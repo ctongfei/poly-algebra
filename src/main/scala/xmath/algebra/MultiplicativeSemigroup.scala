@@ -5,7 +5,7 @@ package xmath.algebra
  * An multiplicative semigroup is a semigroup with the operation is multiply (`*`).
  * @tparam X Type of element
  */
-trait MultiplicativeSemigroup[@specialized X] {
+trait MultiplicativeSemigroup[@specialized(Int, Double, Float) X] {
 
   def mul(x: X, y: X): X
   def ipow(x: X, n: Int): X = semigroupWithMul.combineN(x, n)

@@ -3,7 +3,7 @@ package xmath.algebra
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait PartialOrder[@specialized X] {
+trait PartialOrder[@specialized(Boolean, Int, Float, Double) X] {
   def le(x: X, y: X): Boolean
   def ge(x: X, y: X): Boolean = le(y, x)
   def pmax(x: X, y: X): Option[X] = {

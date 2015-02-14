@@ -3,7 +3,7 @@ package xmath.algebra
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait Monoid[@specialized X] extends Semigroup[X] with HasIdentity[X] {
+trait Monoid[X] extends Semigroup[X] with HasIdentity[X] {
   override def combineN(x: X, n: Int) = {
     if (n < 0) throw new IllegalArgumentException
     var p = id

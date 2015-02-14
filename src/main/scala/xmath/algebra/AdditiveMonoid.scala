@@ -3,7 +3,7 @@ package xmath.algebra
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait AdditiveMonoid[@specialized X] extends AdditiveSemigroup[X] with HasZero[X] { self =>
+trait AdditiveMonoid[@specialized(Int, Float, Double) X] extends AdditiveSemigroup[X] with HasZero[X] { self =>
   def monoidWithAdd: Monoid[X] = new Monoid[X] {
     def op(x: X, y: X) = self.add(x, y)
     def id = self.zero

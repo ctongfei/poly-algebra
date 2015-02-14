@@ -5,7 +5,7 @@ package xmath.algebra
  * An additive semigroup is a semigroup with the operation is add (`+`).
  * @tparam X Type of element
  */
-trait AdditiveSemigroup[@specialized X] {
+trait AdditiveSemigroup[@specialized(Int, Float, Double) X] {
 
   def add(x: X, y: X): X
   def sumN(x: X, n: Int): X = semigroupWithAdd.combineN(x, n)

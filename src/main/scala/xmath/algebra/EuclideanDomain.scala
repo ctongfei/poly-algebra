@@ -3,7 +3,7 @@ package xmath.algebra
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait EuclideanDomain[X] extends Ring[X] {
+trait EuclideanDomain[@specialized(Int) X] extends Ring[X] {
 
   def quot(x: X, y: X): X
   def mod(x: X, y: X): X

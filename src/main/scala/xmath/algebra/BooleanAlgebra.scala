@@ -3,7 +3,7 @@ package xmath.algebra
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait BooleanAlgebra[X] extends Lattice[X] {
+trait BooleanAlgebra[@specialized(Boolean) X] extends Lattice[X] {
 
   def and(x: X, y: X): X
   def or(x: X, y: X): X
@@ -24,9 +24,9 @@ object BooleanAlgebra {
   def create[X](fAnd: (X, X) => X, fOr: (X, X) => X, fNot: X => X, fZero: X, fOne: X) = new BooleanAlgebra[X] {
     def and(x: X, y: X) = fAnd(x, y)
     def or(x: X, y: X) = fOr(x, y)
-    def not(x: X) = fNot(x, y)
-    def and(x: X, y: X) = fAnd(x, y)
-    def and(x: X, y: X) = fAnd(x, y)
+    def not(x: X) = fNot(x)
+    def zero = fZero
+    def one = fOne
 
   }
 }

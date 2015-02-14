@@ -3,7 +3,7 @@ package xmath.algebra
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait Ring[X] extends AdditiveGroup[X] with MultiplicativeMonoid[X]
+trait Ring[@specialized(Double, Float, Int) X] extends AdditiveGroup[X] with MultiplicativeMonoid[X]
 
 object Ring {
   def apply[X](implicit R: Ring[X]) = R

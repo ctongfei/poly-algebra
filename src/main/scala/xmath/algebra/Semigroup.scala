@@ -5,7 +5,7 @@ package xmath.algebra
  * A semigroup is a set equipped with an associative binary operation.
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait Semigroup[@specialized X] {
+trait Semigroup[X] {
 
   /** The associative binary operation of this semigroup. */
   def op(x: X, y: X): X

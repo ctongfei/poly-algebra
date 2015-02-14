@@ -3,7 +3,7 @@ package xmath.algebra
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait Lattice[X] extends PartialOrder[X] {
+trait Lattice[@specialized(Boolean, Int, Double, Float) X] extends PartialOrder[X] {
   def sup(x: X, y: X): X
   def inf(x: X, y: X): X
   def le(x: X, y: X) = inf(x, y) == x

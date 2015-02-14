@@ -3,13 +3,14 @@ package xmath.algebra
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait Field[@specialized(Double, Float) X] extends EuclideanDomain[X] with MultiplicativeGroup[X]
+trait Field[@specialized(Double, Float) X] extends EuclideanDomain[X] with MultiplicativeGroup[X] {
+  def quot(x: X, y: X) = div(x, y)
+  def mod(x: X, y: X) = zero
+}
 
 object Field {
   def apply[X](implicit F: Field[X]) = F
   def create[X](R: Ring[X], fInv: X => X) = new Field[X] {
-    def quot(x: X, y: X) = div(x, y)
-    def mod(x: X, y: X) = R.zero
     def one = R.one
     def neg(x: X) = R.neg(x)
     def add(x: X, y: X) = R.add(x, y)
@@ -25,7 +26,5 @@ object Field {
     def inv(x: X): X = fInv(x)
     def zero: X = zeroElem
     def one: X = oneElem
-    def quot(x: X, y: X): X = div(x, y)
-    def mod(x: X, y: X): X = zeroElem
   }
 }
