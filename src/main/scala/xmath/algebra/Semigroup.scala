@@ -12,25 +12,30 @@ trait Semigroup[X] {
 
   /** Combines an element with itself for ''n'' times using the binary exponentiation algorithm. */
   def combineN(x: X, n: Int): X = {
-    if (n <= 0) throw new IllegalArgumentException()
-    else if (n == 1) x
-    else {
-      var y = x
-      var p = x
-      var m = n
-      while (m > 1) {
-        if (m % 2 == 1) p = op(p, y)
-        y = op(y, y)
-        m >>= 1
-      }
-      p
+    require(n > 0)
+    var y = x
+    var m = n
+    while (m % 2 == 0) {
+      m >>= 1
+      y = op(y, y)
     }
+    var r = y
+    while (m > 1) {
+      m >>= 1
+      y = op(y, y)
+      if (m % 2 == 1)
+        r = op(r, y)
+    }
+    r
   }
 
 }
 
 object Semigroup {
+  /** Retrieves the implicit semigroup associated with a specific type. */
   def apply[X](implicit S: Semigroup[X]) = S
+
+  /** Creates a semigroup using the binary operation provided. */
   def create[X](f: (X, X) => X) = new Semigroup[X] {
     def op(x: X, y: X): X = f(x, y)
   }

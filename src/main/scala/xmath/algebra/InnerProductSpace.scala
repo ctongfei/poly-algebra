@@ -13,7 +13,7 @@ object InnerProductSpace {
   def apply[V, F](implicit S: InnerProductSpace[V, F]) = S
   def create[V, F: Power : Field](fDot: (V, V) => F)(implicit S: VectorSpace[V, F]) = new InnerProductSpace[V, F] {
     def power = implicitly[Power[F]]
-    def scalar = implicitly[Field[F]]
+    def fieldOfScalar = implicitly[Field[F]]
     def dot(x: V, y: V): F = fDot(x, y)
     def neg(x: V): V = S.neg(x)
     def add(x: V, y: V): V = S.add(x, y)

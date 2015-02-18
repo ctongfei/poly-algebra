@@ -4,17 +4,9 @@ package xmath.algebra
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
 trait Monoid[X] extends Semigroup[X] with HasIdentity[X] {
-  override def combineN(x: X, n: Int) = {
-    if (n < 0) throw new IllegalArgumentException
-    var p = id
-    var y = x
-    var m = n
-    while (m != 0) {
-      if (m % 2 == 1) p = op(p, y)
-      y = op(y, y)
-      m >>= 1
-    }
-    p
+  override def combineN(x: X, n: Int): X = {
+    if (n == 0) id
+    else super.combineN(x, n)
   }
 }
 

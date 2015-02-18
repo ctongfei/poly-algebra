@@ -8,9 +8,9 @@ package xmath.algebra
 trait MultiplicativeSemigroup[@specialized(Int, Double, Float) X] {
 
   def mul(x: X, y: X): X
-  def ipow(x: X, n: Int): X = semigroupWithMul.combineN(x, n)
+  def ipow(x: X, n: Int): X = asSemigroupWithMul.combineN(x, n)
 
-  def semigroupWithMul: Semigroup[X] = new Semigroup[X] {
+  def asSemigroupWithMul: Semigroup[X] = new Semigroup[X] {
     def op(x: X, y: X) = mul(x, y)
   }
 }

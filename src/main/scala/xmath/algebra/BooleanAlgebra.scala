@@ -22,6 +22,7 @@ trait BooleanAlgebra[@specialized(Boolean) X] extends Lattice[X] {
 object BooleanAlgebra {
   def apply[X](B: BooleanAlgebra[X]) = B
   def create[X](fAnd: (X, X) => X, fOr: (X, X) => X, fNot: X => X, fZero: X, fOne: X) = new BooleanAlgebra[X] {
+    def eq(x: X, y: X) = x == y
     def and(x: X, y: X) = fAnd(x, y)
     def or(x: X, y: X) = fOr(x, y)
     def not(x: X) = fNot(x)

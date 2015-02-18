@@ -11,7 +11,11 @@ package object algebra {
 
   def one[X](implicit O: HasOne[X]) = O.one
 
-  implicit object BooleanStructure extends BooleanAlgebra[Boolean] with TotalOrder[Boolean] {
+  implicit object BooleanStructure extends BooleanAlgebra[Boolean] with TotalOrder[Boolean] with Hash[Boolean] {
+    def eq(x: Boolean, y: Boolean) = x == y
+    override def ne(x: Boolean, y: Boolean) = x != y
+    def hash(x: Boolean) = x.hashCode()
+
     def one = true
     def zero = false
     def not(x: Boolean) = !x
@@ -20,6 +24,10 @@ package object algebra {
   }
 
   implicit object IntStructure extends EuclideanDomain[Int] with TotalOrder[Int] {
+    def eq(x: Int, y: Int) = x == y
+    override def ne(x: Int, y: Int) = x != y
+    def hash(x: Int) = x.hashCode()
+
     override def le(x: Int, y: Int) = x <= y
     override def lt(x: Int, y: Int) = x < y
     override def ge(x: Int, y: Int) = x >= y
@@ -37,6 +45,10 @@ package object algebra {
   }
   
   implicit object DoubleStructure extends Field[Double] with TotalOrder[Double] {
+    def eq(x: Double, y: Double) = x == y
+    override def ne(x: Double, y: Double) = x != y
+    def hash(x: Double) = x.hashCode()
+
     override def le(x: Double, y: Double) = x <= y
     override def lt(x: Double, y: Double) = x < y
     override def ge(x: Double, y: Double) = x >= y
@@ -67,9 +79,13 @@ package object algebra {
     def &(y: X)(implicit S: BooleanAlgebra[X]) = S.and(x, y)
     def |(y: X)(implicit S: BooleanAlgebra[X]) = S.or(x, y)
 
-    def <(y: X)(implicit S: TotalOrder[X]) = S.lt(x, y)
+    def ===(y: X)(implicit S: Eq[X]) = S.eq(x, y)
+    def =!=(y: X)(implicit S: Eq[X]) = S.ne(x, y)
     def <=(y: X)(implicit S: PartialOrder[X]) = S.le(x, y)
-    def >(y: X)(implicit S: TotalOrder[X]) = S.gt(x, y)
     def >=(y: X)(implicit S: PartialOrder[X]) = S.ge(x, y)
+    def <(y: X)(implicit S: TotalOrder[X]) = S.lt(x, y)
+    def >(y: X)(implicit S: TotalOrder[X]) = S.gt(x, y)
+
+    def ###(implicit S: Hash[X]) = S.hash(x)
   }
 }

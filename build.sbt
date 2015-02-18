@@ -8,6 +8,8 @@ scalaVersion := "2.11.4"
 
 isSnapshot := true
 
+libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.2"
+
 publishMavenStyle := true
 
 publishTo := {

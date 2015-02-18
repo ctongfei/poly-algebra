@@ -1,12 +1,10 @@
 package xmath.algebra
 
-/**
- * @author Tongfei Chen (ctongfei@gmail.com).
- */
+
 trait AdditiveGroup[@specialized(Int, Float, Double) X] extends AdditiveMonoid[X] { self =>
   def neg(x: X): X
   def sub(x: X, y: X): X = add(x, neg(y))
-  def groupWithAdd: Group[X] = new Group[X] {
+  def asGroupWithAdd: Group[X] = new Group[X] {
     def inv(x: X) = self.neg(x)
     def op(x: X, y: X) = self.add(x, y)
     def id = self.zero

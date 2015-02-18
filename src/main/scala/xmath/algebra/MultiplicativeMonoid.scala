@@ -1,7 +1,10 @@
 package xmath.algebra
 
 trait MultiplicativeMonoid[@specialized(Int, Double, Float) X] extends MultiplicativeSemigroup[X] with HasOne[X] { self =>
-  def monoidWithMul: Monoid[X] = new Monoid[X] {
+
+  override def ipow(x: X, n: Int): X = asMonoidWithMul.combineN(x, n)
+
+  def asMonoidWithMul: Monoid[X] = new Monoid[X] {
     def op(x: X, y: X) = self.mul(x, y)
     def id = self.one
   }
