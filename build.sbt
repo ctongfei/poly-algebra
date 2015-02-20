@@ -1,4 +1,4 @@
-name := "xmath-algebra"
+name := "poly-algebra"
 
 version := "0.1.0-SNAPSHOT"
 
@@ -23,7 +23,7 @@ publishTo := {
 publishArtifact in Test := false
 
 pomExtra :=
-  <url>http://github.com/ctongfei/xmath-algebra</url>
+  <url>http://github.com/ctongfei/poly-algebra</url>
     <licenses>
       <license>
         <name>MIT</name>
@@ -32,8 +32,8 @@ pomExtra :=
       </license>
     </licenses>
     <scm>
-      <url>git@github.com:ctongfei/xmath-algebra.git</url>
-      <connection>scm:git:git@github.com:ctongfei/xmath-algebra.git</connection>
+      <url>git@github.com:ctongfei/poly-algebra.git</url>
+      <connection>scm:git:git@github.com:ctongfei/poly-algebra.git</connection>
     </scm>
     <developers>
       <developer>
