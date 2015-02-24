@@ -29,8 +29,7 @@ class BasicTest extends FunSuite {
   }
 
   test("Int GCD/LCM lattice") {
-    val D = EuclideanDomain[Int]
-    val L = Lattice.create[Int](D.lcm, D.gcd)
+    val L = EuclideanDomain[Int].latticeWithGcdLcm
     assert(L.inf(60, 72) == 12)
     assert(L.inf(128, 243) == 1)
     assert(L.sup(12, 18) == 36)

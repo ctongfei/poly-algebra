@@ -22,6 +22,13 @@ trait EuclideanDomain[@specialized(Int, Double, Float) X] extends Ring[X] {
   }
 
   def lcm(x: X, y: X): X = quot(mul(x, y), gcd(x, y))
+
+  def latticeWithGcdLcm: Lattice[X] = new Lattice[X] {
+    def eq(x: X, y: X) = implicitly[Eq[X]].eq(x, y)
+    def sup(x: X, y: X) = lcm(x, y)
+    def inf(x: X, y: X) = gcd(x, y)
+    override def le(x: X, y: X) = mod(y, x) == zero
+  }
 }
 
 object EuclideanDomain {

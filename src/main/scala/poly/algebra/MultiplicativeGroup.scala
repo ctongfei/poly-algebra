@@ -3,7 +3,7 @@ package poly.algebra
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait MultiplicativeGroup[@specialized(Int, Float, Double) X] extends MultiplicativeMonoid[X] { self =>
+trait MultiplicativeGroup[@specialized(Float, Double) X] extends MultiplicativeMonoid[X] { self =>
 
   def inv(x: X): X
   def div(x: X, y: X): X = mul(x, inv(y))

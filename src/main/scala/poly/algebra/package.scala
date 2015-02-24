@@ -12,6 +12,10 @@ package object algebra {
 
   def one[X](implicit O: HasOne[X]) = O.one
 
+  def max[X](x: X, y: X)(implicit O: TotalOrder[X]) = O.sup(x, y)
+
+  def min[X](x: X, y: X)(implicit O: TotalOrder[X]) = O.inf(x, y)
+
   implicit object BooleanStructure extends BooleanAlgebra[Boolean] with TotalOrder[Boolean] with Hash[Boolean] {
     def eq(x: Boolean, y: Boolean) = x == y
     override def ne(x: Boolean, y: Boolean) = x != y
@@ -22,6 +26,8 @@ package object algebra {
     def not(x: Boolean) = !x
     def and(x: Boolean, y: Boolean) = x & y
     def or(x: Boolean, y: Boolean) = x | y
+    def max(x: Boolean, y: Boolean) = x | y
+    def min(x: Boolean, y: Boolean) = x & y
   }
 
   implicit object IntStructure extends EuclideanDomain[Int] with TotalOrder[Int] {
@@ -33,8 +39,8 @@ package object algebra {
     override def lt(x: Int, y: Int) = x < y
     override def ge(x: Int, y: Int) = x >= y
     override def gt(x: Int, y: Int) = x > y
-    def sup(x: Int, y: Int) = if (x > y) x else y
-    def inf(x: Int, y: Int) = if (x < y) x else y
+    def max(x: Int, y: Int) = if (x > y) x else y
+    def min(x: Int, y: Int) = if (x < y) x else y
     def zero = 0
     def one = 1
     def add(x: Int, y: Int) = x + y
@@ -54,8 +60,8 @@ package object algebra {
     override def lt(x: Double, y: Double) = x < y
     override def ge(x: Double, y: Double) = x >= y
     override def gt(x: Double, y: Double) = x > y
-    def sup(x: Double, y: Double) = if (x > y) x else y
-    def inf(x: Double, y: Double) = if (x < y) x else y
+    def max(x: Double, y: Double) = if (x > y) x else y
+    def min(x: Double, y: Double) = if (x < y) x else y
     def zero = 0.0
     def one = 1.0
     def add(x: Double, y: Double) = x + y
@@ -75,10 +81,14 @@ package object algebra {
     def *(y: X)(implicit S: MultiplicativeSemigroup[X]) = S.mul(x, y)
     def /(y: X)(implicit S: MultiplicativeGroup[X]) = S.div(x, y)
     def %(y: X)(implicit S: EuclideanDomain[X]) = S.mod(x, y)
+
     def **(n: Int)(implicit S: MultiplicativeSemigroup[X]) = S.ipow(x, n)
     def unary_!(implicit S: BooleanAlgebra[X]) = S.not(x)
     def &(y: X)(implicit S: BooleanAlgebra[X]) = S.and(x, y)
     def |(y: X)(implicit S: BooleanAlgebra[X]) = S.or(x, y)
+
+    def :*[R](k: R)(implicit S: Module[X, R]) = S.scale(k, x)
+    def *:[V](y: V)(implicit S: Module[V, X]) = S.scale(x, y)
 
     def ===(y: X)(implicit S: Eq[X]) = S.eq(x, y)
     def =!=(y: X)(implicit S: Eq[X]) = S.ne(x, y)
