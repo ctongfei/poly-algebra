@@ -16,7 +16,9 @@ package poly.algebra
  *
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait Ring[@specialized(Double, Float, Int) X] extends AdditiveGroup[X] with MultiplicativeMonoid[X]
+trait Ring[@specialized(Double, Float, Int) X] extends Semiring[X] with AdditiveGroup[X] with MultiplicativeMonoid[X] {
+  def negOne = neg(one)
+}
 
 object Ring {
 

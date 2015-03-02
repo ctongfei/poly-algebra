@@ -6,6 +6,7 @@ package poly.algebra
 trait Module[V, @specialized(Int, Float, Double) R] extends AdditiveGroup[V] {
   def ringOfScalar: Ring[R]
   def scale(k: R, x: V): V
+  def neg(x: V): V = scale(ringOfScalar.negOne, x)
 }
 
 object Module {
@@ -14,7 +15,8 @@ object Module {
   def default[V](implicit R: Ring[V]): Module[V, V] = new Module[V, V] {
     def ringOfScalar = R
     def add(x: V, y: V) = R.add(x, y)
-    def neg(x: V) = R.neg(x)
+    override def neg(x: V) = R.neg(x)
+    override def sub(x: V, y: V) = R.sub(x, y)
     def zero = R.zero
     def scale(x: V, y: V) = R.mul(x, y)
   }

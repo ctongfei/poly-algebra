@@ -1,6 +1,6 @@
 package poly.algebra
 
-trait Power[@specialized(Double, Float) X] {
+trait PowerOps[@specialized(Double, Float) X] {
   def root(x: X, n: Int): X
   def sqrt(x: X): X = root(x, 2)
   def cbrt(x: X): X = root(x, 3)

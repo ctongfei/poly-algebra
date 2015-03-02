@@ -14,7 +14,8 @@ object NormedVectorSpace {
   def create[V, F: Field](fNorm: V => F)(implicit S: VectorSpace[V, F]) = new NormedVectorSpace[V, F] {
     def fieldOfScalar = implicitly[Field[F]]
     def norm(x: V): F = fNorm(x)
-    def neg(x: V): V = S.neg(x)
+    override def neg(x: V): V = S.neg(x)
+    override def sub(x: V, y: V): V = S.sub(x, y)
     def add(x: V, y: V): V = S.add(x, y)
     def zero: V = S.zero
     def scale(k: F, x: V): V = S.scale(k, x)

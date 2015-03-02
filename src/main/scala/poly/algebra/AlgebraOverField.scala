@@ -15,7 +15,7 @@ object AlgebraOverField {
     def one = F.one
     def add(x: X, y: X) = F.add(x, y)
     override def sub(x: X, y: X) = F.sub(x, y)
-    def neg(x: X) = F.neg(x)
+    override def neg(x: X) = F.neg(x)
     def inv(x: X) = F.inv(x)
     def mul(x: X, y: X) = F.mul(x, y)
     def scale(x: X, y: X) = F.mul(x, y)

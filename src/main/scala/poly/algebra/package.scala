@@ -1,20 +1,10 @@
 package poly
 
 /**
- * Poly-algebra contains typeclass abstractions over common algebraic structures.
+ * `Poly-algebra` contains typeclass abstractions over common algebraic structures.
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
 package object algebra {
-
-  def id[X](implicit I: HasIdentity[X]) = I.id
-
-  def zero[X](implicit Z: HasZero[X]) = Z.zero
-
-  def one[X](implicit O: HasOne[X]) = O.one
-
-  def max[X](x: X, y: X)(implicit O: TotalOrder[X]) = O.sup(x, y)
-
-  def min[X](x: X, y: X)(implicit O: TotalOrder[X]) = O.inf(x, y)
 
   implicit object BooleanStructure extends BooleanAlgebra[Boolean] with TotalOrder[Boolean] with Hash[Boolean] {
     def eq(x: Boolean, y: Boolean) = x == y
@@ -30,7 +20,7 @@ package object algebra {
     def min(x: Boolean, y: Boolean) = x & y
   }
 
-  implicit object IntStructure extends EuclideanDomain[Int] with TotalOrder[Int] {
+  implicit object IntStructure extends EuclideanDomain[Int] with TotalOrder[Int] with Hash[Int] {
     def eq(x: Int, y: Int) = x == y
     override def ne(x: Int, y: Int) = x != y
     def hash(x: Int) = x.hashCode()
@@ -51,7 +41,7 @@ package object algebra {
     def mod(x: Int, y: Int) = x % y
   }
   
-  implicit object DoubleStructure extends Field[Double] with TotalOrder[Double] {
+  implicit object DoubleStructure extends Field[Double] with TotalOrder[Double] with Hash[Double] {
     def eq(x: Double, y: Double) = x == y
     override def ne(x: Double, y: Double) = x != y
     def hash(x: Double) = x.hashCode()
@@ -75,20 +65,29 @@ package object algebra {
   }
 
   implicit class withOps[X](val x: X) extends AnyVal { // ensure static invocation
+
     def unary_-(implicit S: AdditiveGroup[X]) = S.neg(x)
     def +(y: X)(implicit S: AdditiveSemigroup[X]) = S.add(x, y)
     def -(y: X)(implicit S: AdditiveGroup[X]) = S.sub(x, y)
     def *(y: X)(implicit S: MultiplicativeSemigroup[X]) = S.mul(x, y)
-    def /(y: X)(implicit S: MultiplicativeGroup[X]) = S.div(x, y)
+    def /(y: X)(implicit S: EuclideanDomain[X]) = S.quot(x, y)
     def %(y: X)(implicit S: EuclideanDomain[X]) = S.mod(x, y)
 
     def **(n: Int)(implicit S: MultiplicativeSemigroup[X]) = S.ipow(x, n)
+
     def unary_!(implicit S: BooleanAlgebra[X]) = S.not(x)
     def &(y: X)(implicit S: BooleanAlgebra[X]) = S.and(x, y)
     def |(y: X)(implicit S: BooleanAlgebra[X]) = S.or(x, y)
 
+    def and(y: X)(implicit S: BooleanAlgebra[X]) = S.and(x, y)
+    def or(y: X)(implicit S: BooleanAlgebra[X]) = S.or(x, y)
+    def xor(y: X)(implicit S: BooleanAlgebra[X]) = S.xor(x, y)
+
+    def ∧(y: X)(implicit S: BooleanAlgebra[X]) = S.and(x, y)
+    def ∨(y: X)(implicit S: BooleanAlgebra[X]) = S.or(x, y)
+
     def :*[R](k: R)(implicit S: Module[X, R]) = S.scale(k, x)
-    def *:[V](y: V)(implicit S: Module[V, X]) = S.scale(x, y)
+    def *:[R](k: R)(implicit S: Module[X, R]) = S.scale(k, x) // colon on the right side
 
     def ===(y: X)(implicit S: Eq[X]) = S.eq(x, y)
     def =!=(y: X)(implicit S: Eq[X]) = S.ne(x, y)
@@ -98,10 +97,10 @@ package object algebra {
     def >(y: X)(implicit S: TotalOrder[X]) = S.gt(x, y)
 
     def ###(implicit S: Hash[X]) = S.hash(x)
+
+    def dot[F](y: X)(implicit S: InnerProductSpace[X, F]) = S.dot(x, y)
+    def ⋅[F](y: X)(implicit S: InnerProductSpace[X, F]) = S.dot(x, y)
+
   }
 
-  implicit class withRefEqOps[X <: AnyRef](val x: X) extends AnyVal { // ensure static invocation
-    def @==(y: X) = x eq y
-    def @!=(y: X) = x ne y
-  }
 }

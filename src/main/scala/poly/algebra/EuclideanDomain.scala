@@ -5,8 +5,13 @@ package poly.algebra
  */
 trait EuclideanDomain[@specialized(Int, Double, Float) X] extends Ring[X] {
 
+  /** Returns the quotient (Euclidean division) of two elements. ABSTRACT: Should be implemented. */
   def quot(x: X, y: X): X
+
+  /** Returns the modulus of two elements. ABSTRACT: Should be implemented. */
   def mod(x: X, y: X): X
+
+  /** Simutaneously returns the quotient and the modulus of two elements. For performance, this function should be overridden. */
   def quotMod(x: X, y: X) : (X, X) = (quot(x, y), mod(x, y))
 
   /** Computes the greatest common divisor of two elements using Euclidean algorithm. */
@@ -21,13 +26,21 @@ trait EuclideanDomain[@specialized(Int, Double, Float) X] extends Ring[X] {
     m
   }
 
+  /** Computes the least common multiplier of two elements. */
   def lcm(x: X, y: X): X = quot(mul(x, y), gcd(x, y))
 
-  def latticeWithGcdLcm: Lattice[X] = new Lattice[X] {
+  /** Casts this Euclidean domain as a lattice with `gcd` as its `inf` operator and `lcm` as its `sup` operator. */
+  def asLatticeWithGcdLcm: Lattice[X] = new Lattice[X] {
     def eq(x: X, y: X) = implicitly[Eq[X]].eq(x, y)
     def sup(x: X, y: X) = lcm(x, y)
     def inf(x: X, y: X) = gcd(x, y)
     override def le(x: X, y: X) = mod(y, x) == zero
+  }
+
+  /** Casts this Euclidean domain as a partial order with the divisible operation as its `<=` operator. */
+  def asPartialOrderWithDivisibility: PartialOrder[X] = new PartialOrder[X] {
+    def le(x: X, y: X) = implicitly[Eq[X]].eq(mod(y, x), zero)
+    def eq(x: X, y: X) = implicitly[Eq[X]].eq(x, y)
   }
 }
 

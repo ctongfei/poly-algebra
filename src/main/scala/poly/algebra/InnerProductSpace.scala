@@ -4,19 +4,20 @@ package poly.algebra
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
 trait InnerProductSpace[V, @specialized(Float, Double) F] extends NormedVectorSpace[V, F] {
-  def power: Power[F]
+  def powerOpsOfScalar: PowerOps[F]
   def dot(x: V, y: V): F
-  def norm(x: V) = power.sqrt(dot(x, x))
+  def norm(x: V) = powerOpsOfScalar.sqrt(dot(x, x))
 }
 
 object InnerProductSpace {
   def apply[V, F](implicit S: InnerProductSpace[V, F]) = S
-  def create[V, F: Power : Field](fDot: (V, V) => F)(implicit S: VectorSpace[V, F]) = new InnerProductSpace[V, F] {
-    def power = implicitly[Power[F]]
+  def create[V, F: PowerOps : Field](fDot: (V, V) => F)(implicit S: VectorSpace[V, F]) = new InnerProductSpace[V, F] {
+    def powerOpsOfScalar = implicitly[PowerOps[F]]
     def fieldOfScalar = implicitly[Field[F]]
     def dot(x: V, y: V): F = fDot(x, y)
-    def neg(x: V): V = S.neg(x)
     def add(x: V, y: V): V = S.add(x, y)
+    override def neg(x: V): V = S.neg(x)
+    override def sub(x: V, y: V): V = S.sub(x, y)
     def zero: V = S.zero
     def scale(k: F, x: V): V = S.scale(k, x)
   }

@@ -15,7 +15,7 @@ object AlgebraOverRing {
     def one = R.one
     def add(x: X, y: X) = R.add(x, y)
     override def sub(x: X, y: X) = R.sub(x, y)
-    def neg(x: X) = R.neg(x)
+    override def neg(x: X) = R.neg(x)
     def mul(x: X, y: X) = R.mul(x, y)
     def scale(x: X, y: X) = R.mul(x, y)
   }

@@ -3,19 +3,29 @@ package poly.algebra
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait BooleanAlgebra[@specialized(Boolean) X] extends Lattice[X] {
+trait BooleanAlgebra[@specialized(Boolean) X] extends Lattice[X] { self =>
 
   def and(x: X, y: X): X
   def or(x: X, y: X): X
   def not(x: X): X
   def one: X
   def zero: X
-  //TODO: xor
+
+  def xor(x: X, y: X): X = or(and(x, not(y)), and(not(x), y))
   def nand(x: X, y: X): X = not(and(x, y))
   def nor(x: X, y: X): X = not(or(x, y))
 
   def sup(x: X, y: X): X = or(x, y)
   def inf(x: X, y: X): X = and(x, y)
+
+  /** Casts this Boolean algebra as a Boolean ring with `xor` as `+` and `and` as `*`. */
+  def asBooleanRing: Ring[X] = new Ring[X] {
+    def mul(x: X, y: X): X = and(x, y)
+    def add(x: X, y: X): X = xor(x, y)
+    def neg(x: X): X = not(x)
+    def one: X = self.one
+    def zero: X = self.zero
+  }
 
 }
 
@@ -28,6 +38,5 @@ object BooleanAlgebra {
     def not(x: X) = fNot(x)
     def zero = fZero
     def one = fOne
-
   }
 }

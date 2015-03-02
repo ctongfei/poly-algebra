@@ -3,6 +3,7 @@ package poly.algebra
 /**
  * Typeclass for endofunction spaces.
  * An endofunction is a function whose domain equals its codomain.
+ * @tparam X Type of domain and codomain
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
 trait EndofunctionSpace[X, R] extends FunctionSpace[X, X, R] {

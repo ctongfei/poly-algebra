@@ -16,7 +16,11 @@ trait Eq[@specialized X] {
 
 
 object Eq {
-  //def apply[X](implicit E: Eq[X]) = E
+
+  def create[X](fEq: (X, X) => Boolean): Eq[X] = new Eq[X] {
+    def eq(x: X, y: X) = fEq(x, y)
+  }
+
   implicit def default[X]: Eq[X] = new Eq[X] {
     def eq(x: X, y: X) = x == y
     override def ne(x: X, y: X) = x != y

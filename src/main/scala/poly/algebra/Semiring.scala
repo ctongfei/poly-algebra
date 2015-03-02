@@ -3,8 +3,7 @@ package poly.algebra
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait Semiring[@specialized(Int, Double, Float) X]
-  extends AdditiveMonoid[X] with MultiplicativeMonoid[X]
+trait Semiring[@specialized(Int, Double, Float) X] extends AdditiveMonoid[X] with MultiplicativeMonoid[X]
 
 object Semiring {
   def apply[X](implicit S: Semiring[X]) = S
