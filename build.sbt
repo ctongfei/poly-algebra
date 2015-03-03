@@ -8,7 +8,13 @@ scalaVersion := "2.11.4"
 
 isSnapshot := true
 
+resolvers += Resolver.sonatypeRepo("snapshots")
+
+libraryDependencies += "org.scala-miniboxing.plugins" %% "miniboxing-runtime" % "0.4-SNAPSHOT"
+
 libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.2"
+
+addCompilerPlugin("org.scala-miniboxing.plugins" %% "miniboxing-plugin" % "0.4-SNAPSHOT")
 
 publishMavenStyle := true
 

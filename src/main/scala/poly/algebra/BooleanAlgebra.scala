@@ -3,7 +3,7 @@ package poly.algebra
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait BooleanAlgebra[@specialized(Boolean) X] extends Lattice[X] { self =>
+trait BooleanAlgebra[@miniboxed X] extends Lattice[X] { self =>
 
   def and(x: X, y: X): X
   def or(x: X, y: X): X
@@ -30,9 +30,10 @@ trait BooleanAlgebra[@specialized(Boolean) X] extends Lattice[X] { self =>
 }
 
 object BooleanAlgebra {
-  def apply[X](B: BooleanAlgebra[X]) = B
-  def create[X](fAnd: (X, X) => X, fOr: (X, X) => X, fNot: X => X, fZero: X, fOne: X) = new BooleanAlgebra[X] {
-    def eq(x: X, y: X) = x == y
+  def apply[@miniboxed X](B: BooleanAlgebra[X]) = B
+  def create[@miniboxed X](fAnd: (X, X) => X, fOr: (X, X) => X, fNot: X => X, fZero: X, fOne: X)(implicit E: Eq[X]) = new BooleanAlgebra[X] {
+    def eq(x: X, y: X) = E.eq(x, y)
+    override def ne(x: X, y: X) = E.ne(x, y)
     def and(x: X, y: X) = fAnd(x, y)
     def or(x: X, y: X) = fOr(x, y)
     def not(x: X) = fNot(x)

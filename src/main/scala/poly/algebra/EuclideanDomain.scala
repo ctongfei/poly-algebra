@@ -3,7 +3,7 @@ package poly.algebra
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait EuclideanDomain[@specialized(Int, Double, Float) X] extends Ring[X] {
+trait EuclideanDomain[@miniboxed X] extends Ring[X] {
 
   /** Returns the quotient (Euclidean division) of two elements. ABSTRACT: Should be implemented. */
   def quot(x: X, y: X): X
@@ -45,8 +45,8 @@ trait EuclideanDomain[@specialized(Int, Double, Float) X] extends Ring[X] {
 }
 
 object EuclideanDomain {
-  def apply[X](implicit E: EuclideanDomain[X]) = E
-  def create[X](R: Ring[X], fQuot: (X, X) => X, fMod: (X, X) => X) = new EuclideanDomain[X] {
+  def apply[@miniboxed X](implicit E: EuclideanDomain[X]) = E
+  def create[@miniboxed X](R: Ring[X], fQuot: (X, X) => X, fMod: (X, X) => X) = new EuclideanDomain[X] {
     def add(x: X, y: X): X = R.add(x, y)
     def mul(x: X, y: X): X = R.mul(x, y)
     def neg(x: X): X = R.neg(x)
@@ -56,7 +56,7 @@ object EuclideanDomain {
     def mod(x: X, y: X): X = fMod(x, y)
   }
 
-  def create[X](fAdd: (X, X) => X, fMul: (X, X) => X, zeroElem: X, oneElem: X, fNeg: X => X, fQuot: (X, X) => X, fMod: (X, X) => X) = new EuclideanDomain[X] {
+  def create[@miniboxed X](fAdd: (X, X) => X, fMul: (X, X) => X, zeroElem: X, oneElem: X, fNeg: X => X, fQuot: (X, X) => X, fMod: (X, X) => X) = new EuclideanDomain[X] {
     def add(x: X, y: X): X = fAdd(x, y)
     def mul(x: X, y: X): X = fMul(x, y)
     def neg(x: X): X = fNeg(x)

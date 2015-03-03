@@ -1,6 +1,6 @@
 package poly.algebra
 
-trait MultiplicativeMonoid[@specialized(Int, Double, Float) X] extends MultiplicativeSemigroup[X] with HasOne[X] { self =>
+trait MultiplicativeMonoid[@miniboxed X] extends MultiplicativeSemigroup[X] with HasOne[X] { self =>
 
   override def ipow(x: X, n: Int): X = asMonoidWithMul.combineN(x, n)
 
@@ -12,8 +12,8 @@ trait MultiplicativeMonoid[@specialized(Int, Double, Float) X] extends Multiplic
 
 
 object MultiplicativeMonoid {
-  def apply[X](implicit M: MultiplicativeMonoid[X]) = M
-  def create[X](f: (X, X) => X, oneElem: X) = new MultiplicativeMonoid[X] {
+  def apply[@miniboxed X](implicit M: MultiplicativeMonoid[X]) = M
+  def create[@miniboxed X](f: (X, X) => X, oneElem: X) = new MultiplicativeMonoid[X] {
     def mul(x: X, y: X): X = f(x, y)
     def one: X = oneElem
   }

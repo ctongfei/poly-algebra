@@ -6,18 +6,18 @@ package poly.algebra
  * @tparam X Type of domain and codomain
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait EndofunctionSpace[X, R] extends FunctionSpace[X, X, R] {
+trait EndofunctionSpace[@miniboxed X, @miniboxed R] extends FunctionSpace[X, X, R] {
 
-  def composeN(f: X => X, n: Int) = monoidWithCompose.combineN(f, n)
+  /* TODO: Minibox bug!
+  def composeN(f: X => X, n: Int) = asMonoidWithCompose.combineN(f, n)
 
-  def monoidWithCompose: Monoid[X => X] = new Monoid[X => X] {
+  def asMonoidWithCompose: Monoid[X => X] = new Monoid[X => X] {
     def id: X => X = (x: X) => x
     def op(f: X => X, g: X => X): X => X = f compose g
   }
-
+  */
 }
 
 object EndofunctionSpace {
-  def apply[X, R](implicit S: EndofunctionSpace[X, R]) = S
-
+  def apply[@miniboxed X, @miniboxed R](implicit S: EndofunctionSpace[X, R]) = S
 }

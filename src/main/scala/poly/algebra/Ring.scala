@@ -16,17 +16,17 @@ package poly.algebra
  *
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait Ring[@specialized(Double, Float, Int) X] extends Semiring[X] with AdditiveGroup[X] with MultiplicativeMonoid[X] {
+trait Ring[@miniboxed X] extends Semiring[X] with AdditiveGroup[X] with MultiplicativeMonoid[X] {
   def negOne = neg(one)
 }
 
 object Ring {
 
   /** Retrieves the implicit ring associated with a specific type. */
-  def apply[X](implicit R: Ring[X]) = R
+  def apply[@miniboxed X](implicit R: Ring[X]) = R
 
   /** Creates a ring using the provided operations `add`, `mul`, `zero`, `one` and `neg`. */
-  def create[X](fAdd: (X, X) => X, fMul: (X, X) => X, zeroElem: X, oneElem: X, fNeg: X => X) = new Ring[X] {
+  def create[@miniboxed X](fAdd: (X, X) => X, fMul: (X, X) => X, zeroElem: X, oneElem: X, fNeg: X => X) = new Ring[X] {
     def add(x: X, y: X): X = fAdd(x, y)
     def mul(x: X, y: X): X = fMul(x, y)
     def zero: X = zeroElem

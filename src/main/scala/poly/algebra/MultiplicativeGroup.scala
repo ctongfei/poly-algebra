@@ -3,7 +3,7 @@ package poly.algebra
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait MultiplicativeGroup[@specialized(Float, Double) X] extends MultiplicativeMonoid[X] { self =>
+trait MultiplicativeGroup[@miniboxed X] extends MultiplicativeMonoid[X] { self =>
 
   def inv(x: X): X
   def div(x: X, y: X): X = mul(x, inv(y))
@@ -15,8 +15,8 @@ trait MultiplicativeGroup[@specialized(Float, Double) X] extends MultiplicativeM
 }
 
 object MultiplicativeGroup {
-  def apply[X](implicit G: MultiplicativeGroup[X]) = G
-  def create[X](f: (X, X) => X, oneElem: X, fInv: X => X) = new MultiplicativeGroup[X] {
+  def apply[@miniboxed X](implicit G: MultiplicativeGroup[X]) = G
+  def create[@miniboxed X](f: (X, X) => X, oneElem: X, fInv: X => X) = new MultiplicativeGroup[X] {
     def inv(x: X): X = fInv(x)
     def mul(x: X, y: X): X = f(x, y)
     def one: X = oneElem

@@ -7,13 +7,13 @@ package poly.algebra
  * @tparam R Type of the ring, over which the codomain is a module
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait FunctionSpace[X, Y, @specialized(Int, Double, Float) R] extends Module[X => Y, R] {
+trait FunctionSpace[@miniboxed X, @miniboxed Y, @miniboxed R] extends Module[X => Y, R] {
 
   def moduleOfCodomain: Module[Y, R]
 
   def scale(a: R, f: X => Y) = (x: X) => moduleOfCodomain.scale(a, f(x))
 
-  override def neg(f: X => Y) = (x: X) => moduleOfCodomain.neg(f(x))
+  //override def neg(f: X => Y) = (x: X) => moduleOfCodomain.neg(f(x))
 
   def zero = (x: X) => moduleOfCodomain.zero
 
@@ -24,7 +24,7 @@ trait FunctionSpace[X, Y, @specialized(Int, Double, Float) R] extends Module[X =
 }
 
 object FunctionSpace {
-  implicit def default[X, Y, R](implicit M: Module[Y, R], r: Ring[R]): FunctionSpace[X, Y, R] = new FunctionSpace[X, Y, R] {
+  implicit def default[@miniboxed X, @miniboxed Y, @miniboxed R](implicit M: Module[Y, R], r: Ring[R]): FunctionSpace[X, Y, R] = new FunctionSpace[X, Y, R] {
     def moduleOfCodomain = M
     def ringOfScalar = r
   }

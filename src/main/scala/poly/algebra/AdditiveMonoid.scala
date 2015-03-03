@@ -1,12 +1,15 @@
 package poly.algebra
 
 /**
+ * Typeclass for additive monoids.
+ * An additive monoid is an additive semigroup (with operation `+`) with an additive identity element `0`.
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait AdditiveMonoid[@specialized(Int, Double, Float) X] extends AdditiveSemigroup[X] with HasZero[X] { self =>
+trait AdditiveMonoid[@miniboxed X] extends AdditiveSemigroup[X] with HasZero[X] { self =>
 
   override def sumN(x: X, n: Int): X = asMonoidWithAdd.combineN(x, n)
 
+  /** Casts this additive monoid as a symbol-agnostic monoid. */
   def asMonoidWithAdd: Monoid[X] = new Monoid[X] {
     def op(x: X, y: X) = self.add(x, y)
     def id = self.zero
@@ -14,8 +17,11 @@ trait AdditiveMonoid[@specialized(Int, Double, Float) X] extends AdditiveSemigro
 }
 
 object AdditiveMonoid {
-  def apply[X](implicit M: AdditiveMonoid[X]) = M
-  def create[X](f: (X, X) => X, zeroElem: X) = new AdditiveMonoid[X] {
+  /** Retrieves the implicit additive monoid associated with the specific type. */
+  def apply[@miniboxed X](implicit M: AdditiveMonoid[X]) = M
+
+  /** Creates an additive monoid of the specific type using the provided `+` and `0`. */
+  def create[@miniboxed X](f: (X, X) => X, zeroElem: X) = new AdditiveMonoid[X] {
     def add(x: X, y: X): X = f(x, y)
     def zero: X = zeroElem
   }
