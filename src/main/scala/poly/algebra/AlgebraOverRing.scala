@@ -3,11 +3,11 @@ package poly.algebra
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait AlgebraOverRing[@miniboxed V, @miniboxed R] extends Module[V, R] with Ring[V]
+trait AlgebraOverRing[V, @miniboxed R] extends Module[V, R] with Ring[V]
 
 object AlgebraOverRing {
 
-  def apply[@miniboxed V, @miniboxed R](implicit A: AlgebraOverRing[V, R]) = A
+  def apply[V, @miniboxed R](implicit A: AlgebraOverRing[V, R]) = A
 
   implicit def defaultOnRing[@miniboxed X](implicit R: Ring[X]): AlgebraOverRing[X, X] = new AlgebraOverRing[X, X] {
     def ringOfScalar = R

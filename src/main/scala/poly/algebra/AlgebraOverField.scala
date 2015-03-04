@@ -3,11 +3,11 @@ package poly.algebra
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait AlgebraOverField[@miniboxed V, @miniboxed F] extends VectorSpace[V, F] with AlgebraOverRing[V, F]
+trait AlgebraOverField[V, @miniboxed F] extends VectorSpace[V, F] with AlgebraOverRing[V, F]
 
 object AlgebraOverField {
 
-  def apply[@miniboxed V, @miniboxed F](implicit A: AlgebraOverField[V, F]) = A
+  def apply[V, @miniboxed F](implicit A: AlgebraOverField[V, F]) = A
 
   implicit def defaultOnField[@miniboxed X](implicit F: Field[X]): AlgebraOverField[X, X] = new AlgebraOverField[X, X] {
     def fieldOfScalar = F

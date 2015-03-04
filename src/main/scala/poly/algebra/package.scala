@@ -35,8 +35,8 @@ package object algebra {
     def ∧(y: X)(implicit S: BooleanAlgebra[X]) = S.and(x, y)
     def ∨(y: X)(implicit S: BooleanAlgebra[X]) = S.or(x, y)
 
-    def :*[@miniboxed R](k: R)(implicit S: Module[X, R]) = S.scale(k, x)
-    def *:[@miniboxed R](k: R)(implicit S: Module[X, R]) = S.scale(k, x) // colon on the right side
+    def :*[R](k: R)(implicit S: Module[X, R]) = S.scale(k, x)
+    def *:[R](k: R)(implicit S: Module[X, R]) = S.scale(k, x) // colon on the right side
 
     def ===(y: X)(implicit S: Eq[X]) = S.eq(x, y)
     def =!=(y: X)(implicit S: Eq[X]) = S.ne(x, y)
@@ -47,7 +47,7 @@ package object algebra {
 
     def ###(implicit S: Hash[X]) = S.hash(x)
 
-    def innerProduct[@miniboxed F](y: X)(implicit S: InnerProductSpace[X, F]) = S.dot(x, y)
+    def innerProduct[F](y: X)(implicit S: InnerProductSpace[X, F]) = S.dot(x, y)
 
   }
 

@@ -7,8 +7,21 @@ package poly.algebra
  */
 trait Monoid[@miniboxed X] extends Semigroup[X] with HasIdentity[X] {
   override def combineN(x: X, n: Int): X = {
-    if (n == 0) id
-    else super.combineN(x, n)
+    if (n == 0) return id
+    var y = x
+    var m = n
+    while (m % 2 == 0) {
+      m >>= 1
+      y = op(y, y)
+    }
+    var r = y
+    while (m > 1) {
+      m >>= 1
+      y = op(y, y)
+      if (m % 2 == 1)
+        r = op(r, y)
+    }
+    r
   }
 }
 
