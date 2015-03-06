@@ -5,6 +5,7 @@ package poly.algebra
  * An endofunction is a function whose domain equals its codomain.
  * @tparam X Type of domain and codomain
  * @author Tongfei Chen (ctongfei@gmail.com).
+ * @deprecated Buggy because of a minibox bug. Do not use.
  */
 trait EndofunctionSpace[X, @miniboxed R] extends FunctionSpace[X, X, R] {
 
@@ -18,4 +19,10 @@ trait EndofunctionSpace[X, @miniboxed R] extends FunctionSpace[X, X, R] {
 
 object EndofunctionSpace {
   def apply[X, @miniboxed R](implicit S: EndofunctionSpace[X, R]) = S
+
+  implicit def default[X, R](implicit M: Module[X, R], r: Ring[R]): EndofunctionSpace[X, R] = new EndofunctionSpace[X, R] {
+    def moduleOfCodomain = M
+    def ringOfScalar = r
+  }
 }
+

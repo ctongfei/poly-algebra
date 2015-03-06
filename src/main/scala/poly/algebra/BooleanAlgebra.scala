@@ -22,7 +22,7 @@ trait BooleanAlgebra[@miniboxed X] extends Lattice[X] { self =>
   def asBooleanRing: Ring[X] = new Ring[X] {
     def mul(x: X, y: X): X = and(x, y)
     def add(x: X, y: X): X = xor(x, y)
-    def neg(x: X): X = not(x)
+    def neg(x: X): X = x
     def one: X = self.one
     def zero: X = self.zero
   }
@@ -30,7 +30,7 @@ trait BooleanAlgebra[@miniboxed X] extends Lattice[X] { self =>
 }
 
 object BooleanAlgebra {
-  def apply[@miniboxed X](B: BooleanAlgebra[X]) = B
+  def apply[@miniboxed X](implicit B: BooleanAlgebra[X]) = B
   def create[@miniboxed X](fAnd: (X, X) => X, fOr: (X, X) => X, fNot: X => X, fZero: X, fOne: X)(implicit E: Eq[X]) = new BooleanAlgebra[X] {
     def eq(x: X, y: X) = E.eq(x, y)
     override def ne(x: X, y: X) = E.ne(x, y)

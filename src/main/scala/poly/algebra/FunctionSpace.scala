@@ -13,7 +13,7 @@ trait FunctionSpace[X, Y, @miniboxed R] extends Module[X => Y, R] {
 
   def scale(a: R, f: X => Y) = (x: X) => moduleOfCodomain.scale(a, f(x))
 
-  //override def neg(f: X => Y) = (x: X) => moduleOfCodomain.neg(f(x))
+  override def neg(f: X => Y) = (x: X) => moduleOfCodomain.neg(f(x))
 
   def zero = (x: X) => moduleOfCodomain.zero
 

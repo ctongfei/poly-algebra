@@ -11,6 +11,10 @@ package object algebra {
   implicit val implicitFloatStructure = std.FloatStructure
   implicit val implicitDoubleStructure = std.DoubleStructure
 
+  implicit class withMonadicOps[M[_], X](val x: M[X]) extends AnyVal {
+    def >>=[Y](f: X => M[Y])(implicit M: Monad[M]) = M.flatMap(x)(f)
+  }
+
   implicit class withOps[X](val x: X) extends AnyVal { // ensure static invocation
 
     def unary_-(implicit S: AdditiveGroup[X]) = S.neg(x)

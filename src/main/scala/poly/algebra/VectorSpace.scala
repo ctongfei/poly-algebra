@@ -12,7 +12,7 @@ object VectorSpace {
 
   def apply[V, @miniboxed F](implicit V: VectorSpace[V, F]) = V
 
-  def default[V](implicit F: Field[V]): VectorSpace[V, V] = new VectorSpace[V, V] {
+  implicit def default[V](implicit F: Field[V]): VectorSpace[V, V] = new VectorSpace[V, V] {
     def fieldOfScalar = F
     def add(x: V, y: V) = F.add(x, y)
     override def neg(x: V) = F.neg(x)

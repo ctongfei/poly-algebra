@@ -3,7 +3,23 @@ import org.scalatest._
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-class BasicTest extends FunSuite {
+class Test extends FunSuite {
+
+  test("Boolean algebra and Boolean ring") {
+    val B = BooleanAlgebra[Boolean]
+    assert(B.and(true, false) == false)
+    assert(B.nand(true, true) == false)
+    assert(B.xor(true, false) == true)
+    assert(B.xor(true, true) == false)
+    assert(B.le(false, true))
+    assert(B.ge(true, false))
+    assert(B.le(true, true))
+    assert(B.or(true, false) == true)
+    assert(B.nor(true, false) == false)
+    val R = B.asBooleanRing
+    assert(R.negOne == true)
+    assert(R.add(true, true) == false)
+  }
 
   test("Int ring") {
     val Z = Ring[Int]
@@ -33,6 +49,19 @@ class BasicTest extends FunSuite {
     assert(L.inf(60, 72) == 12)
     assert(L.inf(128, 243) == 1)
     assert(L.sup(12, 18) == 36)
-
   }
+
+  test("Monads") {
+    val a = Seq(1, 2, 3)
+    val b = a >>= ((x: Int) => Seq(x + 1, x + 2))
+    print(b)
+  }
+
+  test("Endofunction space") {
+    val S = EndofunctionSpace.default[Double, Double]
+    val f = S.composeN((x: Double) => x * x, 4)
+    println(f(2))
+  }
+
+
 }
