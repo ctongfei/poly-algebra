@@ -3,7 +3,7 @@ package poly.algebra
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait PartialOrder[@miniboxed X] extends Eq[X] {
+trait PartialOrder[@specialized(Int, Double) X] extends Eq[X] {
   def le(x: X, y: X): Boolean
   def ge(x: X, y: X): Boolean = le(y, x)
   def pmax(x: X, y: X): Option[X] = {
@@ -19,8 +19,8 @@ trait PartialOrder[@miniboxed X] extends Eq[X] {
 }
 
 object PartialOrder {
-  def apply[@miniboxed X](implicit O: PartialOrder[X]) = O
-  def create[@miniboxed X](fLe: (X, X) => Boolean) = new PartialOrder[X] {
+  def apply[@specialized(Int, Double) X](implicit O: PartialOrder[X]) = O
+  def create[@specialized(Int, Double) X](fLe: (X, X) => Boolean) = new PartialOrder[X] {
     def eq(x: X, y: X) = x == y
     def le(x: X, y: X): Boolean = fLe(x, y)
   }

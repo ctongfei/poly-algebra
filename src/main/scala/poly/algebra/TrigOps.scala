@@ -3,7 +3,7 @@ package poly.algebra
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait TrigOps[@miniboxed X] {
+trait TrigOps[@specialized(Int, Double) X] {
   def e: X
   def pi: X
   def exp(a: X): X

@@ -7,7 +7,7 @@ package poly.algebra
  * @author Tongfei Chen (ctongfei@gmail.com).
  * @deprecated Buggy because of a minibox bug. Do not use.
  */
-trait EndofunctionSpace[X, @miniboxed R] extends FunctionSpace[X, X, R] {
+trait EndofunctionSpace[X, @specialized(Int, Double) R] extends FunctionSpace[X, X, R] {
 
   def composeN(f: X => X, n: Int) = asMonoidWithCompose.combineN(f, n)
 
@@ -18,7 +18,7 @@ trait EndofunctionSpace[X, @miniboxed R] extends FunctionSpace[X, X, R] {
 }
 
 object EndofunctionSpace {
-  def apply[X, @miniboxed R](implicit S: EndofunctionSpace[X, R]) = S
+  def apply[X, @specialized(Int, Double) R](implicit S: EndofunctionSpace[X, R]) = S
 
   implicit def default[X, R](implicit M: Module[X, R], r: Ring[R]): EndofunctionSpace[X, R] = new EndofunctionSpace[X, R] {
     def moduleOfCodomain = M

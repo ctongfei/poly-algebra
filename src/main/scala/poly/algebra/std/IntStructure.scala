@@ -14,8 +14,8 @@ object IntStructure extends EuclideanDomain[Int] with TotalOrder[Int] with Hash[
   override def lt(x: Int, y: Int) = x < y
   override def ge(x: Int, y: Int) = x >= y
   override def gt(x: Int, y: Int) = x > y
-  def max(x: Int, y: Int) = if (x > y) x else y
-  def min(x: Int, y: Int) = if (x < y) x else y
+  override def max(x: Int, y: Int) = if (x > y) x else y
+  override def min(x: Int, y: Int) = if (x < y) x else y
   def zero = 0
   def one = 1
   def add(x: Int, y: Int) = x + y

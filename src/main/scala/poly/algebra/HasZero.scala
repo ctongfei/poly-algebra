@@ -4,7 +4,7 @@ package poly.algebra
  * Represents the existence of an `0` element.
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait HasZero[@miniboxed X] {
+trait HasZero[@specialized(Int, Double) X] {
 
   /** The `0` element (additive identity) of this type. */
   def zero: X
@@ -17,10 +17,10 @@ trait HasZero[@miniboxed X] {
 
 object HasZero {
   /** Retrieves the implicit `HasZero` object of this type. */
-  def apply[@miniboxed X](implicit Z: HasZero[X]) = Z
+  def apply[@specialized(Int, Double) X](implicit Z: HasZero[X]) = Z
 
   /** Creates a `HasZero` object given an identity element `0` of a type. */
-  def create[@miniboxed X](zeroElem: X) = new HasZero[X] {
+  def create[@specialized(Int, Double) X](zeroElem: X) = new HasZero[X] {
     def zero = zeroElem
   }
 }

@@ -5,7 +5,7 @@ package poly.algebra
  * An multiplicative semigroup is a semigroup with the binary operation `mul` (`*`).
  * @tparam X Type of element
  */
-trait MultiplicativeSemigroup[@miniboxed X] {
+trait MultiplicativeSemigroup[@specialized(Int, Double) X] {
 
   /** The `*` operation of this semigroup. */
   def mul(x: X, y: X): X
@@ -22,10 +22,10 @@ trait MultiplicativeSemigroup[@miniboxed X] {
 object MultiplicativeSemigroup {
 
   /** Retrieves the implicit multiplicative semigroup associated with the specific type. */
-  def apply[@miniboxed X](implicit S: MultiplicativeSemigroup[X]) = S
+  def apply[@specialized(Int, Double) X](implicit S: MultiplicativeSemigroup[X]) = S
 
   /** Creates an multiplicative semigroup of the specific type using the `*` operation provided. */
-  def create[@miniboxed X](f: (X, X) => X) = new MultiplicativeSemigroup[X] {
+  def create[@specialized(Int, Double) X](f: (X, X) => X) = new MultiplicativeSemigroup[X] {
     def mul(x: X, y: X): X = f(x, y)
   }
 }

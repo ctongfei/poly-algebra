@@ -5,7 +5,7 @@ package poly.algebra
  * A monoid is a semigroup with an identity element.
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait Monoid[@miniboxed X] extends Semigroup[X] with HasIdentity[X] {
+trait Monoid[@specialized(Int, Double) X] extends Semigroup[X] with HasIdentity[X] {
   override def combineN(x: X, n: Int): X = {
     if (n == 0) return id
     var y = x
@@ -27,10 +27,10 @@ trait Monoid[@miniboxed X] extends Semigroup[X] with HasIdentity[X] {
 
 object Monoid {
   /** Retrieves the implicit monoid associated with the specific type. */
-  def apply[@miniboxed X](implicit M: Monoid[X]) = M
+  def apply[@specialized(Int, Double) X](implicit M: Monoid[X]) = M
 
   /** Creates an monoid of the specific type using the binary operation and the identity element provided. */
-  def create[@miniboxed X](f: (X, X) => X, idElem: X) = new Monoid[X] {
+  def create[@specialized(Int, Double) X](f: (X, X) => X, idElem: X) = new Monoid[X] {
     def op(x: X, y: X): X = f(x, y)
     def id: X = idElem
   }

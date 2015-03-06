@@ -3,15 +3,15 @@ package poly.algebra
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait InnerProductSpace[V, @miniboxed F] extends NormedVectorSpace[V, F] {
+trait InnerProductSpace[V, @specialized(Int, Double) F] extends NormedVectorSpace[V, F] {
   def powerOpsOfScalar: PowerOps[F]
   def dot(x: V, y: V): F
   def norm(x: V) = powerOpsOfScalar.sqrt(dot(x, x))
 }
 
 object InnerProductSpace {
-  def apply[V, @miniboxed F](implicit S: InnerProductSpace[V, F]) = S
-  def create[V, @miniboxed F: PowerOps : Field](fDot: (V, V) => F)(implicit S: VectorSpace[V, F]) = new InnerProductSpace[V, F] {
+  def apply[V, @specialized(Int, Double) F](implicit S: InnerProductSpace[V, F]) = S
+  def create[V, @specialized(Int, Double) F: PowerOps : Field](fDot: (V, V) => F)(implicit S: VectorSpace[V, F]) = new InnerProductSpace[V, F] {
     def powerOpsOfScalar = implicitly[PowerOps[F]]
     def fieldOfScalar = implicitly[Field[F]]
     def dot(x: V, y: V): F = fDot(x, y)

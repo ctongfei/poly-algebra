@@ -14,8 +14,8 @@ object FloatStructure extends Field[Float] with TotalOrder[Float] with Hash[Floa
   override def lt(x: Float, y: Float) = x < y
   override def ge(x: Float, y: Float) = x >= y
   override def gt(x: Float, y: Float) = x > y
-  def max(x: Float, y: Float) = if (x > y) x else y
-  def min(x: Float, y: Float) = if (x < y) x else y
+  override def max(x: Float, y: Float) = if (x > y) x else y
+  override def min(x: Float, y: Float) = if (x < y) x else y
   def zero = 0.0f
   def one = 1.0f
   def add(x: Float, y: Float) = x + y

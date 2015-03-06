@@ -14,8 +14,8 @@ object DoubleStructure extends Field[Double] with TotalOrder[Double] with Hash[D
   override def lt(x: Double, y: Double) = x < y
   override def ge(x: Double, y: Double) = x >= y
   override def gt(x: Double, y: Double) = x > y
-  def max(x: Double, y: Double) = if (x > y) x else y
-  def min(x: Double, y: Double) = if (x < y) x else y
+  override def max(x: Double, y: Double) = if (x > y) x else y
+  override def min(x: Double, y: Double) = if (x < y) x else y
   def zero = 0.0
   def one = 1.0
   def add(x: Double, y: Double) = x + y

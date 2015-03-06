@@ -3,7 +3,7 @@ package poly.algebra
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait TotalOrder[@miniboxed X] extends Lattice[X] with WeakOrder[X] {
+trait TotalOrder[@specialized(Int, Double) X] extends Lattice[X] with WeakOrder[X] {
   def min(x: X, y: X): X = if (lt(x, y)) x else y
   def max(x: X, y: X): X = if (lt(x, y)) y else x
   override def le(x: X, y: X): Boolean = lt(x, y) | eq(x, y)
@@ -13,8 +13,8 @@ trait TotalOrder[@miniboxed X] extends Lattice[X] with WeakOrder[X] {
 }
 
 object TotalOrder {
-  def apply[@miniboxed X](implicit O: TotalOrder[X]) = O
-  def create[@miniboxed X](fLt: (X, X) => Boolean) = new TotalOrder[X] {
+  def apply[@specialized(Int, Double) X](implicit O: TotalOrder[X]) = O
+  def create[@specialized(Int, Double) X](fLt: (X, X) => Boolean) = new TotalOrder[X] {
     def eq(x: X, y: X) = x == y
     override def lt(x: X, y: X) = fLt(x, y)
     override def gt(x: X, y: X) = fLt(y, x)

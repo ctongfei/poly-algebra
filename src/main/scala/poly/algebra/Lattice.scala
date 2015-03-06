@@ -3,7 +3,7 @@ package poly.algebra
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait Lattice[@miniboxed X] extends PartialOrder[X] {
+trait Lattice[@specialized(Int, Double) X] extends PartialOrder[X] {
   def sup(x: X, y: X): X
   def inf(x: X, y: X): X
   def le(x: X, y: X) = eq(x, inf(x, y))
@@ -11,8 +11,8 @@ trait Lattice[@miniboxed X] extends PartialOrder[X] {
 }
 
 object Lattice {
-  def apply[@miniboxed X](implicit L: Lattice[X]) = L
-  def create[@miniboxed X](fSup: (X, X) => X, fInf: (X, X) => X) = new Lattice[X] {
+  def apply[@specialized(Int, Double) X](implicit L: Lattice[X]) = L
+  def create[@specialized(Int, Double) X](fSup: (X, X) => X, fInf: (X, X) => X) = new Lattice[X] {
     def eq(x: X, y: X) = x == y
     def sup(x: X, y: X): X = fSup(x, y)
     def inf(x: X, y: X): X = fInf(x, y)

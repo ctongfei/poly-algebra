@@ -3,15 +3,15 @@ package poly.algebra
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait NormedVectorSpace[V, @miniboxed F] extends VectorSpace[V, F] with MetricSpace[V, F] {
+trait NormedVectorSpace[V, @specialized(Int, Double) F] extends VectorSpace[V, F] with MetricSpace[V, F] {
   def norm(x: V): F
   def dist(x: V, y: V): F = norm(sub(x, y))
   def normalize(x: V): V = scale(fieldOfScalar.inv(norm(x)), x)
 }
 
 object NormedVectorSpace {
-  def apply[V, @miniboxed F](implicit S: NormedVectorSpace[V, F]) = S
-  def create[V, @miniboxed F: Field](fNorm: V => F)(implicit S: VectorSpace[V, F]) = new NormedVectorSpace[V, F] {
+  def apply[V, @specialized(Int, Double) F](implicit S: NormedVectorSpace[V, F]) = S
+  def create[V, @specialized(Int, Double) F: Field](fNorm: V => F)(implicit S: VectorSpace[V, F]) = new NormedVectorSpace[V, F] {
     def fieldOfScalar = implicitly[Field[F]]
     def norm(x: V): F = fNorm(x)
     override def neg(x: V): V = S.neg(x)
