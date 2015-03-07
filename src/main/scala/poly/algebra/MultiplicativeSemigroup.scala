@@ -7,10 +7,10 @@ package poly.algebra
  */
 trait MultiplicativeSemigroup[@specialized(Int, Double) X] {
 
-  /** The `*` operation of this semigroup. */
+  /** Returns the product of two elements. */
   def mul(x: X, y: X): X
 
-  /** Computes the product ''x'' * ''x'' * ... * ''x'' with ''x'' repeated for ''n'' times. */
+  /** Computes the product ''x'' * ''x'' * ··· * ''x'' with ''x'' repeated for ''n'' times. */
   def ipow(x: X, n: Int): X = asSemigroupWithMul.combineN(x, n)
 
   /** Casts this structure as a symbol-agnostic semigroup. */

@@ -5,10 +5,10 @@ package poly.algebra
  */
 trait EuclideanDomain[@specialized(Int, Double) X] extends Ring[X] {
 
-  /** Returns the quotient (Euclidean division) of two elements. ABSTRACT: Should be implemented. */
+  /** Returns the quotient (Euclidean division) of two elements. */
   def quot(x: X, y: X): X
 
-  /** Returns the modulus of two elements. ABSTRACT: Should be implemented. */
+  /** Returns the modulus of two elements.. */
   def mod(x: X, y: X): X
 
   /** Simutaneously returns the quotient and the modulus of two elements. For performance, this function should be overridden. */

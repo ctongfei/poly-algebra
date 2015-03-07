@@ -1,4 +1,6 @@
-package poly.algebra
+package poly.algebra.monad
+
+import poly.algebra._
 
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).

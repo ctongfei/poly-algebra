@@ -26,7 +26,7 @@ class Test extends FunSuite {
     assert(Z.add(30, 20) == 50)
     assert(Z.sub(40, 10) == 30)
     assert(Z.sumN(2, 10) == 20)
-    assert(Z.ipow(2, 20) == 1048576)
+    assert(Z.ipow(2, 10) == 1024)
     assert(Z.ipow(3, 0) == 1)
   }
 
@@ -39,7 +39,7 @@ class Test extends FunSuite {
 
   test("Double field") {
     val R = Field[Double]
-    assert(R.ipow(2.0, 20) == 1048576.0)
+    assert(R.ipow(2.0, 10) == 1024.0)
     assert(R.sumN(3.0, 100) == 300.0)
     assert(R.div(20.0, 10.0) == 2.0)
   }
@@ -51,16 +51,10 @@ class Test extends FunSuite {
     assert(L.sup(12, 18) == 36)
   }
 
-  test("Monads") {
-    val a = Seq(1, 2, 3)
-    val b = a >>= ((x: Int) => Seq(x + 1, x + 2))
-    print(b)
-  }
-
   test("Endofunction space") {
     val S = EndofunctionSpace.default[Double, Double]
     val f = S.composeN((x: Double) => x * x, 4)
-    println(f(2))
+    assert(f(2) == 65536)
   }
 
 

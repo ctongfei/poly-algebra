@@ -1,5 +1,7 @@
 package poly
 
+import poly.algebra.monad._
+
 /**
  * `Poly-algebra` contains typeclass abstractions over common algebraic structures.
  * @author Tongfei Chen (ctongfei@gmail.com).
@@ -11,9 +13,6 @@ package object algebra {
   implicit val implicitFloatStructure = std.FloatStructure
   implicit val implicitDoubleStructure = std.DoubleStructure
 
-  implicit class withMonadicOps[M[_], X](val x: M[X]) extends AnyVal {
-    def >>=[Y](f: X => M[Y])(implicit M: Monad[M]) = M.flatMap(x)(f)
-  }
 
   implicit class withOps[X](val x: X) extends AnyVal { // ensure static invocation
 
@@ -46,8 +45,9 @@ package object algebra {
     def =!=(y: X)(implicit S: Eq[X]) = S.ne(x, y)
     def <=(y: X)(implicit S: PartialOrder[X]) = S.le(x, y)
     def >=(y: X)(implicit S: PartialOrder[X]) = S.ge(x, y)
-    def <(y: X)(implicit S: TotalOrder[X]) = S.lt(x, y)
-    def >(y: X)(implicit S: TotalOrder[X]) = S.gt(x, y)
+    def <(y: X)(implicit S: WeakOrder[X]) = S.lt(x, y)
+    def >(y: X)(implicit S: WeakOrder[X]) = S.gt(x, y)
+    def =~=(y: X)(implicit S: WeakOrder[X]) = S.tied(x, y)
 
     def ###(implicit S: Hash[X]) = S.hash(x)
 

@@ -5,11 +5,12 @@ import poly.algebra._
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-object DoubleStructure extends Field[Double] with TotalOrder[Double] with Hash[Double] with PowerOps[Double] with TrigOps[Double] with Signed[Double] {
+object DoubleStructure extends Field[Double] with TotalOrder[Double] with Hash[Double] with PowerOps[Double] with TrigExpOps[Double] with Signed[Double] {
   def eq(x: Double, y: Double) = x == y
   override def ne(x: Double, y: Double) = x != y
   def hash(x: Double) = x.hashCode()
 
+  def cmp(x: Double, y: Double) = (x - y).toInt
   override def le(x: Double, y: Double) = x <= y
   override def lt(x: Double, y: Double) = x < y
   override def ge(x: Double, y: Double) = x >= y

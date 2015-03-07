@@ -1,4 +1,4 @@
-package poly.algebra
+package poly.algebra.monad
 
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).

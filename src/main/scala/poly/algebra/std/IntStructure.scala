@@ -10,6 +10,7 @@ object IntStructure extends EuclideanDomain[Int] with TotalOrder[Int] with Hash[
   override def ne(x: Int, y: Int) = x != y
   def hash(x: Int) = x.hashCode()
 
+  def cmp(x: Int, y: Int) = x - y
   override def le(x: Int, y: Int) = x <= y
   override def lt(x: Int, y: Int) = x < y
   override def ge(x: Int, y: Int) = x >= y

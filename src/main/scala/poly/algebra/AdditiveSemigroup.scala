@@ -10,7 +10,7 @@ trait AdditiveSemigroup[@specialized(Int, Double) X] {
   /** The `+` operation of this semigroup. */
   def add(x: X, y: X): X
 
-  /** Computes the sum ''x'' + ''x'' + ... + ''x'' with ''x'' repeated for ''n'' times. */
+  /** Computes the sum ''x'' + ''x'' + ··· + ''x'' with ''x'' repeated for ''n'' times. */
   def sumN(x: X, n: Int): X = asSemigroupWithAdd.combineN(x, n)
 
   /** Casts this structure as a symbol-agnostic semigroup. */

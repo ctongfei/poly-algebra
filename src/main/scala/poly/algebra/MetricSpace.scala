@@ -3,7 +3,7 @@ package poly.algebra
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait MetricSpace[V, @specialized(Int, Double)  F] {
+trait MetricSpace[V, @specialized(Int, Double) F] {
   def dist(x: V, y: V): F
 }
 

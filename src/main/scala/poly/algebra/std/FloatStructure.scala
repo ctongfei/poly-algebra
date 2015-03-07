@@ -5,11 +5,12 @@ import poly.algebra._
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-object FloatStructure extends Field[Float] with TotalOrder[Float] with Hash[Float] with PowerOps[Float] with TrigOps[Float] with Signed[Float] {
+object FloatStructure extends Field[Float] with TotalOrder[Float] with Hash[Float] with PowerOps[Float] with TrigExpOps[Float] with Signed[Float] {
   def eq(x: Float, y: Float) = x == y
   override def ne(x: Float, y: Float) = x != y
   def hash(x: Float) = x.hashCode()
 
+  def cmp(x: Float, y: Float) = (x - y).toInt
   override def le(x: Float, y: Float) = x <= y
   override def lt(x: Float, y: Float) = x < y
   override def ge(x: Float, y: Float) = x >= y
