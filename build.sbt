@@ -10,11 +10,11 @@ isSnapshot := true
 
 resolvers += Resolver.sonatypeRepo("snapshots")
 
+//addCompilerPlugin("org.scala-miniboxing.plugins" %% "miniboxing-plugin" % "0.4-SNAPSHOT")
+
 //libraryDependencies += "org.scala-miniboxing.plugins" %% "miniboxing-runtime" % "0.4-SNAPSHOT"
 
 libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.2"
-
-//addCompilerPlugin("org.scala-miniboxing.plugins" %% "miniboxing-plugin" % "0.4-SNAPSHOT")
 
 scalacOptions in (Compile, doc) += "-diagrams"
 

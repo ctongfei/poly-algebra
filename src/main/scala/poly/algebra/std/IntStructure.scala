@@ -5,7 +5,7 @@ import poly.algebra._
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-object IntStructure extends EuclideanDomain[Int] with TotalOrder[Int] with Hash[Int] with Signed[Int] {
+object IntStructure extends EuclideanDomain[Int] with TotalOrder[Int] with Hash[Int] with SignOps[Int] {
   def eq(x: Int, y: Int) = x == y
   override def ne(x: Int, y: Int) = x != y
   def hash(x: Int) = x.hashCode()

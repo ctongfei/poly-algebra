@@ -5,7 +5,7 @@ import poly.algebra._
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-object DoubleStructure extends Field[Double] with TotalOrder[Double] with Hash[Double] with PowerOps[Double] with TrigExpOps[Double] with Signed[Double] {
+object DoubleStructure extends Field[Double] with TotalOrder[Double] with Hash[Double] with PowerOps[Double] with TrigExpOps[Double] with SignOps[Double] {
   def eq(x: Double, y: Double) = x == y
   override def ne(x: Double, y: Double) = x != y
   def hash(x: Double) = x.hashCode()

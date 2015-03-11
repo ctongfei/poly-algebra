@@ -5,7 +5,7 @@ import poly.algebra._
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-object FloatStructure extends Field[Float] with TotalOrder[Float] with Hash[Float] with PowerOps[Float] with TrigExpOps[Float] with Signed[Float] {
+object FloatStructure extends Field[Float] with TotalOrder[Float] with Hash[Float] with PowerOps[Float] with TrigExpOps[Float] with SignOps[Float] {
   def eq(x: Float, y: Float) = x == y
   override def ne(x: Float, y: Float) = x != y
   def hash(x: Float) = x.hashCode()

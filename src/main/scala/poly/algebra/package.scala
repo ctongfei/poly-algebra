@@ -24,7 +24,6 @@ package object algebra {
     def %(y: X)(implicit S: EuclideanDomain[X]) = S.mod(x, y)
 
     def **(n: Int)(implicit S: MultiplicativeSemigroup[X]) = S.ipow(x, n)
-    def **(n: Int)(implicit S: MultiplicativeMonoid[X]) = S.ipow(x, n)
     def **(y: X)(implicit S: PowerOps[X]) = S.pow(x, y)
 
     def unary_!(implicit S: BooleanAlgebra[X]) = S.not(x)

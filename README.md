@@ -18,6 +18,6 @@ Typeclass abstractions of common algebraic structures
 
 `FunctionSpace`, `EndofunctionSpace`
 
-`Signed`, `PowerOps`, `TrigExpOps`
+`SignOps`, `PowerOps`, `TrigExpOps`
 
 `Applicative`, `Functor`, `Monad`
