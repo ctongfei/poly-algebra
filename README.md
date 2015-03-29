@@ -10,7 +10,7 @@ Typeclass abstractions of common algebraic structures
 
 `Semiring`, `Ring`, `EuclideanDomain`, `Field`
 
-`PartialOrder`, `Lattice`, `WeakOrder`, `TotalOrder`, `BooleanAlgebra`
+`PartialOrder`, `UpperSemilattice`, `LowerSemilattice`, `Lattice`, `WeakOrder`, `TotalOrder`, `BooleanAlgebra`
 
 `Module`, `AlgebraOverRing`, `AlgebraOverField`
 

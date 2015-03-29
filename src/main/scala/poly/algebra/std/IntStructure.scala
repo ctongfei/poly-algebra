@@ -5,27 +5,27 @@ import poly.algebra._
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-object IntStructure extends EuclideanDomain[Int] with TotalOrder[Int] with Hash[Int] with SignOps[Int] {
-  def eq(x: Int, y: Int) = x == y
-  override def ne(x: Int, y: Int) = x != y
-  def hash(x: Int) = x.hashCode()
+object IntStructure extends EuclideanDomain[ZZ] with TotalOrder[ZZ] with Hash[ZZ] with SignOps[ZZ] {
+  def eq(x: ZZ, y: ZZ) = x == y
+  override def ne(x: ZZ, y: ZZ) = x != y
+  def hash(x: ZZ) = x.hashCode()
 
-  def cmp(x: Int, y: Int) = x - y
-  override def le(x: Int, y: Int) = x <= y
-  override def lt(x: Int, y: Int) = x < y
-  override def ge(x: Int, y: Int) = x >= y
-  override def gt(x: Int, y: Int) = x > y
-  override def max(x: Int, y: Int) = if (x > y) x else y
-  override def min(x: Int, y: Int) = if (x < y) x else y
+  def cmp(x: ZZ, y: ZZ) = x - y
+  override def le(x: ZZ, y: ZZ) = x <= y
+  override def lt(x: ZZ, y: ZZ) = x < y
+  override def ge(x: ZZ, y: ZZ) = x >= y
+  override def gt(x: ZZ, y: ZZ) = x > y
+  override def max(x: ZZ, y: ZZ) = if (x > y) x else y
+  override def min(x: ZZ, y: ZZ) = if (x < y) x else y
   def zero = 0
   def one = 1
-  def add(x: Int, y: Int) = x + y
-  def neg(x: Int) = -x
-  override def sub(x: Int, y: Int) = x - y
-  def mul(x: Int, y: Int) = x * y
-  def quot(x: Int, y: Int) = x / y
-  def mod(x: Int, y: Int) = x % y
+  def add(x: ZZ, y: ZZ) = x + y
+  def neg(x: ZZ) = -x
+  override def sub(x: ZZ, y: ZZ) = x - y
+  def mul(x: ZZ, y: ZZ) = x * y
+  def quot(x: ZZ, y: ZZ) = x / y
+  def mod(x: ZZ, y: ZZ) = x % y
 
-  def abs(x: Int) = Math.abs(x)
-  def sgn(x: Int) = if (x == 0) 0 else if (x > 0) 1 else -1
+  def abs(x: ZZ) = Math.abs(x)
+  def sgn(x: ZZ) = if (x == 0) 0 else if (x > 0) 1 else -1
 }

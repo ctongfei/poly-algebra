@@ -3,10 +3,9 @@ package poly.algebra
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait Lattice[@specialized(Int, Double) X] extends PartialOrder[X] {
-  def sup(x: X, y: X): X
-  def inf(x: X, y: X): X
-  def le(x: X, y: X) = eq(x, inf(x, y))
+
+trait Lattice[@specialized(Int, Double) X] extends UpperSemilattice[X] with LowerSemilattice[X] {
+  override def le(x: X, y: X) = eq(x, inf(x, y))
   override def ge(x: X, y: X) = eq(x, sup(x, y))
 }
 

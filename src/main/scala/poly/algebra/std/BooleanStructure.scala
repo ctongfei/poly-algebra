@@ -5,12 +5,12 @@ import poly.algebra._
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-object BooleanStructure extends BooleanAlgebra[Boolean] with TotalOrder[Boolean] with Hash[Boolean] {
-  def eq(x: Boolean, y: Boolean) = x == y
-  override def ne(x: Boolean, y: Boolean) = x != y
-  def hash(x: Boolean) = x.hashCode()
+object BooleanStructure extends BooleanAlgebra[BB] with TotalOrder[BB] with Hash[BB] {
+  def eq(x: BB, y: BB) = x == y
+  override def ne(x: BB, y: BB) = x != y
+  def hash(x: BB) = x.hashCode()
 
-  override def cmp(x: Boolean, y: Boolean) = {
+  override def cmp(x: BB, y: BB) = {
     if (x == y) 0
     else if (x) 1
     else -1
@@ -18,11 +18,11 @@ object BooleanStructure extends BooleanAlgebra[Boolean] with TotalOrder[Boolean]
 
   def one = true
   def zero = false
-  def not(x: Boolean) = !x
-  def and(x: Boolean, y: Boolean) = x & y
-  def or(x: Boolean, y: Boolean) = x | y
+  def not(x: BB) = !x
+  def and(x: BB, y: BB) = x & y
+  def or(x: BB, y: BB) = x | y
 
-  override def sup(x: Boolean, y: Boolean) = x | y
-  override def inf(x: Boolean, y: Boolean) = x & y
+  override def sup(x: BB, y: BB) = x | y
+  override def inf(x: BB, y: BB) = x & y
 
 }

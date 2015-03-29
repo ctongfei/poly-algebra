@@ -1,6 +1,5 @@
 package poly
 
-import poly.algebra.monad._
 
 /**
  * `Poly-algebra` contains typeclass abstractions over common algebraic structures.
