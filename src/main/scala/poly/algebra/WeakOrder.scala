@@ -13,6 +13,8 @@ trait WeakOrder[@specialized(Int, Double) X] extends PartialOrder[X] {
   override def ge(x: X, y: X): Boolean = cmp(x, y) >= 0
   def tied(x: X, y: X): Boolean = cmp(x, y) == 0
 
+  def asEqWithTied = Eq.create(tied)
+
 }
 
 object WeakOrder {

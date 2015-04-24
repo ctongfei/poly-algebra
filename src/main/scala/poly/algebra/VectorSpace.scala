@@ -12,7 +12,13 @@ object VectorSpace {
 
   def apply[V, @specialized(Int, Double) F](implicit V: VectorSpace[V, F]) = V
 
-  implicit def default[V](implicit F: Field[V]): VectorSpace[V, V] = new VectorSpace[V, V] {
+  /**
+   * Constructs the trivial vector space of any field over itself.
+   * @param F The field
+   * @tparam V Type of values of the field
+   * @return The trivial vector space of a field over itself.
+   */
+  implicit def trivial[V](implicit F: Field[V]): VectorSpace[V, V] = new VectorSpace[V, V] {
     def fieldOfScalar = F
     def add(x: V, y: V) = F.add(x, y)
     override def neg(x: V) = F.neg(x)

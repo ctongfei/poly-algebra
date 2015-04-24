@@ -1,7 +1,7 @@
 package poly.algebra
 
 /**
- * Typeclass for type-strict equality checking.
+ * Typeclass for type-strict equivalence relation.
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
 trait Eq[@specialized(Int, Double) X] {
@@ -16,6 +16,8 @@ trait Eq[@specialized(Int, Double) X] {
 
 
 object Eq {
+
+  def apply[@specialized(Int, Double) X](implicit ev: Eq[X]): Eq[X] = ev
 
   def create[@specialized(Int, Double) X](fEq: (X, X) => Boolean): Eq[X] = new Eq[X] {
     def eq(x: X, y: X) = fEq(x, y)

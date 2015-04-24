@@ -3,7 +3,9 @@ import org.scalatest._
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-class Test extends FunSuite {
+class TestAlgebraicStructures extends FunSuite {
+
+  import ops._
 
   test("Boolean algebra and Boolean ring") {
     val B = BooleanAlgebra[Boolean]
@@ -56,6 +58,5 @@ class Test extends FunSuite {
     val f = S.composeN((x: Double) => x * x, 4)
     assert(f(2) == 65536)
   }
-
 
 }

@@ -5,7 +5,7 @@ package poly.algebra
  * An additive semigroup is a semigroup with the binary operation `add` (`+`).
  * @tparam X Type of element
  */
-trait AdditiveSemigroup[@specialized(Int, Double) X] {
+trait AdditiveSemigroup[@specialized(Int, Double) X] { self =>
 
   /** The `+` operation of this semigroup. */
   def add(x: X, y: X): X
@@ -15,7 +15,7 @@ trait AdditiveSemigroup[@specialized(Int, Double) X] {
 
   /** Casts this structure as a symbol-agnostic semigroup. */
   def asSemigroupWithAdd: Semigroup[X] = new Semigroup[X] {
-    def op(x: X, y: X) = add(x, y)
+    def op(x: X, y: X) = self.add(x, y)
   }
 }
 

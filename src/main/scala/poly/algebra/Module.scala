@@ -10,9 +10,17 @@ trait Module[@specialized(Int, Double) V, @specialized(Int, Double) R] extends A
 }
 
 object Module {
+
+  /** Retrieves the implicit module associated with the specific type. */
   def apply[@specialized(Int, Double) V, @specialized(Int, Double) R](implicit M: Module[V, R]) = M
 
-  implicit def default[@specialized(Int, Double) V](implicit R: Ring[V]): Module[V, V] = new Module[V, V] {
+  /**
+   * Constructs the trivial module of any ring over itself.
+   * @param R The ring
+   * @tparam V Type of values of the ring
+   * @return The trivial module of a ring over itself.
+   */
+  implicit def trivial[@specialized(Int, Double) V](implicit R: Ring[V]): Module[V, V] = new Module[V, V] {
     def ringOfScalar = R
     def add(x: V, y: V) = R.add(x, y)
     override def neg(x: V) = R.neg(x)

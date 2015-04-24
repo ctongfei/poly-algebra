@@ -13,7 +13,7 @@ trait Hash[@specialized(Int, Double) X] extends Eq[X] {
 
 object Hash {
 
-  //def apply[X](implicit H: Hash[X]) = H
+  def apply[X](implicit H: Hash[X]) = H
 
   def create[@specialized(Int, Double) X](fHash: X => Int)(implicit E: Eq[X]): Hash[X] = new Hash[X] {
     def eq(x: X, y: X) = E.eq(x, y)

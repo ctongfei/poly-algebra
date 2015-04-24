@@ -10,7 +10,7 @@ trait AdditiveGroup[@specialized(Int, Double) X] extends AdditiveMonoid[X] { sel
   def neg(x: X): X
 
   /** Returns the difference of two elements. */
-  def sub(x: X, y: X): X = add(x, neg(y))
+  def sub(x: X, y: X): X = this.add(x, neg(y))
 
   /** Casts this object to a symbol-agnostic group with the group operation `+`. */
   def asGroupWithAdd: Group[X] = new Group[X] {

@@ -5,7 +5,7 @@ package poly.algebra
  */
 trait NormedVectorSpace[V, @specialized(Double) F] extends VectorSpace[V, F] with MetricSpace[V, F] {
   def norm(x: V): F
-  def dist(x: V, y: V): F = norm(sub(x, y))
+  def dist(x: V, y: V): F = norm(this.sub(x, y))
   def normalize(x: V): V = scale(fieldOfScalar.inv(norm(x)), x)
 }
 
