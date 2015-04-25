@@ -13,5 +13,7 @@ trait GenericFunctions {
 
   def one[X](implicit ev: HasOne[X]) = ev.one
 
+  def inv[X](x: X)(implicit ev: MultiplicativeGroup[X]) = ev.inv(x)
+
 
 }

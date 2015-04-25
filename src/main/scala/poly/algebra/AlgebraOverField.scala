@@ -9,7 +9,7 @@ object AlgebraOverField {
 
   def apply[V, @specialized(Int, Double) F](implicit A: AlgebraOverField[V, F]) = A
 
-  implicit def defaultOnField[@specialized(Int, Double) X](implicit F: Field[X]): AlgebraOverField[X, X] = new AlgebraOverField[X, X] {
+  implicit def trivial[@specialized(Int, Double) X](implicit F: Field[X]): AlgebraOverField[X, X] = new AlgebraOverField[X, X] {
     def fieldOfScalar = F
     def zero = F.zero
     def one = F.one

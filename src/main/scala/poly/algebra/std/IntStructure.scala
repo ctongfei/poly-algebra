@@ -23,7 +23,7 @@ object IntStructure extends EuclideanDomain[ZZ] with TotalOrder[ZZ] with Hash[ZZ
   def neg(x: ZZ) = -x
   override def sub(x: ZZ, y: ZZ) = x - y
   def mul(x: ZZ, y: ZZ) = x * y
-  def quot(x: ZZ, y: ZZ) = x / y
+  def div(x: ZZ, y: ZZ) = x / y
   def mod(x: ZZ, y: ZZ) = x % y
 
   def abs(x: ZZ) = Math.abs(x)

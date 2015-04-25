@@ -25,7 +25,6 @@ object DoubleStructure extends Field[RR] with TotalOrder[RR] with Hash[RR] with 
   def mul(x: RR, y: RR) = x * y
   def inv(x: RR) = 1.0 / x
   override def div(x: RR, y: RR) = x / y
-  override def quot(x: RR, y: RR) = x / y
   override def mod(x: RR, y: RR) = 0.0
 
   def root(x: RR, n: Int): RR = Math.pow(x, 1.0 / n)

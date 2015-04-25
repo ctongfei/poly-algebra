@@ -4,7 +4,6 @@ package poly.algebra
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
 trait Field[@specialized(Double) X] extends EuclideanDomain[X] with MultiplicativeGroup[X] {
-  def quot(x: X, y: X) = div(x, y)
   def mod(x: X, y: X) = zero
 }
 

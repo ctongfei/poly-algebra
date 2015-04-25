@@ -25,7 +25,6 @@ object FloatStructure extends Field[RF] with TotalOrder[RF] with Hash[RF] with P
   def mul(x: RF, y: RF) = x * y
   def inv(x: RF) = 1.0f / x
   override def div(x: RF, y: RF) = x / y
-  override def quot(x: RF, y: RF) = x / y
   override def mod(x: RF, y: RF) = 0.0f
 
   def root(x: RF, n: Int): RF = Math.pow(x, 1.0f / n).toFloat

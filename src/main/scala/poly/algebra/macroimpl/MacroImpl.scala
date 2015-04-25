@@ -49,6 +49,7 @@ object MacroImpl {
   /** -lhs =COMPILER=> implicitConv(lhs)(ev).unary_-() =MACRO=> ev.unary_-(lhs) */
   /**
    * Rewrites a unary operator by implicit conversion into a direct call.
+   * `-x` will be rewritten as `withOps(x).unary_-(ev)`, then it will be rewritten as `ev.neg(x)` by this macro.
    */
   def unaryOp[T, Ev](c: Context)(ev: c.Expr[Ev]) = {
     import c.universe._
@@ -59,6 +60,7 @@ object MacroImpl {
 
   /**
    * Rewrites a binary operator by implicit conversion into a direct call.
+   * `x+y` will be rewritten as `withOps(x).+(y)(ev)`, then it will be rewritten as `ev.add(x, y)` by this macro.
    */
   def binaryOp[T1, T2, Ev](c: Context)(y: c.Expr[T2])(ev: c.Expr[Ev]) = {
     import c.universe._

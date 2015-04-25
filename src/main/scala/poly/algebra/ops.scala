@@ -4,15 +4,10 @@ import scala.language.experimental.macros
 import poly.algebra.macroimpl._
 
 /**
- * `Poly-algebra` contains typeclass abstractions over common algebraic structures.
+ * Importing this object introduces efficient operator overloading through macros.
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
 object ops {
-
-  implicit val implicitBooleanStructure = std.BooleanStructure
-  implicit val implicitIntStructure = std.IntStructure
-  implicit val implicitFloatStructure = std.FloatStructure
-  implicit val implicitDoubleStructure = std.DoubleStructure
 
   /**
    * Enriches any type with mathematical operators if appropriate algebraic structures are implicitly provided.

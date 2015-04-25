@@ -6,13 +6,13 @@ package poly.algebra
 trait EuclideanDomain[@specialized(Int, Double) X] extends Ring[X] {
 
   /** Returns the quotient (Euclidean division) of two elements. */
-  def quot(x: X, y: X): X
+  def div(x: X, y: X): X
 
-  /** Returns the modulus of two elements.. */
+  /** Returns the modulus of two elements. */
   def mod(x: X, y: X): X
 
   /** Simutaneously returns the quotient and the modulus of two elements. For performance, this function should be overridden. */
-  def quotMod(x: X, y: X) : (X, X) = (quot(x, y), mod(x, y))
+  def quotMod(x: X, y: X) : (X, X) = (div(x, y), mod(x, y))
 
   /** Computes the greatest common divisor of two elements using Euclidean algorithm. */
   def gcd(x: X, y: X): X = {
@@ -27,7 +27,7 @@ trait EuclideanDomain[@specialized(Int, Double) X] extends Ring[X] {
   }
 
   /** Computes the least common multiplier of two elements. */
-  def lcm(x: X, y: X): X = quot(mul(x, y), gcd(x, y))
+  def lcm(x: X, y: X): X = div(mul(x, y), gcd(x, y))
 
   /** Casts this Euclidean domain as a lattice with `gcd` as its `inf` operator and `lcm` as its `sup` operator. */
   def asLatticeWithGcdLcm: Lattice[X] = new Lattice[X] {
@@ -39,8 +39,8 @@ trait EuclideanDomain[@specialized(Int, Double) X] extends Ring[X] {
 
   /** Casts this Euclidean domain as a partial order with the divisible operation as its `<=` operator. */
   def asPartialOrderWithDivisibility: PartialOrder[X] = new PartialOrder[X] {
-    def le(x: X, y: X) = implicitly[Eq[X]].eq(mod(y, x), zero)
-    def eq(x: X, y: X) = implicitly[Eq[X]].eq(x, y)
+    def le(x: X, y: X) = Eq.default[X].eq(mod(y, x), zero)
+    def eq(x: X, y: X) = Eq.default[X].eq(x, y)
   }
 }
 
@@ -52,7 +52,7 @@ object EuclideanDomain {
     def neg(x: X): X = R.neg(x)
     def zero: X = R.zero
     def one: X = R.one
-    def quot(x: X, y: X): X = fQuot(x, y)
+    def div(x: X, y: X): X = fQuot(x, y)
     def mod(x: X, y: X): X = fMod(x, y)
   }
 
@@ -62,7 +62,7 @@ object EuclideanDomain {
     def neg(x: X): X = fNeg(x)
     def zero: X = zeroElem
     def one: X = oneElem
-    def quot(x: X, y: X): X = fQuot(x, y)
+    def div(x: X, y: X): X = fQuot(x, y)
     def mod(x: X, y: X): X = fMod(x, y)
   }
 }

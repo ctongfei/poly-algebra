@@ -17,8 +17,6 @@ trait Eq[@specialized(Int, Double) X] {
 
 object Eq {
 
-  def apply[@specialized(Int, Double) X](implicit ev: Eq[X]): Eq[X] = ev
-
   def create[@specialized(Int, Double) X](fEq: (X, X) => Boolean): Eq[X] = new Eq[X] {
     def eq(x: X, y: X) = fEq(x, y)
   }

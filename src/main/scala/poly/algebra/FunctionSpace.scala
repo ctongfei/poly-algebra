@@ -10,15 +10,10 @@ package poly.algebra
 trait FunctionSpace[X, Y, @specialized(Int, Double) R] extends Module[X => Y, R] {
 
   def moduleOfCodomain: Module[Y, R]
-
   def scale(a: R, f: X => Y) = (x: X) => moduleOfCodomain.scale(a, f(x))
-
   override def neg(f: X => Y) = (x: X) => moduleOfCodomain.neg(f(x))
-
   def zero = (x: X) => moduleOfCodomain.zero
-
   def add(f: X => Y, g: X => Y) = (x: X) => moduleOfCodomain.add(f(x), g(x))
-
   override def sub(f: X => Y, g: X => Y) = (x: X) => moduleOfCodomain.sub(f(x), g(x))
 
 }

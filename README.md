@@ -1,8 +1,25 @@
 # poly-algebra
-Typeclass abstractions of common algebraic structures
+`Poly-algebra` is a library that contains typeclass abstractions for common algebraic structures. Implicits, specialization
+and macros are used extensively to create an elegant API with virtually no performance cost.
+
+ - New in 0.2.0: Macros for inlining implicit operators
 
 ## Supported typeclasses
-`Eq`, `Hash`, `HasIdentity`, `HasZero`, `HasOne`
+
+### Equality and Hashing functions
+|      | === | =!= | ### |
+|:----:|:---:|:---:|:---:|
+|  Eq  |  *  |  *  |  *  |
+| Hash |  *  |     |     |
+
+### Existence of identity elements
+|             | id | 0 | 1 |
+|:-----------:|:--:|:-:|:-:|
+| HasIdentity |  * |   |   |
+|   HasZero   |    | * |   |
+| HasOne      |    |   |   |
+
+### Groups/Rings/Fields
 
 `Semigroup`, `AdditiveSemigroup`, `MultiplicativeSemigroup`
 
@@ -10,14 +27,20 @@ Typeclass abstractions of common algebraic structures
 
 `Semiring`, `Ring`, `EuclideanDomain`, `Field`
 
+### Orders/Lattices/Boolean algebra
+
 `PartialOrder`, `UpperSemilattice`, `LowerSemilattice`, `Lattice`, `WeakOrder`, `TotalOrder`, `BooleanAlgebra`
+
+### Modules/Algebras/Vector spaces
 
 `Module`, `AlgebraOverRing`, `AlgebraOverField`
 
 `VectorSpace`, `MetricSpace`, `NormedVectorSpace`, `InnerProductSpace`
 
+### Function spaces
+
 `FunctionSpace`, `EndofunctionSpace`
 
-`SignOps`, `PowerOps`, `TrigExpOps`
+### Typeclasses for the abstraction of elementary functions
 
-`Applicative`, `Functor`, `Monad`
+`SignOps`, `PowerOps`, `TrigExpOps`

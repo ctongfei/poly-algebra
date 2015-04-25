@@ -9,7 +9,7 @@ object AlgebraOverRing {
 
   def apply[V, @specialized(Int, Double) R](implicit A: AlgebraOverRing[V, R]) = A
 
-  implicit def defaultOnRing[@specialized(Int, Double) X](implicit R: Ring[X]): AlgebraOverRing[X, X] = new AlgebraOverRing[X, X] {
+  implicit def trivial[@specialized(Int, Double) X](implicit R: Ring[X]): AlgebraOverRing[X, X] = new AlgebraOverRing[X, X] {
     def ringOfScalar = R
     def zero = R.zero
     def one = R.one

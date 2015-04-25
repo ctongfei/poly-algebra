@@ -7,7 +7,10 @@ trait Semiring[@specialized(Int, Double) X] extends AdditiveMonoid[X] with Multi
 
 object Semiring {
   def apply[@specialized(Int, Double) X](implicit S: Semiring[X]) = S
-  def create[@specialized(Int, Double) X](fAdd: (X, X) => X, fMul: (X, X) => X, zeroElem: X, oneElem: X) = new Semiring[X] {
+
+  /** Creates a semiring using the provided operations `add`, `mul`, `zero`, and `one`. */
+  def create[@specialized(Int, Double) X](fAdd: (X, X) => X, fMul: (X, X) => X, zeroElem: X, oneElem: X)
+  : Semiring[X] = new Semiring[X] {
     def add(x: X, y: X): X = fAdd(x, y)
     def mul(x: X, y: X): X = fMul(x, y)
     def zero: X = zeroElem
