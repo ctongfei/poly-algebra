@@ -14,11 +14,17 @@ trait TotalOrder[@specialized(Int, Double) X] extends Lattice[X] with WeakOrder[
 }
 
 object TotalOrder {
+
   def apply[@specialized(Int, Double) X](implicit O: TotalOrder[X]) = O
+
   def create[@specialized(Int, Double) X](fLt: (X, X) => Boolean) = new TotalOrder[X] {
     def cmp(x: X, y: X) = if (fLt(x, y)) -1 else if (x == y) 0 else 1
-    def eq(x: X, y: X) = x == y
     override def lt(x: X, y: X) = fLt(x, y)
     override def gt(x: X, y: X) = fLt(y, x)
   }
+
+  def on[@specialized(Int, Double) X, Y](f: Y => X)(implicit O: TotalOrder[X]) = new TotalOrder[Y] {
+    def cmp(x: Y, y: Y) = O.cmp(f(x), f(y))
+  }
+
 }

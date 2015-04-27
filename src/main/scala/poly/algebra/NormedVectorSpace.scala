@@ -11,7 +11,8 @@ trait NormedVectorSpace[V, @specialized(Double) F] extends VectorSpace[V, F] wit
 
 object NormedVectorSpace {
   def apply[V, @specialized(Double) F](implicit S: NormedVectorSpace[V, F]) = S
-  def create[V, @specialized(Double) F: Field](fNorm: V => F)(implicit S: VectorSpace[V, F]) = new NormedVectorSpace[V, F] {
+  def create[V, @specialized(Double) F: Field](fNorm: V => F)(implicit S: VectorSpace[V, F]): NormedVectorSpace[V, F]
+  = new NormedVectorSpace[V, F] {
     def fieldOfScalar = implicitly[Field[F]]
     def norm(x: V): F = fNorm(x)
     override def neg(x: V): V = S.neg(x)

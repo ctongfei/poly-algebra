@@ -15,5 +15,4 @@ trait GenericFunctions {
 
   def inv[X](x: X)(implicit ev: MultiplicativeGroup[X]) = ev.inv(x)
 
-
 }

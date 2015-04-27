@@ -6,10 +6,10 @@ package poly.algebra
  */
 trait Eq[@specialized(Int, Double) X] {
 
-  /** Checks if two objects of the same type are equivalent. */
+  /** Checks if two objects of the same type are equivalent under this equivalence relation. */
   def eq(x: X, y: X): Boolean
 
-  /** Checks if two objects of the same type are not equivalent. */
+  /** Checks if two objects of the same type are not equivalent under this equivalence equation. */
   def ne(x: X, y: X): Boolean = !eq(x, y)
 
 }
