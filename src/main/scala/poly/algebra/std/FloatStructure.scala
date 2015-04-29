@@ -6,8 +6,6 @@ import poly.algebra._
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
 object FloatStructure extends Field[RF] with TotalOrder[RF] with Hash[RF] with PowerOps[RF] with TrigExpOps[RF] with SignOps[RF] {
-  def eq(x: RF, y: RF) = x == y
-  override def ne(x: RF, y: RF) = x != y
   def hash(x: RF) = x.hashCode()
 
   def cmp(x: RF, y: RF) = (x - y).toInt

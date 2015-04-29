@@ -18,13 +18,12 @@ object MacroImpl {
 
       case TermName("$hash$hash$hash") => TermName("hash")
 
-      case TermName("$eq$eq$eq") => TermName("eq")
+      case TermName("$eq$tilde$eq") => TermName("eq")
       case TermName("$eq$bang$eq") => TermName("ne")
       case TermName("$greater") => TermName("gt")
       case TermName("$greater$eq") => TermName("ge")
       case TermName("$less") => TermName("lt")
       case TermName("$less$eq") => TermName("le")
-      case TermName("$eq$tilde$eq") => TermName("tied")
 
       case TermName("unary_$minus") => TermName("neg")
 
@@ -32,7 +31,6 @@ object MacroImpl {
       case TermName("$minus") => TermName("sub")
       case TermName("$times") => TermName("mul")
       case TermName("$times$times") => TermName("pow")
-
       case TermName("$div") => TermName("quot")
       case TermName("$percent") => TermName("mod")
       case TermName("$div$percent") => TermName("quotmod")
@@ -46,7 +44,6 @@ object MacroImpl {
     }
   }
 
-  /** -lhs =COMPILER=> implicitConv(lhs)(ev).unary_-() =MACRO=> ev.unary_-(lhs) */
   /**
    * Rewrites a unary operator by implicit conversion into a direct call.
    * `-x` will be rewritten as `withOps(x).unary_-(ev)`, then it will be rewritten as `ev.neg(x)` by this macro.
@@ -76,6 +73,18 @@ object MacroImpl {
     }
   }
 
+  def sumOp[T, Ev](c: Context)(n: c.Expr[Int])(f: c.Expr[Int => T])(ev: c.Expr[Ev]) = {
+    import c.universe._
+    q"""
+        var sum = $f(0)
+        var idx = 1
+        while (idx < $n) {
+          sum = $ev.add(sum, $f(idx))
+          idx += 1
+        }
+        sum
+    """
+  }
 
 }
 

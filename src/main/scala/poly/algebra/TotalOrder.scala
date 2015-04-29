@@ -9,6 +9,8 @@ trait TotalOrder[@specialized(Int, Double) X] extends Lattice[X] with WeakOrder[
   def sup(x: X, y: X) = max(x, y)
   def inf(x: X, y: X) = min(x, y)
 
+  override def eq(x: X, y: X) = x == y
+  override def ne(x: X, y: X) = x != y
   override def le(x: X, y: X) = cmp(x, y) <= 0
   override def ge(x: X, y: X) = cmp(x, y) >= 0
 }
@@ -23,7 +25,7 @@ object TotalOrder {
     override def gt(x: X, y: X) = fLt(y, x)
   }
 
-  def on[@specialized(Int, Double) X, Y](f: Y => X)(implicit O: TotalOrder[X]) = new TotalOrder[Y] {
+  def by[Y, @specialized(Int, Double) X](f: Y => X)(implicit O: TotalOrder[X]) = new TotalOrder[Y] {
     def cmp(x: Y, y: Y) = O.cmp(f(x), f(y))
   }
 

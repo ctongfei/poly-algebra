@@ -31,7 +31,6 @@ trait EuclideanDomain[@specialized(Int, Double) X] extends Ring[X] {
 
   /** Casts this Euclidean domain as a lattice with `gcd` as its `inf` operator and `lcm` as its `sup` operator. */
   def asLatticeWithGcdLcm: Lattice[X] = new Lattice[X] {
-    def eq(x: X, y: X) = implicitly[Eq[X]].eq(x, y)
     def sup(x: X, y: X) = lcm(x, y)
     def inf(x: X, y: X) = gcd(x, y)
     override def le(x: X, y: X) = mod(y, x) == zero
@@ -40,7 +39,6 @@ trait EuclideanDomain[@specialized(Int, Double) X] extends Ring[X] {
   /** Casts this Euclidean domain as a partial order with the divisible operation as its `<=` operator. */
   def asPartialOrderWithDivisibility: PartialOrder[X] = new PartialOrder[X] {
     def le(x: X, y: X) = Eq.default[X].eq(mod(y, x), zero)
-    def eq(x: X, y: X) = Eq.default[X].eq(x, y)
   }
 }
 

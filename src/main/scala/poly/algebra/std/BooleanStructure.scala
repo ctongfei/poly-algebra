@@ -6,8 +6,6 @@ import poly.algebra._
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
 object BooleanStructure extends BooleanAlgebra[BB] with TotalOrder[BB] with Hash[BB] {
-  def eq(x: BB, y: BB) = x == y
-  override def ne(x: BB, y: BB) = x != y
   def hash(x: BB) = x.hashCode()
 
   override def cmp(x: BB, y: BB) = {

@@ -6,8 +6,6 @@ import poly.algebra._
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
 object DoubleStructure extends Field[RR] with TotalOrder[RR] with Hash[RR] with PowerOps[RR] with TrigExpOps[RR] with SignOps[RR] {
-  def eq(x: RR, y: RR) = x == y
-  override def ne(x: RR, y: RR) = x != y
   def hash(x: RR) = x.hashCode()
 
   def cmp(x: RR, y: RR) = (x - y).toInt

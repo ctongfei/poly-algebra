@@ -22,7 +22,7 @@ object WeakOrder {
     def cmp(x: X, y: X) = fCmp(x, y)
   }
 
-  def on[@specialized(Int, Double) X, Y](f: Y => X)(implicit O: WeakOrder[X]) = new WeakOrder[Y] {
+  def by[@specialized(Int, Double) X, Y](f: Y => X)(implicit O: WeakOrder[X]) = new WeakOrder[Y] {
     def cmp(x: Y, y: Y) = O.cmp(f(x), f(y))
   }
 }

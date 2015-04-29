@@ -25,18 +25,6 @@ trait PartialOrder[@specialized(Int, Double) X] extends Eq[X] { self =>
   /** Returns whether ''x'' strictly succeeds ''y'' under this partial order. */
   def gt(x: X, y: X): Boolean = le(y, x) & !le(x, y)
 
-  def pmax(x: X, y: X): Option[X] = {
-    if (le(x, y)) Some(y)
-    else if (le(y, x)) Some(x)
-    else None
-  }
-
-  def pmin(x: X, y: X): Option[X] = {
-    if (le(x, y)) Some(x)
-    else if (le(y, x)) Some(y)
-    else None
-  }
-
   /** Returns the reverse order of this partial order. */
   def reverse: PartialOrder[X] = new PartialOrder[X] {
     override def reverse = self
@@ -52,7 +40,7 @@ object PartialOrder {
     def le(x: X, y: X): Boolean = fLe(x, y)
   }
 
-  def on[@specialized(Int, Double) X, Y](f: Y => X)(implicit ev: PartialOrder[X]) = new PartialOrder[Y] {
+  def by[Y, @specialized(Int, Double) X](f: Y => X)(implicit ev: PartialOrder[X]) = new PartialOrder[Y] {
     def le(x: Y, y: Y) = ev.le(f(x), f(y))
   }
 }

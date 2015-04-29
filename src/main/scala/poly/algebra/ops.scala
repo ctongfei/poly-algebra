@@ -43,13 +43,12 @@ object ops {
     def :*[R](k: R)(implicit ev: Module[X, R]) = ev.scale(k, x)
     def *:[R](k: R)(implicit ev: Module[X, R]) = ev.scale(k, x)
 
-    def ===(y: X)(implicit ev: Eq[X]): Boolean = macro MacroImpl.binaryOp[X, X, Eq[X]]
+    def =~=(y: X)(implicit ev: Eq[X]): Boolean = macro MacroImpl.binaryOp[X, X, Eq[X]]
     def =!=(y: X)(implicit ev: Eq[X]): Boolean = macro MacroImpl.binaryOp[X, X, Eq[X]]
     def <=(y: X)(implicit ev: PartialOrder[X]): Boolean = macro MacroImpl.binaryOp[X, X, PartialOrder[X]]
     def >=(y: X)(implicit ev: PartialOrder[X]): Boolean = macro MacroImpl.binaryOp[X, X, PartialOrder[X]]
-    def <(y: X)(implicit ev: WeakOrder[X]): Boolean = macro MacroImpl.binaryOp[X, X, WeakOrder[X]]
-    def >(y: X)(implicit ev: WeakOrder[X]): Boolean = macro MacroImpl.binaryOp[X, X, WeakOrder[X]]
-    def =~=(y: X)(implicit ev: WeakOrder[X]): Boolean = macro MacroImpl.binaryOp[X, X, WeakOrder[X]]
+    def <(y: X)(implicit ev: PartialOrder[X]): Boolean = macro MacroImpl.binaryOp[X, X, PartialOrder[X]]
+    def >(y: X)(implicit ev: PartialOrder[X]): Boolean = macro MacroImpl.binaryOp[X, X, PartialOrder[X]]
 
     def ###(implicit ev: Hash[X]): Int = macro MacroImpl.unaryOp[X, Hash[X]]
 

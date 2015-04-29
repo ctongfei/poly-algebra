@@ -5,9 +5,12 @@ import poly.algebra._
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-object IntStructure extends EuclideanDomain[ZZ] with TotalOrder[ZZ] with Hash[ZZ] with SignOps[ZZ] {
-  def eq(x: ZZ, y: ZZ) = x == y
-  override def ne(x: ZZ, y: ZZ) = x != y
+object IntStructure extends
+  EuclideanDomain[ZZ] with
+  TotalOrder[ZZ] with
+  Hash[ZZ] with
+  SignOps[ZZ]
+{
   def hash(x: ZZ) = x.hashCode()
 
   def cmp(x: ZZ, y: ZZ) = x - y
@@ -28,4 +31,5 @@ object IntStructure extends EuclideanDomain[ZZ] with TotalOrder[ZZ] with Hash[ZZ
 
   def abs(x: ZZ) = Math.abs(x)
   def sgn(x: ZZ) = if (x == 0) 0 else if (x > 0) 1 else -1
+
 }

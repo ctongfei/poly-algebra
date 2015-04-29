@@ -29,4 +29,3 @@ object AdditiveSemigroup {
     def add(x: X, y: X): X = f(x, y)
   }
 }
-
