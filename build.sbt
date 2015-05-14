@@ -14,6 +14,8 @@ libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.2"
 
 scalacOptions in (Compile, doc) += "-diagrams"
 
+classDiagramSettings
+
 publishMavenStyle := true
 
 publishTo := {

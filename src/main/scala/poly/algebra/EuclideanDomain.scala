@@ -11,7 +11,7 @@ trait EuclideanDomain[@specialized(Int, Double) X] extends Ring[X] {
   /** Returns the modulus of two elements. */
   def mod(x: X, y: X): X
 
-  /** Simutaneously returns the quotient and the modulus of two elements. For performance, this function should be overridden. */
+  /** Simultaneously returns the quotient and the modulus of two elements. For performance, this function should be overridden. */
   def quotMod(x: X, y: X) : (X, X) = (div(x, y), mod(x, y))
 
   /** Computes the greatest common divisor of two elements using Euclidean algorithm. */
@@ -36,10 +36,6 @@ trait EuclideanDomain[@specialized(Int, Double) X] extends Ring[X] {
     override def le(x: X, y: X) = mod(y, x) == zero
   }
 
-  /** Casts this Euclidean domain as a partial order with the divisible operation as its `<=` operator. */
-  def asPartialOrderWithDivisibility: PartialOrder[X] = new PartialOrder[X] {
-    def le(x: X, y: X) = Eq.default[X].eq(mod(y, x), zero)
-  }
 }
 
 object EuclideanDomain {

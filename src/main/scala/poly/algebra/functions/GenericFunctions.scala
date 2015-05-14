@@ -7,6 +7,9 @@ import poly.algebra._
  */
 trait GenericFunctions {
 
+  /** Returns a hashed value of the specific value. */
+  def hash[X](x: X)(implicit ev: Hash[X]): Int = ev.hash(x)
+
   /** Returns the identity element of a type. */
   def id[X](implicit ev: HasIdentity[X]) = ev.id
 

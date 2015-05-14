@@ -6,9 +6,9 @@ package poly.algebra
  * A ring is an algebraic structure that generalizes the arithmetic operations of addition
  * and multiplication.
  *
- * Formally, a ring is a set ''R'' equipped with `+` and `*` where (''R'', `+`) form an
+ * Formally, a ring is a set ''R'' equipped with `+` and `*` where (''R'', +) form an
  * Abelian additive group (associative, `0` as the additive identity, commutative, invertible),
- * (''R'', `*`) form a multiplicative monoid (associative, `1` as the multiplicative identity),
+ * (''R'', *) form a multiplicative monoid (associative, `1` as the multiplicative identity),
  * and `*` distributes over `+`.
  *
  * In order to create a ring, `add`, `mul`, `zero`, `one`, `neg` should be implemented. `sub`
@@ -36,5 +36,15 @@ object Ring {
     def zero: X = zeroElem
     def one: X = oneElem
     def neg(x: X): X = fNeg(x)
+  }
+
+  /** Creates a ring using the provided operations `mul`, `one` based on an existing additive group. */
+  def create[@specialized(Int, Double) X](fMul: (X, X) => X, oneElem: X)(implicit G: AdditiveGroup[X]): Ring[X] = new Ring[X] {
+    def add(x: X, y: X): X = G.add(x, y)
+    def mul(x: X, y: X): X = fMul(x, y)
+    def zero: X = G.zero
+    def one: X = oneElem
+    def neg(x: X): X = G.neg(x)
+    override def sub(x: X, y: X): X = G.sub(x, y)
   }
 }

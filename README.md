@@ -17,7 +17,7 @@ and macros are used extensively to create an elegant API with virtually no perfo
 |:-----------:|:--:|:-:|:-:|
 | HasIdentity |  * |   |   |
 |   HasZero   |    | * |   |
-| HasOne      |    |   |   |
+| HasOne      |    |   | * |
 
 ### Groups/Rings/Fields
 

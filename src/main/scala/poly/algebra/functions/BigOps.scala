@@ -2,6 +2,7 @@ package poly.algebra.functions
 
 import poly.algebra._
 import poly.algebra.macroimpl._
+import scala.language.experimental.macros
 
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).

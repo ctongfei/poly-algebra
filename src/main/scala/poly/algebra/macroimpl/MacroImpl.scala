@@ -75,7 +75,7 @@ object MacroImpl {
 
   def sumOp[T, Ev](c: Context)(n: c.Expr[Int])(f: c.Expr[Int => T])(ev: c.Expr[Ev]) = {
     import c.universe._
-    q"""
+    val tree = q"""
         var sum = $f(0)
         var idx = 1
         while (idx < $n) {
@@ -84,6 +84,7 @@ object MacroImpl {
         }
         sum
     """
+    tree
   }
 
 }
