@@ -1,43 +1,58 @@
-# poly-algebra
+### poly-algebra
 `Poly-algebra` is a library that contains typeclass abstractions for common algebraic structures. Implicits, specialization
 and macros are used extensively to create an elegant API with virtually no performance cost.
 
  - New in 0.2.0: Macros for inlining implicit operators
 
-## Supported typeclasses
+### Supported typeclasses
 
-### Equality and Hashing functions
+#### Equality and Hashing functions
 |      | === | =!= | ### |
 |:----:|:---:|:---:|:---:|
-|  Eq  |  *  |  *  |  *  |
-| Hash |  *  |     |     |
+|  Eq  |  *  |  *  |     |
+| Hash |  *  |  *  |  *  |
 
-### Existence of identity elements
-|             | id | 0 | 1 |
+#### Existence of identity elements
+|             | id | zero | one |
 |:-----------:|:--:|:-:|:-:|
 | HasIdentity |  * |   |   |
 |   HasZero   |    | * |   |
 | HasOne      |    |   | * |
 
+#### Symbol-agnostic structures (Semigroup/Monoid/Group)
+
+|           | id | op | inv | combineN |
+|:---------:|:--:|:--:|-----|:--------:|
+| Semigroup |    | *  |     | *        |
+| Monoid    | *  | *  |     | *        |
+| Group     | *  | *  |     | *        |
+
 ### Groups/Rings/Fields
 
-`Semigroup`, `AdditiveSemigroup`, `MultiplicativeSemigroup`
+|                         | zero | one | add + | neg unary_- | sub - | mul * | inv | div / | sumN | ipow ** | mod % | gcd | lcm |
+|:-----------------------:|:----:|:---:|:-----:|:-----:|:-----:|:-----:|:---:|:-----:|:----:|:-------:|-------|-----|-----|
+|    AdditiveSemigroup    |      |     |   *   |       |       |       |     |       |   *  |         |       |     |     |
+|      AdditiveMonoid     |   *  |     |   *   |       |       |       |     |       |   *  |         |       |     |     |
+|      AdditiveGroup      |   *  |     |   *   |   *   |   *   |       |     |       |   *  |         |       |     |     |
+| MultiplicativeSemigroup |      |     |       |       |       |   *   |     |       |      |    *    |       |     |     |
+|   MultiplicativeMonoid  |      |  *  |       |       |       |   *   |     |       |      |    *    |       |     |     |
+|   MultiplicativeGroup   |      |  *  |       |       |       |   *   |  *  |   *   |      |    *    |       |     |     |
+| Semiring                | *    | *   | *     |       |       | *     |     |       | *    | *       |       |     |     |
+| Ring                    | *    | *   | *     | *     | *     | *     |     |       | *    | *       |       |     |     |
+| EuclideanDomain         | *    | *   | *     | *     | *     | *     |     | *     | *    | *       | *     | *   | *   |
+| Field                   | *    | *   | *     | *     | *     | *     | *   | *     | *    | *       | *     | *   | *   |
 
-`Monoid`, `AdditiveMonoid`, `MultiplicativeMonoid`
-
-`Semiring`, `Ring`, `EuclideanDomain`, `Field`
-
-### Orders/Lattices/Boolean algebra
+#### Orders/Lattices/Boolean algebra
 
 `PartialOrder`, `UpperSemilattice`, `LowerSemilattice`, `Lattice`, `WeakOrder`, `TotalOrder`, `BooleanAlgebra`
 
-### Modules/Algebras/Vector spaces
+#### Modules/Algebras/Vector spaces
 
 `Module`, `AlgebraOverRing`, `AlgebraOverField`
 
 `VectorSpace`, `MetricSpace`, `NormedVectorSpace`, `InnerProductSpace`
 
-### Function spaces
+#### Function spaces
 
 `FunctionSpace`, `EndofunctionSpace`
 
