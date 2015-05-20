@@ -3,7 +3,7 @@ package poly.algebra
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait BooleanAlgebra[@specialized(Int, Double) X] extends Lattice[X] { self =>
+trait BooleanAlgebra[@specialized(Int, Double) X] extends Lattice[X] with HasZero[X] with HasOne[X] { self =>
 
   def and(x: X, y: X): X
   def or(x: X, y: X): X
@@ -18,7 +18,7 @@ trait BooleanAlgebra[@specialized(Int, Double) X] extends Lattice[X] { self =>
   def sup(x: X, y: X): X = or(x, y)
   def inf(x: X, y: X): X = and(x, y)
 
-  /** Casts this Boolean algebra as a Boolean ring with `xor` as `+` and `and` as `*`. */
+  /** Casts this Boolean algebra as a Boolean ring with "`xor`" as `+` and "`and`" as `*`. */
   def asBooleanRing: Ring[X] = new Ring[X] {
     def mul(x: X, y: X): X = and(x, y)
     def add(x: X, y: X): X = xor(x, y)

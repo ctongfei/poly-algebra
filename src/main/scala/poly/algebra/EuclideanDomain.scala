@@ -50,13 +50,4 @@ object EuclideanDomain {
     def mod(x: X, y: X): X = fMod(x, y)
   }
 
-  def create[@specialized(Int, Double) X](fAdd: (X, X) => X, fMul: (X, X) => X, zeroElem: X, oneElem: X, fNeg: X => X, fQuot: (X, X) => X, fMod: (X, X) => X) = new EuclideanDomain[X] {
-    def add(x: X, y: X): X = fAdd(x, y)
-    def mul(x: X, y: X): X = fMul(x, y)
-    def neg(x: X): X = fNeg(x)
-    def zero: X = zeroElem
-    def one: X = oneElem
-    def div(x: X, y: X): X = fQuot(x, y)
-    def mod(x: X, y: X): X = fMod(x, y)
-  }
 }

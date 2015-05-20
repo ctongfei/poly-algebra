@@ -3,7 +3,7 @@ package poly.algebra
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait WeakOrder[@specialized(Int, Double) X] extends PartialOrder[X] {
+trait WeakOrder[@specialized(Int, Double) X] extends PartialOrder[X] { self =>
 
   def cmp(x: X, y: X): Int
 
@@ -12,6 +12,20 @@ trait WeakOrder[@specialized(Int, Double) X] extends PartialOrder[X] {
   override def lt(x: X, y: X): Boolean = cmp(x, y) < 0
   override def gt(x: X, y: X): Boolean = cmp(x, y) > 0
   override def eq(x: X, y: X): Boolean = cmp(x, y) == 0
+  override def ne(x: X, y: X): Boolean = cmp(x, y) != 0
+
+  def max(x: X, y: X): X = if (cmp(x, y) >= 0) x else y
+  def min(x: X, y: X): X = if (cmp(x, y) <= 0) x else y
+
+  /** Returns the equivalence relation (tied relation) induced by this weak order. */
+  def asEq: Eq[X] = new Eq[X] {
+    def eq(x: X, y: X) = self.cmp(x, y) == 0
+  }
+
+  override def reverse: WeakOrder[X] = new WeakOrder[X] {
+    override def reverse: WeakOrder[X] = self
+    def cmp(x: X, y: X): Int = -self.cmp(x, y)
+  }
 
 }
 

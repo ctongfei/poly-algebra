@@ -12,6 +12,10 @@ trait LowerSemilattice[@specialized(Int, Boolean, Double) X] extends PartialOrde
     override def reverse = self
     def sup(x: X, y: X) = inf(x, y)
   }
+
+  def asSemigroupWithInf: Semigroup[X] = new Semigroup[X] {
+    def op(x: X, y: X) = inf(x, y)
+  }
 }
 
 object LowerSemilattice {

@@ -16,4 +16,9 @@ package object std {
 
   private[std] type BB = Boolean
 
+  implicit def seqMonoid[X]: Monoid[Seq[X]] = new Monoid[Seq[X]] {
+    def id = Seq()
+    def op(x: Seq[X], y: Seq[X]) = x ++ y
+  }
+
 }

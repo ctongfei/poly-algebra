@@ -3,9 +3,9 @@ package poly.algebra
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait TotalOrder[@specialized(Int, Double) X] extends Lattice[X] with WeakOrder[X] {
-  def min(x: X, y: X): X = if (lt(x, y)) x else y
-  def max(x: X, y: X): X = if (lt(x, y)) y else x
+trait TotalOrder[@specialized(Int, Double) X] extends Lattice[X] with WeakOrder[X] { self =>
+  override def min(x: X, y: X): X = if (lt(x, y)) x else y
+  override def max(x: X, y: X): X = if (lt(x, y)) y else x
   def sup(x: X, y: X) = max(x, y)
   def inf(x: X, y: X) = min(x, y)
 
@@ -13,6 +13,11 @@ trait TotalOrder[@specialized(Int, Double) X] extends Lattice[X] with WeakOrder[
   override def ne(x: X, y: X) = x != y
   override def le(x: X, y: X) = cmp(x, y) <= 0
   override def ge(x: X, y: X) = cmp(x, y) >= 0
+
+  override def reverse: TotalOrder[X] = new TotalOrder[X] {
+    override def reverse: TotalOrder[X] = self
+    def cmp(x: X, y: X): Int = -self.cmp(x, y)
+  }
 }
 
 object TotalOrder {

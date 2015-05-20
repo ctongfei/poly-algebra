@@ -9,7 +9,6 @@ trait InplaceAdditiveSemigroup[X] extends AdditiveSemigroup[X] {
   def inplaceAdd(x: X, y: X): Unit
 }
 
-
 /**
  * An additive monoid that allows inplace addition (for performance when dealing with vectors/matrices).
  * @author Tongfei Chen (ctongfei@gmail.com).

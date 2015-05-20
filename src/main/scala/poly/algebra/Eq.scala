@@ -25,4 +25,10 @@ object Eq {
     def eq(x: X, y: X) = x == y
     override def ne(x: X, y: X) = x != y
   }
+
+  /** Returns the equality-by-reference relation. */
+  def byRef[X <: AnyRef]: Eq[X] = new Eq[X] {
+    def eq(x: X, y: X) = x eq y
+    override def ne(x: X, y: X) = x ne y
+  }
 }
