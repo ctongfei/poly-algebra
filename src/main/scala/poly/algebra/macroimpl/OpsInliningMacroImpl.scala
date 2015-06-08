@@ -5,7 +5,7 @@ import scala.reflect.macros.blackbox._
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-object MacroImpl {
+object OpsInliningMacroImpl {
 
   def ops(c: Context)(s: String): c.TermName = {
     import c.universe._
@@ -34,6 +34,9 @@ object MacroImpl {
       case TermName("$div") => TermName("quot")
       case TermName("$percent") => TermName("mod")
       case TermName("$div$percent") => TermName("quotmod")
+
+      case TermName("$colon$times") => TermName("scale")
+      case TermName("$times$colon") => TermName("scale")
 
       case TermName("$amp") => TermName("and")
       case TermName("bar") => TermName("or")
@@ -73,19 +76,7 @@ object MacroImpl {
     }
   }
 
-  def sumOp[T, Ev](c: Context)(n: c.Expr[Int])(f: c.Expr[Int => T])(ev: c.Expr[Ev]) = {
-    import c.universe._
-    val tree = q"""
-        var sum = $f(0)
-        var idx = 1
-        while (idx < $n) {
-          sum = $ev.add(sum, $f(idx))
-          idx += 1
-        }
-        sum
-    """
-    tree
-  }
+
 
 }
 

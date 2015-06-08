@@ -1,5 +1,7 @@
 package poly.algebra
 
+import poly.algebra.specgroup._
+
 /**
  * Typeclass for rings.
  *
@@ -16,7 +18,7 @@ package poly.algebra
  *
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait Ring[@specialized(Int, Double) X] extends Semiring[X] with AdditiveGroup[X] {
+trait Ring[@sp(di) X] extends Semiring[X] with AdditiveGroup[X] {
 
   /** Returns the -1 element in this ring. */
   def negOne = neg(one)
@@ -26,10 +28,10 @@ trait Ring[@specialized(Int, Double) X] extends Semiring[X] with AdditiveGroup[X
 object Ring {
 
   /** Retrieves the implicit ring associated with a specific type. */
-  def apply[@specialized(Int, Double) X](implicit R: Ring[X]) = R
+  def apply[@sp(di) X](implicit R: Ring[X]) = R
 
   /** Creates a ring using the provided operations `add`, `mul`, `zero`, `one` and `neg`. */
-  def create[@specialized(Int, Double) X](fAdd: (X, X) => X, fMul: (X, X) => X, zeroElem: X, oneElem: X, fNeg: X => X)
+  def create[@sp(di) X](fAdd: (X, X) => X, fMul: (X, X) => X, zeroElem: X, oneElem: X, fNeg: X => X)
   : Ring[X] = new Ring[X] {
     def add(x: X, y: X): X = fAdd(x, y)
     def mul(x: X, y: X): X = fMul(x, y)
@@ -39,7 +41,7 @@ object Ring {
   }
 
   /** Creates a ring using the provided operations `mul`, `one` based on an existing additive group. */
-  def create[@specialized(Int, Double) X](fMul: (X, X) => X, oneElem: X)(implicit G: AdditiveGroup[X]): Ring[X] = new Ring[X] {
+  def create[@sp(di) X](fMul: (X, X) => X, oneElem: X)(implicit G: AdditiveGroup[X]): Ring[X] = new Ring[X] {
     def add(x: X, y: X): X = G.add(x, y)
     def mul(x: X, y: X): X = fMul(x, y)
     def zero: X = G.zero

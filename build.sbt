@@ -4,13 +4,21 @@ version := "0.2.0-SNAPSHOT"
 
 organization := "me.tongfei"
 
-scalaVersion := "2.11.4"
+scalaVersion := "2.11.6"
 
 isSnapshot := true
 
 resolvers += Resolver.sonatypeRepo("snapshots")
 
-libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.2"
+libraryDependencies += "org.scala-lang" % "scala-reflect" % scalaVersion.value
+
+libraryDependencies += "me.tongfei" %% "poly-util" % "0.1.0-SNAPSHOT"
+
+libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.2" % Test
+
+libraryDependencies += "com.storm-enroute" %% "scalameter-core" % "0.7-SNAPSHOT" % Test
+
+parallelExecution in Test := false
 
 scalacOptions in (Compile, doc) += "-diagrams"
 

@@ -14,13 +14,13 @@ object BooleanStructure extends BooleanAlgebra[BB] with TotalOrder[BB] with Hash
     else -1
   }
 
-  def one = true
-  def zero = false
-  def not(x: BB) = !x
-  def and(x: BB, y: BB) = x & y
-  def or(x: BB, y: BB) = x | y
+  final val one = true
+  final val zero = false
+  final def not(x: BB) = !x
+  final def and(x: BB, y: BB) = x & y
+  final def or(x: BB, y: BB) = x | y
 
-  override def sup(x: BB, y: BB) = x | y
-  override def inf(x: BB, y: BB) = x & y
+  override final def sup(x: BB, y: BB) = x | y
+  override final def inf(x: BB, y: BB) = x & y
 
 }

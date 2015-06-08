@@ -1,5 +1,7 @@
 package poly.algebra
 
+import poly.algebra.specgroup._
+
 /**
  * Typeclass for partial orders.
  *
@@ -8,7 +10,7 @@ package poly.algebra
  *
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait PartialOrder[@specialized(Int, Double) X] extends Eq[X] { self =>
+trait PartialOrder[@sp(di) X] extends Eq[X] { self =>
 
   /** Returns whether ''x'' precedes ''y'' under this partial order. */
   def le(x: X, y: X): Boolean
@@ -34,13 +36,13 @@ trait PartialOrder[@specialized(Int, Double) X] extends Eq[X] { self =>
 }
 
 object PartialOrder {
-  def apply[@specialized(Int, Double) X](implicit O: PartialOrder[X]) = O
+  def apply[@sp(di) X](implicit O: PartialOrder[X]) = O
 
-  def create[@specialized(Int, Double) X](fLe: (X, X) => Boolean) = new PartialOrder[X] {
+  def create[@sp(di) X](fLe: (X, X) => Boolean) = new PartialOrder[X] {
     def le(x: X, y: X): Boolean = fLe(x, y)
   }
 
-  def by[Y, @specialized(Int, Double) X](f: Y => X)(implicit ev: PartialOrder[X]) = new PartialOrder[Y] {
+  def by[Y, @sp(di) X](f: Y => X)(implicit ev: PartialOrder[X]) = new PartialOrder[Y] {
     def le(x: Y, y: Y) = ev.le(f(x), f(y))
   }
 }

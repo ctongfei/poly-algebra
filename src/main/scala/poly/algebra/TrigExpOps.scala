@@ -1,9 +1,11 @@
 package poly.algebra
 
+import poly.algebra.specgroup._
+
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait TrigExpOps[@specialized(Double) X] {
+trait TrigExpOps[@sp(fd) X] {
   def e: X
   def pi: X
   def exp(a: X): X

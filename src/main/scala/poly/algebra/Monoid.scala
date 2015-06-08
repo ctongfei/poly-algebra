@@ -5,7 +5,7 @@ package poly.algebra
  * A monoid is a semigroup with an identity element.
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait Monoid[@specialized(Int, Double) X] extends Semigroup[X] with HasIdentity[X] {
+trait Monoid[X] extends Semigroup[X] with HasIdentity[X] {
   override def combineN(x: X, n: Int): X = {
     if (n == 0) return id
     var y = x
@@ -23,16 +23,23 @@ trait Monoid[@specialized(Int, Double) X] extends Semigroup[X] with HasIdentity[
     }
     r
   }
+
 }
 
 object Monoid {
   /** Retrieves the implicit monoid associated with the specific type. */
-  def apply[@specialized(Int, Double) X](implicit M: Monoid[X]) = M
+  def apply[X](implicit M: Monoid[X]) = M
 
   /** Creates an monoid of the specific type using the binary operation and the identity element provided. */
-  def create[@specialized(Int, Double) X](f: (X, X) => X, idElem: X) = new Monoid[X] {
+  def create[X](f: (X, X) => X, idElem: X): Monoid[X] = new Monoid[X] {
     def op(x: X, y: X): X = f(x, y)
-    def id: X = idElem
+    val id: X = idElem
+  }
+
+  /** Returns the product monoid of two monoids. */
+  def product[X, Y](implicit Mx: Monoid[X], My: Monoid[Y]): Monoid[(X, Y)] = new Monoid[(X, Y)] {
+    def op(x: (X, Y), y: (X, Y)) = (Mx.op(x._1, y._1), My.op(x._2, y._2))
+    val id: (X, Y) = (Mx.id, My.id)
   }
 }
 

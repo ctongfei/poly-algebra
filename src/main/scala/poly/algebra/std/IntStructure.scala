@@ -20,8 +20,8 @@ object IntStructure extends
   override def gt(x: ZZ, y: ZZ) = x > y
   override def max(x: ZZ, y: ZZ) = if (x > y) x else y
   override def min(x: ZZ, y: ZZ) = if (x < y) x else y
-  def zero = 0
-  def one = 1
+  final val zero = 0
+  final val one = 1
   def add(x: ZZ, y: ZZ) = x + y
   def neg(x: ZZ) = -x
   override def sub(x: ZZ, y: ZZ) = x - y

@@ -1,11 +1,13 @@
 package poly.algebra
 
+import poly.algebra.specgroup._
+
 /**
  * Typeclass for additive groups.
  * Additives groups are groups with the operation `+`.
  * @tparam X Type
  */
-trait AdditiveGroup[@specialized(Int, Double) X] extends AdditiveMonoid[X] { self =>
+trait AdditiveGroup[@sp(di) X] extends AdditiveMonoid[X] { self =>
   /** Returns the negation (additive inverse) of an element. */
   def neg(x: X): X
 
@@ -23,10 +25,10 @@ trait AdditiveGroup[@specialized(Int, Double) X] extends AdditiveMonoid[X] { sel
 object AdditiveGroup {
 
   /** Retrieves the implicit additive group associated with the specific type. */
-  def apply[@specialized(Int, Double) X](implicit G: AdditiveGroup[X]) = G
+  def apply[@sp(di) X](implicit G: AdditiveGroup[X]) = G
 
   /** Creates an additive monoid of the specific type using the provided `+`, `0` and `-` (unary negation). */
-  def create[@specialized(Int, Double) X](f: (X, X) => X, zeroElem: X, fNeg: X => X) = new AdditiveGroup[X] {
+  def create[@sp(di) X](f: (X, X) => X, zeroElem: X, fNeg: X => X) = new AdditiveGroup[X] {
     def neg(x: X): X = fNeg(x)
     def add(x: X, y: X): X = f(x, y)
     def zero: X = zeroElem

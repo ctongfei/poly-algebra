@@ -1,5 +1,7 @@
 package poly.algebra
 
+import poly.algebra.specgroup._
+
 /**
  * Typeclass for function spaces.
  * @tparam X Type of domain
@@ -7,7 +9,7 @@ package poly.algebra
  * @tparam R Type of the ring, over which the codomain is a module
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait FunctionSpace[X, Y, @specialized(Int, Double) R] extends Module[X => Y, R] {
+trait FunctionSpace[X, Y, @sp(di) R] extends Module[X => Y, R] {
 
   def moduleOfCodomain: Module[Y, R]
   def scale(a: R, f: X => Y) = (x: X) => moduleOfCodomain.scale(a, f(x))
@@ -19,7 +21,7 @@ trait FunctionSpace[X, Y, @specialized(Int, Double) R] extends Module[X => Y, R]
 }
 
 object FunctionSpace {
-  implicit def default[X, Y, @specialized(Int, Double) R](implicit M: Module[Y, R], r: Ring[R]): FunctionSpace[X, Y, R] = new FunctionSpace[X, Y, R] {
+  implicit def default[X, Y, @sp(di) R](implicit M: Module[Y, R], r: Ring[R]): FunctionSpace[X, Y, R] = new FunctionSpace[X, Y, R] {
     def moduleOfCodomain = M
     def ringOfScalar = r
   }

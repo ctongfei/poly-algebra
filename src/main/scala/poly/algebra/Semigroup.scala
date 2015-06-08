@@ -5,7 +5,7 @@ package poly.algebra
  * A semigroup is a set equipped with an associative binary operation.
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait Semigroup[@specialized(Int, Double) X] {
+trait Semigroup[X] {
 
   /** The associative binary operation of this semigroup. */
   def op(x: X, y: X): X
@@ -33,10 +33,10 @@ trait Semigroup[@specialized(Int, Double) X] {
 
 object Semigroup {
   /** Retrieves the implicit semigroup associated with the specific type. */
-  def apply[@specialized(Int, Double) X](implicit S: Semigroup[X]) = S
+  def apply[X](implicit S: Semigroup[X]) = S
 
   /** Creates a semigroup of the specific type using the binary operation provided. */
-  def create[@specialized(Int, Double) X](f: (X, X) => X) = new Semigroup[X] {
+  def create[X](f: (X, X) => X) = new Semigroup[X] {
     def op(x: X, y: X): X = f(x, y)
   }
 }

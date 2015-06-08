@@ -1,9 +1,11 @@
 package poly.algebra
 
+import poly.algebra.specgroup._
+
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait EuclideanDomain[@specialized(Int, Double) X] extends Ring[X] {
+trait EuclideanDomain[@sp(di) X] extends Ring[X] {
 
   /** Returns the quotient (Euclidean division) of two elements. */
   def div(x: X, y: X): X
@@ -39,8 +41,8 @@ trait EuclideanDomain[@specialized(Int, Double) X] extends Ring[X] {
 }
 
 object EuclideanDomain {
-  def apply[@specialized(Int, Double) X](implicit E: EuclideanDomain[X]) = E
-  def create[@specialized(Int, Double) X](R: Ring[X], fQuot: (X, X) => X, fMod: (X, X) => X) = new EuclideanDomain[X] {
+  def apply[@sp(di) X](implicit E: EuclideanDomain[X]) = E
+  def create[@sp(di) X](R: Ring[X], fQuot: (X, X) => X, fMod: (X, X) => X) = new EuclideanDomain[X] {
     def add(x: X, y: X): X = R.add(x, y)
     def mul(x: X, y: X): X = R.mul(x, y)
     def neg(x: X): X = R.neg(x)

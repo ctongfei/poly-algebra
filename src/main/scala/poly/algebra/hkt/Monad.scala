@@ -20,12 +20,13 @@ trait Monad[M[_]] extends Functor[M] with Applicative[M] { self =>
 
   def ap[x, y](mx: M[x])(f: M[x => y]): M[y] = flatMap(f)(map(mx))
 
+  def zip[x, y](mx: M[x], my: M[y]): M[(x, y)] = flatMap(mx)(x => map(my)(y => (x, y)))
+
   /** Casts this monad as a monoid. */
   def asMonoid[x]: Monoid[x => M[x]] = new Monoid[x => M[x]] {
     def id = self.id[x]
     def op(f: x => M[x], g: x => M[x]) = u => flatMap(flatMap(self.id(u))(f))(g)
   }
-
 
 }
 

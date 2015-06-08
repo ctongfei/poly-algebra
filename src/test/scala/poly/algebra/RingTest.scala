@@ -1,13 +1,14 @@
 package poly.algebra
 
 import org.scalatest._
+import poly.algebra.ops._
 
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
 class RingTest extends FunSuite {
 
-  test("Int ring") {
+  test("Integer ring") {
     val Z = Ring[Int]
     assert(Z.add(30, 20) == 50)
     assert(Z.sub(40, 10) == 30)
@@ -28,9 +29,11 @@ class RingTest extends FunSuite {
   }
 
   test("Boolean Ring") {
-    val B = BooleanAlgebra[Boolean].asBooleanRing
-    assert(B.negOne == true)
-    assert(B.add(true, true) == false)
+      val B = BooleanAlgebra[Boolean].asBooleanRing
+      assert(B.negOne == true)
+      assert(B.add(true, true) == false)
+      assert(B.sub(false, true) == true)
+      assert(B.mul(true, true) == true)
   }
 
 

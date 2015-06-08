@@ -15,8 +15,8 @@ object FloatStructure extends Field[RF] with TotalOrder[RF] with Hash[RF] with P
   override def gt(x: RF, y: RF) = x > y
   override def max(x: RF, y: RF) = if (x > y) x else y
   override def min(x: RF, y: RF) = if (x < y) x else y
-  def zero = 0.0f
-  def one = 1.0f
+  final val zero = 0.0f
+  final val one = 1.0f
   def add(x: RF, y: RF) = x + y
   def neg(x: RF) = -x
   override def sub(x: RF, y: RF) = x - y
@@ -30,8 +30,8 @@ object FloatStructure extends Field[RF] with TotalOrder[RF] with Hash[RF] with P
   override def cbrt(x: RF): RF = Math.cbrt(x).toFloat
   def pow(x: RF, y: RF): RF = Math.pow(x, y).toFloat
 
-  def e: RF = Math.E.toFloat
-  def pi: RF = Math.PI.toFloat
+  final val e: RF = Math.E.toFloat
+  final val pi: RF = Math.PI.toFloat
   def exp(a: RF): RF = Math.exp(a).toFloat
   def expm1(a: RF): RF = Math.expm1(a).toFloat
   def log(a: RF): RF = Math.log(a).toFloat
