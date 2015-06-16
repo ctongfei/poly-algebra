@@ -6,26 +6,22 @@ import poly.algebra.specgroup._
  * Typeclass for hashing functions.
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait Hash[@sp(fdi) X] extends Eq[X] {
+trait Hash[@sp(fdi) X, @sp(i) H] {
 
   /** Returns a user-defined hash code of an object. */
-  def hash(x: X): Int
+  def hash(x: X): H
 
 }
 
 object Hash {
 
-  def apply[X](implicit H: Hash[X]) = H
+  def apply[X, H](implicit H: Hash[X, H]) = H
 
-  def create[@sp(fdi) X](fHash: X => Int)(implicit E: Eq[X]): Hash[X] = new Hash[X] {
-    def eq(x: X, y: X) = E.eq(x, y)
-    override def ne(x: X, y: X) = E.ne(x, y)
-    def hash(x: X): Int = fHash(x)
+  def create[@sp(fdi) X, H](fHash: X => H): Hash[X, H] = new Hash[X, H] {
+    def hash(x: X): H = fHash(x)
   }
 
-  implicit def default[@sp(fdi) X]: Hash[X] = new Hash[X] {
-    def eq(x: X, y: X) = x == y
-    override def ne(x: X, y: X) = x != y
+  implicit def default[@sp(fdi) X]: Hash[X, Int] = new Hash[X, Int] {
     def hash(x: X) = x.##
   }
 }

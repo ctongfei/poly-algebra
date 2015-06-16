@@ -5,13 +5,13 @@ import poly.algebra.specgroup._
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait AlgebraOverField[V, @sp(di) F] extends VectorSpace[V, F] with AlgebraOverRing[V, F]
+trait AlgebraOverField[V, @sp(d) F] extends VectorSpace[V, F] with AlgebraOverRing[V, F]
 
 object AlgebraOverField {
 
-  def apply[V, @sp(di) F](implicit A: AlgebraOverField[V, F]) = A
+  def apply[V, @sp(d) F](implicit A: AlgebraOverField[V, F]) = A
 
-  implicit def trivial[@sp(di) X](implicit F: Field[X]): AlgebraOverField[X, X] = new AlgebraOverField[X, X] {
+  implicit def trivial[@sp(d) X](implicit F: Field[X]): AlgebraOverField[X, X] = new AlgebraOverField[X, X] {
     def fieldOfScalar = F
     def zero = F.zero
     def one = F.one

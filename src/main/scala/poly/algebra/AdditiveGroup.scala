@@ -6,6 +6,7 @@ import poly.algebra.specgroup._
  * Typeclass for additive groups.
  * Additives groups are groups with the operation `+`.
  * @tparam X Type
+ * @since 1.0.0
  */
 trait AdditiveGroup[@sp(di) X] extends AdditiveMonoid[X] { self =>
   /** Returns the negation (additive inverse) of an element. */
@@ -34,4 +35,5 @@ object AdditiveGroup {
     def zero: X = zeroElem
   }
 }
+
 

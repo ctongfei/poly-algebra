@@ -8,9 +8,6 @@ import poly.algebra.specgroup._
  */
 trait GenericFunctions {
 
-  /** Returns a hashed value of the specific value. */
-  def hash[@sp(di) X](x: X)(implicit ev: Hash[X]): Int = ev.hash(x)
-
   /** Returns the identity element of a type. */
   def id[@sp(di) X](implicit ev: HasIdentity[X]) = ev.id
 
