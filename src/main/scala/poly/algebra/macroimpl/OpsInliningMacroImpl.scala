@@ -43,6 +43,8 @@ object OpsInliningMacroImpl {
       case TermName("$up") => TermName("xor")
       case TermName("unary_$bang") => TermName("not")
 
+      case TermName("$plus$plus") => TermName("concat")
+
       case _ => op
     }
   }

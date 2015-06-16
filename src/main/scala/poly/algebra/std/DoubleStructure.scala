@@ -5,7 +5,7 @@ import poly.algebra._
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-object DoubleStructure extends Field[RR] with TotalOrder[RR] with Hash[RR, Int] with PowerOps[RR] with TrigExpOps[RR] with SignOps[RR] {
+object DoubleStructure extends Field[RR] with TotalOrder[RR] with Hashing[RR, Int] with PowerOps[RR] with TrigExpOps[RR] with SignOps[RR] {
   def hash(x: RR) = x.hashCode()
 
   final def cmp(x: RR, y: RR) = (x - y).toInt

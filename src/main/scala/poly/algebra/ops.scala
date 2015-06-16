@@ -55,10 +55,12 @@ object ops {
     def <(y: X)(implicit ev: PartialOrder[X]): Boolean = macro OpsInliningMacroImpl.binaryOp[X, X, PartialOrder[X]]
     def >(y: X)(implicit ev: PartialOrder[X]): Boolean = macro OpsInliningMacroImpl.binaryOp[X, X, PartialOrder[X]]
 
-    def ###(implicit ev: Hash[X, Int]): Int = macro OpsInliningMacroImpl.unaryOp[X, Hash[X, Int]]
+    def ###(implicit ev: Hashing[X, Int]): Int = macro OpsInliningMacroImpl.unaryOp[X, Hashing[X, Int]]
 
     //TODO: macro
     def innerProduct[F](y: X)(implicit ev: InnerProductSpace[X, F]) = ev.dot(x, y)
+
+    def ++(y: X)(implicit ev: ConcatenativeSemigroup[X]): X = macro OpsInliningMacroImpl.binaryOp[X, X, ConcatenativeSemigroup[X]]
 
   }
 

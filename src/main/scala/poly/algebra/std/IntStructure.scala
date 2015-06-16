@@ -8,7 +8,7 @@ import poly.algebra._
 object IntStructure extends
   EuclideanDomain[ZZ] with
   TotalOrder[ZZ] with
-  Hash[ZZ, Int] with
+  Hashing[ZZ, Int] with
   SignOps[ZZ]
 {
   def hash(x: ZZ) = x.hashCode()
