@@ -18,6 +18,8 @@ object ops {
 
     def flatMap[Y](f: X => M[Y])(implicit F: Monad[M]): M[Y] = F.flatMap(mx)(f)
 
+    def filter(f: X => Boolean)(implicit F: ConcatenativeMonad[M]): M[X] = F.filter(mx)(f)
+
   }
 
 }

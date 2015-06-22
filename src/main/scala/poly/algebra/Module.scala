@@ -5,10 +5,10 @@ import poly.algebra.specgroup._
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait Module[@sp(di) V, @sp(di) R] extends AdditiveGroup[V] {
+trait Module[@sp(di) V, @sp(di) R] extends AdditiveGroup[V] { self =>
   def ringOfScalar: Ring[R]
-  def scale(k: R, x: V): V
-  def neg(x: V): V = scale(ringOfScalar.negOne, x)
+  def scale(x: V, k: R): V
+  def neg(x: V): V = scale(x, ringOfScalar.negOne)
 }
 
 object Module {
@@ -20,7 +20,7 @@ object Module {
     def ringOfScalar = R
     def zero = fZero
     def add(x: V, y: V) = fAdd(x, y)
-    def scale(k: R, x: V) = fScale(k, x)
+    def scale(x: V, k: R) = fScale(k, x)
   }
 
   /**
@@ -35,6 +35,6 @@ object Module {
     override def neg(x: V) = R.neg(x)
     override def sub(x: V, y: V) = R.sub(x, y)
     def zero = R.zero
-    def scale(x: V, y: V) = R.mul(x, y)
+    def scale(y: V, x: V) = R.mul(x, y)
   }
 }

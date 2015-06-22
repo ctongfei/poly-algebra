@@ -20,7 +20,7 @@ object AlgebraOverField {
     override def neg(x: X) = F.neg(x)
     def inv(x: X) = F.inv(x)
     def mul(x: X, y: X) = F.mul(x, y)
-    def scale(x: X, y: X) = F.mul(x, y)
+    def scale(y: X, x: X) = F.mul(x, y)
   }
 
 }

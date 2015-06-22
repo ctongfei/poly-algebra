@@ -31,7 +31,7 @@ object OpsInliningMacroImpl {
       case TermName("$minus") => TermName("sub")
       case TermName("$times") => TermName("mul")
       case TermName("$times$times") => TermName("pow")
-      case TermName("$div") => TermName("quot")
+      case TermName("$div") => TermName("div")
       case TermName("$percent") => TermName("mod")
       case TermName("$div$percent") => TermName("quotmod")
 
@@ -68,6 +68,7 @@ object OpsInliningMacroImpl {
     import c.universe._
     c.macroApplication match {
       case q"$implicitConv($lhs).$method($rhs)($evidence)" => q"$evidence.${opsName(c)(method)}($lhs, $rhs)"
+      case q"$implicitConv($lhs).$method[$ty]($rhs)($evidence)" => q"$evidence.${opsName(c)(method)}($lhs, $rhs)"
     }
   }
 

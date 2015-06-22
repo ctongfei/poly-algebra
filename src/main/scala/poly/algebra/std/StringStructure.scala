@@ -5,7 +5,7 @@ import poly.algebra._
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-object StringStructure extends Monoid[String] {
-  val id = ""
-  def op(x: String, y: String) = x + y
+object StringStructure extends ConcatenativeMonoid[String] {
+  final val empty = ""
+  def concat(x: String, y: String) = x + y
 }

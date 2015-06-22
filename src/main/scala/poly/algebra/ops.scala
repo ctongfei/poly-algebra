@@ -1,6 +1,7 @@
 package poly.algebra
 
 import poly.algebra.macroimpl._
+import poly.util.typeclass._
 import scala.language.experimental.macros
 
 /**
@@ -13,6 +14,8 @@ object ops {
   implicit val implicitIntStructure = std.IntStructure
   implicit val implicitFloatStructure = std.FloatStructure
   implicit val implicitDoubleStructure = std.DoubleStructure
+  implicit val implicitStringStructure = std.StringStructure
+  implicit val implicitSeqStructure = std.SeqStructure
 
   /**
    * Enriches any type with mathematical operators if appropriate algebraic structures are implicitly provided.
@@ -38,15 +41,11 @@ object ops {
     def |(y: X)(implicit ev: BooleanAlgebra[X]): X = macro OpsInliningMacroImpl.binaryOp[X, X, BooleanAlgebra[X]]
     def ^(y: X)(implicit ev: BooleanAlgebra[X]): X = macro OpsInliningMacroImpl.binaryOp[X, X, BooleanAlgebra[X]]
 
-    def and(y: X)(implicit ev: BooleanAlgebra[X]): X = macro OpsInliningMacroImpl.binaryOp[X, X, BooleanAlgebra[X]]
-    def or(y: X)(implicit ev: BooleanAlgebra[X]): X = macro OpsInliningMacroImpl.binaryOp[X, X, BooleanAlgebra[X]]
-    def xor(y: X)(implicit ev: BooleanAlgebra[X]): X = macro OpsInliningMacroImpl.binaryOp[X, X, BooleanAlgebra[X]]
-
     def ∧(y: X)(implicit ev: BooleanAlgebra[X]) = ev.and(x, y)
     def ∨(y: X)(implicit ev: BooleanAlgebra[X]) = ev.or(x, y)
 
-    def :*[R](k: R)(implicit ev: Module[X, R]) = ev.scale(k, x)
-    def *:[R](k: R)(implicit ev: Module[X, R]) = ev.scale(k, x)
+    def :*[R](y: R)(implicit ev: Module[X, R]): X = macro OpsInliningMacroImpl.binaryOp[X, R, Module[X, R]]
+    def *:[R](y: R)(implicit ev: Module[X, R]): X = macro OpsInliningMacroImpl.binaryOp[X, R, Module[X, R]]
 
     def =~=(y: X)(implicit ev: Eq[X]): Boolean = macro OpsInliningMacroImpl.binaryOp[X, X, Eq[X]]
     def =!=(y: X)(implicit ev: Eq[X]): Boolean = macro OpsInliningMacroImpl.binaryOp[X, X, Eq[X]]
@@ -58,9 +57,12 @@ object ops {
     def ###(implicit ev: Hashing[X, Int]): Int = macro OpsInliningMacroImpl.unaryOp[X, Hashing[X, Int]]
 
     //TODO: macro
-    def innerProduct[F](y: X)(implicit ev: InnerProductSpace[X, F]) = ev.dot(x, y)
+    def dot[F](y: X)(implicit ev: InnerProductSpace[X, F]) = ev.dot(x, y)
 
     def ++(y: X)(implicit ev: ConcatenativeSemigroup[X]): X = macro OpsInliningMacroImpl.binaryOp[X, X, ConcatenativeSemigroup[X]]
+
+    //def +=(y: X)(implicit ev: InplaceAdditiveSemigroup[X]): Unit = ev.inplaceAdd(x, y)
+    //def -=(y: X)(implicit ev: InplaceAdditiveGroup[X]): Unit = ev.inplaceSub(x, y)
 
   }
 

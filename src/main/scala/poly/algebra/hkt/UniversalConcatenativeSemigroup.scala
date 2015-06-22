@@ -4,7 +4,9 @@ import poly.algebra._
 import scala.language.higherKinds
 
 /**
+ * Represents a universally quantified concatenative semigroup.
  * @author Tongfei Chen (ctongfei@gmail.com).
+ * @since 0.2.1
  */
 trait UniversalConcatenativeSemigroup[S[_]] { self =>
 

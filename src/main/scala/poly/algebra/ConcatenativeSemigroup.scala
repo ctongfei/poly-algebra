@@ -2,6 +2,7 @@ package poly.algebra
 
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
+ * @since 0.2.1
  */
 trait ConcatenativeSemigroup[X] { self =>
 
