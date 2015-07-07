@@ -1,12 +1,12 @@
 package poly.algebra
 
-import poly.algebra.specgroup._
+import poly.util.specgroup._
 
 /**
  * Represents the existence of an `0` element.
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait HasZero[@sp(di) X] {
+trait HasZero[@sp(fdi) X] {
 
   /** The `0` element (additive identity) of this type. */
   def zero: X
@@ -19,10 +19,10 @@ trait HasZero[@sp(di) X] {
 
 object HasZero {
   /** Retrieves the implicit `HasZero` object of this type. */
-  def apply[@sp(di) X](implicit Z: HasZero[X]) = Z
+  def apply[@sp(fdi) X](implicit Z: HasZero[X]) = Z
 
   /** Creates a `HasZero` object given an identity element `0` of a type. */
-  def create[@sp(di) X](zeroElem: X) = new HasZero[X] {
+  def create[@sp(fdi) X](zeroElem: X) = new HasZero[X] {
     def zero = zeroElem
   }
 }

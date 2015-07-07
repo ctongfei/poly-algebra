@@ -1,7 +1,6 @@
 package poly.algebra.function
 
 import poly.algebra._
-import poly.algebra.specgroup._
 
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
@@ -58,6 +57,35 @@ trait GenericFunctions {
 
   def min[@sp(di) X](xs: X*)(implicit ev: WeakOrder[X]) = xs.reduce(ev.min)
 
+  def abs[@sp(fdi) X](x: X)(implicit ev: SignOps[X]) = ev.abs(x)
+
+  def sgn[@sp(fdi) X](x: X)(implicit ev: SignOps[X]) = ev.sgn(x)
+
+  def ipow[@sp(fdi) X](x: X, y: Int)(implicit ev: MultiplicativeSemigroup[X]) = ev.ipow(x, y)
+
+  def pow[@sp(fd) X](x: X, y: X)(implicit ev: PowerOps[X]) = ev.pow(x, y)
+
+  def sqrt[@sp(fd) X](x: X)(implicit ev: PowerOps[X]) = ev.sqrt(x)
+
+  def cbrt[@sp(fd) X](x: X)(implicit ev: PowerOps[X]) = ev.cbrt(x)
+
+  def sin[@sp(fd) X](x: X)(implicit ev: TrigExpOps[X]) = ev.sin(x)
+
+  def cos[@sp(fd) X](x: X)(implicit ev: TrigExpOps[X]) = ev.cos(x)
+
+  def tan[@sp(fd) X](x: X)(implicit ev: TrigExpOps[X]) = ev.tan(x)
+
+  def arcsin[@sp(fd) X](x: X)(implicit ev: TrigExpOps[X]) = ev.arcsin(x)
+
+  def arccos[@sp(fd) X](x: X)(implicit ev: TrigExpOps[X]) = ev.arccos(x)
+
+  def arctan[@sp(fd) X](x: X)(implicit ev: TrigExpOps[X]) = ev.arctan(x)
+
+  def sinh[@sp(fd) X](x: X)(implicit ev: TrigExpOps[X]) = ev.sinh(x)
+
+  def cosh[@sp(fd) X](x: X)(implicit ev: TrigExpOps[X]) = ev.cosh(x)
+
+  def tanh[@sp(fd) X](x: X)(implicit ev: TrigExpOps[X]) = ev.tanh(x)
 
 
 

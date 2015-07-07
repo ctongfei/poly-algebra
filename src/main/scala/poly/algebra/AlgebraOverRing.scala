@@ -1,17 +1,17 @@
 package poly.algebra
 
-import poly.algebra.specgroup._
+import poly.util.specgroup._
 
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait AlgebraOverRing[V, @sp(di) R] extends Module[V, R] with Ring[V]
+trait AlgebraOverRing[V, @sp(fdi) R] extends Module[V, R] with Ring[V]
 
 object AlgebraOverRing {
 
-  def apply[V, @sp(di) R](implicit A: AlgebraOverRing[V, R]) = A
+  def apply[V, @sp(fdi) R](implicit A: AlgebraOverRing[V, R]) = A
 
-  implicit def trivial[@sp(di) X](implicit R: Ring[X]): AlgebraOverRing[X, X] = new AlgebraOverRing[X, X] {
+  implicit def trivial[@sp(fdi) X](implicit R: Ring[X]): AlgebraOverRing[X, X] = new AlgebraOverRing[X, X] {
     def ringOfScalar = R
     def zero = R.zero
     def one = R.one

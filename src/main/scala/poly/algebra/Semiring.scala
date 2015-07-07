@@ -1,11 +1,11 @@
 package poly.algebra
 
-import poly.algebra.specgroup._
+import poly.util.specgroup._
 
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait Semiring[@sp(di) X] extends AdditiveMonoid[X] with MultiplicativeMonoid[X]
+trait Semiring[@sp(fdi) X] extends AdditiveMonoid[X] with MultiplicativeMonoid[X]
 
 object Semiring {
   def apply[@sp(di) X](implicit S: Semiring[X]) = S

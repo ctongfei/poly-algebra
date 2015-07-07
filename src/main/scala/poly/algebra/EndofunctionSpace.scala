@@ -1,6 +1,6 @@
 package poly.algebra
 
-import poly.algebra.specgroup._
+import poly.util.specgroup._
 
 /**
  * Typeclass for endofunction spaces.
@@ -8,7 +8,7 @@ import poly.algebra.specgroup._
  * @tparam X Type of domain and codomain
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait EndofunctionSpace[X, @sp(di) R] extends FunctionSpace[X, X, R] {
+trait EndofunctionSpace[X, @sp(fdi) R] extends FunctionSpace[X, X, R] {
 
   def composeN(f: X => X, n: Int) = asMonoidWithCompose.combineN(f, n)
 
@@ -19,9 +19,9 @@ trait EndofunctionSpace[X, @sp(di) R] extends FunctionSpace[X, X, R] {
 }
 
 object EndofunctionSpace {
-  def apply[X, @sp(di) R](implicit S: EndofunctionSpace[X, R]) = S
+  def apply[X, @sp(fdi) R](implicit S: EndofunctionSpace[X, R]) = S
 
-  implicit def default[X, R](implicit M: Module[X, R], r: Ring[R]): EndofunctionSpace[X, R] = new EndofunctionSpace[X, R] {
+  implicit def default[X, @sp(fdi) R](implicit M: Module[X, R], r: Ring[R]): EndofunctionSpace[X, R] = new EndofunctionSpace[X, R] {
     def moduleOfCodomain = M
     def ringOfScalar = r
   }

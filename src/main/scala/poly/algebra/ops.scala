@@ -10,13 +10,6 @@ import scala.language.experimental.macros
  */
 object ops {
 
-  implicit val implicitBooleanStructure = std.BooleanStructure
-  implicit val implicitIntStructure = std.IntStructure
-  implicit val implicitFloatStructure = std.FloatStructure
-  implicit val implicitDoubleStructure = std.DoubleStructure
-  implicit val implicitStringStructure = std.StringStructure
-  implicit val implicitSeqStructure = std.SeqStructure
-
   /**
    * Enriches any type with mathematical operators if appropriate algebraic structures are implicitly provided.
    * @param x Variable to be enriched

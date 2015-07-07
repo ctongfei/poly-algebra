@@ -14,6 +14,8 @@ trait Functor[M[_]] {
 
   def lift[X, Y](f: X => Y): M[X] => M[Y] = mx => map(mx)(f)
 
+  def unzip[X, Y](mxy: M[(X, Y)]): (M[X], M[Y]) = (map(mxy)(_._1), map(mxy)(_._2))
+
 }
 
 object Functor {

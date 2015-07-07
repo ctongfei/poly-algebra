@@ -1,11 +1,11 @@
 package poly.algebra
 
-import poly.algebra.specgroup._
+import poly.util.specgroup._
 
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait LowerSemilattice[@sp(dib) X] extends PartialOrder[X] { self =>
+trait LowerSemilattice[@sp(Int, Boolean) X] extends PartialOrder[X] { self =>
 
 
   def inf(x: X, y: X): X
@@ -25,14 +25,14 @@ trait LowerSemilattice[@sp(dib) X] extends PartialOrder[X] { self =>
 }
 
 object LowerSemilattice {
-  def apply[@sp(dib) X](implicit L: LowerSemilattice[X]) = L
-  def create[@sp(dib) X](fInf: (X, X) => X) = new LowerSemilattice[X] {
+  def apply[@sp(Int, Boolean) X](implicit L: LowerSemilattice[X]) = L
+  def create[@sp(Int, Boolean) X](fInf: (X, X) => X) = new LowerSemilattice[X] {
     def inf(x: X, y: X): X = fInf(x, y)
   }
 }
 
 
-trait BoundedLowerSemilattice[@sp(dib) X] extends LowerSemilattice[X] with HasZero[X] { self =>
+trait BoundedLowerSemilattice[@sp(Int, Boolean) X] extends LowerSemilattice[X] with HasZero[X] { self =>
   def asMonoidWithInf: Monoid[X] = new Monoid[X] {
   def id: X = self.zero
     def op(x: X, y: X): X = self.inf(x, y)

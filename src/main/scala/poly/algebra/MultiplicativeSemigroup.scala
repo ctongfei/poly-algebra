@@ -1,13 +1,13 @@
 package poly.algebra
 
-import poly.algebra.specgroup._
+import poly.util.specgroup._
 
 /**
  * Typeclass for multiplicative semigroups.
  * An multiplicative semigroup is a semigroup with the binary operation `mul` (`*`).
  * @tparam X Type of element
  */
-trait MultiplicativeSemigroup[@sp(di) X] {
+trait MultiplicativeSemigroup[@sp(fdi) X] {
 
   /** Returns the product of two elements. */
   def mul(x: X, y: X): X
@@ -24,10 +24,10 @@ trait MultiplicativeSemigroup[@sp(di) X] {
 object MultiplicativeSemigroup {
 
   /** Retrieves the implicit multiplicative semigroup associated with the specific type. */
-  def apply[@sp(di) X](implicit S: MultiplicativeSemigroup[X]) = S
+  def apply[@sp(fdi) X](implicit S: MultiplicativeSemigroup[X]) = S
 
   /** Creates an multiplicative semigroup of the specific type using the `*` operation provided. */
-  def create[@sp(di) X](f: (X, X) => X) = new MultiplicativeSemigroup[X] {
+  def create[@sp(fdi) X](f: (X, X) => X) = new MultiplicativeSemigroup[X] {
     def mul(x: X, y: X): X = f(x, y)
   }
 }

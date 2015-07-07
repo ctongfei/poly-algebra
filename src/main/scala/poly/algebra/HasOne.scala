@@ -1,12 +1,12 @@
 package poly.algebra
 
-import poly.algebra.specgroup._
+import poly.util.specgroup._
 
 /**
  * Represents the existence of an `1` element.
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait HasOne[@sp(di) X] {
+trait HasOne[@sp(fdi) X] {
   /** The `1` element (multiplicative identity) of this type. */
   def one: X
 
@@ -18,10 +18,10 @@ trait HasOne[@sp(di) X] {
 
 object HasOne {
   /** Retrieves the implicit `HasOne` object of this type. */
-  def apply[@sp(di) X](implicit O: HasOne[X]) = O
+  def apply[@sp(fdi) X](implicit O: HasOne[X]) = O
 
   /** Creates a `HasOne` object given an identity element `1` of a type. */
-  def create[@sp(di) X](oneElem: X) = new HasOne[X] {
+  def create[@sp(fdi) X](oneElem: X) = new HasOne[X] {
     def one = oneElem
   }
 }

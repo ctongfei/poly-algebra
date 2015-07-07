@@ -1,11 +1,11 @@
 package poly.algebra
 
-import poly.algebra.specgroup._
+import poly.util.specgroup._
 
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait WeakOrder[@sp(di) X] extends PartialOrder[X] { self =>
+trait WeakOrder[@sp(fdib) X] extends PartialOrder[X] { self =>
 
   def cmp(x: X, y: X): Int
 
@@ -32,13 +32,13 @@ trait WeakOrder[@sp(di) X] extends PartialOrder[X] { self =>
 }
 
 object WeakOrder {
-  def apply[@sp(di) X](implicit O: WeakOrder[X]) = O
+  def apply[@sp(fdib) X](implicit O: WeakOrder[X]) = O
 
-  def create[@sp(di) X](fCmp: (X, X) => Int): WeakOrder[X] = new WeakOrder[X] {
+  def create[@sp(fdib) X](fCmp: (X, X) => Int): WeakOrder[X] = new WeakOrder[X] {
     def cmp(x: X, y: X) = fCmp(x, y)
   }
 
-  def by[@sp(di) X, Y](f: Y => X)(implicit O: WeakOrder[X]) = new WeakOrder[Y] {
+  def by[@sp(fdib) X, Y](f: Y => X)(implicit O: WeakOrder[X]) = new WeakOrder[Y] {
     def cmp(x: Y, y: Y) = O.cmp(f(x), f(y))
   }
 }

@@ -1,11 +1,11 @@
 package poly.algebra
 
-import poly.algebra.specgroup._
+import poly.util.specgroup._
 
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait BooleanAlgebra[@sp(dib) X] extends BoundedLattice[X] { self =>
+trait BooleanAlgebra[@sp(Boolean) X] extends BoundedLattice[X] { self =>
 
   def and(x: X, y: X): X
   def or(x: X, y: X): X
@@ -32,8 +32,8 @@ trait BooleanAlgebra[@sp(dib) X] extends BoundedLattice[X] { self =>
 }
 
 object BooleanAlgebra {
-  def apply[@sp(dib) X](implicit B: BooleanAlgebra[X]) = B
-  def create[@sp(dib) X](fAnd: (X, X) => X, fOr: (X, X) => X, fNot: X => X, fZero: X, fOne: X)(implicit E: Eq[X]) = new BooleanAlgebra[X] {
+  def apply[@sp(Boolean) X](implicit B: BooleanAlgebra[X]) = B
+  def create[@sp(Boolean) X](fAnd: (X, X) => X, fOr: (X, X) => X, fNot: X => X, fZero: X, fOne: X)(implicit E: Eq[X]) = new BooleanAlgebra[X] {
     def and(x: X, y: X) = fAnd(x, y)
     def or(x: X, y: X) = fOr(x, y)
     def not(x: X) = fNot(x)

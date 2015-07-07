@@ -1,8 +1,8 @@
 package poly.algebra
 
-import poly.algebra.specgroup._
+import poly.util.specgroup._
 
-trait MultiplicativeMonoid[@sp(di) X] extends MultiplicativeSemigroup[X] with HasOne[X] { self =>
+trait MultiplicativeMonoid[@sp(fdi) X] extends MultiplicativeSemigroup[X] with HasOne[X] { self =>
 
   override def ipow(x: X, n: Int): X = asMonoidWithMul.combineN(x, n)
 
@@ -14,8 +14,8 @@ trait MultiplicativeMonoid[@sp(di) X] extends MultiplicativeSemigroup[X] with Ha
 
 
 object MultiplicativeMonoid {
-  def apply[@sp(di) X](implicit M: MultiplicativeMonoid[X]) = M
-  def create[@sp(di) X](f: (X, X) => X, oneElem: X) = new MultiplicativeMonoid[X] {
+  def apply[@sp(fdi) X](implicit M: MultiplicativeMonoid[X]) = M
+  def create[@sp(fdi) X](f: (X, X) => X, oneElem: X) = new MultiplicativeMonoid[X] {
     def mul(x: X, y: X): X = f(x, y)
     def one: X = oneElem
   }

@@ -1,11 +1,11 @@
 package poly.algebra
 
-import poly.algebra.specgroup._
+import poly.util.specgroup._
 
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait Module[@sp(di) V, @sp(di) R] extends AdditiveGroup[V] { self =>
+trait Module[V, @sp(fdi) R] extends AdditiveGroup[V] { self =>
   def ringOfScalar: Ring[R]
   def scale(x: V, k: R): V
   def neg(x: V): V = scale(x, ringOfScalar.negOne)
@@ -14,9 +14,9 @@ trait Module[@sp(di) V, @sp(di) R] extends AdditiveGroup[V] { self =>
 object Module {
 
   /** Retrieves the implicit module associated with the specific type. */
-  def apply[@sp(di) V, @sp(di) R](implicit M: Module[V, R]) = M
+  def apply[V, @sp(fdi) R](implicit M: Module[V, R]) = M
 
-  def create[@sp(di) V, @sp(di) R](fAdd: (V, V) => V, fScale: (R, V) => V, fZero: V)(implicit R: Ring[R]): Module[V, R] = new Module[V, R] {
+  def create[V, @sp(fdi) R](fAdd: (V, V) => V, fScale: (R, V) => V, fZero: V)(implicit R: Ring[R]): Module[V, R] = new Module[V, R] {
     def ringOfScalar = R
     def zero = fZero
     def add(x: V, y: V) = fAdd(x, y)
@@ -29,7 +29,7 @@ object Module {
    * @tparam V Type of values of the ring
    * @return The trivial module of a ring over itself.
    */
-  implicit def trivial[@sp(di) V](implicit R: Ring[V]): Module[V, V] = new Module[V, V] {
+  implicit def trivial[V](implicit R: Ring[V]): Module[V, V] = new Module[V, V] {
     def ringOfScalar = R
     def add(x: V, y: V) = R.add(x, y)
     override def neg(x: V) = R.neg(x)

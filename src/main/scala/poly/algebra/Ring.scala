@@ -1,6 +1,6 @@
 package poly.algebra
 
-import poly.algebra.specgroup._
+import poly.util.specgroup._
 
 /**
  * Typeclass for rings.
@@ -18,7 +18,7 @@ import poly.algebra.specgroup._
  *
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait Ring[@sp(di) X] extends Semiring[X] with AdditiveGroup[X] {
+trait Ring[@sp(fdi) X] extends Semiring[X] with AdditiveGroup[X] {
 
   /** Returns the -1 element in this ring. */
   def negOne = neg(one)

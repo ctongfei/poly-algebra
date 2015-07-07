@@ -1,13 +1,13 @@
 package poly.algebra
 
-import poly.algebra.specgroup._
+import poly.util.specgroup._
 
 /**
  * Typeclass for additive semigroups.
  * An additive semigroup is a semigroup with the binary operation `add` (`+`).
  * @tparam X Type of element
  */
-trait AdditiveSemigroup[@sp(di) X] { self =>
+trait AdditiveSemigroup[@sp(fdi) X] { self =>
 
   /** The `+` operation of this semigroup. */
   def add(x: X, y: X): X
@@ -24,10 +24,10 @@ trait AdditiveSemigroup[@sp(di) X] { self =>
 object AdditiveSemigroup {
 
   /** Retrieves the implicit additive semigroup associated with the specific type. */
-  def apply[@sp(di) X](implicit S: AdditiveSemigroup[X]) = S
+  def apply[@sp(fdi) X](implicit S: AdditiveSemigroup[X]) = S
 
   /** Creates an additive semigroup of the specific type using the `+` operation provided. */
-  def create[@sp(di) X](f: (X, X) => X) = new AdditiveSemigroup[X] {
+  def create[@sp(fdi) X](f: (X, X) => X) = new AdditiveSemigroup[X] {
     def add(x: X, y: X): X = f(x, y)
   }
 }
