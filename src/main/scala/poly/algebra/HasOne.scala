@@ -6,7 +6,7 @@ import poly.util.specgroup._
  * Represents the existence of an `1` element.
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait HasOne[@sp(fdi) X] {
+trait HasOne[@sp(fdi) +X] {
   /** The `1` element (multiplicative identity) of this type. */
   def one: X
 

@@ -22,11 +22,12 @@ trait UpperSemilattice[@sp(fdib) X] extends PartialOrder[X] { self =>
 
 object UpperSemilattice {
   def apply[@sp(fdib) X](implicit L: UpperSemilattice[X]) = L
-  def create[@sp(fdib) X](fSup: (X, X) => X) = new UpperSemilattice[X] {
+
+
+  def create[@sp(Int, Boolean) X](fSup: (X, X) => X): UpperSemilattice[X] = new UpperSemilattice[X] {
     def sup(x: X, y: X): X = fSup(x, y)
   }
 }
-
 
 trait BoundedUpperSemilattice[@sp(Boolean) X] extends UpperSemilattice[X] with HasOne[X] { self =>
   def asMonoidWithSup: Monoid[X] = new Monoid[X] {

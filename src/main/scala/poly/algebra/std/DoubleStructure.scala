@@ -5,16 +5,15 @@ import poly.algebra._
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-object DoubleStructure extends Field[RR] with TotalOrder[RR] with Hashing[RR, Int] with PowerOps[RR] with TrigExpOps[RR] with SignOps[RR] {
-  def hash(x: RR) = x.hashCode()
+object DoubleStructure extends Field[RR] with TotalOrder[RR] with PowerOps[RR] with TrigExpOps[RR] with SignOps[RR] {
 
   final def cmp(x: RR, y: RR) = (x - y).toInt
   final override def le(x: RR, y: RR) = x <= y
   final override def lt(x: RR, y: RR) = x < y
   final override def ge(x: RR, y: RR) = x >= y
   final override def gt(x: RR, y: RR) = x > y
-  final override def max(x: RR, y: RR) = if (x > y) x else y
-  final override def min(x: RR, y: RR) = if (x < y) x else y
+  final override def max[Y <: RR](x: Y, y: Y) = if (x > y) x else y
+  final override def min[Y <: RR](x: Y, y: Y) = if (x < y) x else y
   final val zero = 0.0
   final val one = 1.0
   final def add(x: RR, y: RR) = x + y

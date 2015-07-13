@@ -4,7 +4,7 @@ package poly.algebra
  * Represents the existence of an identity element.
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait HasIdentity[X] {
+trait HasIdentity[+X] {
   /** The identity element of this type. */
   def id: X
 }

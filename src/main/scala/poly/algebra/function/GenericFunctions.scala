@@ -1,6 +1,7 @@
 package poly.algebra.function
 
 import poly.algebra._
+import poly.util.specgroup._
 
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
@@ -53,9 +54,9 @@ trait GenericFunctions {
 
   def inf[@sp(di) X](xs: X*)(implicit ev: LowerSemilattice[X]) = xs.reduce(ev.inf)
 
-  def max[@sp(di) X](xs: X*)(implicit ev: WeakOrder[X]) = xs.reduce(ev.max)
+  def max[@sp(di) X](xs: X*)(implicit ev: WeakOrder[X]) = xs.reduce(ev.max[X])
 
-  def min[@sp(di) X](xs: X*)(implicit ev: WeakOrder[X]) = xs.reduce(ev.min)
+  def min[@sp(di) X](xs: X*)(implicit ev: WeakOrder[X]) = xs.reduce(ev.min[X])
 
   def abs[@sp(fdi) X](x: X)(implicit ev: SignOps[X]) = ev.abs(x)
 

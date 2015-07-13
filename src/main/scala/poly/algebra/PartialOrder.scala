@@ -1,6 +1,7 @@
 package poly.algebra
 
 import poly.util.specgroup._
+import poly.util.typeclass._
 
 /**
  * Typeclass for partial orders.
@@ -10,7 +11,7 @@ import poly.util.specgroup._
  *
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait PartialOrder[@sp(fdib) X] extends Eq[X] { self =>
+trait PartialOrder[@sp(fdib) -X] extends Eq[X] { self =>
 
   /** Returns whether ''x'' precedes ''y'' under this partial order. */
   def le(x: X, y: X): Boolean

@@ -5,21 +5,15 @@ import poly.algebra._
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-object IntStructure extends
-  EuclideanDomain[ZZ] with
-  TotalOrder[ZZ] with
-  Hashing[ZZ, Int] with
-  SignOps[ZZ]
-{
-  def hash(x: ZZ) = x.hashCode()
+object IntStructure extends EuclideanDomain[ZZ] with TotalOrder[ZZ] with SignOps[ZZ] {
 
   def cmp(x: ZZ, y: ZZ) = x - y
   override def le(x: ZZ, y: ZZ) = x <= y
   override def lt(x: ZZ, y: ZZ) = x < y
   override def ge(x: ZZ, y: ZZ) = x >= y
   override def gt(x: ZZ, y: ZZ) = x > y
-  override def max(x: ZZ, y: ZZ) = if (x > y) x else y
-  override def min(x: ZZ, y: ZZ) = if (x < y) x else y
+  override def max[Y <: ZZ](x: Y, y: Y) = if (x > y) x else y
+  override def min[Y <: ZZ](x: Y, y: Y) = if (x < y) x else y
   final val zero = 0
   final val one = 1
   def add(x: ZZ, y: ZZ) = x + y

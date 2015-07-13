@@ -5,8 +5,7 @@ import poly.algebra._
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-object BooleanStructure extends BooleanAlgebra[BB] with TotalOrder[BB] with Hashing[BB, Int] {
-  def hash(x: BB) = x.hashCode()
+object BooleanStructure extends BooleanAlgebra[BB] with TotalOrder[BB] {
 
   override def cmp(x: BB, y: BB) = {
     if (x == y) 0

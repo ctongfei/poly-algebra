@@ -1,6 +1,7 @@
 package poly.algebra
 
 import poly.util.specgroup._
+import poly.util.typeclass._
 
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).

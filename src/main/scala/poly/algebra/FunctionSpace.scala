@@ -1,5 +1,7 @@
 package poly.algebra
 
+import poly.util.specgroup._
+
 /**
  * Typeclass for function spaces.
  * @tparam X Type of domain

@@ -5,16 +5,15 @@ import poly.algebra._
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-object FloatStructure extends Field[RF] with TotalOrder[RF] with Hashing[RF, Int] with PowerOps[RF] with TrigExpOps[RF] with SignOps[RF] {
-  def hash(x: RF) = x.hashCode()
+object FloatStructure extends Field[RF] with TotalOrder[RF] with PowerOps[RF] with TrigExpOps[RF] with SignOps[RF] {
 
   def cmp(x: RF, y: RF) = (x - y).toInt
   override def le(x: RF, y: RF) = x <= y
   override def lt(x: RF, y: RF) = x < y
   override def ge(x: RF, y: RF) = x >= y
   override def gt(x: RF, y: RF) = x > y
-  override def max(x: RF, y: RF) = if (x > y) x else y
-  override def min(x: RF, y: RF) = if (x < y) x else y
+  override def max[Y <: RF](x: Y, y: Y) = if (x > y) x else y
+  override def min[Y <: RF](x: Y, y: Y) = if (x < y) x else y
   final val zero = 0.0f
   final val one = 1.0f
   def add(x: RF, y: RF) = x + y

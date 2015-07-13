@@ -1,5 +1,6 @@
 package poly.algebra
 
+import poly.algebra.implicits._
 import poly.algebra.ops._
 import poly.algebra.functions._
 import org.scalatest._

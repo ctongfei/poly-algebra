@@ -7,10 +7,8 @@ import poly.util.specgroup._
  */
 trait LowerSemilattice[@sp(Int, Boolean) X] extends PartialOrder[X] { self =>
 
-
   def inf(x: X, y: X): X
 
-  /** @inheritdoc */
   def le(x: X, y: X) = eq(x, inf(x, y))
   override def ge(x: X, y: X) = eq(y, inf(x, y))
 
@@ -26,15 +24,15 @@ trait LowerSemilattice[@sp(Int, Boolean) X] extends PartialOrder[X] { self =>
 
 object LowerSemilattice {
   def apply[@sp(Int, Boolean) X](implicit L: LowerSemilattice[X]) = L
-  def create[@sp(Int, Boolean) X](fInf: (X, X) => X) = new LowerSemilattice[X] {
+
+  def create[@sp(Int, Boolean) X](fInf: (X, X) => X): LowerSemilattice[X] = new LowerSemilattice[X] {
     def inf(x: X, y: X): X = fInf(x, y)
   }
 }
 
-
 trait BoundedLowerSemilattice[@sp(Int, Boolean) X] extends LowerSemilattice[X] with HasZero[X] { self =>
   def asMonoidWithInf: Monoid[X] = new Monoid[X] {
-  def id: X = self.zero
+    def id: X = self.zero
     def op(x: X, y: X): X = self.inf(x, y)
   }
 }

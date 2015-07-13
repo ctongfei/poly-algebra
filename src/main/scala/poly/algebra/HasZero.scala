@@ -6,7 +6,7 @@ import poly.util.specgroup._
  * Represents the existence of an `0` element.
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait HasZero[@sp(fdi) X] {
+trait HasZero[@sp(fdi) +X] {
 
   /** The `0` element (additive identity) of this type. */
   def zero: X

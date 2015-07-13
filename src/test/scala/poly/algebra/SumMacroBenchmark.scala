@@ -1,7 +1,6 @@
 package poly.algebra
 
-import poly.util.fastloop._
-import poly.algebra.ops._
+import poly.algebra.implicits._
 import poly.algebra.functions._
 import org.scalameter._
 import scala.language.postfixOps
