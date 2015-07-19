@@ -14,13 +14,13 @@ trait Monad[M[_]] extends Functor[M] with Applicative[M] { self =>
 
   def flatMap[x, y](mx: M[x])(f: x => M[y]): M[y]
 
-  def map[x, y](mx: M[x])(f: x => y): M[y] = flatMap(mx)(u => id(f(u)))
+  def map[x, y](f: (X) => Y, mx: M[X]): M[Any] = flatMap(mx)(u => id(f(u)))
 
   def flatten[y](mmy: M[M[y]]): M[y] = flatMap(mmy)(u => u)
 
-  def liftedApply[x, y](mx: M[x])(f: M[x => y]): M[y] = flatMap(f)(map(mx))
+  def liftedApply[x, y](mx: M[x])(f: M[x => y]): M[y] = flatMap(f)(map(mx = mx))
 
-  def zip[x, y](mx: M[x], my: M[y]): M[(x, y)] = flatMap(mx)(x => map(my)(y => (x, y)))
+  def zip[x, y](mx: M[x], my: M[y]): M[(x, y)] = flatMap(mx)(x => map(y => (x, y), my))
 
   /** Casts this monad as a monoid. */
   def asMonoid[x]: Monoid[x => M[x]] = new Monoid[x => M[x]] {
@@ -38,21 +38,21 @@ object Monad {
   implicit def seqMonad: Monad[Seq] = new Monad[Seq] {
     def flatMap[X, Y](mx: Seq[X])(f: X => Seq[Y]) = mx.flatMap(f)
     def id[X](u: X) = Seq(u)
-    override def map[X, Y](mx: Seq[X])(f: X => Y) = mx.map(f)
+    override def map[X, Y](f: (X) => Y, mx: Seq[X]): Seq[Any] = mx.map(f)
   }
 
  /** The default monad on `Option`s. */
   implicit def optionMonad: Monad[Option] = new Monad[Option] {
     def flatMap[X, Y](mx: Option[X])(f: X => Option[Y]) = mx.flatMap(f)
     def id[X](u: X) = Some(u)
-    override def map[X, Y](mx: Option[X])(f: X => Y) = mx.map(f)
+    override def map[X, Y](f: (X) => Y, mx: Option[X]): Option[Any] = mx.map(f)
   }
 
   /** The default monad on functions. */
   implicit def functionMonad[z]: Monad[({type λ[α] = z => α})#λ] = new Monad[({type λ[α] = z => α})#λ] {
     def flatMap[x, y](mx: z => x)(f: x => z => y): z => y = w => f(mx(w))(w)
     def id[x](u: x): z => x = _ => u
-    override def map[x, y](mx: z => x)(f: x => y) = f compose mx
+    override def map[x, y](f: (X) => Y, mx: (z) => X): (z) => Any = f compose mx
   }
 
 }

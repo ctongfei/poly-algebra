@@ -14,7 +14,7 @@ object ops {
    */
   implicit class withHktOps[M[_], X](val mx: M[X]) extends AnyVal {
 
-    def map[Y](f: X => Y)(implicit F: Functor[M]): M[Y] = F.map(mx)(f)
+    def map[Y](f: X => Y)(implicit F: Functor[M]): M[Y] = F.map(f, mx)
 
     def flatMap[Y](f: X => M[Y])(implicit F: Monad[M]): M[Y] = F.flatMap(mx)(f)
 
