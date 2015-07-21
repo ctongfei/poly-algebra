@@ -1,9 +1,11 @@
 package poly.algebra
 
+import poly.algebra.PartialOrder._
+import poly.algebra.hkt._
 import poly.util.specgroup._
 
 /**
- * Typeclass for type-strict equivalence relation.
+ * Typeclass for type-strict equivalence relations.
  * @author Tongfei Chen (ctongfei@gmail.com).
  * @since 0.1.0
  */
@@ -38,5 +40,9 @@ object Eq {
   def byRef[X <: AnyRef]: Eq[X] = new Eq[X] {
     def eq(x: X, y: X) = x eq y
     override def ne(x: X, y: X) = x ne y
+  }
+
+  implicit object ContravariantFunctor extends ContravariantFunctor[Eq] {
+    def contramap[X, Y](ex: Eq[X])(f: Y => X) = Eq.by(f)(ex)
   }
 }

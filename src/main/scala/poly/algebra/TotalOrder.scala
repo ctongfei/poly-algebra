@@ -1,5 +1,6 @@
 package poly.algebra
 
+import poly.algebra.hkt._
 import poly.util.specgroup._
 
 /**
@@ -37,6 +38,10 @@ object TotalOrder {
 
   def by[Y, @sp(fdib) X](f: Y => X)(implicit O: TotalOrder[X]): TotalOrder[Y] = new TotalOrder[Y] {
     def cmp(x: Y, y: Y) = O.cmp(f(x), f(y))
+  }
+
+  implicit object ContravariantFunctor extends ContravariantFunctor[TotalOrder] {
+    def contramap[X, Y](tox: TotalOrder[X])(f: Y => X) = TotalOrder.by(f)(tox)
   }
 
 }

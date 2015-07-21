@@ -5,4 +5,7 @@ package poly
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
 package object algebra {
+
+  type Id[+X] = X
+
 }

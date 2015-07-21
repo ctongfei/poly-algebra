@@ -1,5 +1,6 @@
 package poly.algebra
 
+import poly.algebra.hkt._
 import poly.util.specgroup._
 import poly.util.typeclass._
 
@@ -51,5 +52,9 @@ object WeakOrder {
 
   def by[@sp(fdib) X, Y](f: Y => X)(implicit O: WeakOrder[X]): WeakOrder[Y] = new WeakOrder[Y] {
     def cmp(x: Y, y: Y) = O.cmp(f(x), f(y))
+  }
+
+  implicit object ContravariantFunctor extends ContravariantFunctor[WeakOrder] {
+    def contramap[X, Y](wox: WeakOrder[X])(f: Y => X) = WeakOrder.by(f)(wox)
   }
 }

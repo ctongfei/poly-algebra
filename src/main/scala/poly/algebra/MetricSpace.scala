@@ -5,7 +5,7 @@ import poly.util.specgroup._
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait MetricSpace[V, @sp(fdi) F] {
+trait MetricSpace[-V, @sp(fdi) +F] {
   def dist(x: V, y: V): F
 }
 

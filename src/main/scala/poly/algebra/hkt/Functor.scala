@@ -4,11 +4,10 @@ import scala.language.higherKinds
 
 /**
  * Typeclass for functors.
- * A functor is any type which has the `map` operation with type signature `(X => Y) => M[X] => M[Y]`.
  * @author Tongfei Chen (ctongfei@gmail.com).
  * @since 0.2.0
  */
-trait Functor[F[_]] {
+trait Functor[F[+_]] {
 
   def map[X, Y](mx: F[X])(f: X => Y): F[Y]
 
