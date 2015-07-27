@@ -18,4 +18,11 @@ object Semiring {
     def zero: X = zeroElem
     def one: X = oneElem
   }
+
+  def from[@sp(di) X](am: AdditiveMonoid[X], mm: MultiplicativeMonoid[X]): Semiring[X] = new Semiring[X] {
+    def one: X = mm.one
+    def add(x: X, y: X): X = am.add(x, y)
+    def mul(x: X, y: X): X = mm.mul(x, y)
+    def zero: X = am.zero
+  }
 }

@@ -1,7 +1,7 @@
 package poly.algebra
 
-import poly.algebra.implicits._
 import poly.algebra.functions._
+import poly.algebra.implicits._
 import org.scalameter._
 import scala.language.postfixOps
 
@@ -12,7 +12,7 @@ object SumMacroBenchmark extends App {
 
   for (n ← Seq(200000, 400000, 800000, 1600000)) {
 
-    val conf = config(Key.exec.benchRuns → 30)
+    val conf = config(Key.exec.benchRuns → 25)
     .withWarmer(new Warmer.Default).withMeasurer(new Measurer.IgnoringGC)
 
     val t1 = conf measure {

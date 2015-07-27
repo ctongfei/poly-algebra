@@ -8,7 +8,7 @@ import scala.language.reflectiveCalls
  * Typeclass for monads.
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait Monad[M[_]] extends Functor[M] with Applicative[M] { self =>
+trait Monad[M[+_]] extends Functor[M] with Applicative[M] { self =>
 
   def id[x](u: x): M[x]
 
@@ -32,7 +32,7 @@ trait Monad[M[_]] extends Functor[M] with Applicative[M] { self =>
 
 object Monad {
 
-  def apply[M[_]](implicit M: Monad[M]): Monad[M] = M
+  def apply[M[+_]](implicit M: Monad[M]): Monad[M] = M
 
   /** The default monad on sequences. */
   implicit def seqMonad: Monad[Seq] = new Monad[Seq] {
@@ -49,7 +49,7 @@ object Monad {
   }
 
   /** The default monad on functions. */
-  implicit def functionMonad[z]: Monad[({type λ[α] = z => α})#λ] = new Monad[({type λ[α] = z => α})#λ] {
+  implicit def functionMonad[z]: Monad[({type λ[+α] = z => α})#λ] = new Monad[({type λ[+α] = z => α})#λ] {
     def flatMap[x, y](mx: z => x)(f: x => z => y): z => y = w => f(mx(w))(w)
     def id[x](u: x): z => x = _ => u
     override def map[x, y](mx: z => x)(f: x => y): z => y = f compose mx

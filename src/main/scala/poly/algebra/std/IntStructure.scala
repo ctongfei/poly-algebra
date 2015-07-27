@@ -5,7 +5,7 @@ import poly.algebra._
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-object IntStructure extends EuclideanDomain[ZZ] with TotalOrder[ZZ] with SignOps[ZZ] {
+object IntStructure extends EuclideanDomain[ZZ] with TotalOrder[ZZ] {
 
   def cmp(x: ZZ, y: ZZ) = x - y
   override def le(x: ZZ, y: ZZ) = x <= y

@@ -8,7 +8,7 @@ import scala.language.higherKinds
  * Typeclass for applicatives.
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait Applicative[M[_]] extends Functor[M] { self =>
+trait Applicative[M[+_]] extends Functor[M] { self =>
 
   def id[x](u: x): M[x]
 
@@ -24,6 +24,6 @@ trait Applicative[M[_]] extends Functor[M] { self =>
 
 object Applicative {
 
-  def apply[M[_]](implicit M: Applicative[M]): Applicative[M] = M
+  def apply[M[+_]](implicit M: Applicative[M]): Applicative[M] = M
 
 }

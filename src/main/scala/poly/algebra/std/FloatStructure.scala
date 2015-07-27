@@ -5,7 +5,7 @@ import poly.algebra._
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-object FloatStructure extends Field[RF] with TotalOrder[RF] with PowerOps[RF] with TrigExpOps[RF] with SignOps[RF] {
+object FloatStructure extends OrderedField[RF] with PowerOps[RF] with TrigExpOps[RF] {
 
   def cmp(x: RF, y: RF) = (x - y).toInt
   override def le(x: RF, y: RF) = x <= y
@@ -46,6 +46,6 @@ object FloatStructure extends Field[RF] with TotalOrder[RF] with PowerOps[RF] wi
   def cosh(x: RF): RF = Math.cosh(x).toFloat
   def tanh(x: RF): RF = Math.tanh(x).toFloat
 
-  def abs(x: RF) = Math.abs(x)
-  def sgn(x: RF) = Math.signum(x)
+  override def abs(x: RF) = Math.abs(x)
+  override def sgn(x: RF) = Math.signum(x)
 }

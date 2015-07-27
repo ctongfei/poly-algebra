@@ -19,7 +19,7 @@ trait Functor[F[+_]] {
 
 object Functor {
 
-  def apply[M[_]](implicit M: Functor[M]): Functor[M] = M
+  def apply[M[+_]](implicit M: Functor[M]): Functor[M] = M
 
 
 }

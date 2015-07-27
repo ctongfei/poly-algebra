@@ -40,8 +40,6 @@ object TotalOrder {
     def cmp(x: Y, y: Y) = O.cmp(f(x), f(y))
   }
 
-  implicit object ContravariantFunctor extends ContravariantFunctor[TotalOrder] {
-    def contramap[X, Y](tox: TotalOrder[X])(f: Y => X) = TotalOrder.by(f)(tox)
-  }
+  //TODO: should be a ContravariantFunctor but because of Scala's type system, it cannot be implemented easily
 
 }

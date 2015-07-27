@@ -5,7 +5,7 @@ import poly.algebra._
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-object DoubleStructure extends Field[RR] with TotalOrder[RR] with PowerOps[RR] with TrigExpOps[RR] with SignOps[RR] {
+object DoubleStructure extends OrderedField[RR] with PowerOps[RR] with TrigExpOps[RR] {
 
   final def cmp(x: RR, y: RR) = (x - y).toInt
   final override def le(x: RR, y: RR) = x <= y
@@ -46,6 +46,6 @@ object DoubleStructure extends Field[RR] with TotalOrder[RR] with PowerOps[RR] w
   final def cosh(x: RR): RR = Math.cosh(x)
   final def tanh(x: RR): RR = Math.tanh(x)
 
-  final def abs(x: RR) = Math.abs(x)
-  final def sgn(x: RR) = Math.signum(x)
+  override final def abs(x: RR) = Math.abs(x)
+  override final def sgn(x: RR) = Math.signum(x)
 }

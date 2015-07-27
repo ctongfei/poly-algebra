@@ -1,8 +1,8 @@
 package poly.algebra
 
 import org.scalatest._
-import poly.algebra.implicits._
 import poly.algebra.functions._
+import poly.algebra.implicits._
 
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).

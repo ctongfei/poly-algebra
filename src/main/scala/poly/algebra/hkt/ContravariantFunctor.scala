@@ -17,11 +17,11 @@ trait ContravariantFunctor[F[-_]] {
 
 object ContravariantFunctor {
 
-  def apply[M[_]](implicit M: ContravariantFunctor[M]): ContravariantFunctor[M] = M
+  def apply[M[-_]](implicit M: ContravariantFunctor[M]): ContravariantFunctor[M] = M
 
   /** The default contravariant functor on functions. */
-  implicit def functionContravariantFunctor[Z]: ContravariantFunctor[({type λ[α] = α => Z})#λ] =
-    new ContravariantFunctor[({type λ[α] = α => Z})#λ] {
+  implicit def functionContravariantFunctor[Z]: ContravariantFunctor[({type 位[-伪] = 伪 => Z})#位] =
+    new ContravariantFunctor[({type 位[-伪] = 伪 => Z})#位] {
       def contramap[Y, X](g: Y => Z)(f: X => Y) = f andThen g
     }
 

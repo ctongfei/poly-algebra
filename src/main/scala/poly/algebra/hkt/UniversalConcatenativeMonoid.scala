@@ -15,5 +15,7 @@ trait UniversalConcatenativeMonoid[M[_]] extends UniversalConcatenativeSemigroup
     def empty: M[x] = self.empty[x]
   }
 
+
+
 }
 
