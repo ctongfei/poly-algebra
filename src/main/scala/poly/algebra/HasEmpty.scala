@@ -4,7 +4,7 @@ package poly.algebra
  * Represents the existence of an empty element.
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait HasEmpty[X] {
+trait HasEmpty[+X] {
 
   /** The empty element (concatenative identity) of this type. */
   def empty: X

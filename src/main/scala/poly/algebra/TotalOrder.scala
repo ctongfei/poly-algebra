@@ -2,18 +2,18 @@ package poly.algebra
 
 import poly.algebra.hkt._
 import poly.util.specgroup._
+import scala.annotation.unchecked.{uncheckedVariance => uv}
 
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  * @since 0.1.0
  */
-//TODO: should be covariant. But it seems impossible under Scala's type system
-trait TotalOrder[@sp(fdib) X] extends Lattice[X] with WeakOrder[X] { self =>
+trait TotalOrder[@sp(fdib) -X] extends Lattice[X @uv] with WeakOrder[X] { self =>
   override def min[Y <: X](x: Y, y: Y): Y = if (lt(x, y)) x else y
   override def max[Y <: X](x: Y, y: Y): Y = if (lt(x, y)) y else x
 
-  def sup(x: X, y: X): X = max(x, y)
-  def inf(x: X, y: X): X = min(x, y)
+  def sup(x: X, y: X): X @uv = max(x, y)
+  def inf(x: X, y: X): X @uv = min(x, y)
 
   override def eq(x: X, y: X) = x == y
   override def ne(x: X, y: X) = x != y
@@ -40,6 +40,8 @@ object TotalOrder {
     def cmp(x: Y, y: Y) = O.cmp(f(x), f(y))
   }
 
-  //TODO: should be a ContravariantFunctor but because of Scala's type system, it cannot be implemented easily
+  implicit object ContravariantFunctor extends ContravariantFunctor[TotalOrder] {
+    def contramap[X, Y](tox: TotalOrder[X])(f: Y => X): TotalOrder[Y] = TotalOrder.by(f)(tox)
+  }
 
 }

@@ -5,7 +5,7 @@ import poly.util.specgroup._
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait SimilarityMeasure[V, @sp(fdi) F] {
+trait SimilarityMeasure[-V, @sp(fdi) +F] {
 
   def sim(x: V, y: V): F
   

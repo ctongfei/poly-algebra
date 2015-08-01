@@ -29,9 +29,10 @@ object UpperSemilattice {
   }
 }
 
-trait BoundedUpperSemilattice[@sp(Boolean) X] extends UpperSemilattice[X] with HasOne[X] { self =>
+trait BoundedUpperSemilattice[@sp(Boolean) X] extends UpperSemilattice[X] { self =>
+  def top: X
   def asMonoidWithSup: Monoid[X] = new Monoid[X] {
-    def id: X = self.one
+    def id: X = self.top
     def op(x: X, y: X): X = self.sup(x, y)
   }
 }

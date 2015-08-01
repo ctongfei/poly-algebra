@@ -9,6 +9,6 @@ import scala.language.higherKinds
  */
 trait ConcatenativeMonad[M[+_]] extends Monad[M] with UniversalConcatenativeMonoid[M] {
 
-  def filter[x](mx: M[x])(f: x => Boolean) = flatMap(mx)(e => if (f(e)) id(e) else empty[x])
+  def filter[X](mx: M[X])(f: X => Boolean) = flatMap(mx)(e => if (f(e)) id(e) else empty[X])
 
 }

@@ -7,14 +7,14 @@ import poly.algebra._
  */
 object BooleanStructure extends BooleanAlgebra[BB] with TotalOrder[BB] {
 
-  override def cmp(x: BB, y: BB) = {
+  override final def cmp(x: BB, y: BB) = {
     if (x == y) 0
     else if (x) 1
     else -1
   }
 
-  final val one = true
-  final val zero = false
+  final val top = true
+  final val bottom = false
   final def not(x: BB) = !x
   final def and(x: BB, y: BB) = x & y
   final def or(x: BB, y: BB) = x | y

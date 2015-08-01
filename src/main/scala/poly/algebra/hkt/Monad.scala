@@ -10,22 +10,22 @@ import scala.language.reflectiveCalls
  */
 trait Monad[M[+_]] extends Functor[M] with Applicative[M] { self =>
 
-  def id[x](u: x): M[x]
+  def id[X](u: X): M[X]
 
-  def flatMap[x, y](mx: M[x])(f: x => M[y]): M[y]
+  def flatMap[X, Y](mx: M[X])(f: X => M[Y]): M[Y]
 
-  override def map[x, y](mx: M[x])(f: x => y): M[y] = flatMap(mx)(u => id(f(u)))
+  override def map[X, Y](mx: M[X])(f: X => Y): M[Y] = flatMap(mx)(u => id(f(u)))
 
-  def flatten[y](mmy: M[M[y]]): M[y] = flatMap(mmy)(u => u)
+  def flatten[Y](mmy: M[M[Y]]): M[Y] = flatMap(mmy)(u => u)
 
-  def liftedApply[x, y](mx: M[x])(f: M[x => y]): M[y] = flatMap(f)(map(mx = mx))
+  def liftedApply[X, Y](mx: M[X])(f: M[X => Y]): M[Y] = flatMap(f)(map(mx = mx))
 
-  def zip[x, y](mx: M[x], my: M[y]): M[(x, y)] = flatMap(mx)(x => map(my)(y => (x, y)))
+  def product[X, Y](mx: M[X], my: M[Y]): M[(X, Y)] = flatMap(mx)(x => map(my)(y => (x, y)))
 
   /** Casts this monad as a monoid. */
-  def asMonoid[x]: Monoid[x => M[x]] = new Monoid[x => M[x]] {
-    def id = self.id[x]
-    def op(f: x => M[x], g: x => M[x]) = u => flatMap(flatMap(self.id(u))(f))(g)
+  def asMonoid[X]: Monoid[X => M[X]] = new Monoid[X => M[X]] {
+    def id = self.id[X]
+    def op(f: X => M[X], g: X => M[X]) = u => flatMap(flatMap(self.id(u))(f))(g)
   }
 
 }
@@ -49,10 +49,10 @@ object Monad {
   }
 
   /** The default monad on functions. */
-  implicit def functionMonad[z]: Monad[({type λ[+α] = z => α})#λ] = new Monad[({type λ[+α] = z => α})#λ] {
-    def flatMap[x, y](mx: z => x)(f: x => z => y): z => y = w => f(mx(w))(w)
-    def id[x](u: x): z => x = _ => u
-    override def map[x, y](mx: z => x)(f: x => y): z => y = f compose mx
+  implicit def functionMonad[W]: Monad[({type λ[+α] = W => α})#λ] = new Monad[({type λ[+α] = W => α})#λ] {
+    def flatMap[X, Y](mx: W => X)(f: X => W => Y): W => Y = w => f(mx(w))(w)
+    def id[X](u: X): W => X = _ => u
+    override def map[X, Y](mx: W => X)(f: X => Y): W => Y = f compose mx
   }
 
 }

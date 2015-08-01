@@ -30,9 +30,10 @@ object LowerSemilattice {
   }
 }
 
-trait BoundedLowerSemilattice[@sp(Int, Boolean) X] extends LowerSemilattice[X] with HasZero[X] { self =>
+trait BoundedLowerSemilattice[@sp(Int, Boolean) X] extends LowerSemilattice[X] { self =>
+  def bottom: X
   def asMonoidWithInf: Monoid[X] = new Monoid[X] {
-    def id: X = self.zero
+    def id: X = self.bottom
     def op(x: X, y: X): X = self.inf(x, y)
   }
 }

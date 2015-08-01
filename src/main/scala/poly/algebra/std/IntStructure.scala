@@ -5,7 +5,7 @@ import poly.algebra._
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-object IntStructure extends EuclideanDomain[ZZ] with TotalOrder[ZZ] {
+object IntStructure extends EuclideanDomain[ZZ] with OrderedRing[ZZ] {
 
   def cmp(x: ZZ, y: ZZ) = x - y
   override def le(x: ZZ, y: ZZ) = x <= y
@@ -23,7 +23,7 @@ object IntStructure extends EuclideanDomain[ZZ] with TotalOrder[ZZ] {
   def div(x: ZZ, y: ZZ) = x / y
   def mod(x: ZZ, y: ZZ) = x % y
 
-  def abs(x: ZZ) = Math.abs(x)
-  def sgn(x: ZZ) = if (x == 0) 0 else if (x > 0) 1 else -1
+  override def abs(x: ZZ) = Math.abs(x)
+  override def sgn(x: ZZ) = if (x == 0) 0 else if (x > 0) 1 else -1
 
 }

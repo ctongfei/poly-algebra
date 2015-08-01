@@ -11,8 +11,8 @@ trait BooleanAlgebra[@sp(Boolean) X] extends BoundedLattice[X] { self =>
   def and(x: X, y: X): X
   def or(x: X, y: X): X
   def not(x: X): X
-  def one: X
-  def zero: X
+  def top: X
+  def bottom: X
 
   def xor(x: X, y: X): X = or(and(x, not(y)), and(not(x), y))
   def nand(x: X, y: X): X = not(and(x, y))
@@ -26,8 +26,8 @@ trait BooleanAlgebra[@sp(Boolean) X] extends BoundedLattice[X] { self =>
     def mul(x: X, y: X): X = and(x, y)
     def add(x: X, y: X): X = xor(x, y)
     def neg(x: X): X = x
-    def one: X = self.one
-    def zero: X = self.zero
+    def one: X = self.top
+    def zero: X = self.bottom
   }
 
 }
@@ -38,7 +38,7 @@ object BooleanAlgebra {
     def and(x: X, y: X) = fAnd(x, y)
     def or(x: X, y: X) = fOr(x, y)
     def not(x: X) = fNot(x)
-    def zero = fZero
-    def one = fOne
+    def bottom = fZero
+    def top = fOne
   }
 }
