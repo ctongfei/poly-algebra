@@ -42,7 +42,7 @@ trait EuclideanDomain[@sp(fdi) X] extends Ring[X] {
 
 object EuclideanDomain {
   def apply[@sp(fdi) X](implicit E: EuclideanDomain[X]) = E
-  def create[@sp(fdi) X](R: Ring[X], fQuot: (X, X) => X, fMod: (X, X) => X) = new EuclideanDomain[X] {
+  def create[@sp(fdi) X](fQuot: (X, X) => X, fMod: (X, X) => X)(implicit R: Ring[X]) = new EuclideanDomain[X] {
     def add(x: X, y: X): X = R.add(x, y)
     def mul(x: X, y: X): X = R.mul(x, y)
     def neg(x: X): X = R.neg(x)

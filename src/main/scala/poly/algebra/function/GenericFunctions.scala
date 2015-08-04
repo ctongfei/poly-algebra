@@ -30,6 +30,8 @@ trait GenericFunctions {
   /** Returns the norm of a vector in a normed vector space. */
   def norm[V, @sp(fdi) F](x: V)(implicit ev: NormedVectorSpace[V, F]) = ev.norm(x)
 
+//  def angle[V, @sp(fd) F](x: V, y: V)(implicit ev: InnerProductSpace[V, F]) = arccos
+
   /** Returns the greatest common divisor of two elements. */
   def gcd[@sp(i) X](x: X, y: X)(implicit ev: EuclideanDomain[X]) = ev.gcd(x, y)
 

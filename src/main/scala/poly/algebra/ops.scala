@@ -59,9 +59,5 @@ object ops {
 
   }
 
-  implicit class withRefEqOps[X <: AnyRef](val x: X) extends AnyVal {
-    def =@=(y: X): Boolean = macro OpsInliningMacroImpl.refEqOp[X]
-    def !@=(y: X): Boolean = macro OpsInliningMacroImpl.refNeOp[X]
-  }
 
 }

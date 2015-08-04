@@ -14,7 +14,7 @@ trait Bijection[X, Y] extends (X => Y) { self =>
     def apply(y: Y): X = self.invert(y)
   }
 
-  def andThen[Z](that: Y <=> Z): X <=> Z = new Bijection[X, Z] {
+  def andThen[Z](that: Y <=> Z): X <=> Z = new (X <=> Z) {
     def invert(z: Z): X = self.invert(that.invert(z))
     def apply(x: X): Z = that(self(x))
   }

@@ -4,7 +4,7 @@ version := "0.2.4-SNAPSHOT"
 
 organization := "me.tongfei"
 
-scalaVersion := "2.11.6"
+scalaVersion := "2.11.7"
 
 isSnapshot := true
 
