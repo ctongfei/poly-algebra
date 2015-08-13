@@ -1,5 +1,6 @@
 package poly.algebra
 
+import poly.algebra.factory._
 import poly.util.specgroup._
 
 /**
@@ -21,10 +22,7 @@ trait MultiplicativeSemigroup[@sp(fdi) X] {
   }
 }
 
-object MultiplicativeSemigroup {
-
-  /** Retrieves the implicit multiplicative semigroup associated with the specific type. */
-  def apply[@sp(fdi) X](implicit S: MultiplicativeSemigroup[X]) = S
+object MultiplicativeSemigroup extends ImplicitGetter[MultiplicativeSemigroup] {
 
   /** Creates an multiplicative semigroup of the specific type using the `*` operation provided. */
   def create[@sp(fdi) X](f: (X, X) => X) = new MultiplicativeSemigroup[X] {

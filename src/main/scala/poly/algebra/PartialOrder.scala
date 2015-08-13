@@ -1,5 +1,6 @@
 package poly.algebra
 
+import poly.algebra.factory._
 import poly.algebra.hkt._
 import poly.util.specgroup._
 
@@ -36,8 +37,7 @@ trait PartialOrder[@sp(fdib) -X] extends Eq[X] { self =>
 
 }
 
-object PartialOrder {
-  def apply[@sp(fdib) X](implicit O: PartialOrder[X]) = O
+object PartialOrder extends ImplicitGetter[PartialOrder] {
 
   def create[@sp(fdib) X](fLe: (X, X) => Boolean): PartialOrder[X] = new PartialOrder[X] {
     def le(x: X, y: X): Boolean = fLe(x, y)
@@ -48,6 +48,6 @@ object PartialOrder {
   }
 
   implicit object ContravariantFunctor extends ContravariantFunctor[PartialOrder] {
-    def contramap[X, Y](ox: PartialOrder[X])(f: Y => X) = PartialOrder.by(f)(ox)
+    def contramap[X, Y](pox: PartialOrder[X])(f: Y => X) = PartialOrder.by(f)(pox)
   }
 }

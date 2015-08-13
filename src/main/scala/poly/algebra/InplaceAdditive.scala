@@ -3,6 +3,7 @@ package poly.algebra
 /**
  * An additive semigroup that allows inplace addition (for performance when dealing with vectors/matrices).
  * @author Tongfei Chen (ctongfei@gmail.com).
+ * @since 0.2.1
  */
 trait InplaceAdditiveSemigroup[X] extends AdditiveSemigroup[X] {
   /** Adds ''y'' onto ''x'' in-place. */

@@ -1,5 +1,6 @@
 package poly.algebra
 
+import poly.algebra.factory._
 import poly.util.specgroup._
 
 /**
@@ -9,8 +10,7 @@ trait Field[@sp(fd) X] extends EuclideanDomain[X] with MultiplicativeGroup[X] {
   def mod(x: X, y: X) = zero
 }
 
-object Field {
-  def apply[@sp(fd) X](implicit F: Field[X]) = F
+object Field extends ImplicitGetter[Field] {
   def create[@sp(fd) X](R: Ring[X], fInv: X => X) = new Field[X] {
     def one = R.one
     def neg(x: X) = R.neg(x)

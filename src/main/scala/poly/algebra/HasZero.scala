@@ -1,5 +1,6 @@
 package poly.algebra
 
+import poly.algebra.factory._
 import poly.util.specgroup._
 
 /**
@@ -17,9 +18,7 @@ trait HasZero[@sp(fdi) +X] {
   }
 }
 
-object HasZero {
-  /** Retrieves the implicit `HasZero` object of this type. */
-  def apply[@sp(fdi) X](implicit Z: HasZero[X]) = Z
+object HasZero extends ImplicitGetter[HasZero] {
 
   /** Creates a `HasZero` object given an identity element `0` of a type. */
   def create[@sp(fdi) X](zeroElem: X) = new HasZero[X] {

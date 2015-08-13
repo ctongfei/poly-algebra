@@ -1,5 +1,6 @@
 package poly.algebra
 
+import poly.algebra.factory._
 import poly.util.specgroup._
 import poly.util.typeclass._
 
@@ -11,8 +12,6 @@ trait BooleanAlgebra[@sp(Boolean) X] extends BoundedLattice[X] { self =>
   def and(x: X, y: X): X
   def or(x: X, y: X): X
   def not(x: X): X
-  def top: X
-  def bottom: X
 
   def xor(x: X, y: X): X = or(and(x, not(y)), and(not(x), y))
   def nand(x: X, y: X): X = not(and(x, y))
@@ -27,18 +26,19 @@ trait BooleanAlgebra[@sp(Boolean) X] extends BoundedLattice[X] { self =>
     def add(x: X, y: X): X = xor(x, y)
     def neg(x: X): X = x
     def one: X = self.top
-    def zero: X = self.bottom
+    def zero: X = self.bot
   }
 
 }
 
-object BooleanAlgebra {
-  def apply[@sp(Boolean) X](implicit B: BooleanAlgebra[X]) = B
+object BooleanAlgebra extends ImplicitGetter[BooleanAlgebra] {
+
   def create[@sp(Boolean) X](fAnd: (X, X) => X, fOr: (X, X) => X, fNot: X => X, fZero: X, fOne: X)(implicit E: Eq[X]) = new BooleanAlgebra[X] {
     def and(x: X, y: X) = fAnd(x, y)
     def or(x: X, y: X) = fOr(x, y)
     def not(x: X) = fNot(x)
-    def bottom = fZero
-    def top = fOne
+    val bot = fZero
+    val top = fOne
   }
+
 }

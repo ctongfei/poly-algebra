@@ -30,7 +30,7 @@ class MetricSpaceTest extends FunSuite {
     assert(ms2.dist(a, c) == 3)
   }
 
-  test("MetricSpace 3: Levenstein edit distance on strings") {
+  test("MetricSpace 3: Levenshtein edit distance on strings") {
     val ms3 = MetricSpace.create[String, Int](
       (x, y) => {
         val d = Array.ofDim[Int](x.length + 1, y.length + 1)

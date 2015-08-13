@@ -1,5 +1,7 @@
 package poly.algebra
 
+import poly.algebra.factory._
+
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  * @since 0.2.1
@@ -15,12 +17,11 @@ trait ConcatenativeMonoid[X] extends ConcatenativeSemigroup[X] with HasEmpty[X] 
 
 }
 
-object ConcatenativeMonoid {
-
-  def apply[X](implicit M: ConcatenativeMonoid[X]) = M
+object ConcatenativeMonoid extends ImplicitGetter[ConcatenativeMonoid] {
 
   def create[X](f: (X, X) => X, emptyElem: X) = new ConcatenativeMonoid[X] {
     def concat(x: X, y: X): X = f(x, y)
     def empty = emptyElem
   }
+
 }

@@ -1,5 +1,6 @@
 package poly.algebra
 
+import poly.algebra.factory._
 import poly.algebra.hkt._
 import poly.util.specgroup._
 import scala.annotation.unchecked.{uncheckedVariance => uv}
@@ -26,9 +27,7 @@ trait TotalOrder[@sp(fdib) -X] extends Lattice[X @uv] with WeakOrder[X] { self =
   }
 }
 
-object TotalOrder {
-
-  def apply[@sp(fdib) X](implicit O: TotalOrder[X]) = O
+object TotalOrder extends ImplicitGetter[TotalOrder] {
 
   def create[@sp(fdib) X](fLt: (X, X) => Boolean): TotalOrder[X] = new TotalOrder[X] {
     def cmp(x: X, y: X) = if (fLt(x, y)) -1 else if (x == y) 0 else 1

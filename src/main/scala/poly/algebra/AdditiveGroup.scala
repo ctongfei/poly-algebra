@@ -1,12 +1,13 @@
 package poly.algebra
 
+import poly.algebra.factory._
 import poly.util.specgroup._
 
 /**
  * Typeclass for additive groups.
  * Additives groups are groups with the operation `+`.
  * @tparam X Type
- * @since 1.0.0
+ * @since 0.1.0
  */
 trait AdditiveGroup[@sp(fdi) X] extends AdditiveMonoid[X] { self =>
   /** Returns the negation (additive inverse) of an element. */
@@ -23,10 +24,7 @@ trait AdditiveGroup[@sp(fdi) X] extends AdditiveMonoid[X] { self =>
   }
 }
 
-object AdditiveGroup {
-
-  /** Retrieves the implicit additive group associated with the specific type. */
-  def apply[@sp(fdi) X](implicit G: AdditiveGroup[X]) = G
+object AdditiveGroup extends ImplicitGetter[AdditiveGroup] {
 
   /** Creates an additive monoid of the specific type using the provided `+`, `0` and `-` (unary negation). */
   def create[@sp(fdi) X](f: (X, X) => X, zeroElem: X, fNeg: X => X) = new AdditiveGroup[X] {

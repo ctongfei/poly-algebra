@@ -27,7 +27,7 @@ object SumMacroBenchmark extends App {
     println(s"While loop: $t1")
 
 
-    val t2 = conf measure {∑(n)(i => i * 0.1)}
+    val t2 = conf measure {Sum(n)(i => i * 0.1)}
     println(s"BigOps sum macro: $t2")
 
     val t3 = conf measure {

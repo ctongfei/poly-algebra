@@ -1,7 +1,11 @@
 package poly.algebra
 
+import poly.algebra.factory._
+import poly.algebra.hkt._
+
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
+ * @since 0.2.5
  */
 trait Bijection[X, Y] extends (X => Y) { self =>
 
@@ -9,21 +13,21 @@ trait Bijection[X, Y] extends (X => Y) { self =>
 
   def invert(y: Y): X
 
-  implicit def inverse: Y <=> X = new (Y <=> X) {
+  implicit def inverse: Bijection[Y, X] = new Bijection[Y, X] {
     def invert(x: X): Y = self.apply(x)
     def apply(y: Y): X = self.invert(y)
   }
 
-  def andThen[Z](that: Y <=> Z): X <=> Z = new (X <=> Z) {
+  def andThen[Z](that: Bijection[Y, Z]): Bijection[X, Z] = new Bijection[X, Z] {
     def invert(z: Z): X = self.invert(that.invert(z))
     def apply(x: X): Z = that(self(x))
   }
 
-  def compose[W](that: W <=> X): W <=> Y = that andThen self
+  def compose[W](that: Bijection[W, X]): Bijection[W, Y] = that andThen self
 
 }
 
-object Bijection {
+object Bijection extends BinaryImplicitGetter[Bijection] {
 
   /** ASCII-compliant symbolic alias for bijections. */
   type <=>[X, Y] = Bijection[X, Y]
@@ -35,12 +39,12 @@ object Bijection {
     def apply(x: X): Y = f1(x)
   }
 
-  implicit def IdentityBijection[X] = new (X <=> X) {
+  implicit def IdentityBijection[X]: Bijection[X, X] = new (X <=> X) {
     def invert(x: X): X = x
     def apply(x: X): X = x
   }
 
-  implicit def SwapBijection[X, Y] = new ((X, Y) <=> (Y, X)) {
+  implicit def SwapBijection[X, Y]: Bijection[(X, Y), (Y, X)] = new ((X, Y) <=> (Y, X)) {
     def invert(y: (Y, X)): (X, Y) = y.swap
     def apply(x: (X, Y)): (Y, X) = x.swap
   }

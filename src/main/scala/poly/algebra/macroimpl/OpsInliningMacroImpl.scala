@@ -16,14 +16,13 @@ object OpsInliningMacroImpl {
     import c.universe._
     op match {
 
-      case TermName("$hash$hash$hash") => TermName("hash")
-
       case TermName("$eq$tilde$eq") => TermName("eq")
       case TermName("$eq$bang$eq") => TermName("ne")
       case TermName("$greater") => TermName("gt")
       case TermName("$greater$eq") => TermName("ge")
       case TermName("$less") => TermName("lt")
       case TermName("$less$eq") => TermName("le")
+      case TermName("$less$greater$qmark") => TermName("cmp")
 
       case TermName("unary_$minus") => TermName("neg")
 

@@ -1,5 +1,6 @@
 package poly.algebra
 
+import poly.algebra.factory._
 import poly.util.specgroup._
 
 /**
@@ -17,13 +18,11 @@ trait Lattice[@sp(fdib) X] extends UpperSemilattice[X] with LowerSemilattice[X] 
   }
 }
 
-object Lattice {
-  def apply[@sp(fdib) X](implicit L: Lattice[X]) = L
+object Lattice extends ImplicitGetter[Lattice] {
   def create[@sp(fdib) X](fSup: (X, X) => X, fInf: (X, X) => X) = new Lattice[X] {
     def sup(x: X, y: X): X = fSup(x, y)
     def inf(x: X, y: X): X = fInf(x, y)
   }
 }
 
-trait BoundedLattice[@sp(Boolean) X] extends
-  Lattice[X] with BoundedLowerSemilattice[X] with BoundedUpperSemilattice[X]
+

@@ -1,5 +1,7 @@
 package poly.algebra
 
+import poly.algebra.factory._
+
 /**
  * Represents the existence of an identity element.
  * @author Tongfei Chen (ctongfei@gmail.com).
@@ -9,9 +11,7 @@ trait HasIdentity[+X] {
   def id: X
 }
 
-object HasIdentity {
-  /** Retrieves the implicit HasIdentity object of this type. */
-  def apply[X](implicit I: HasIdentity[X]) = I
+object HasIdentity extends ImplicitGetter[HasIdentity] {
 
   /** Creates a `HasIdentity` object given an identity element of a type. */
   def create[X](idElem: X) = new HasIdentity[X] {

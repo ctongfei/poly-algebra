@@ -1,5 +1,7 @@
 package poly.algebra
 
+import poly.algebra.factory._
+
 /**
  * Typeclass for monoids.
  * A monoid is a semigroup with an identity element.
@@ -26,9 +28,7 @@ trait Monoid[X] extends Semigroup[X] with HasIdentity[X] {
 
 }
 
-object Monoid {
-  /** Retrieves the implicit monoid associated with the specific type. */
-  def apply[X](implicit M: Monoid[X]) = M
+object Monoid extends ImplicitGetter[Monoid] {
 
   /** Creates an monoid of the specific type using the binary operation and the identity element provided. */
   def create[X](f: (X, X) => X, idElem: X): Monoid[X] = new Monoid[X] {
@@ -41,5 +41,5 @@ object Monoid {
     def op(x: (X, Y), y: (X, Y)) = (Mx.op(x._1, y._1), My.op(x._2, y._2))
     val id: (X, Y) = (Mx.id, My.id)
   }
-}
 
+}

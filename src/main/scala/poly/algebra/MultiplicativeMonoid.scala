@@ -1,5 +1,6 @@
 package poly.algebra
 
+import poly.algebra.factory._
 import poly.util.specgroup._
 
 trait MultiplicativeMonoid[@sp(fdi) X] extends MultiplicativeSemigroup[X] with HasOne[X] { self =>
@@ -13,8 +14,7 @@ trait MultiplicativeMonoid[@sp(fdi) X] extends MultiplicativeSemigroup[X] with H
 }
 
 
-object MultiplicativeMonoid {
-  def apply[@sp(fdi) X](implicit M: MultiplicativeMonoid[X]) = M
+object MultiplicativeMonoid extends ImplicitGetter[MultiplicativeMonoid] {
   def create[@sp(fdi) X](f: (X, X) => X, oneElem: X) = new MultiplicativeMonoid[X] {
     def mul(x: X, y: X): X = f(x, y)
     def one: X = oneElem

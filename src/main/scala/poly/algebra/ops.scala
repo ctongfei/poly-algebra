@@ -17,7 +17,7 @@ object ops {
    */
   implicit class withOps[X](val x: X) extends AnyVal {
 
-    def op(implicit ev: Semigroup[X]): X = macro OpsInliningMacroImpl.unaryOp[X, Semigroup[X]]
+    def op(y: X)(implicit ev: Semigroup[X]): X = macro OpsInliningMacroImpl.binaryOp[X, X, Semigroup[X]]
 
     def unary_-(implicit ev: AdditiveGroup[X]): X = macro OpsInliningMacroImpl.unaryOp[X, AdditiveGroup[X]]
     def +(y: X)(implicit ev: AdditiveSemigroup[X]): X = macro OpsInliningMacroImpl.binaryOp[X, X, AdditiveSemigroup[X]]
@@ -40,14 +40,13 @@ object ops {
     def :*[R](y: R)(implicit ev: Module[X, R]): X = macro OpsInliningMacroImpl.binaryOp[X, R, Module[X, R]]
     def *:[R](y: R)(implicit ev: Module[X, R]): X = macro OpsInliningMacroImpl.binaryOp[X, R, Module[X, R]]
 
+    def <>?(y: X)(implicit ev: WeakOrder[X]): Int = macro OpsInliningMacroImpl.binaryOp[X, X, WeakOrder[X]]
     def =~=(y: X)(implicit ev: Eq[X]): Boolean = macro OpsInliningMacroImpl.binaryOp[X, X, Eq[X]]
     def =!=(y: X)(implicit ev: Eq[X]): Boolean = macro OpsInliningMacroImpl.binaryOp[X, X, Eq[X]]
     def <=(y: X)(implicit ev: PartialOrder[X]): Boolean = macro OpsInliningMacroImpl.binaryOp[X, X, PartialOrder[X]]
     def >=(y: X)(implicit ev: PartialOrder[X]): Boolean = macro OpsInliningMacroImpl.binaryOp[X, X, PartialOrder[X]]
     def <(y: X)(implicit ev: PartialOrder[X]): Boolean = macro OpsInliningMacroImpl.binaryOp[X, X, PartialOrder[X]]
     def >(y: X)(implicit ev: PartialOrder[X]): Boolean = macro OpsInliningMacroImpl.binaryOp[X, X, PartialOrder[X]]
-
-    def ###(implicit ev: Hashing[X, Int]): Int = macro OpsInliningMacroImpl.unaryOp[X, Hashing[X, Int]]
 
     //TODO: macro
     def dot[F](y: X)(implicit ev: InnerProductSpace[X, F]) = ev.dot(x, y)

@@ -1,5 +1,6 @@
 package poly.algebra
 
+import poly.algebra.factory._
 import poly.util.specgroup._
 
 /**
@@ -20,19 +21,11 @@ trait UpperSemilattice[@sp(fdib) X] extends PartialOrder[X] { self =>
   }
 }
 
-object UpperSemilattice {
-  def apply[@sp(fdib) X](implicit L: UpperSemilattice[X]) = L
-
+object UpperSemilattice extends ImplicitGetter[UpperSemilattice] {
 
   def create[@sp(Int, Boolean) X](fSup: (X, X) => X): UpperSemilattice[X] = new UpperSemilattice[X] {
     def sup(x: X, y: X): X = fSup(x, y)
   }
 }
 
-trait BoundedUpperSemilattice[@sp(Boolean) X] extends UpperSemilattice[X] { self =>
-  def top: X
-  def asMonoidWithSup: Monoid[X] = new Monoid[X] {
-    def id: X = self.top
-    def op(x: X, y: X): X = self.sup(x, y)
-  }
-}
+

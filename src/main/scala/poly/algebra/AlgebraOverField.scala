@@ -1,5 +1,6 @@
 package poly.algebra
 
+import poly.algebra.factory._
 import poly.util.specgroup._
 
 /**
@@ -7,9 +8,7 @@ import poly.util.specgroup._
  */
 trait AlgebraOverField[V, @sp(fd) F] extends VectorSpace[V, F] with AlgebraOverRing[V, F]
 
-object AlgebraOverField {
-
-  def apply[V, @sp(fd) F](implicit A: AlgebraOverField[V, F]) = A
+object AlgebraOverField extends BinaryImplicitGetter[AlgebraOverField] {
 
   implicit def trivial[@sp(fd) X](implicit F: Field[X]): AlgebraOverField[X, X] = new AlgebraOverField[X, X] {
     def fieldOfScalar = F

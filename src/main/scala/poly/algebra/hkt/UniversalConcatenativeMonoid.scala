@@ -14,8 +14,6 @@ trait UniversalConcatenativeMonoid[M[_]] extends UniversalConcatenativeSemigroup
     def concat(mx: M[x], my: M[x]) = self.concat(mx, my)
     def empty: M[x] = self.empty[x]
   }
-
-
-
+  
 }
 

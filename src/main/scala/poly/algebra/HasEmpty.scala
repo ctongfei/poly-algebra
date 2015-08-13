@@ -1,5 +1,7 @@
 package poly.algebra
 
+import poly.algebra.factory._
+
 /**
  * Represents the existence of an empty element.
  * @author Tongfei Chen (ctongfei@gmail.com).
@@ -15,9 +17,7 @@ trait HasEmpty[+X] {
   }
 }
 
-object HasEmpty {
-  /** Retrieves the implicit `HasEmpty` object of this type. */
-  def apply[X](implicit E: HasEmpty[X]) = E
+object HasEmpty extends ImplicitGetter[HasEmpty] {
 
   /** Creates a `HasEmpty` object given an empty element of a type. */
   def create[X](emptyElem: X) = new HasEmpty[X] {

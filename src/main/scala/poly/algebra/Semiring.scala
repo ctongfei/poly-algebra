@@ -1,5 +1,6 @@
 package poly.algebra
 
+import poly.algebra.factory._
 import poly.util.specgroup._
 
 /**
@@ -7,8 +8,7 @@ import poly.util.specgroup._
  */
 trait Semiring[@sp(fdi) X] extends AdditiveMonoid[X] with MultiplicativeMonoid[X]
 
-object Semiring {
-  def apply[@sp(di) X](implicit S: Semiring[X]) = S
+object Semiring extends ImplicitGetter[Semiring] {
 
   /** Creates a semiring using the provided operations `add`, `mul`, `zero`, and `one`. */
   def create[@sp(di) X](fAdd: (X, X) => X, fMul: (X, X) => X, zeroElem: X, oneElem: X)

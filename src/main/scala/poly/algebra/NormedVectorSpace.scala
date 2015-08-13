@@ -1,5 +1,6 @@
 package poly.algebra
 
+import poly.algebra.factory._
 import poly.util.specgroup._
 
 /**
@@ -11,8 +12,8 @@ trait NormedVectorSpace[V, @sp(fd) F] extends VectorSpace[V, F] with MetricSpace
   def normalize(x: V): V = scale(x, fieldOfScalar.inv(norm(x)))
 }
 
-object NormedVectorSpace {
-  def apply[V, @sp(fd) F](implicit S: NormedVectorSpace[V, F]) = S
+object NormedVectorSpace extends BinaryImplicitGetter[NormedVectorSpace] {
+
   def create[V, @sp(fd) F: Field](fNorm: V => F)(implicit S: VectorSpace[V, F]): NormedVectorSpace[V, F]
   = new NormedVectorSpace[V, F] {
     def fieldOfScalar = implicitly[Field[F]]

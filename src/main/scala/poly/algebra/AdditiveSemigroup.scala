@@ -1,5 +1,6 @@
 package poly.algebra
 
+import poly.algebra.factory._
 import poly.util.specgroup._
 
 /**
@@ -21,10 +22,7 @@ trait AdditiveSemigroup[@sp(fdi) X] { self =>
   }
 }
 
-object AdditiveSemigroup {
-
-  /** Retrieves the implicit additive semigroup associated with the specific type. */
-  def apply[@sp(fdi) X](implicit S: AdditiveSemigroup[X]) = S
+object AdditiveSemigroup extends ImplicitGetter[AdditiveSemigroup] {
 
   /** Creates an additive semigroup of the specific type using the `+` operation provided. */
   def create[@sp(fdi) X](f: (X, X) => X) = new AdditiveSemigroup[X] {

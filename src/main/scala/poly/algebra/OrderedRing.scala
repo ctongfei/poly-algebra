@@ -1,5 +1,6 @@
 package poly.algebra
 
+import poly.algebra.factory._
 import poly.util.specgroup._
 
 /**
@@ -17,3 +18,5 @@ trait OrderedRing[@sp(fdi) X] extends Ring[X] with TotalOrder[X] with SignOps[X]
   def isNegative(x: X): Boolean = lt(x, zero)
 
 }
+
+object OrderedRing extends ImplicitGetter[OrderedRing]

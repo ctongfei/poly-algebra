@@ -1,6 +1,5 @@
 package poly.algebra
 
-import poly.algebra.PartialOrder._
 import poly.algebra.hkt._
 import poly.util.specgroup._
 

@@ -7,12 +7,12 @@ import poly.algebra.hkt._
  */
 object SeqStructure extends ConcatenativeMonad[Seq] {
 
-  def flatMap[x, y](sx: Seq[x])(f: x => Seq[y]) = sx.flatMap(f)
+  def flatMap[X, Y](sx: Seq[X])(f: X => Seq[Y]) = sx.flatMap(f)
 
-  def concat[x](sx: Seq[x], sy: Seq[x]) = sx ++ sy
+  def concat[X](sx: Seq[X], sy: Seq[X]) = sx ++ sy
 
-  def id[x](u: x): Seq[x] = Seq(u)
+  def id[X](u: X): Seq[X] = Seq(u)
 
-  def empty[x]: Seq[x] = Seq()
+  def empty[X]: Seq[X] = Seq()
 
 }

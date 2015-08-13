@@ -1,5 +1,6 @@
 package poly.algebra
 
+import poly.algebra.factory._
 import poly.util.specgroup._
 
 /**
@@ -18,8 +19,7 @@ trait EndofunctionSpace[X, @sp(fdi) R] extends FunctionSpace[X, X, R] {
   }
 }
 
-object EndofunctionSpace {
-  def apply[X, @sp(fdi) R](implicit S: EndofunctionSpace[X, R]) = S
+object EndofunctionSpace extends BinaryImplicitGetter[EndofunctionSpace] {
 
   implicit def default[X, @sp(fdi) R](implicit M: Module[X, R], r: Ring[R]): EndofunctionSpace[X, R] = new EndofunctionSpace[X, R] {
     def moduleOfCodomain = M

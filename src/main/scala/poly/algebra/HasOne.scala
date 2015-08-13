@@ -1,5 +1,6 @@
 package poly.algebra
 
+import poly.algebra.factory._
 import poly.util.specgroup._
 
 /**
@@ -16,9 +17,7 @@ trait HasOne[@sp(fdi) +X] {
   }
 }
 
-object HasOne {
-  /** Retrieves the implicit `HasOne` object of this type. */
-  def apply[@sp(fdi) X](implicit O: HasOne[X]) = O
+object HasOne extends ImplicitGetter[HasOne] {
 
   /** Creates a `HasOne` object given an identity element `1` of a type. */
   def create[@sp(fdi) X](oneElem: X) = new HasOne[X] {

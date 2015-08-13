@@ -1,5 +1,6 @@
 package poly.algebra
 
+import poly.algebra.factory._
 import poly.util.specgroup._
 
 /**
@@ -11,8 +12,7 @@ trait SimilarityMeasure[-V, @sp(fdi) +F] {
   
 }
 
-object SimilarityMeasure {
-  def apply[V, @sp(fdi) F](implicit S: SimilarityMeasure[V, F]) = S
+object SimilarityMeasure extends BinaryImplicitGetter[SimilarityMeasure] {
   def create[V, @sp(fdi) F](fSim: (V, V) => F): SimilarityMeasure[V, F] = new SimilarityMeasure[V, F] {
     def sim(x: V, y: V): F = fSim(x, y)
   }

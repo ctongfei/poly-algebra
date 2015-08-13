@@ -1,5 +1,7 @@
 package poly.algebra
 
+import poly.algebra.factory._
+
 /**
  * Typeclass for semigroups.
  * A semigroup is a set equipped with an associative binary operation.
@@ -29,14 +31,13 @@ trait Semigroup[X] {
     r
   }
 
+
 }
 
-object Semigroup {
-  /** Retrieves the implicit semigroup associated with the specific type. */
-  def apply[X](implicit S: Semigroup[X]) = S
+object Semigroup extends ImplicitGetter[Semigroup] {
 
   /** Creates a semigroup of the specific type using the binary operation provided. */
-  def create[X](f: (X, X) => X) = new Semigroup[X] {
+  def create[X](f: (X, X) => X): Semigroup[X] = new Semigroup[X] {
     def op(x: X, y: X): X = f(x, y)
   }
 }

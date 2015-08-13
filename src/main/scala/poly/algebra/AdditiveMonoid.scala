@@ -1,5 +1,6 @@
 package poly.algebra
 
+import poly.algebra.factory._
 import poly.util.specgroup._
 
 /**
@@ -18,9 +19,7 @@ trait AdditiveMonoid[@sp(fdi) X] extends AdditiveSemigroup[X] with HasZero[X] { 
   }
 }
 
-object AdditiveMonoid {
-  /** Retrieves the implicit additive monoid associated with the specific type. */
-  def apply[@sp(fdi) X](implicit M: AdditiveMonoid[X]) = M
+object AdditiveMonoid extends ImplicitGetter[AdditiveMonoid] {
 
   /** Creates an additive monoid of the specific type using the provided `+` and `0`. */
   def create[@sp(fdi) X](f: (X, X) => X, zeroElem: X) = new AdditiveMonoid[X] {

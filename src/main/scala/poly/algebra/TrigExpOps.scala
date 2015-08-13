@@ -1,5 +1,6 @@
 package poly.algebra
 
+import poly.algebra.factory._
 import poly.util.specgroup._
 
 /**
@@ -23,3 +24,5 @@ trait TrigExpOps[@sp(fd) X] {
   def cosh(x: X): X
   def tanh(x: X): X
 }
+
+object TrigExpOps extends ImplicitGetter[TrigExpOps]

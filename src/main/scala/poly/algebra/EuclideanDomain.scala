@@ -1,5 +1,6 @@
 package poly.algebra
 
+import poly.algebra.factory._
 import poly.util.specgroup._
 
 /**
@@ -40,16 +41,16 @@ trait EuclideanDomain[@sp(fdi) X] extends Ring[X] {
 
 }
 
-object EuclideanDomain {
-  def apply[@sp(fdi) X](implicit E: EuclideanDomain[X]) = E
-  def create[@sp(fdi) X](fQuot: (X, X) => X, fMod: (X, X) => X)(implicit R: Ring[X]) = new EuclideanDomain[X] {
-    def add(x: X, y: X): X = R.add(x, y)
-    def mul(x: X, y: X): X = R.mul(x, y)
-    def neg(x: X): X = R.neg(x)
-    def zero: X = R.zero
-    def one: X = R.one
-    def div(x: X, y: X): X = fQuot(x, y)
-    def mod(x: X, y: X): X = fMod(x, y)
-  }
+object EuclideanDomain extends ImplicitGetter[EuclideanDomain] {
+  def create[@sp(fdi) X](fQuot: (X, X) => X, fMod: (X, X) => X)(implicit R: Ring[X]): EuclideanDomain[X] =
+    new EuclideanDomain[X] {
+      def add(x: X, y: X): X = R.add(x, y)
+      def mul(x: X, y: X): X = R.mul(x, y)
+      def neg(x: X): X = R.neg(x)
+      def zero: X = R.zero
+      def one: X = R.one
+      def div(x: X, y: X): X = fQuot(x, y)
+      def mod(x: X, y: X): X = fMod(x, y)
+    }
 
 }

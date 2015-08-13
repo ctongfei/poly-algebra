@@ -1,5 +1,6 @@
 package poly.algebra
 
+import poly.algebra.factory._
 import poly.util.specgroup._
 
 /**
@@ -7,9 +8,7 @@ import poly.util.specgroup._
  */
 trait AlgebraOverRing[V, @sp(fdi) R] extends Module[V, R] with Ring[V]
 
-object AlgebraOverRing {
-
-  def apply[V, @sp(fdi) R](implicit A: AlgebraOverRing[V, R]) = A
+object AlgebraOverRing extends BinaryImplicitGetter[AlgebraOverRing] {
 
   implicit def trivial[@sp(fdi) X](implicit R: Ring[X]): AlgebraOverRing[X, X] = new AlgebraOverRing[X, X] {
     def ringOfScalar = R

@@ -1,5 +1,6 @@
 package poly.algebra
 
+import poly.algebra.factory._
 import poly.util.specgroup._
 
 /**
@@ -25,10 +26,7 @@ trait Ring[@sp(fdi) X] extends Semiring[X] with AdditiveGroup[X] {
 
 }
 
-object Ring {
-
-  /** Retrieves the implicit ring associated with a specific type. */
-  def apply[@sp(di) X](implicit R: Ring[X]) = R
+object Ring extends ImplicitGetter[Ring] {
 
   /** Creates a ring using the provided operations `add`, `mul`, `zero`, `one` and `neg`. */
   def create[@sp(di) X](fAdd: (X, X) => X, fMul: (X, X) => X, zeroElem: X, oneElem: X, fNeg: X => X)

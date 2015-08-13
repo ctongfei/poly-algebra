@@ -1,5 +1,6 @@
 package poly.algebra
 
+import poly.algebra.factory._
 import poly.util.specgroup._
 
 /**
@@ -26,9 +27,7 @@ trait VectorSpace[V, @sp(fd) F] extends Module[V, F] { self =>
 
 }
 
-object VectorSpace {
-
-  def apply[V, @sp(fd) F](implicit V: VectorSpace[V, F]) = V
+object VectorSpace extends BinaryImplicitGetter[VectorSpace] {
 
   /**
    * Constructs the trivial vector space of any field over itself.

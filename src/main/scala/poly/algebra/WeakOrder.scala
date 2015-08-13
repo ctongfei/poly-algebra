@@ -1,8 +1,8 @@
 package poly.algebra
 
+import poly.algebra.factory._
 import poly.algebra.hkt._
 import poly.util.specgroup._
-import poly.util.typeclass._
 
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
@@ -43,8 +43,7 @@ trait WeakOrder[@sp(fdib) -X] extends PartialOrder[X] { self =>
 
 }
 
-object WeakOrder {
-  def apply[@sp(fdib) X](implicit O: WeakOrder[X]) = O
+object WeakOrder extends ImplicitGetter[WeakOrder] {
 
   def create[@sp(fdib) X](fCmp: (X, X) => Int): WeakOrder[X] = new WeakOrder[X] {
     def cmp(x: X, y: X) = fCmp(x, y)

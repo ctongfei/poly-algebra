@@ -1,20 +1,21 @@
 package poly.algebra
 
 import org.scalatest._
+import org.scalacheck._
+import org.scalacheck.Arbitrary._
+import org.scalacheck.Prop._
+import org.scalatest.prop._
 import poly.algebra.implicits._
+import poly.algebra.law._
 
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-class RingTest extends FunSuite {
+class RingTest extends FunSuite with Checkers {
 
   test("Integer ring") {
-    val Z = Ring[Int]
-    assert(Z.add(30, 20) == 50)
-    assert(Z.sub(40, 10) == 30)
-    assert(Z.sumN(2, 10) == 20)
-    assert(Z.ipow(2, 10) == 1024)
-    assert(Z.ipow(3, 0) == 1)
+    check(Law.ring[Int])
+
   }
 
   test("Int modular ring") {

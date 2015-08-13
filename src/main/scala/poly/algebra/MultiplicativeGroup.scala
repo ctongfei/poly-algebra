@@ -1,5 +1,6 @@
 package poly.algebra
 
+import poly.algebra.factory._
 import poly.util.specgroup._
 
 /**
@@ -16,11 +17,12 @@ trait MultiplicativeGroup[@sp(fd) X] extends MultiplicativeMonoid[X] { self =>
   }
 }
 
-object MultiplicativeGroup {
-  def apply[@sp(fd) X](implicit G: MultiplicativeGroup[X]) = G
+object MultiplicativeGroup extends ImplicitGetter[MultiplicativeGroup] {
   def create[@sp(fd) X](f: (X, X) => X, oneElem: X, fInv: X => X) = new MultiplicativeGroup[X] {
     def inv(x: X): X = fInv(x)
     def mul(x: X, y: X): X = f(x, y)
     def one: X = oneElem
   }
 }
+
+trait MultiplicativeCGroup[@sp(fd) X] extends MultiplicativeGroup[X]

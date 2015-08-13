@@ -1,5 +1,7 @@
 package poly.algebra
 
+import poly.algebra.factory._
+
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  * @since 0.2.1
@@ -19,10 +21,7 @@ trait ConcatenativeSemigroup[X] { self =>
 
 }
 
-object ConcatenativeSemigroup {
-
-  /** Retrieves the concatenative additive semigroup associated with the specific type. */
-  def apply[X](implicit S: ConcatenativeSemigroup[X]) = S
+object ConcatenativeSemigroup extends ImplicitGetter[ConcatenativeSemigroup] {
 
   /** Creates an concatenative semigroup of the specific type using the `++` operation provided. */
   def create[X](f: (X, X) => X) = new ConcatenativeSemigroup[X] {

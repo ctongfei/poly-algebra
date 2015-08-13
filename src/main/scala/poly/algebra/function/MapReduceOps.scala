@@ -7,7 +7,7 @@ import scala.language.experimental.macros
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait BigOps {
+trait MapReduceOps {
 
   def Sum[X](n: Int)(f: Int => X)(implicit ev: AdditiveMonoid[X]): X =
     macro MapReduceMacroImpl.sumOp[X, AdditiveMonoid[X]]
@@ -19,18 +19,6 @@ trait BigOps {
     macro MapReduceMacroImpl.forAllOp[X, BooleanAlgebra[X]]
 
   def Exists[X](n: Int)(f: Int => X)(implicit ev: BooleanAlgebra[X]): X =
-    macro MapReduceMacroImpl.existsOp[X, BooleanAlgebra[X]]
-
-  def ∑[X](n: Int)(f: Int => X)(implicit ev: AdditiveMonoid[X]): X =
-    macro MapReduceMacroImpl.sumOp[X, AdditiveMonoid[X]]
-
-  def ∏[X](n: Int)(f: Int => X)(implicit ev: MultiplicativeMonoid[X]): X =
-    macro MapReduceMacroImpl.productOp[X, MultiplicativeMonoid[X]]
-
-  def ∀[X](n: Int)(f: Int => X)(implicit ev: BooleanAlgebra[X]): X =
-    macro MapReduceMacroImpl.forAllOp[X, BooleanAlgebra[X]]
-
-  def ∃[X](n: Int)(f: Int => X)(implicit ev: BooleanAlgebra[X]): X =
     macro MapReduceMacroImpl.existsOp[X, BooleanAlgebra[X]]
 
 }

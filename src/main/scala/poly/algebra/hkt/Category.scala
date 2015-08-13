@@ -22,7 +22,7 @@ object Category {
 
   implicit object BijectionCategory extends Category[Bijection] {
     def id[X] = Bijection.create(x => x, x => x)
-    def map[X, Y, Z](f: Bijection[X, Y])(g: Bijection[Y, Z]) = f andThen g
+    def map[X, Y, Z](f: Bijection[X, Y])(g: Bijection[Y, Z]) = g compose f
   }
 
 }
