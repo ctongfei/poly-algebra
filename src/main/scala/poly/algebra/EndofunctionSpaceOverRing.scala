@@ -9,7 +9,7 @@ import poly.util.specgroup._
  * @tparam X Type of domain and codomain
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait EndofunctionSpace[X, @sp(fdi) R] extends FunctionSpace[X, X, R] {
+trait EndofunctionSpaceOverRing[X, @sp(fdi) R] extends FunctionSpaceOverRing[X, X, R] {
 
   def composeN(f: X => X, n: Int) = asMonoidWithCompose.combineN(f, n)
 
@@ -19,9 +19,9 @@ trait EndofunctionSpace[X, @sp(fdi) R] extends FunctionSpace[X, X, R] {
   }
 }
 
-object EndofunctionSpace extends BinaryImplicitGetter[EndofunctionSpace] {
+object EndofunctionSpaceOverRing extends BinaryImplicitGetter[EndofunctionSpaceOverRing] {
 
-  implicit def default[X, @sp(fdi) R](implicit M: Module[X, R], r: Ring[R]): EndofunctionSpace[X, R] = new EndofunctionSpace[X, R] {
+  implicit def default[X, @sp(fdi) R](implicit M: Module[X, R], r: Ring[R]): EndofunctionSpaceOverRing[X, R] = new EndofunctionSpaceOverRing[X, R] {
     def moduleOfCodomain = M
     def ringOfScalar = r
   }

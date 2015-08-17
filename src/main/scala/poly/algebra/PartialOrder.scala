@@ -14,19 +14,19 @@ import poly.util.specgroup._
  */
 trait PartialOrder[@sp(fdib) -X] extends Eq[X] { self =>
 
-  /** Returns whether ''x'' precedes ''y'' under this partial order. */
+  /** Returns whether ''x'' precedes ''y'' under this order. */
   def le(x: X, y: X): Boolean
 
-  /** Returns whether ''x'' succeeds ''y'' under this partial order. */
+  /** Returns whether ''x'' succeeds ''y'' under this order. */
   def ge(x: X, y: X): Boolean = le(y, x)
 
-  /** Returns whether ''x'' is equivalent to ''y'' under this partial order. */
+  /** Returns whether ''x'' is equivalent to ''y'' under this order. */
   def eq(x: X, y: X) = le(x, y) && le(y, x)
 
-  /** Returns whether ''x'' strictly precedes ''y'' under this partial order. */
+  /** Returns whether ''x'' strictly precedes ''y'' under this order. */
   def lt(x: X, y: X): Boolean = le(x, y) & !le(y, x)
 
-  /** Returns whether ''x'' strictly succeeds ''y'' under this partial order. */
+  /** Returns whether ''x'' strictly succeeds ''y'' under this order. */
   def gt(x: X, y: X): Boolean = le(y, x) & !le(x, y)
 
   /** Returns the reverse order of this partial order. */

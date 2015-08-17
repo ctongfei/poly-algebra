@@ -18,11 +18,9 @@ trait VectorSpace[V, @sp(fd) F] extends Module[V, F] { self =>
    * Returns the dual space of this vector space.
    * @since 0.2.2
    */
-  def dualSpace: VectorSpace[V => F, F] = new VectorSpace[V => F, F] {
+  def dualSpace: VectorSpace[V => F, F] = new FunctionSpaceOverField[V, F, F] {
     def fieldOfScalar: Field[F] = self.fieldOfScalar
-    def scale(f: V => F, k: F): V => F = (x: V) => self.fieldOfScalar.mul(f(x), k)
-    def zero: V => F = (x: V) => self.fieldOfScalar.zero
-    def add(f: V => F, g: V => F): V => F = (x: V) => self.fieldOfScalar.add(f(x), g(x))
+    def vectorSpaceOfCodomain = VectorSpace.trivial(self.fieldOfScalar)
   }
 
 }

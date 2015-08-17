@@ -9,7 +9,7 @@ import poly.util.specgroup._
  * @tparam R Type of the ring, over which the codomain is a module
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait FunctionSpace[X, Y, @sp(di) R] extends Module[X => Y, R] {
+trait FunctionSpaceOverRing[X, Y, @sp(di) R] extends Module[X => Y, R] {
 
   def moduleOfCodomain: Module[Y, R]
   def scale(f: (X) => Y, a: R) = (x: X) => moduleOfCodomain.scale(f(x), a)
@@ -20,9 +20,9 @@ trait FunctionSpace[X, Y, @sp(di) R] extends Module[X => Y, R] {
 
 }
 
-object FunctionSpace {
-  implicit def default[X, Y, @sp(di) R](implicit M: Module[Y, R], r: Ring[R]): FunctionSpace[X, Y, R] = new FunctionSpace[X, Y, R] {
+object FunctionSpaceOverRing {
+  implicit def default[X, Y, @sp(di) R](implicit M: Module[Y, R]): FunctionSpaceOverRing[X, Y, R] = new FunctionSpaceOverRing[X, Y, R] {
     def moduleOfCodomain = M
-    def ringOfScalar = r
+    def ringOfScalar = M.ringOfScalar
   }
 }

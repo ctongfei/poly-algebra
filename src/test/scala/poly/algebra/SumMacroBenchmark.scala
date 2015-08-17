@@ -10,7 +10,7 @@ import scala.language.postfixOps
  */
 object SumMacroBenchmark extends App {
 
-  for (n ← Seq(200000, 400000, 800000, 1600000)) {
+  for (n ← Seq(100000, 200000, 400000, 800000, 1600000, 3200000)) {
 
     val conf = config(Key.exec.benchRuns → 25)
     .withWarmer(new Warmer.Default).withMeasurer(new Measurer.IgnoringGC)
