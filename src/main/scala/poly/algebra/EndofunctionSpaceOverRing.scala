@@ -4,7 +4,7 @@ import poly.algebra.factory._
 import poly.util.specgroup._
 
 /**
- * Typeclass for endofunction spaces.
+ * Typeclass for endofunction spaces over rings.
  * An endofunction is a function whose domain equals its codomain.
  * @tparam X Type of domain and codomain
  * @author Tongfei Chen (ctongfei@gmail.com).

@@ -7,8 +7,8 @@ import poly.algebra._
  */
 object DoubleStructure extends OrderedField[Double] with PowerOps[Double] with TrigExpOps[Double] with BoundedLattice[Double] {
 
-  def bot: Double = Double.NegativeInfinity
-  def top: Double = Double.PositiveInfinity
+  final val bot: Double = Double.NegativeInfinity
+  final val top: Double = Double.PositiveInfinity
 
   final def cmp(x: Double, y: Double) = (x - y).toInt
   final override def le(x: Double, y: Double) = x <= y

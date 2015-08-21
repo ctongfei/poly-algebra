@@ -7,8 +7,8 @@ import poly.algebra._
  */
 object FloatStructure extends OrderedField[Float] with PowerOps[Float] with TrigExpOps[Float] with BoundedLattice[Float] {
 
-  def bot: Float = Float.NegativeInfinity
-  def top: Float = Float.PositiveInfinity
+  final val bot: Float = Float.NegativeInfinity
+  final val top: Float = Float.PositiveInfinity
 
   def cmp(x: Float, y: Float) = (x - y).toInt
   override def le(x: Float, y: Float) = x <= y

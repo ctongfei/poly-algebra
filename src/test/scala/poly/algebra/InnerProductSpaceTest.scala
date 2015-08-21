@@ -25,9 +25,9 @@ class InnerProductSpaceTest extends FunSuite {
     val a = Point(1, 1)
     val b = Point(-1, 1)
     val c = Point(5, 6)
-    assert((a dot b) == 0)
-    assert((a dot c) == 11)
-    assert((b dot c) == 1)
+    assert((a ⋅ b) == 0)
+    assert((a ⋅ c) == 11)
+    assert((b ⋅ c) == 1)
   }
 
   test("Reproducing kernel Hilbert space") {

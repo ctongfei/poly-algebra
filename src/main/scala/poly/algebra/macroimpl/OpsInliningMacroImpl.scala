@@ -18,10 +18,13 @@ object OpsInliningMacroImpl {
 
       case TermName("$eq$tilde$eq") => TermName("eq")
       case TermName("$eq$bang$eq") => TermName("ne")
+      case TermName("$u2260") => TermName("ne") // ≠
       case TermName("$greater") => TermName("gt")
       case TermName("$greater$eq") => TermName("ge")
+      case TermName("$u2265") => TermName("ge") // ≥
       case TermName("$less") => TermName("lt")
       case TermName("$less$eq") => TermName("le")
+      case TermName("$u2264") => TermName("le") // ≤
       case TermName("$less$greater$qmark") => TermName("cmp")
 
       case TermName("unary_$minus") => TermName("neg")
@@ -38,11 +41,13 @@ object OpsInliningMacroImpl {
       case TermName("$times$colon") => TermName("scale")
 
       case TermName("$amp") => TermName("and")
-      case TermName("bar") => TermName("or")
+      case TermName("$bar") => TermName("or")
       case TermName("$up") => TermName("xor")
       case TermName("unary_$bang") => TermName("not")
 
       case TermName("$plus$plus") => TermName("concat")
+
+      case TermName("$u22C5") => TermName("dot") // ⋅
 
       case _ => op
     }

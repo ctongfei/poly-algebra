@@ -8,6 +8,7 @@ import poly.algebra.factory._
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
 trait Monoid[X] extends Semigroup[X] with HasIdentity[X] {
+
   override def combineN(x: X, n: Int): X = {
     if (n == 0) return id
     var y = x

@@ -9,8 +9,6 @@ import poly.algebra.hkt._
  */
 trait Bijection[X, Y] extends (X => Y) { self =>
 
-  import Bijection._
-
   def invert(y: Y): X
 
   implicit def inverse: Bijection[Y, X] = new Bijection[Y, X] {
@@ -37,6 +35,11 @@ object Bijection extends BinaryImplicitGetter[Bijection] {
   def create[X, Y](f1: X => Y, f2: Y => X): Bijection[X, Y] = new (X <=> Y) {
     def invert(y: Y) = f2(y)
     def apply(x: X): Y = f1(x)
+  }
+
+  implicit object Category extends Category[Bijection] {
+    def id[X] = Bijection.create(x => x, x => x)
+    def map[X, Y, Z](f: Bijection[X, Y])(g: Bijection[Y, Z]) = f andThen g
   }
 
   implicit def IdentityBijection[X]: Bijection[X, X] = new (X <=> X) {

@@ -34,22 +34,21 @@ object ops {
     def |(y: X)(implicit ev: BooleanAlgebra[X]): X = macro OpsInliningMacroImpl.binaryOp[X, X, BooleanAlgebra[X]]
     def ^(y: X)(implicit ev: BooleanAlgebra[X]): X = macro OpsInliningMacroImpl.binaryOp[X, X, BooleanAlgebra[X]]
 
-    def ∧(y: X)(implicit ev: BooleanAlgebra[X]) = ev.and(x, y)
-    def ∨(y: X)(implicit ev: BooleanAlgebra[X]) = ev.or(x, y)
-
     def :*[R](y: R)(implicit ev: Module[X, R]): X = macro OpsInliningMacroImpl.binaryOp[X, R, Module[X, R]]
     def *:[R](y: R)(implicit ev: Module[X, R]): X = macro OpsInliningMacroImpl.binaryOp[X, R, Module[X, R]]
 
     def <>?(y: X)(implicit ev: WeakOrder[X]): Int = macro OpsInliningMacroImpl.binaryOp[X, X, WeakOrder[X]]
     def =~=(y: X)(implicit ev: Eq[X]): Boolean = macro OpsInliningMacroImpl.binaryOp[X, X, Eq[X]]
     def =!=(y: X)(implicit ev: Eq[X]): Boolean = macro OpsInliningMacroImpl.binaryOp[X, X, Eq[X]]
+    def ≠(y: X)(implicit ev: Eq[X]): Boolean = macro OpsInliningMacroImpl.binaryOp[X, X, Eq[X]]
     def <=(y: X)(implicit ev: PartialOrder[X]): Boolean = macro OpsInliningMacroImpl.binaryOp[X, X, PartialOrder[X]]
+    def ≤(y: X)(implicit ev: PartialOrder[X]): Boolean = macro OpsInliningMacroImpl.binaryOp[X, X, PartialOrder[X]]
+    def ≥(y: X)(implicit ev: PartialOrder[X]): Boolean = macro OpsInliningMacroImpl.binaryOp[X, X, PartialOrder[X]]
     def >=(y: X)(implicit ev: PartialOrder[X]): Boolean = macro OpsInliningMacroImpl.binaryOp[X, X, PartialOrder[X]]
     def <(y: X)(implicit ev: PartialOrder[X]): Boolean = macro OpsInliningMacroImpl.binaryOp[X, X, PartialOrder[X]]
     def >(y: X)(implicit ev: PartialOrder[X]): Boolean = macro OpsInliningMacroImpl.binaryOp[X, X, PartialOrder[X]]
 
-    //TODO: macro
-    def dot[F](y: X)(implicit ev: InnerProductSpace[X, F]) = ev.dot(x, y)
+    def ⋅[F](y: X)(implicit ev: InnerProductSpace[X, F]): F = macro OpsInliningMacroImpl.binaryOp[X, X, InnerProductSpace[X, F]]
 
     def ++(y: X)(implicit ev: ConcatenativeSemigroup[X]): X = macro OpsInliningMacroImpl.binaryOp[X, X, ConcatenativeSemigroup[X]]
 
