@@ -27,11 +27,13 @@ trait AdditiveGroup[@sp(fdi) X] extends AdditiveMonoid[X] { self =>
 object AdditiveGroup extends ImplicitGetter[AdditiveGroup] {
 
   /** Creates an additive monoid of the specific type using the provided `+`, `0` and `-` (unary negation). */
-  def create[@sp(fdi) X](f: (X, X) => X, zeroElem: X, fNeg: X => X) = new AdditiveGroup[X] {
+  def create[@sp(fdi) X](f: (X, X) => X, zeroElem: X, fNeg: X => X): AdditiveGroup[X] = new AdditiveGroup[X] {
     def neg(x: X): X = fNeg(x)
     def add(x: X, y: X): X = f(x, y)
     def zero: X = zeroElem
   }
 }
+
+
 
 

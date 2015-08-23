@@ -5,7 +5,7 @@ package poly.algebra
  * @author Tongfei Chen (ctongfei@gmail.com).
  * @since 0.2.1
  */
-trait InplaceAdditiveSemigroup[X] extends AdditiveSemigroup[X] {
+trait InplaceAdditiveCSemigroup[X] extends AdditiveCSemigroup[X] {
   /** Adds ''y'' onto ''x'' in-place. */
   def inplaceAdd(x: X, y: X): Unit
 }
@@ -14,7 +14,7 @@ trait InplaceAdditiveSemigroup[X] extends AdditiveSemigroup[X] {
  * An additive monoid that allows inplace addition (for performance when dealing with vectors/matrices).
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait InplaceAdditiveMonoid[X] extends InplaceAdditiveSemigroup[X] with AdditiveMonoid[X] {
+trait InplaceAdditiveCMonoid[X] extends InplaceAdditiveCSemigroup[X] with AdditiveCMonoid[X] {
   /** Clears ''x'' in-place. */
   def inplaceClear(x: X): Unit
 }
@@ -24,7 +24,7 @@ trait InplaceAdditiveMonoid[X] extends InplaceAdditiveSemigroup[X] with Additive
  * An additive group that allows inplace addition and subtraction (for performance when dealing with vectors/matrices).
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait InplaceAdditiveGroup[X] extends InplaceAdditiveMonoid[X] with AdditiveGroup[X] {
+trait InplaceAdditiveCGroup[X] extends InplaceAdditiveCMonoid[X] with AdditiveCGroup[X] {
   /** Subtracts ''y'' from ''x'' in-place. */
   def inplaceSub(x: X, y: X): Unit = inplaceAdd(x, neg(y))
 }

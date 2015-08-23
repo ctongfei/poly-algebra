@@ -15,9 +15,13 @@ trait MultiplicativeMonoid[@sp(fdi) X] extends MultiplicativeSemigroup[X] with H
 
 
 object MultiplicativeMonoid extends ImplicitGetter[MultiplicativeMonoid] {
-  def create[@sp(fdi) X](f: (X, X) => X, oneElem: X) = new MultiplicativeMonoid[X] {
+  def create[@sp(fdi) X](f: (X, X) => X, oneElem: X): MultiplicativeMonoid[X] = new MultiplicativeMonoid[X] {
     def mul(x: X, y: X): X = f(x, y)
     def one: X = oneElem
   }
 }
+
+
+
+
 

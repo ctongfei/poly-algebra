@@ -44,3 +44,6 @@ object Monoid extends ImplicitGetter[Monoid] {
   }
 
 }
+
+
+

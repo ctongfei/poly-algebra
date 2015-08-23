@@ -4,6 +4,7 @@ import poly.algebra.factory._
 import poly.util.specgroup._
 
 /**
+ * Represents a similarity measure.
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
 trait SimilarityMeasure[-V, @sp(fdi) +F] {

@@ -6,7 +6,7 @@ import poly.util.specgroup._
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait EuclideanDomain[@sp(fdi) X] extends Ring[X] {
+trait EuclideanDomain[@sp(fdi) X] extends CRing[X] {
 
   /** Returns the quotient (Euclidean division) of two elements. */
   def div(x: X, y: X): X

@@ -4,7 +4,7 @@ import org.scalacheck.Prop._
 import org.scalacheck._
 import poly.algebra._
 import poly.algebra.implicits._
-import poly.algebra.functions._
+import poly.algebra.function._
 import poly.algebra.ops._
 
 /**

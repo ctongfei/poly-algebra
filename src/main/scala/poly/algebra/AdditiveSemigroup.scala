@@ -25,7 +25,11 @@ trait AdditiveSemigroup[@sp(fdi) X] { self =>
 object AdditiveSemigroup extends ImplicitGetter[AdditiveSemigroup] {
 
   /** Creates an additive semigroup of the specific type using the `+` operation provided. */
-  def create[@sp(fdi) X](f: (X, X) => X) = new AdditiveSemigroup[X] {
+  def create[@sp(fdi) X](f: (X, X) => X): AdditiveSemigroup[X] = new AdditiveSemigroup[X] {
     def add(x: X, y: X): X = f(x, y)
   }
 }
+
+
+
+

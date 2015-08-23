@@ -25,7 +25,6 @@ object FloatStructure extends OrderedField[Float] with PowerOps[Float] with Trig
   def mul(x: Float, y: Float) = x * y
   def inv(x: Float) = 1.0f / x
   override def div(x: Float, y: Float) = x / y
-  override def mod(x: Float, y: Float) = 0.0f
 
   def root(x: Float, n: Int): Float = Math.pow(x, 1.0f / n).toFloat
   override def sqrt(x: Float): Float = Math.sqrt(x).toFloat

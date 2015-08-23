@@ -16,7 +16,7 @@ trait UpperSemilattice[@sp(fdib) X] extends PartialOrder[X] { self =>
     def inf(x: X, y: X) = sup(x, y)
   }
 
-  def asSemigroupWithSup: Semigroup[X] = new Semigroup[X] {
+  def asSemigroupWithSup: CSemigroup[X] = new CSemigroup[X] {
     def op(x: X, y: X) = sup(x, y)
   }
 }

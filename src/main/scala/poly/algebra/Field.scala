@@ -6,9 +6,7 @@ import poly.util.specgroup._
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait Field[@sp(fd) X] extends EuclideanDomain[X] with MultiplicativeGroup[X] {
-  def mod(x: X, y: X) = zero
-}
+trait Field[@sp(fd) X] extends CRing[X] with MultiplicativeCGroup[X]
 
 object Field extends ImplicitGetter[Field] {
   def create[@sp(fd) X](R: Ring[X], fInv: X => X) = new Field[X] {

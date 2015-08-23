@@ -14,12 +14,12 @@ import poly.util.specgroup._
  * (''R'', *) form a multiplicative monoid (associative, `1` as the multiplicative identity),
  * and `*` distributes over `+`.
  *
- * In order to create a ring, `add`, `mul`, `zero`, `one`, `neg` should be implemented. `sub`
+ * To create a ring, `add`, `mul`, `zero`, `one`, `neg` should be implemented. `sub`
  * should be overridden for performance.
  *
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait Ring[@sp(fdi) X] extends Semiring[X] with AdditiveGroup[X] {
+trait Ring[@sp(fdi) X] extends Semiring[X] with AdditiveCGroup[X] {
 
   /** Returns the -1 element in this ring. */
   def negOne = neg(one)
@@ -48,3 +48,7 @@ object Ring extends ImplicitGetter[Ring] {
     override def sub(x: X, y: X): X = G.sub(x, y)
   }
 }
+
+
+
+

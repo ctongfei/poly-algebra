@@ -18,7 +18,7 @@ trait LowerSemilattice[@sp(Boolean) X] extends PartialOrder[X] { self =>
     def sup(x: X, y: X) = inf(x, y)
   }
 
-  def asSemigroupWithInf: Semigroup[X] = new Semigroup[X] {
+  def asSemigroupWithInf: CSemigroup[X] = new CSemigroup[X] {
     def op(x: X, y: X) = inf(x, y)
   }
 }

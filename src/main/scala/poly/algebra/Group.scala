@@ -17,3 +17,6 @@ object Group extends ImplicitGetter[Group] {
     def id: X = idElem
   }
 }
+
+
+

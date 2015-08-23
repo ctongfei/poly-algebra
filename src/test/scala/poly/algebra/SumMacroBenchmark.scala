@@ -1,7 +1,7 @@
 package poly.algebra
 
-import poly.algebra.functions._
 import poly.algebra.implicits._
+import poly.algebra.function._
 import org.scalameter._
 import scala.language.postfixOps
 

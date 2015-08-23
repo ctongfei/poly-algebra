@@ -6,7 +6,7 @@ import poly.util.specgroup._
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait Semiring[@sp(fdi) X] extends AdditiveMonoid[X] with MultiplicativeMonoid[X]
+trait Semiring[@sp(fdi) X] extends AdditiveCMonoid[X] with MultiplicativeMonoid[X]
 
 object Semiring extends ImplicitGetter[Semiring] {
 
@@ -19,10 +19,14 @@ object Semiring extends ImplicitGetter[Semiring] {
     def one: X = oneElem
   }
 
-  def from[@sp(di) X](am: AdditiveMonoid[X], mm: MultiplicativeMonoid[X]): Semiring[X] = new Semiring[X] {
+  def from[@sp(di) X](am: AdditiveCMonoid[X], mm: MultiplicativeMonoid[X]): Semiring[X] = new Semiring[X] {
     def one: X = mm.one
     def add(x: X, y: X): X = am.add(x, y)
     def mul(x: X, y: X): X = mm.mul(x, y)
     def zero: X = am.zero
   }
 }
+
+
+
+

@@ -42,3 +42,6 @@ object Semigroup extends ImplicitGetter[Semigroup] {
   }
 }
 
+
+
+

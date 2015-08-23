@@ -37,7 +37,7 @@ object ops {
     def :*[R](y: R)(implicit ev: Module[X, R]): X = macro OpsInliningMacroImpl.binaryOp[X, R, Module[X, R]]
     def *:[R](y: R)(implicit ev: Module[X, R]): X = macro OpsInliningMacroImpl.binaryOp[X, R, Module[X, R]]
 
-    def <>?(y: X)(implicit ev: WeakOrder[X]): Int = macro OpsInliningMacroImpl.binaryOp[X, X, WeakOrder[X]]
+    def <?>(y: X)(implicit ev: WeakOrder[X]): Int = macro OpsInliningMacroImpl.binaryOp[X, X, WeakOrder[X]]
     def =~=(y: X)(implicit ev: Eq[X]): Boolean = macro OpsInliningMacroImpl.binaryOp[X, X, Eq[X]]
     def =!=(y: X)(implicit ev: Eq[X]): Boolean = macro OpsInliningMacroImpl.binaryOp[X, X, Eq[X]]
     def ≠(y: X)(implicit ev: Eq[X]): Boolean = macro OpsInliningMacroImpl.binaryOp[X, X, Eq[X]]

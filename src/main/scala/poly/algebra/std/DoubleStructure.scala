@@ -25,7 +25,6 @@ object DoubleStructure extends OrderedField[Double] with PowerOps[Double] with T
   final def mul(x: Double, y: Double) = x * y
   final def inv(x: Double) = 1.0 / x
   final override def div(x: Double, y: Double) = x / y
-  final override def mod(x: Double, y: Double) = 0.0
 
   final def root(x: Double, n: Int): Double = Math.pow(x, 1.0 / n)
   final override def sqrt(x: Double): Double = Math.sqrt(x)

@@ -21,9 +21,9 @@ trait EndofunctionSpaceOverRing[X, @sp(fdi) R] extends FunctionSpaceOverRing[X, 
 
 object EndofunctionSpaceOverRing extends BinaryImplicitGetter[EndofunctionSpaceOverRing] {
 
-  implicit def default[X, @sp(fdi) R](implicit M: Module[X, R], r: Ring[R]): EndofunctionSpaceOverRing[X, R] = new EndofunctionSpaceOverRing[X, R] {
-    def moduleOfCodomain = M
-    def ringOfScalar = r
+  implicit def default[X, @sp(fdi) R](implicit X: Module[X, R], R: Ring[R]): EndofunctionSpaceOverRing[X, R] = new EndofunctionSpaceOverRing[X, R] {
+    def moduleOfCodomain = X
+    def ringOfScalar = R
   }
 }
 

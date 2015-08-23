@@ -25,8 +25,11 @@ trait MultiplicativeSemigroup[@sp(fdi) X] {
 object MultiplicativeSemigroup extends ImplicitGetter[MultiplicativeSemigroup] {
 
   /** Creates an multiplicative semigroup of the specific type using the `*` operation provided. */
-  def create[@sp(fdi) X](f: (X, X) => X) = new MultiplicativeSemigroup[X] {
+  def create[@sp(fdi) X](f: (X, X) => X): MultiplicativeSemigroup[X] = new MultiplicativeSemigroup[X] {
     def mul(x: X, y: X): X = f(x, y)
   }
 }
+
+
+
 
