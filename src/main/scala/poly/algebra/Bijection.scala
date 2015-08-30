@@ -4,6 +4,7 @@ import poly.algebra.factory._
 import poly.algebra.hkt._
 
 /**
+ * Represents an one-to-one function.
  * @author Tongfei Chen (ctongfei@gmail.com).
  * @since 0.2.5
  */

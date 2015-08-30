@@ -4,9 +4,11 @@ import poly.algebra.factory._
 import poly.util.specgroup._
 
 /**
+ * Represents an algebra over a ring, i.e., a module equipped with a bilinear product.
  * @author Tongfei Chen (ctongfei@gmail.com).
+ * @since 0.1.0
  */
-trait AlgebraOverRing[V, @sp(fdi) R] extends Module[V, R] with Ring[V]
+trait AlgebraOverRing[V, @sp(fdi) R] extends Module[V, R] with CRing[V]
 
 object AlgebraOverRing extends BinaryImplicitGetter[AlgebraOverRing] {
 

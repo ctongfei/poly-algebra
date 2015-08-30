@@ -4,7 +4,9 @@ import poly.algebra.factory._
 import poly.util.specgroup._
 
 /**
+ * Represents an additive commutative semigroup.
  * @author Tongfei Chen (ctongfei@gmail.com).
+ * @since 0.2.6
  */
 object AdditiveCSemigroup extends ImplicitGetter[AdditiveCSemigroup] {
   def create[@sp(fdi) X](f: (X, X) => X): AdditiveCSemigroup[X] = new AdditiveCSemigroup[X] {

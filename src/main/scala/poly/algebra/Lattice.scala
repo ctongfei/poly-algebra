@@ -4,7 +4,9 @@ import poly.algebra.factory._
 import poly.util.specgroup._
 
 /**
+ * Represents a lattice.
  * @author Tongfei Chen (ctongfei@gmail.com).
+ * @since 0.1.0
  */
 
 trait Lattice[@sp(fdib) X] extends UpperSemilattice[X] with LowerSemilattice[X] { self =>

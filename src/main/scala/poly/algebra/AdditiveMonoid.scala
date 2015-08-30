@@ -4,9 +4,10 @@ import poly.algebra.factory._
 import poly.util.specgroup._
 
 /**
- * Typeclass for additive monoids.
+ * Represents an additive monoid.
  * An additive monoid is an additive semigroup (with operation `+`) with an additive identity element `0`.
  * @author Tongfei Chen (ctongfei@gmail.com).
+ * @since 0.1.0
  */
 trait AdditiveMonoid[@sp(fdi) X] extends AdditiveSemigroup[X] with HasZero[X] { self =>
 

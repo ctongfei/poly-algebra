@@ -4,7 +4,9 @@ import poly.algebra.factory._
 import poly.util.specgroup._
 
 /**
+ * Represents an additive commutative group.
  * @author Tongfei Chen (ctongfei@gmail.com).
+ * @since 0.2.6
  */
 trait AdditiveCGroup[@sp(fdi) X] extends AdditiveGroup[X] with AdditiveCMonoid[X] { self =>
   override def asGroupWithAdd: CGroup[X] = new CGroup[X] {

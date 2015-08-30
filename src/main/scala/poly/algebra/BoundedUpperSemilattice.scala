@@ -4,6 +4,7 @@ import poly.algebra.factory._
 import poly.util.specgroup._
 
 /**
+ * Represents an upper semilattice that has a specific top element.
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
 trait BoundedUpperSemilattice[@sp(Boolean) X] extends UpperSemilattice[X] with HasTop[X] { self =>

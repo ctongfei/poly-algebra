@@ -7,7 +7,7 @@ import poly.util.specgroup._
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
 trait Module[V, @sp(fdi) R] extends AdditiveGroup[V] { self =>
-  def ringOfScalar: Ring[R]
+  implicit def ringOfScalar: Ring[R]
   def scale(x: V, k: R): V
   def neg(x: V): V = scale(x, ringOfScalar.negOne)
 }

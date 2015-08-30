@@ -4,7 +4,9 @@ import poly.algebra.factory._
 import poly.util.specgroup._
 
 /**
+ * Represents a lower semilattice that has a specific bottom element.
  * @author Tongfei Chen (ctongfei@gmail.com).
+ * @since 0.2.0
  */
 trait BoundedLowerSemilattice[@sp(Boolean) X] extends LowerSemilattice[X] with HasBottom[X] { self =>
   def asMonoidWithInf: CMonoid[X] = new CMonoid[X] {

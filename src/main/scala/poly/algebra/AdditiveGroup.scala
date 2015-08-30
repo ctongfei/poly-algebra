@@ -4,9 +4,8 @@ import poly.algebra.factory._
 import poly.util.specgroup._
 
 /**
- * Typeclass for additive groups.
+ * Represents an additive group.
  * Additives groups are groups with the operation `+`.
- * @tparam X Type
  * @since 0.1.0
  */
 trait AdditiveGroup[@sp(fdi) X] extends AdditiveMonoid[X] { self =>

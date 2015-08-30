@@ -11,7 +11,7 @@ trait VectorSpace[V, @sp(fd) F] extends Module[V, F] { self =>
   type LinearForm = V => F
   type BilinearForm = (V, V) => F
 
-  def fieldOfScalar: Field[F]
+  implicit def fieldOfScalar: Field[F]
   def ringOfScalar: Ring[F] = fieldOfScalar
 
   /**

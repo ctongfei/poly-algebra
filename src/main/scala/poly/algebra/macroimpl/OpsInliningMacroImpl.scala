@@ -25,7 +25,7 @@ object OpsInliningMacroImpl {
       case TermName("$less") => TermName("lt")
       case TermName("$less$eq") => TermName("le")
       case TermName("$u2264") => TermName("le") // ≤
-      case TermName("$less$qmark$greater") => TermName("cmp")
+      case TermName("$greater$qmark$less") => TermName("cmp")
 
       case TermName("unary_$minus") => TermName("neg")
 

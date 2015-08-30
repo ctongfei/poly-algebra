@@ -4,10 +4,11 @@ import poly.algebra.factory._
 import poly.util.specgroup._
 
 /**
- * Typeclass for endofunction spaces over rings.
+ * Represents an endofunction space over rings.
  * An endofunction is a function whose domain equals its codomain.
  * @tparam X Type of domain and codomain
  * @author Tongfei Chen (ctongfei@gmail.com).
+ * @since 0.1.1
  */
 trait EndofunctionSpaceOverRing[X, @sp(fdi) R] extends FunctionSpaceOverRing[X, X, R] {
 

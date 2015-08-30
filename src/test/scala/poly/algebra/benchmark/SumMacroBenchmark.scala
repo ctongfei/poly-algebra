@@ -1,8 +1,9 @@
-package poly.algebra
+package poly.algebra.benchmark
 
-import poly.algebra.implicits._
-import poly.algebra.function._
 import org.scalameter._
+import poly.algebra.function._
+import poly.algebra.implicits._
+
 import scala.language.postfixOps
 
 /**

@@ -23,7 +23,7 @@ object ops {
     def +(y: X)(implicit ev: AdditiveSemigroup[X]): X = macro OpsInliningMacroImpl.binaryOp[X, X, AdditiveSemigroup[X]]
     def -(y: X)(implicit ev: AdditiveGroup[X]): X = macro OpsInliningMacroImpl.binaryOp[X, X, AdditiveGroup[X]]
     def *(y: X)(implicit ev: MultiplicativeSemigroup[X]): X = macro OpsInliningMacroImpl.binaryOp[X, X, MultiplicativeSemigroup[X]]
-    def /(y: X)(implicit ev: EuclideanDomain[X]): X = macro OpsInliningMacroImpl.binaryOp[X, X, EuclideanDomain[X]]
+    def /(y: X)(implicit ev: MultiplicativeGroup[X]): X = macro OpsInliningMacroImpl.binaryOp[X, X, MultiplicativeGroup[X]]
     def %(y: X)(implicit ev: EuclideanDomain[X]): X = macro OpsInliningMacroImpl.binaryOp[X, X, EuclideanDomain[X]]
 
     def **(n: Int)(implicit ev: MultiplicativeSemigroup[X]): X = macro OpsInliningMacroImpl.ipowOp[X, MultiplicativeSemigroup[X]]
@@ -37,7 +37,7 @@ object ops {
     def :*[R](y: R)(implicit ev: Module[X, R]): X = macro OpsInliningMacroImpl.binaryOp[X, R, Module[X, R]]
     def *:[R](y: R)(implicit ev: Module[X, R]): X = macro OpsInliningMacroImpl.binaryOp[X, R, Module[X, R]]
 
-    def <?>(y: X)(implicit ev: WeakOrder[X]): Int = macro OpsInliningMacroImpl.binaryOp[X, X, WeakOrder[X]]
+    def >?<(y: X)(implicit ev: WeakOrder[X]): Int = macro OpsInliningMacroImpl.binaryOp[X, X, WeakOrder[X]]
     def =~=(y: X)(implicit ev: Eq[X]): Boolean = macro OpsInliningMacroImpl.binaryOp[X, X, Eq[X]]
     def =!=(y: X)(implicit ev: Eq[X]): Boolean = macro OpsInliningMacroImpl.binaryOp[X, X, Eq[X]]
     def ≠(y: X)(implicit ev: Eq[X]): Boolean = macro OpsInliningMacroImpl.binaryOp[X, X, Eq[X]]

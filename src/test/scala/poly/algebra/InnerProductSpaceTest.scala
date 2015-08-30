@@ -2,6 +2,8 @@ package poly.algebra
 
 import org.scalatest._
 import poly.algebra.ops._
+import poly.algebra.function._
+import poly.algebra.implicits._
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
@@ -15,7 +17,6 @@ class InnerProductSpaceTest extends FunSuite {
       def dot(x: Point, y: Point): Double = x.x * y.x + x.y * y.y
       def powerOpsOfScalar: PowerOps[Double] = std.DoubleStructure
       def fieldOfScalar: Field[Double] = std.DoubleStructure
-      def trigExpOpsOfScalar = std.DoubleStructure
       def scale(x: Point, k: Double): Point = Point(x.x * k, x.y * k)
       def zero: Point = Point(0.0, 0.0)
       def add(x: Point, y: Point): Point = Point(x.x + y.x, x.y + y.y)

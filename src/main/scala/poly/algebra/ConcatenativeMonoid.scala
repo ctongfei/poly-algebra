@@ -3,6 +3,7 @@ package poly.algebra
 import poly.algebra.factory._
 
 /**
+ * Represents a concatenative monoid (i.e. monoids operating on sequences, etc. that bears the operation `++`)
  * @author Tongfei Chen (ctongfei@gmail.com).
  * @since 0.2.1
  */

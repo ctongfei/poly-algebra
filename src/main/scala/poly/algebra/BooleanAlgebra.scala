@@ -5,7 +5,9 @@ import poly.util.specgroup._
 import poly.util.typeclass._
 
 /**
+ * Represents an abstract Boolean algebra, which is a complemented distributive lattice.
  * @author Tongfei Chen (ctongfei@gmail.com).
+ * @since 0.1.0
  */
 trait BooleanAlgebra[@sp(Boolean) X] extends BoundedLattice[X] { self =>
 

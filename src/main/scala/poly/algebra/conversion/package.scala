@@ -6,7 +6,7 @@ import scala.language.implicitConversions
  * This package contains implicit converters that converts Scala math typeclasses to Poly-algebra typeclasses.
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-object conversion {
+package object conversion {
 
   implicit def scalaEquivAsPoly[X](s: scala.Equiv[X]): Eq[X] = new Eq[X] {
     def eq(x: X, y: X): Boolean = s.equiv(x, y)

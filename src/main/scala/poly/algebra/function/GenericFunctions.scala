@@ -39,7 +39,7 @@ trait GenericFunctions {
   def norm[V, @sp(fdi) F](x: V)(implicit ev: NormedVectorSpace[V, F]) = ev.norm(x)
 
   /** Returns the angle between two vectors in an inner product space. */
-  def angle[V, @sp(fd) F](x: V, y: V)(implicit ev: InnerProductSpace[V, F]) = ev.angle(x, y)
+  def angle[V, @sp(fd) F](x: V, y: V)(implicit ev1: InnerProductSpace[V, F], ev2: TrigExpOps[F]) = ev1.angle(x, y)
 
   /** Returns the greatest common divisor of two elements. */
   def gcd[@sp(i) X](x: X, y: X)(implicit ev: EuclideanDomain[X]) = ev.gcd(x, y)

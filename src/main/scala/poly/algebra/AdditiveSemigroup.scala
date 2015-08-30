@@ -4,9 +4,9 @@ import poly.algebra.factory._
 import poly.util.specgroup._
 
 /**
- * Typeclass for additive semigroups.
+ * Represents an additive semigroup.
  * An additive semigroup is a semigroup with the binary operation `add` (`+`).
- * @tparam X Type of element
+ * @since 0.1.0
  */
 trait AdditiveSemigroup[@sp(fdi) X] { self =>
 
