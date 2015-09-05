@@ -1,10 +1,10 @@
 package poly.algebra
 
-import poly.algebra.factory._
+import poly.util.typeclass._
 import poly.util.specgroup._
 
 /**
- * Represents a bounded lattice, i.e., containing both the top and the bottom elements.
+ * Represents a bounded lattice, i.e., a lattice containing both the top and the bottom elements.
  * @author Tongfei Chen (ctongfei@gmail.com).
  * @since 0.2.0
  */

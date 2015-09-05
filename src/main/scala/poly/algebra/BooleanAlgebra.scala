@@ -1,8 +1,7 @@
 package poly.algebra
 
-import poly.algebra.factory._
-import poly.util.specgroup._
 import poly.util.typeclass._
+import poly.util.specgroup._
 
 /**
  * Represents an abstract Boolean algebra, which is a complemented distributive lattice.
@@ -11,12 +10,18 @@ import poly.util.typeclass._
  */
 trait BooleanAlgebra[@sp(Boolean) X] extends BoundedLattice[X] { self =>
 
+  /** Returns the conjunction of the two arguments. */
   def and(x: X, y: X): X
+  /** Returns the disjunction of the two arguments. */
   def or(x: X, y: X): X
+  /** Returns the complement of the argument. */
   def not(x: X): X
 
+  /** Returns the exclusive disjunction of the two arguments. */
   def xor(x: X, y: X): X = or(and(x, not(y)), and(not(x), y))
+  /** Returns the complement of the conjunction of the two elements. */
   def nand(x: X, y: X): X = not(and(x, y))
+  /** Returns the complement of the disjunction of the two elements. */
   def nor(x: X, y: X): X = not(or(x, y))
 
   def sup(x: X, y: X): X = or(x, y)

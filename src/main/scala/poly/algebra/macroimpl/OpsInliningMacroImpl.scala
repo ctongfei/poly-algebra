@@ -83,20 +83,5 @@ object OpsInliningMacroImpl {
     }
   }
 
-  def refEqOp[T](c: Context)(y: c.Expr[T]) = {
-    import c.universe._
-    c.macroApplication match {
-      case q"$implicitConv($lhs).$method($rhs)" => q"$lhs eq $rhs"
-    }
-  }
-
-  def refNeOp[T](c: Context)(y: c.Expr[T]) = {
-    import c.universe._
-    c.macroApplication match {
-      case q"$implicitConv($lhs).$method($rhs)" => q"$lhs ne $rhs"
-    }
-  }
-
-
 }
 

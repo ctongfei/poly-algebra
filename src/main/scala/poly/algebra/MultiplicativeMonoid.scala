@@ -1,6 +1,6 @@
 package poly.algebra
 
-import poly.algebra.factory._
+import poly.util.typeclass._
 import poly.util.specgroup._
 
 trait MultiplicativeMonoid[@sp(fdi) X] extends MultiplicativeSemigroup[X] with HasOne[X] { self =>

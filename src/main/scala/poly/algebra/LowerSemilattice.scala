@@ -1,13 +1,13 @@
 package poly.algebra
 
-import poly.algebra.factory._
+import poly.util.typeclass._
 import poly.util.specgroup._
 
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
 trait LowerSemilattice[@sp(Boolean) X] extends PartialOrder[X] { self =>
-
+  /** Returns the infimum (meet, a.k.a. greatest lower bound) of the two arguments. */
   def inf(x: X, y: X): X
 
   def le(x: X, y: X) = eq(x, inf(x, y))

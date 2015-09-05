@@ -5,7 +5,7 @@ import poly.algebra._
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-object FloatStructure extends OrderedField[Float] with PowerOps[Float] with TrigExpOps[Float] with BoundedLattice[Float] {
+object FloatStructure extends OrderedField[Float] with PowerOps[Float] with TrigExpOps[Float] with BoundedLattice[Float] with CompleteMetricSpace[Float, Float] {
 
   final val bot: Float = Float.NegativeInfinity
   final val top: Float = Float.PositiveInfinity

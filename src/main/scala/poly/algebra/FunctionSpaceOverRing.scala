@@ -1,6 +1,6 @@
 package poly.algebra
 
-import poly.algebra.factory._
+import poly.util.typeclass._
 import poly.util.specgroup._
 
 /**
@@ -14,7 +14,7 @@ import poly.util.specgroup._
 trait FunctionSpaceOverRing[X, Y, @sp(fdi) R] extends Module[X => Y, R] {
 
   def moduleOfCodomain: Module[Y, R]
-  def scale(f: (X) => Y, a: R) = (x: X) => moduleOfCodomain.scale(f(x), a)
+  def scale(f: X => Y, a: R) = (x: X) => moduleOfCodomain.scale(f(x), a)
   override def neg(f: X => Y) = (x: X) => moduleOfCodomain.neg(f(x))
   def zero = (x: X) => moduleOfCodomain.zero
   def add(f: X => Y, g: X => Y) = (x: X) => moduleOfCodomain.add(f(x), g(x))

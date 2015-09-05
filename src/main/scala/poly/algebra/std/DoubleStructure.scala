@@ -5,7 +5,13 @@ import poly.algebra._
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-object DoubleStructure extends OrderedField[Double] with PowerOps[Double] with TrigExpOps[Double] with BoundedLattice[Double] {
+object DoubleStructure extends
+  OrderedField[Double] with
+  PowerOps[Double] with
+  TrigExpOps[Double] with
+  BoundedLattice[Double] with
+  CompleteMetricSpace[Double, Double]
+{
 
   final val bot: Double = Double.NegativeInfinity
   final val top: Double = Double.PositiveInfinity
@@ -50,4 +56,7 @@ object DoubleStructure extends OrderedField[Double] with PowerOps[Double] with T
 
   override final def abs(x: Double) = Math.abs(x)
   override final def sgn(x: Double) = Math.signum(x)
+  override final def dist(x: Double, y: Double) = Math.abs(x - y)
+
+
 }

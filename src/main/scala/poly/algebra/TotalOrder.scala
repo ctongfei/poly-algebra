@@ -1,6 +1,6 @@
 package poly.algebra
 
-import poly.algebra.factory._
+import poly.util.typeclass._
 import poly.algebra.hkt._
 import poly.util.specgroup._
 import scala.annotation.unchecked.{uncheckedVariance => uv}

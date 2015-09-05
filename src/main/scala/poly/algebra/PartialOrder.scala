@@ -1,6 +1,6 @@
 package poly.algebra
 
-import poly.algebra.factory._
+import poly.util.typeclass._
 import poly.algebra.hkt._
 import poly.util.specgroup._
 
@@ -29,7 +29,7 @@ trait PartialOrder[@sp(fdib) -X] extends Eq[X] { self =>
   /** Returns whether ''x'' strictly succeeds ''y'' under this order. */
   def gt(x: X, y: X): Boolean = le(y, x) & !le(x, y)
 
-  /** Returns the reverse order of this partial order. */
+  /** Returns the reverse order of this ordering relation. */
   def reverse: PartialOrder[X] = new PartialOrder[X] {
     override def reverse = self
     def le(x: X, y: X) = self.le(y, x)

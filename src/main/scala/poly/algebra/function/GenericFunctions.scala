@@ -24,13 +24,13 @@ trait GenericFunctions {
   def bot[@sp(fdib) X](implicit ev: HasBottom[X]) = ev.bot
 
   /** Returns the multiplicative inverse of an element. */
-  def inv[@sp(di) X](x: X)(implicit ev: MultiplicativeGroup[X]) = ev.inv(x)
+  def inv[@sp(fdi) X](x: X)(implicit ev: MultiplicativeGroup[X]) = ev.inv(x)
 
   /** Returns the square of an element. */
-  def sqr[@sp(di) X](x: X)(implicit ev: MultiplicativeSemigroup[X]) = ev.mul(x, x)
+  def sqr[@sp(fdi) X](x: X)(implicit ev: MultiplicativeSemigroup[X]) = ev.mul(x, x)
 
   /** Returns the cube of an element. */
-  def cube[@sp(di) X](x: X)(implicit ev: MultiplicativeSemigroup[X]) = ev.mul(ev.mul(x, x), x)
+  def cube[@sp(fdi) X](x: X)(implicit ev: MultiplicativeSemigroup[X]) = ev.mul(ev.mul(x, x), x)
 
   /** Returns the distance between two vectors in a metric space. */
   def dist[V, @sp(fdi) F](x: V, y: V)(implicit ev: MetricSpace[V, F]) = ev.dist(x, y)
@@ -48,34 +48,34 @@ trait GenericFunctions {
   def lcm[@sp(i) X](x: X, y: X)(implicit ev: EuclideanDomain[X]) = ev.lcm(x, y)
 
   /** Returns the supremum (join) of two elements in a lattice. */
-  def sup[@sp(di) X](x: X, y: X)(implicit ev: UpperSemilattice[X]) = ev.sup(x, y)
+  def sup[@sp(fdib) X](x: X, y: X)(implicit ev: UpperSemilattice[X]) = ev.sup(x, y)
 
   /** Returns the infimum (meet) of two elements in a lattice. */
-  def inf[@sp(di) X](x: X, y: X)(implicit ev: LowerSemilattice[X]) = ev.inf(x, y)
+  def inf[@sp(fdib) X](x: X, y: X)(implicit ev: LowerSemilattice[X]) = ev.inf(x, y)
 
   /** Returns the greater one of the two elements. */
-  def max[@sp(di) X](x: X, y: X)(implicit ev: WeakOrder[X]) = ev.max(x, y)
+  def max[@sp(fdib) X](x: X, y: X)(implicit ev: WeakOrder[X]) = ev.max(x, y)
 
   /** Returns the lesser one of the two elements. */
-  def min[@sp(di) X](x: X, y: X)(implicit ev: WeakOrder[X]) = ev.min(x, y)
+  def min[@sp(fdib) X](x: X, y: X)(implicit ev: WeakOrder[X]) = ev.min(x, y)
 
   /** Returns the greatest common divisor of the specified elements. */
-  def gcd[@sp(di) X](xs: X*)(implicit ev: EuclideanDomain[X]) = xs.reduce(ev.gcd)
+  def gcd[@sp(i) X](xs: X*)(implicit ev: EuclideanDomain[X]) = xs.reduce(ev.gcd)
 
   /** Returns the least common multiplier of the specified elements. */
-  def lcm[@sp(di) X](xs: X*)(implicit ev: EuclideanDomain[X]) = xs.reduce(ev.lcm)
+  def lcm[@sp(i) X](xs: X*)(implicit ev: EuclideanDomain[X]) = xs.reduce(ev.lcm)
 
   /** Returns the supremum (join) of the specified elements. */
-  def sup[@sp(di) X](xs: X*)(implicit ev: UpperSemilattice[X]) = xs.reduce(ev.sup)
+  def sup[@sp(fdi) X](xs: X*)(implicit ev: UpperSemilattice[X]) = xs.reduce(ev.sup)
 
   /** Returns the infimum (meet) of the specified elements. */
-  def inf[@sp(di) X](xs: X*)(implicit ev: LowerSemilattice[X]) = xs.reduce(ev.inf)
+  def inf[@sp(fdi) X](xs: X*)(implicit ev: LowerSemilattice[X]) = xs.reduce(ev.inf)
 
   /** Returns the maximum one of the specified elements. */
-  def max[@sp(di) X](xs: X*)(implicit ev: WeakOrder[X]) = xs.reduce(ev.max[X])
+  def max[@sp(fdi) X](xs: X*)(implicit ev: WeakOrder[X]) = xs.reduce(ev.max[X])
 
   /** Returns the minimum one of the specified elements. */
-  def min[@sp(di) X](xs: X*)(implicit ev: WeakOrder[X]) = xs.reduce(ev.min[X])
+  def min[@sp(fdi) X](xs: X*)(implicit ev: WeakOrder[X]) = xs.reduce(ev.min[X])
 
   def abs[@sp(fdi) X](x: X)(implicit ev: SignOps[X]) = ev.abs(x)
 

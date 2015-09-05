@@ -1,15 +1,19 @@
 package poly.algebra
 
-import poly.algebra.factory._
+import poly.util.typeclass._
 import poly.util.specgroup._
 
 /**
+ * Typeclass for vector spaces.
+ *
+ * A vector space over a field ([[poly.algebra.Field]]) is a set of vectors
+ * together with a linear distributive scaling function.
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
 trait VectorSpace[V, @sp(fd) F] extends Module[V, F] { self =>
 
-  type LinearForm = V => F
-  type BilinearForm = (V, V) => F
+  type LinearForm <: V => F
+  type BilinearForm <: (V, V) => F
 
   implicit def fieldOfScalar: Field[F]
   def ringOfScalar: Ring[F] = fieldOfScalar
@@ -18,7 +22,7 @@ trait VectorSpace[V, @sp(fd) F] extends Module[V, F] { self =>
    * Returns the dual space of this vector space.
    * @since 0.2.2
    */
-  def dualSpace: VectorSpace[V => F, F] = new FunctionSpaceOverField[V, F, F] {
+  override def dualSpace: VectorSpace[V => F, F] = new FunctionSpaceOverField[V, F, F] {
     def fieldOfScalar: Field[F] = self.fieldOfScalar
     def vectorSpaceOfCodomain = VectorSpace.trivial(self.fieldOfScalar)
   }

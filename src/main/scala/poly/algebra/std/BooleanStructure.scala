@@ -7,6 +7,8 @@ import poly.algebra._
  */
 object BooleanStructure extends BooleanAlgebra[Boolean] with TotalOrder[Boolean] {
 
+  def elements = List(false, true)
+
   override final def cmp(x: Boolean, y: Boolean) = {
     if (x == y) 0
     else if (x) 1

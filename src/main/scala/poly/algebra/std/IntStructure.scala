@@ -5,7 +5,7 @@ import poly.algebra._
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-object IntStructure extends OrderedEuclideanDomain[Int] with BoundedLattice[Int] {
+object IntStructure extends OrderedEuclideanDomain[Int] with BoundedLattice[Int] with MetricSpace[Int, Int] {
 
   final val bot: Int = Int.MinValue
   final val top: Int = Int.MaxValue
@@ -29,5 +29,6 @@ object IntStructure extends OrderedEuclideanDomain[Int] with BoundedLattice[Int]
 
   override def abs(x: Int) = Math.abs(x)
   override def sgn(x: Int) = if (x == 0) 0 else if (x > 0) 1 else -1
+  override def dist(x: Int, y: Int) = Math.abs(x - y)
 
 }

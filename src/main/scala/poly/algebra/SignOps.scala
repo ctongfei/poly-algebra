@@ -1,6 +1,6 @@
 package poly.algebra
 
-import poly.algebra.factory._
+import poly.util.typeclass._
 import poly.util.specgroup._
 
 /**
@@ -10,6 +10,7 @@ trait SignOps[@sp(fdi) X] {
 
   def abs(x: X): X
   def sgn(x: X): X
+
 
 }
 

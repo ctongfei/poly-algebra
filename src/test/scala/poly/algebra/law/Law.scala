@@ -10,7 +10,7 @@ import poly.algebra.ops._
 /**
  * Law checking for Poly-algebra structures using ScalaCheck.
  * @author Tongfei Chen (ctongfei@gmail.com).
- * @since 0.2.5
+ * @since 0.3.0
  */
 object Law {
 

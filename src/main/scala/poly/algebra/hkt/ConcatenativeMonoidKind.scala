@@ -6,7 +6,7 @@ import scala.language.higherKinds
  * @author Tongfei Chen (ctongfei@gmail.com).
  * @since 0.2.1
  */
-trait UniversalConcatenativeMonoid[M[_]] extends UniversalConcatenativeSemigroup[M] { self =>
+trait ConcatenativeMonoidKind[M[_]] extends ConcatenativeSemigroupKind[M] { self =>
 
   def empty[x]: M[x]
 

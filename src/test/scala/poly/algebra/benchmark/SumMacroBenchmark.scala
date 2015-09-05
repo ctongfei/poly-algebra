@@ -13,23 +13,30 @@ object SumMacroBenchmark extends App {
 
   for (n ← Seq(100000, 200000, 400000, 800000, 1600000, 3200000)) {
 
-    val conf = config(Key.exec.benchRuns → 25)
+    val conf = config(Key.exec.benchRuns → 30)
     .withWarmer(new Warmer.Default).withMeasurer(new Measurer.IgnoringGC)
 
+    var sum = 0.0
     val t1 = conf measure {
-      var sum = 0.0
+      sum = 0.0
       var i = 0
       while (i < n) {
         sum += i * 0.1
         i += 1
       }
       sum
+      print(s"$sum\r")
     }
     println(s"While loop: $t1")
+    println(sum)
 
-
-    val t2 = conf measure {Sum(n)(i => i * 0.1)}
+    var sum2 = 0.0
+    val t2 = conf measure {
+      sum2 = Sum(n)(i => i * 0.1)
+      print(s"$sum\r")
+    }
     println(s"BigOps sum macro: $t2")
+    println(sum2)
 
     val t3 = conf measure {
       var sum = 0.0

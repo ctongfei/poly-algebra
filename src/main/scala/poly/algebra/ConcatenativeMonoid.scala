@@ -1,6 +1,6 @@
 package poly.algebra
 
-import poly.algebra.factory._
+import poly.util.typeclass._
 
 /**
  * Represents a concatenative monoid (i.e. monoids operating on sequences, etc. that bears the operation `++`)
