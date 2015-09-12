@@ -5,6 +5,8 @@ import poly.algebra.hkt._
 
 /**
  * Represents a one-to-one function.
+ *
+ * An instance of this typeclass should satisfy the following axiom:
  * @author Tongfei Chen (ctongfei@gmail.com).
  * @since 0.2.5
  */

@@ -6,6 +6,10 @@ import poly.util.specgroup._
 /**
  * Represents an additive monoid.
  * An additive monoid is an additive semigroup (with operation `+`) with an additive identity element `0`.
+ *
+ * An instance of this typeclass should satisfy the following axioms:
+ *  - $lawAdditiveAssociativity
+ *  - $lawAdditiveIdentity
  * @author Tongfei Chen (ctongfei@gmail.com).
  * @since 0.1.0
  */

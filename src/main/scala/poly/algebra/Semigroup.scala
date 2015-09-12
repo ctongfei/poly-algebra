@@ -3,8 +3,13 @@ package poly.algebra
 import poly.util.typeclass._
 
 /**
+ *
  * Typeclass for semigroups.
  * A semigroup is a set equipped with an associative binary operation.
+ *
+ * An instance of this typeclass should satisfy the following axiom:
+ *  - $lawAssociativity
+ * @define lawAssociativity '''Associativity''': ∀''a'', ''b'', ''c''∈X, (''a'' op ''b'') op ''c'' == ''a'' op (''b'' op ''c'').
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
 trait Semigroup[X] {

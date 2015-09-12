@@ -4,26 +4,37 @@ import poly.util.typeclass._
 import poly.util.specgroup._
 
 /**
- * Typeclass for vector spaces.
+ * Represents a vector space over a field.
  *
  * A vector space over a field ([[poly.algebra.Field]]) is a set of vectors
  * together with a linear distributive scaling function.
+ *
+ * An instance of this typeclass should satisfy the following axioms:
+ *  - S is a field.
+ *  - $lawAdditiveAssociativity
+ *  - $lawAdditiveIdentity
+ *  - $lawAdditiveInvertibility
+ *  - $lawAdditiveCommutativity
+ *  - $lawCompatibility
+ *  - $lawScalingIdentity
+ *  - $lawDistributivitySV
+ *  - $lawDistributivitySS
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait VectorSpace[V, @sp(fd) F] extends Module[V, F] { self =>
+trait VectorSpace[X, @sp(fd) S] extends Module[X, S] { self =>
 
-  type LinearForm <: V => F
-  type BilinearForm <: (V, V) => F
+  type LinearForm <: X => S
+  type BilinearForm <: (X, X) => S
 
-  implicit def fieldOfScalar: Field[F]
-  def ringOfScalar: Ring[F] = fieldOfScalar
+  implicit def fieldOfScalar: Field[S]
+  def ringOfScalar: Ring[S] = fieldOfScalar
 
   /**
    * Returns the dual space of this vector space.
    * @since 0.2.2
    */
-  override def dualSpace: VectorSpace[V => F, F] = new FunctionSpaceOverField[V, F, F] {
-    def fieldOfScalar: Field[F] = self.fieldOfScalar
+  override def dualSpace: VectorSpace[X => S, S] = new FunctionSpaceOverField[X, S, S] {
+    def fieldOfScalar: Field[S] = self.fieldOfScalar
     def vectorSpaceOfCodomain = VectorSpace.trivial(self.fieldOfScalar)
   }
 

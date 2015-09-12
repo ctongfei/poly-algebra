@@ -5,6 +5,10 @@ import poly.util.specgroup._
 
 /**
  * Represents the existence of an `1` element.
+
+ * An instance of this typeclass should satisfy the following axiom:
+ *  - $lawMultiplicativeIdentity
+ * @define lawMultiplicativeIdentity '''Multiplicative identity''': ∀''a''∈X, ''a'' * 1 == 1 * ''a'' == ''a''.
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
 trait HasOne[@sp(fdi) +X] {

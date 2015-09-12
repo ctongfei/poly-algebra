@@ -4,6 +4,10 @@ import poly.util.typeclass._
 
 /**
  * Represents the existence of an identity element.
+ *
+ * An instance of this typeclass should satisfy the following axiom:
+ *  - $lawIdentity
+ * @define lawIdentity '''Identity''': ∀''a''∈X, ''a'' op id == id op ''a'' == ''a''.
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
 trait HasIdentity[+X] {

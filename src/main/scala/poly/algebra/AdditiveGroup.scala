@@ -5,7 +5,14 @@ import poly.util.specgroup._
 
 /**
  * Represents an additive group.
- * Additives groups are groups with the operation `+`.
+ * An additive group is an additive monoid (with operation `+` and identity element `0`)
+ * that is also invertible.
+ *
+ * An instance of this typeclass should satisfy the following axioms:
+ *  - $lawAdditiveAssociativity
+ *  - $lawAdditiveIdentity
+ *  - $lawAdditiveInvertibility
+ * @define lawAdditiveInvertibility '''Additive invertibility''': ∀''a''∈X, ∃(-''a'')∈X, ''a'' + (-''a'') == (-''a'') + ''a'' == 0.
  * @since 0.1.0
  */
 trait AdditiveGroup[@sp(fdi) X] extends AdditiveMonoid[X] { self =>

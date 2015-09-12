@@ -4,6 +4,14 @@ import poly.util.typeclass._
 
 
 /**
+ * Represents a group. A group is a monoid where for each element there exists an inverse element.
+ *
+ * An instance of this typeclass should satisfy the following axioms:
+ *  - $lawAssociativity
+ *  - $lawIdentity
+ *  - $lawInvertibility
+ * @define lawInvertibility '''Invertibility''': ∀''a''∈X, ∃''b''∈X, ''a'' op ''b'' == ''b'' op ''a'' == id.
+ *
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
 trait Group[X] extends Monoid[X] {

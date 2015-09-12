@@ -5,6 +5,11 @@ import poly.util.specgroup._
 
 /**
  * Represents an additive commutative monoid.
+ *
+ * An instance of this typeclass should satisfy the following axioms:
+ *  - $lawAdditiveAssociativity
+ *  - $lawAdditiveIdentity
+ *  - $lawAdditiveCommutativity
  * @author Tongfei Chen (ctongfei@gmail.com).
  * @since 0.2.6
  */

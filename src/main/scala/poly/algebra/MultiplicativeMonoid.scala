@@ -3,6 +3,15 @@ package poly.algebra
 import poly.util.typeclass._
 import poly.util.specgroup._
 
+/**
+ * Represents a multiplicative monoid.
+ * A multiplicative monoid is a multiplicative semigroup with a multiplicative identity `1`.
+ *
+ * An instance of this typeclass should satisfy the following axioms:
+ *  - $lawMultiplicativeAssociativity
+ *  - $lawMultiplicativeIdentity
+ * @tparam X Type of element
+ */
 trait MultiplicativeMonoid[@sp(fdi) X] extends MultiplicativeSemigroup[X] with HasOne[X] { self =>
 
   override def ipow(x: X, n: Int): X = asMonoidWithMul.combineN(x, n)

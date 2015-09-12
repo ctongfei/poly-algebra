@@ -4,8 +4,13 @@ import poly.util.typeclass._
 import poly.util.specgroup._
 
 /**
- * Typeclass for multiplicative semigroups.
+ * Represents a multiplicative semigroup.
  * An multiplicative semigroup is a semigroup with the binary operation `mul` (`*`).
+ *
+ * An instance of this typeclass should satisfy the following axiom:
+ *  - $lawMultiplicativeAssociativity
+ *
+ * @define lawMultiplicativeAssociativity '''Multiplicative associativity''':  ∀''a'', ''b'', ''c''∈X, (''a'' * ''b'') * ''c'' == ''a'' * (''b'' * ''c'').
  * @tparam X Type of element
  */
 trait MultiplicativeSemigroup[@sp(fdi) X] {

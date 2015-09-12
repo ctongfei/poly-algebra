@@ -5,6 +5,10 @@ import poly.util.typeclass._
 /**
  * Typeclass for monoids.
  * A monoid is a semigroup with an identity element.
+ *
+ * An instance of this typeclass should satisfy the following axioms:
+ *  - $lawAssociativity
+ *  - $lawIdentity
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
 trait Monoid[X] extends Semigroup[X] with HasIdentity[X] {

@@ -4,29 +4,45 @@ import poly.util.typeclass._
 import poly.util.specgroup._
 
 /**
- * Typeclass for modules.
+ * Represents a module over a ring.
  *
  * A module over a ring is an additive Abelian group ([[poly.algebra.AdditiveCGroup]])
  * on vectors that supports a linear distributive scaling function. It is a generalization
  * of a vector space because the scalars need only be a ring ([[poly.algebra.Ring]]).
+ *
+ * An instance of this typeclass should satisfy the following axioms:
+ *  - S is a ring.
+ *  - $lawAdditiveAssociativity
+ *  - $lawAdditiveIdentity
+ *  - $lawAdditiveInvertibility
+ *  - $lawAdditiveCommutativity
+ *  - $lawCompatibility
+ *  - $lawScalingIdentity
+ *  - $lawDistributivitySV
+ *  - $lawDistributivitySS
+ *
+ * @define lawCompatibility '''Compatibility''': ∀''k'', ''l''∈S, ∀''a''∈X, ''k'' *: (''l'' *: ''a'') == (''k'' * ''l'') *: ''a''.
+ * @define lawScalingIdentity '''Scaling identity''': ∀''a''∈X, 1 *: ''a'' == ''a''.
+ * @define lawDistributivitySV '''Distributivity of scaling w.r.t. vector addition''': ∀''k''∈S, ∀''a'', ''b''∈X, ''k'' *: (''a'' + ''b'') == ''k'' *: ''a'' + ''k'' *: ''b''.
+ * @define lawDistributivitySS '''Distributivity of scaling w.r.t. scalar addition''': ∀''k'', ''l''∈S, ∀''a''∈X, (''k'' + ''l'') *: ''a'' = ''k'' *: ''a'' + ''l'' *: ''a''.
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait Module[V, @sp(fdi) R] extends AdditiveCGroup[V] { self =>
+trait Module[X, @sp(fdi) S] extends AdditiveCGroup[X] { self =>
 
-  type LinearForm <: V => R
-  type BilinearForm <: (V, V) => R
+  type LinearForm <: X => S
+  type BilinearForm <: (X, X) => S
 
-  implicit def ringOfScalar: Ring[R]
+  implicit def ringOfScalar: Ring[S]
 
   /** Scales a vector by a scalar. */
-  def scale(x: V, k: R): V
-  def neg(x: V): V = scale(x, ringOfScalar.negOne)
+  def scale(x: X, k: S): X
+  def neg(x: X): X = scale(x, ringOfScalar.negOne)
 
   /**
    * Returns the dual space of this module.
    * @since 0.2.7
    */
-  def dualSpace: Module[V => R, R] = new FunctionSpaceOverRing[V, R, R] {
+  def dualSpace: Module[X => S, S] = new FunctionSpaceOverRing[X, S, S] {
     def moduleOfCodomain = Module.trivial(self.ringOfScalar)
     implicit def ringOfScalar = self.ringOfScalar
   }
@@ -34,11 +50,11 @@ trait Module[V, @sp(fdi) R] extends AdditiveCGroup[V] { self =>
 
 object Module extends BinaryImplicitGetter[Module] {
 
-  def create[V, @sp(fdi) R](fAdd: (V, V) => V, fScale: (R, V) => V, fZero: V)(implicit R: Ring[R]): Module[V, R] = new Module[V, R] {
+  def create[X, @sp(fdi) R](fAdd: (X, X) => X, fScale: (R, X) => X, fZero: X)(implicit R: Ring[R]): Module[X, R] = new Module[X, R] {
     def ringOfScalar = R
     def zero = fZero
-    def add(x: V, y: V) = fAdd(x, y)
-    def scale(x: V, k: R) = fScale(k, x)
+    def add(x: X, y: X) = fAdd(x, y)
+    def scale(x: X, k: R) = fScale(k, x)
   }
 
   /**

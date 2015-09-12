@@ -5,6 +5,10 @@ import poly.util.specgroup._
 
 /**
  * Represents the existence of an `0` element.
+ *
+ * An instance of this typeclass should satisfy the following axiom:
+ *  - $lawAdditiveIdentity
+ * @define lawAdditiveIdentity '''Additive identity''': ∀''a''∈X, ''a'' + 0 == 0 + ''a'' == ''a''.
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
 trait HasZero[@sp(fdi) +X] {

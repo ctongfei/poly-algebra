@@ -4,7 +4,13 @@ import poly.util.typeclass._
 import poly.util.specgroup._
 
 /**
- * Represents an additive commutative group.
+ * Represents an additive Abelian (commutative) group.
+ *
+ * An instance of this typeclass should satisfy the following axioms:
+ *  - $lawAdditiveAssociativity
+ *  - $lawAdditiveIdentity
+ *  - $lawAdditiveInvertibility
+ *  - $lawAdditiveCommutativity
  * @author Tongfei Chen (ctongfei@gmail.com).
  * @since 0.2.6
  */

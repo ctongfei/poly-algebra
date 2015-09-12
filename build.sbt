@@ -10,7 +10,7 @@ isSnapshot := true
 
 resolvers += Resolver.sonatypeRepo("snapshots")
 
-libraryDependencies += "org.scala-lang"    % " scala-reflect"   % scalaVersion.value
+libraryDependencies += "org.scala-lang"    %  "scala-reflect"   % scalaVersion.value
 
 libraryDependencies += "me.tongfei"        %% "poly-util"       % "0.2.3-SNAPSHOT"
 

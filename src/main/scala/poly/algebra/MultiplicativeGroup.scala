@@ -4,6 +4,16 @@ import poly.util.typeclass._
 import poly.util.specgroup._
 
 /**
+ * Represents an multiplicative group.
+ * A multiplicative group is a multiplicative monoid (with operation `*` and identity `1`)
+ * that is also invertible.
+ *
+ * An instance of this typeclass should satisfy the following axioms:
+ *  - $lawMultiplicativeAssociativity
+ *  - $lawMultiplicativeIdentity
+ *  - $lawMultiplicativeInvertibility
+ *
+ * @define lawMultiplicativeInvertibility '''Multiplicative invertibility''': ∀''a''∈X, ∃''a''^-1^∈X, ''a'' * ''a''^-1^ == ''a''^-1^ * ''a'' == 1.
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
 trait MultiplicativeGroup[@sp(fd) X] extends MultiplicativeMonoid[X] { self =>

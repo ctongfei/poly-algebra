@@ -6,6 +6,11 @@ import poly.util.specgroup._
 /**
  * Represents an additive semigroup.
  * An additive semigroup is a semigroup with the binary operation `add` (`+`).
+ *
+ * An instance of this typeclass should satisfy the following axiom:
+ *  - $lawAdditiveAssociativity
+ *
+ * @define lawAdditiveAssociativity '''Additive associativity''': ∀''a'', ''b'', ''c''∈X, (''a'' + ''b'') + ''c'' == ''a'' + (''b'' + ''c'').
  * @since 0.1.0
  */
 trait AdditiveSemigroup[@sp(fdi) X] { self =>

@@ -5,6 +5,15 @@ import poly.util.specgroup._
 
 /**
  * Typeclass for type-strict equivalence relations.
+ *
+ * An instance of this typeclass should satisfy the following axioms:
+ *  - $lawEqReflexivity
+ *  - $lawEqSymmetry
+ *  - $lawEqTransitivity
+ *
+ * @define lawEqReflexivity '''Reflexivity''': ∀''a''∈X, ''a'' =~= ''a''.
+ * @define lawEqSymmetry '''Symmetry''': ∀''a'', ''b''∈X, ''a'' =~= ''b'' implies ''b'' =~= ''a''.
+ * @define lawEqTransitivity '''Transitivity''': ∀''a'', ''b'', ''c''∈X, ''a'' =~= ''b'' and ''b'' =~= ''c'' implies ''a'' =~= ''c''.
  * @author Tongfei Chen (ctongfei@gmail.com).
  * @since 0.1.0
  */
