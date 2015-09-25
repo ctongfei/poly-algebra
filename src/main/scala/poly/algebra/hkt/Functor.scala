@@ -1,5 +1,7 @@
 package poly.algebra.hkt
 
+import poly.algebra.factory._
+
 import scala.language.higherKinds
 
 /**
@@ -7,7 +9,7 @@ import scala.language.higherKinds
  * @author Tongfei Chen (ctongfei@gmail.com).
  * @since 0.2.0
  */
-trait Functor[F[+_]] {
+trait Functor[F[_]] {
 
   def map[X, Y](mx: F[X])(f: X => Y): F[Y]
 
@@ -17,9 +19,5 @@ trait Functor[F[+_]] {
 
 }
 
-object Functor {
+object Functor extends ImplicitHktGetter[Functor]
 
-  def apply[M[+_]](implicit M: Functor[M]): Functor[M] = M
-
-
-}

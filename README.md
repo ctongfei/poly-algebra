@@ -1,7 +1,22 @@
 ### poly-algebra
-`Poly-algebra` is a library that contains typeclass abstractions for common algebraic structures. Implicits, specialization
-and macros are used extensively to create an elegant API with virtually no performance cost.
+`Poly-algebra` is a library that contains a hierarchy of typeclass abstractions for common algebraic structures and higher-kinded functional constructs that enables generic math programming in Scala.
+Implicits, specialization and macros are used extensively to create an elegant API with virtually no performance cost.
 
- - New in 0.3.0: Extensive law checking using ScalaCheck
- - New in 0.2.1: Concatenative structures up to `ConcatenativeMonad` that abstracts over `filter`
- - New in 0.2.0: Macros for inlining implicit operators
+Import once for good:
+```scala
+import poly.algebra._           // Imports definitions for common algebraic structures
+import poly.algebra.implicits._ // Brings default structures of system types into scope
+import poly.algebra.function._  // Imports generic version of common math functions
+import poly.algebra.ops._       // Enables generic infix operators with no overhead
+import poly.algebra.hkt._       // Imports definitions for higher-kinded typeclasses
+import poly.algebra.hkt.ops._   // Enables operators on higher-kinded types
+```
+
+`Poly-algebra` is inspired by [Spire](https://github.com/non/spire) and [Scalaz](http://github.com/scalaz/scalaz).
+
+#### Installation
+```scala
+libraryDependencies += "me.tongfei" %% "poly-algebra" % "0.2.9-SNAPSHOT"
+```
+
+#### Features

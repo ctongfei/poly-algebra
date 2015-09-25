@@ -24,7 +24,7 @@ trait InnerProductSpace[V, @sp(fd) F] extends NormedVectorSpace[V, F] {
   }
 
   /** Returns the cosine similarity measure based on this inner product. */
-  def cosineSimilarity: SimilarityMeasure[V, F] = new SimilarityMeasure[V, F] {
+  def cosineSimilarity: Similarity[V, F] = new Similarity[V, F] {
     def sim(x: V, y: V): F = {
       val F = fieldOfScalar
       F.div(dot(x, y), F.mul(norm(x), norm(y)))

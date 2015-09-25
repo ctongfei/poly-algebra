@@ -1,6 +1,7 @@
 package poly.algebra.hkt
 
 import scala.language.higherKinds
+import scala.language.reflectiveCalls
 
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
@@ -8,27 +9,36 @@ import scala.language.higherKinds
 object ops {
   /**
    * Enriches any type with higher-kinded type operations if appropriate algebraic structures are implicitly provided.
-   * @param mx Variable to be enriched
-   * @tparam M Higher-kinded type
+   * @param x Variable to be enriched
+   * @tparam H Higher-kinded type
    * @tparam X Type of the variable
    */
-  implicit class withHktOps[M[+_], X](val mx: M[X]) extends AnyVal {
+  implicit class withHktOps[H[_], X](val x: H[X]) extends AnyVal {
 
-    def map[Y](f: X => Y)(implicit F: Functor[M]): M[Y] = F.map(mx)(f)
+    def map      [Y](f: X => Y      )(implicit H: Functor[H]             ): H[Y] = H.map(x)(f)
+    def contramap[Y](f: Y => X      )(implicit H: ContravariantFunctor[H]): H[Y] = H.contramap(x)(f)
+    def flatMap  [Y](f: X => H[Y]   )(implicit H: Monad[H]               ): H[Y] = H.flatMap(x)(f)
+    def filter      (f: X => Boolean)(implicit H: ConcatenativeMonad[H]  ): H[X] = H.filter(x)(f)
 
-    def flatMap[Y](f: X => M[Y])(implicit F: Monad[M]): M[Y] = F.flatMap(mx)(f)
-
-    def filter(f: X => Boolean)(implicit F: ConcatenativeMonad[M]): M[X] = F.filter(mx)(f)
+    def |>       [Y](f: X => Y)      (implicit H: Functor[H]             ): H[Y] = H.map(x)(f)
+    def |<       [Y](f: Y => X)      (implicit H: ContravariantFunctor[H]): H[Y] = H.contramap(x)(f)
+    def ||>      [Y](f: X => H[Y])   (implicit H: Monad[H]               ): H[Y] = H.flatMap(x)(f)
+    def |?          (f: X => Boolean)(implicit H: ConcatenativeMonad[H]  ): H[X] = H.filter(x)(f)
 
   }
 
-  implicit class withContravariantHktOps[M[-_], X](val mx: M[X]) extends AnyVal {
-    def contramap[Y](f: Y => X)(implicit F: ContravariantFunctor[M]): M[Y] = F.contramap(mx)(f)
-  }
-  
-  implicit class withBiHktOps[H[+_, +_], X, Y](val x: H[X, Y]) extends AnyVal {
-    def map1[Z](f: X => Z)(implicit H: Bifunctor[H]) = H.map1(x)(f)
-    def map2[Z](f: Y => Z)(implicit H: Bifunctor[H]) = H.map2(x)(f)
+  implicit class withBiHktOps[H[_, _], X, Y](val x: H[X, Y]) extends AnyVal {
+
+    def map1     [Z](f: X => Z)      (implicit H: Bifunctor[H]         ) = H.map1(x)(f)
+    def map2     [Z](f: Y => Z)      (implicit H: Bifunctor[H]         ) = H.map2(x)(f)
+    def flatMap  [Z](f: Y => H[X, Z])(implicit H: Monad[({type λ[υ] = H[X, υ]})#λ]) = H.flatMap(x)(f)
+    def map      [Z](f: Y => Z)      (implicit H: Profunctor[H]        ) = H.map(x)(f)
+    def contramap[Z](f: Z => X)      (implicit H: Profunctor[H]        ) = H.contramap(x)(f)
+
+    def |>       [Z](f: Y => Z)      (implicit H: Profunctor[H]        ) = H.map(x)(f)
+    def |<       [Z](f: Z => X)      (implicit H: Profunctor[H]        ) = H.contramap(x)(f)
+    def ||>      [Z](f: Y => H[X, Z])(implicit H: Monad[({type λ[υ] = H[X, υ]})#λ]) = H.flatMap(x)(f)
+
   }
 
 }

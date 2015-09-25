@@ -4,6 +4,8 @@ import poly.algebra.factory._
 import poly.algebra.hkt._
 import poly.algebra.specgroup._
 
+import scala.annotation.unchecked._
+
 /**
  * Represents a weak order.
  *
@@ -33,7 +35,7 @@ trait WeakOrder[@sp(fdib) -X] extends PartialOrder[X] { self =>
   def min[Y <: X](x: Y, y: Y): Y = if (cmp(x, y) <= 0) x else y
 
   /** Returns the equivalence relation (tied relation) induced by this weak order. */
-  def asEq: Equiv[X] = new Equiv[X] {
+  def asEquiv: Equiv[X] = new Equiv[X] {
     def eq(x: X, y: X) = self.cmp(x, y) == 0
   }
 
@@ -45,7 +47,7 @@ trait WeakOrder[@sp(fdib) -X] extends PartialOrder[X] { self =>
   /** If tied after first order, use second order. Experimental.
    * @since 0.2.3
    */
-  def andThen[Y <: X](that: WeakOrder[Y]): WeakOrder[Y] = new WeakOrder[Y] {
+  def thenOrderBy[Y <: X](that: WeakOrder[Y]): WeakOrder[Y] = new WeakOrder[Y] {
     def cmp(x: Y, y: Y) = {
       val r = self.cmp(x, y)
       if (r != 0) r else that.cmp(x, y)

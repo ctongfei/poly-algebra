@@ -1,6 +1,7 @@
 package poly.algebra.hkt
 
 import poly.algebra._
+import poly.algebra.factory._
 
 import scala.language.higherKinds
 
@@ -8,7 +9,7 @@ import scala.language.higherKinds
  * Typeclass for applicatives.
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait Applicative[M[+_]] extends Functor[M] { self =>
+trait Applicative[M[_]] extends Functor[M] { self =>
 
   def id[x](u: x): M[x]
 
@@ -22,8 +23,4 @@ trait Applicative[M[+_]] extends Functor[M] { self =>
 
 }
 
-object Applicative {
-
-  def apply[M[+_]](implicit M: Applicative[M]): Applicative[M] = M
-
-}
+object Applicative extends ImplicitHktGetter[Applicative]

@@ -7,7 +7,7 @@ import scala.language.higherKinds
  * @author Tongfei Chen (ctongfei@gmail.com).
  * @since 0.2.1
  */
-trait ConcatenativeMonad[M[+_]] extends Monad[M] with ConcatenativeMonoidKind[M] {
+trait ConcatenativeMonad[M[_]] extends Monad[M] with ConcatenativeMonoidKind[M] {
 
   def filter[X](mx: M[X])(f: X => Boolean) = flatMap(mx)(e => if (f(e)) id(e) else empty[X])
 

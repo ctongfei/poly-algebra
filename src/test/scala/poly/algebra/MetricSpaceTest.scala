@@ -9,12 +9,12 @@ import poly.algebra.implicits._
  */
 class MetricSpaceTest extends FunSuite {
 
-  test("MetricSpace 1: Absolute value on integers") {
-    val ms1 = MetricSpace[Int, Int]
-    assert(ms1.dist(2, 3) == 1)
-    assert(ms1.dist(-4, 3) == 7)
-    assert(ms1.dist(0, -5) == 5)
-  }
+//  test("MetricSpace 1: Absolute value on integers") {
+//    val ms1 = MetricSpace[Int, Int]
+//    assert(ms1.dist(2, 3) == 1)
+//    assert(ms1.dist(-4, 3) == 7)
+//    assert(ms1.dist(0, -5) == 5)
+//  }
 
   test("MetricSpace 2: Hamming distance on Boolean sequences") {
     val ms2 = MetricSpace.create[Array[Boolean], Int](

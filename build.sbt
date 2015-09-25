@@ -1,6 +1,6 @@
 name := "poly-algebra"
 
-version := "0.2.7-SNAPSHOT"
+version := "0.2.9-SNAPSHOT"
 
 organization := "me.tongfei"
 
@@ -12,7 +12,7 @@ resolvers += Resolver.sonatypeRepo("snapshots")
 
 libraryDependencies += "org.scala-lang"    %  "scala-reflect"   % scalaVersion.value
 
-libraryDependencies += "me.tongfei"        %% "poly-util"       % "0.2.3-SNAPSHOT"
+libraryDependencies += "me.tongfei"        %% "poly-macroutil"  % "0.1.0-SNAPSHOT"
 
 libraryDependencies += "org.scalatest"     %% "scalatest"       % "2.2.2"             % Test
 

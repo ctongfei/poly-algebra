@@ -7,9 +7,9 @@ import poly.algebra.specgroup._
  * @author Tongfei Chen (ctongfei@gmail.com).
  * @since 0.2.4
  */
-trait OrderedRing[@sp(fdi) X] extends Ring[X] with OrderedAdditiveCGroup[X] with SignOps[X] {
+trait OrderedRing[@sp(fdi) X] extends Ring[X] with OrderedAdditiveCGroup[X] {
 
-  def sgn(x: X) = if (isPositive(x)) one else if (isNegative(x)) negOne else zero
+  def sgn(x: X) = if (gt(x, zero)) one else if (lt(x, zero)) negOne else zero
 
 }
 

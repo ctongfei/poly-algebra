@@ -29,7 +29,6 @@ trait Equiv[@sp -X] {
   def fromJavaEquals = false
 
   def equivSameAs[X1 <: X](that: Equiv[X1]) = (this eq that) || (this.fromJavaEquals && that.fromJavaEquals)
-
 }
 
 

@@ -7,9 +7,9 @@ import poly.algebra.specgroup._
  * Represents a similarity measure.
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait Similarity[-V, @sp(fdi) +F] {
+trait Similarity[-X, @sp(fdi) +S] {
 
-  def sim(x: V, y: V): F
+  def sim(x: X, y: X): S
   
 }
 

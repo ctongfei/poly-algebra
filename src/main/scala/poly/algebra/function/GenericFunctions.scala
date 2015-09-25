@@ -77,9 +77,9 @@ trait GenericFunctions {
   /** Returns the minimum one of the specified elements. */
   def min[@sp(fdi) X](xs: X*)(implicit ev: WeakOrder[X]) = xs.reduce(ev.min[X])
 
-  def abs[@sp(fdi) X](x: X)(implicit ev: SignOps[X]) = ev.abs(x)
+  //def abs[@sp(fdi) X](x: X)(implicit ev: OrderedRing[X]) = ev.abs(x)
 
-  def sgn[@sp(fdi) X](x: X)(implicit ev: SignOps[X]) = ev.sgn(x)
+  def sgn[@sp(fdi) X](x: X)(implicit ev: OrderedRing[X]) = ev.sgn(x)
 
   def ipow[@sp(fdi) X](x: X, y: Int)(implicit ev: MultiplicativeSemigroup[X]) = ev.ipow(x, y)
 

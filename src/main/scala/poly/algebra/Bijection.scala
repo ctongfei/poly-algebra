@@ -40,7 +40,7 @@ object Bijection extends BinaryImplicitGetter[Bijection] {
 
   implicit object Category extends Category[Bijection] {
     def id[X] = Bijection.create(x => x, x => x)
-    def map[X, Y, Z](f: Bijection[X, Y])(g: Bijection[Y, Z]) = f andThen g
+    def compose[X, Y, Z](g: Bijection[Y, Z], f: Bijection[X, Y]) = g compose f
   }
 
   implicit def IdentityBijection[X]: Bijection[X, X] = new (X <=> X) {

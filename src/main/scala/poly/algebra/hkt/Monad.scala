@@ -1,6 +1,7 @@
 package poly.algebra.hkt
 
 import poly.algebra._
+import poly.algebra.factory._
 import scala.language.higherKinds
 import scala.language.reflectiveCalls
 
@@ -8,7 +9,7 @@ import scala.language.reflectiveCalls
  * Typeclass for monads.
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait Monad[M[+_]] extends Functor[M] with Applicative[M] { self =>
+trait Monad[M[_]] extends Functor[M] with Applicative[M] { self =>
 
   def id[X](u: X): M[X]
 
@@ -22,7 +23,7 @@ trait Monad[M[+_]] extends Functor[M] with Applicative[M] { self =>
 
   def product[X, Y](mx: M[X], my: M[Y]): M[(X, Y)] = flatMap(mx)(x => map(my)(y => (x, y)))
 
-  /** Casts this monad as a monoid. */
+  /** Casts this monad as a monoid on Kleisli functions. */
   def asMonoid[X]: Monoid[X => M[X]] = new Monoid[X => M[X]] {
     def id = self.id[X]
     def op(f: X => M[X], g: X => M[X]) = u => flatMap(flatMap(self.id(u))(f))(g)
@@ -30,23 +31,7 @@ trait Monad[M[+_]] extends Functor[M] with Applicative[M] { self =>
 
 }
 
-object Monad {
-
-  def apply[M[+_]](implicit M: Monad[M]): Monad[M] = M
-
-  /** The default monad on sequences. */
-  implicit def seqMonad: Monad[Seq] = new Monad[Seq] {
-    def flatMap[X, Y](mx: Seq[X])(f: X => Seq[Y]) = mx.flatMap(f)
-    def id[X](u: X) = Seq(u)
-    override def map[X, Y](mx: Seq[X])(f: X => Y): Seq[Y] = mx.map(f)
-  }
-
- /** The default monad on `Option`s. */
-  implicit def optionMonad: Monad[Option] = new Monad[Option] {
-    def flatMap[X, Y](mx: Option[X])(f: X => Option[Y]) = mx.flatMap(f)
-    def id[X](u: X) = Some(u)
-    override def map[X, Y](mx: Option[X])(f: X => Y): Option[Y] = mx.map(f)
-  }
+object Monad extends ImplicitHktGetter[Monad]{
 
   /** The default monad on functions. */
   implicit def functionMonad[W]: Monad[({type λ[+α] = W => α})#λ] = new Monad[({type λ[+α] = W => α})#λ] {

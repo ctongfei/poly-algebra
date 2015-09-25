@@ -6,7 +6,7 @@ import scala.language.higherKinds
  * @author Tongfei Chen (ctongfei@gmail.com).
  * @since 0.2.4
  */
-trait Comonad[M[+_]] extends Functor[M] {
+trait Comonad[M[_]] extends Functor[M] {
 
   def extract[X](u: M[X]): X
 

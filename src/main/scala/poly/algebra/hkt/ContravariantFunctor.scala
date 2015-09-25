@@ -1,5 +1,7 @@
 package poly.algebra.hkt
 
+import poly.algebra.factory._
+
 import scala.language.higherKinds
 import scala.language.reflectiveCalls
 
@@ -7,7 +9,7 @@ import scala.language.reflectiveCalls
  * Typeclass for contravariant functors.
  * @since 0.2.0
  */
-trait ContravariantFunctor[F[-_]] {
+trait ContravariantFunctor[F[_]] {
 
   def contramap[X, Y](mx: F[X])(f: Y => X): F[Y]
 
@@ -15,9 +17,7 @@ trait ContravariantFunctor[F[-_]] {
 
 }
 
-object ContravariantFunctor {
-
-  def apply[M[-_]](implicit M: ContravariantFunctor[M]): ContravariantFunctor[M] = M
+object ContravariantFunctor extends ImplicitHktGetter[ContravariantFunctor] {
 
   /** The default contravariant functor on functions. */
   implicit def functionContravariantFunctor[Z]: ContravariantFunctor[({type λ[-α] = α => Z})#λ] =
