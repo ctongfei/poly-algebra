@@ -1,6 +1,6 @@
 package poly.algebra
 
-import poly.util.typeclass._
+import poly.algebra.factory._
 
 /**
  * Represents an Abelian (commutative) group.

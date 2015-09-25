@@ -1,7 +1,7 @@
 package poly.algebra
 
-import poly.util.typeclass._
-import poly.util.specgroup._
+import poly.algebra.factory._
+import poly.algebra.specgroup._
 
 /**
  * Represents a module over a ring.
@@ -25,6 +25,9 @@ import poly.util.specgroup._
  * @define lawScalingIdentity '''Scaling identity''': ∀''a''∈X, 1 *: ''a'' == ''a''.
  * @define lawDistributivitySV '''Distributivity of scaling w.r.t. vector addition''': ∀''k''∈S, ∀''a'', ''b''∈X, ''k'' *: (''a'' + ''b'') == ''k'' *: ''a'' + ''k'' *: ''b''.
  * @define lawDistributivitySS '''Distributivity of scaling w.r.t. scalar addition''': ∀''k'', ''l''∈S, ∀''a''∈X, (''k'' + ''l'') *: ''a'' = ''k'' *: ''a'' + ''l'' *: ''a''.
+ *
+ * @tparam X Type of vectors
+ * @tparam S Type of scalars
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
 trait Module[X, @sp(fdi) S] extends AdditiveCGroup[X] { self =>

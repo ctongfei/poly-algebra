@@ -1,10 +1,21 @@
 package poly.algebra
 
-import poly.util.typeclass._
-import poly.util.specgroup._
+import poly.algebra.factory._
+import poly.algebra.specgroup._
 
 /**
- * Represents a lattice.
+ * Represents a lattice, a partially-ordered set where each two element have a
+ * unique infimum and a unique supremum.
+ *
+ * An instance of this typeclass should satisfy the following axioms:
+ *  - $lawSupremumAssociativity
+ *  - $lawInfimumAssociativity
+ *  - $lawSupremumCommutativity
+ *  - $lawInfimumCommutativity
+ *  - $lawAbsorptionSI
+ *  - $lawAbsorptionIS
+ * @define lawAbsorptionSI '''Absorption of supremum w.r.t. infimum''': ∀''a'', ''b''∈X, sup(''a'', inf(''a'', ''b'')) == ''a''.
+ * @define lawAbsorptionIS '''Absorption of infimum w.r.t. supremum''': ∀''a'', ''b''∈X, inf(''a'', sup(''a'', ''b'')) == ''a''.
  * @author Tongfei Chen (ctongfei@gmail.com).
  * @since 0.1.0
  */

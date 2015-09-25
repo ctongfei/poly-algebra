@@ -1,9 +1,19 @@
 package poly.algebra
 
-import poly.util.typeclass._
-import poly.util.specgroup._
+import poly.algebra.factory._
+import poly.algebra.specgroup._
 
 /**
+ * Represents a upper-semilattice, i.e., a partially-ordered set in which every finite non-empty subset has a
+ * least upper bound.
+ *
+ * An instance of this typeclass should satisfy the following axioms:
+ *  - $lawSupremumAssociativity
+ *  - $lawSupremumCommutativity
+ *  - $lawSupremumIdempotency
+ * @define lawSupremumAssociativity '''Supremum associativity''': ∀''a'', ''b'', ''c''∈X, sup(''a'', sup(''b'', ''c'')) == sup(sup(''a'', ''b''), ''c'').
+ * @define lawSupremumCommutativity '''Supremum commutativity''': ∀''a'', ''b''∈X, sup(''a'', ''b'') == sup(''b'', ''a'').
+ * @define lawSupremumIdempotency '''Supremum idempotency''': ∀''a''∈X, sup(''a'', ''a'') == a.
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
 trait UpperSemilattice[@sp(fdib) X] extends PartialOrder[X] { self =>

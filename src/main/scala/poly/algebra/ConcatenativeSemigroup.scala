@@ -1,6 +1,6 @@
 package poly.algebra
 
-import poly.util.typeclass._
+import poly.algebra.factory._
 
 /**
  * Represents a concatenative semigroup (i.e. semigroups operating on sequences, etc. that bears the operation `++`)
@@ -12,7 +12,7 @@ trait ConcatenativeSemigroup[X] { self =>
   /** The concatenation (`++`) operation of this semigroup. */
   def concat(x: X, y: X): X
 
-  /** Computes the sum ''x'' ++ ''x'' ++ ··· ++ ''x'' with ''x'' repeated for ''n'' times. */
+  /** Computes the concatenated sequence ''x'' ++ ''x'' ++ ··· ++ ''x'' with ''x'' repeated for ''n'' times. */
   def concatN(x: X, n: Int): X = asSemigroupWithConcat.combineN(x, n)
 
   /** Casts this structure as a symbol-agnostic semigroup. */

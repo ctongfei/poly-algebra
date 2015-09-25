@@ -1,7 +1,7 @@
 package poly.algebra
 
 import poly.algebra.hkt._
-import poly.util.specgroup._
+import poly.algebra.specgroup._
 
 /**
  * Typeclass for type-strict equivalence relations.
@@ -17,7 +17,7 @@ import poly.util.specgroup._
  * @author Tongfei Chen (ctongfei@gmail.com).
  * @since 0.1.0
  */
-trait Eq[@sp -X] {
+trait Equiv[@sp -X] {
 
   /** Checks if two objects of the same type are equivalent under this equivalence relation. */
   def eq(x: X, y: X): Boolean
@@ -25,32 +25,38 @@ trait Eq[@sp -X] {
   /** Checks if two objects of the same type are not equivalent under this equivalence equation. */
   def ne(x: X, y: X): Boolean = !eq(x, y)
 
+  /** Marks whether the `eq` method is derived from `java.lang.Object.equals`. */
+  def fromJavaEquals = false
+
+  def equivSameAs[X1 <: X](that: Equiv[X1]) = (this eq that) || (this.fromJavaEquals && that.fromJavaEquals)
+
 }
 
 
-object Eq {
+object Equiv {
 
-  def create[@sp X](fEq: (X, X) => Boolean): Eq[X] = new Eq[X] {
+  def create[@sp X](fEq: (X, X) => Boolean): Equiv[X] = new Equiv[X] {
     def eq(x: X, y: X) = fEq(x, y)
   }
 
-  implicit def default[@sp X]: Eq[X] = new Eq[X] {
+  implicit def default[@sp X]: Equiv[X] = new Equiv[X] {
     def eq(x: X, y: X) = x == y
     override def ne(x: X, y: X) = x != y
+    override def fromJavaEquals = true
   }
 
-  def by[@sp Y, X](f: Y => X)(implicit ev: Eq[X]): Eq[Y] = new Eq[Y] {
+  def by[@sp Y, X](f: Y => X)(implicit ev: Equiv[X]): Equiv[Y] = new Equiv[Y] {
     def eq(x: Y, y: Y) = ev.eq(f(x), f(y))
     override def ne(x: Y, y: Y) = ev.ne(f(x), f(y))
   }
 
   /** Returns the equality-by-reference relation. */
-  def byRef[X <: AnyRef]: Eq[X] = new Eq[X] {
+  def byRef[X <: AnyRef]: Equiv[X] = new Equiv[X] {
     def eq(x: X, y: X) = x eq y
     override def ne(x: X, y: X) = x ne y
   }
 
-  implicit object ContravariantFunctor extends ContravariantFunctor[Eq] {
-    def contramap[X, Y](ex: Eq[X])(f: Y => X) = Eq.by(f)(ex)
+  implicit object ContravariantFunctor extends ContravariantFunctor[Equiv] {
+    def contramap[X, Y](ex: Equiv[X])(f: Y => X) = Equiv.by(f)(ex)
   }
 }

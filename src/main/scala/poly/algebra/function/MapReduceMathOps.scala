@@ -1,8 +1,8 @@
 package poly.algebra.function
 
 import poly.algebra._
-import poly.util.fastloop._
-import poly.util.specgroup._
+import poly.macroutil._
+import poly.algebra.specgroup._
 import scala.language.experimental.macros
 
 /**

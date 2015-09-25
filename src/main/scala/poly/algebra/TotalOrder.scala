@@ -1,11 +1,17 @@
 package poly.algebra
 
-import poly.util.typeclass._
+import poly.algebra.factory._
 import poly.algebra.hkt._
-import poly.util.specgroup._
+import poly.algebra.specgroup._
 import scala.annotation.unchecked.{uncheckedVariance => uv}
 
 /**
+ * Represents a total order.
+ *
+ * An instance of this typeclass should satisfy the following axioms:
+ *  - $lawOrderTransitivity
+ *  - $lawOrderAntisymmetry
+ *  - $lawOrderTotality
  * @author Tongfei Chen (ctongfei@gmail.com).
  * @since 0.1.0
  */

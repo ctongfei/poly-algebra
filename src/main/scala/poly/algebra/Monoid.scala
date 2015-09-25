@@ -1,10 +1,9 @@
 package poly.algebra
 
-import poly.util.typeclass._
+import poly.algebra.factory._
 
 /**
- * Typeclass for monoids.
- * A monoid is a semigroup with an identity element.
+ * Represents a monoid, i.e., a semigroup with an identity element.
  *
  * An instance of this typeclass should satisfy the following axioms:
  *  - $lawAssociativity

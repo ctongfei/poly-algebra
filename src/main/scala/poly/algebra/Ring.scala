@@ -1,21 +1,19 @@
 package poly.algebra
 
-import poly.util.typeclass._
-import poly.util.specgroup._
+import poly.algebra.factory._
+import poly.algebra.specgroup._
 
 /**
- * Typeclass for rings.
+ * Represents a ring. A ring is an Abelian additive group together with a multiplicative monoid.
  *
- * A ring is an algebraic structure that generalizes the arithmetic operations of addition
- * and multiplication.
- *
- * Formally, a ring is a set ''R'' equipped with `+` and `*` where (''R'', +) form an
- * Abelian additive group (associative, `0` as the additive identity, commutative, invertible),
- * (''R'', *) form a multiplicative monoid (associative, `1` as the multiplicative identity),
- * and `*` distributes over `+`.
- *
- * To create a ring, `add`, `mul`, `zero`, `one`, `neg` should be implemented. `sub`
- * should be overridden for performance.
+ * An instance of this typeclass should satisfy the following axioms:
+ *  - $lawAdditiveAssociativity
+ *  - $lawAdditiveIdentity
+ *  - $lawAdditiveInvertibility
+ *  - $lawAdditiveCommutativity
+ *  - $lawMultiplicativeAssociativity
+ *  - $lawMultiplicativeIdentity
+ *  - $lawDistributivityMA
  *
  * @author Tongfei Chen (ctongfei@gmail.com).
  */

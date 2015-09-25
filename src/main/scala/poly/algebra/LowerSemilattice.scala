@@ -1,9 +1,19 @@
 package poly.algebra
 
-import poly.util.typeclass._
-import poly.util.specgroup._
+import poly.algebra.factory._
+import poly.algebra.specgroup._
 
 /**
+ * Represents a lower-semilattice, i.e., a partially-ordered set in which every finite non-empty subset has a
+ * greatest lower bound.
+ *
+ * An instance of this typeclass should satisfy the following axioms:
+ *  - $lawInfimumAssociativity
+ *  - $lawInfimumCommutativity
+ *  - $lawInfimumIdempotency
+ * @define lawInfimumAssociativity '''Infimum associativity''': ∀''a'', ''b'', ''c''∈X, inf(''a'', inf(''b'', ''c'')) == inf(inf(''a'', ''b''), ''c'').
+ * @define lawInfimumCommutativity '''Infimum commutativity''': ∀''a'', ''b''∈X, inf(''a'', ''b'') == inf(''b'', ''a'').
+ * @define lawInfimumIdempotency '''Infimum idempotency''': ∀''a''∈X, inf(''a'', ''a'') == a.
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
 trait LowerSemilattice[@sp(Boolean) X] extends PartialOrder[X] { self =>

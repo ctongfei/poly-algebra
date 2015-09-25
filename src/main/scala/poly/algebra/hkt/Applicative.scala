@@ -12,7 +12,7 @@ trait Applicative[M[+_]] extends Functor[M] { self =>
 
   def id[x](u: x): M[x]
 
-  def liftedApply[x, y](mx: M[x])(f: M[x => y]): M[y]
+  def liftedApply[x, y](mx: M[x])(mf: M[x => y]): M[y]
 
   def map[x, y](mx: M[x])(f: x => y): M[y] = liftedApply(mx)(id(f))
 

@@ -1,7 +1,7 @@
 package poly.algebra.function
 
 import poly.algebra._
-import poly.util.specgroup._
+import poly.algebra.specgroup._
 
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).

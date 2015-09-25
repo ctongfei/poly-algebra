@@ -5,11 +5,12 @@ package poly.algebra
  */
 object implicits {
 
-  implicit final val implicitIntStructure = std.IntStructure
-  implicit final val implicitFloatStructure = std.FloatStructure
-  implicit final val implicitDoubleStructure = std.DoubleStructure
-  implicit final val implicitBooleanStructure = std.BooleanStructure
-  implicit final val implicitStringStructure = std.StringStructure
-  implicit final val implicitSeqStructure = std.SeqStructure
+  implicit final val IntStructure = std.IntStructure
+  implicit final val FloatStructure = std.FloatStructure
+  implicit final val DoubleStructure = std.DoubleStructure
+  implicit final val BooleanStructure = std.BooleanStructure
+  implicit final val StringStructure = std.StringStructure
+  implicit final val SeqStructure = std.SeqStructure
+  implicit final val FunctionStructure = std.FunctionStructure
 
 }

@@ -25,5 +25,10 @@ object ops {
   implicit class withContravariantHktOps[M[-_], X](val mx: M[X]) extends AnyVal {
     def contramap[Y](f: Y => X)(implicit F: ContravariantFunctor[M]): M[Y] = F.contramap(mx)(f)
   }
+  
+  implicit class withBiHktOps[H[+_, +_], X, Y](val x: H[X, Y]) extends AnyVal {
+    def map1[Z](f: X => Z)(implicit H: Bifunctor[H]) = H.map1(x)(f)
+    def map2[Z](f: Y => Z)(implicit H: Bifunctor[H]) = H.map2(x)(f)
+  }
 
 }

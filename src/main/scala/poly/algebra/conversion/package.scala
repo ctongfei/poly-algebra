@@ -8,7 +8,11 @@ import scala.language.implicitConversions
  */
 package object conversion {
 
-  implicit def scalaEquivAsPoly[X](s: scala.Equiv[X]): Eq[X] = new Eq[X] {
+  implicit def javaComparatorAsPoly[X](s: java.util.Comparator[X]): WeakOrder[X] = new WeakOrder[X] {
+    def cmp(x: X, y: X) = s.compare(x, y)
+  }
+
+  implicit def scalaEquivAsPoly[X](s: scala.Equiv[X]): Equiv[X] = new Equiv[X] {
     def eq(x: X, y: X): Boolean = s.equiv(x, y)
   }
 
@@ -32,7 +36,7 @@ package object conversion {
     def cmp(x: X, y: X) = s.compare(x, y)
   }
 
-  implicit def scalaIntegralAsPoly[X](s: scala.Integral[X]): OrderedEuclideanDomain[X] = new OrderedEuclideanDomain[X] {
+  implicit def scalaIntegralAsPoly[X](s: scala.Integral[X]): EuclideanDomain[X] = new EuclideanDomain[X] {
     def zero = s.zero
     def one = s.one
 
@@ -58,6 +62,13 @@ package object conversion {
     override def div(x: X, y: X) = s.div(x, y)
 
     def cmp(x: X, y: X) = s.compare(x, y)
+  }
+
+  implicit def scalaHashingAsPoly[X](s: scala.util.hashing.Hashing[X]): Hashing[X, Int] = new Hashing[X, Int] {
+    def hash(x: X) = s.hash(x)
+    def eq(x: X, y: X) = x equals y
+    override def fromJavaEquals = true
+    override def fromJavaHashCode = true
   }
 
 }

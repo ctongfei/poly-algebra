@@ -18,7 +18,7 @@ trait Monad[M[+_]] extends Functor[M] with Applicative[M] { self =>
 
   def flatten[Y](mmy: M[M[Y]]): M[Y] = flatMap(mmy)(u => u)
 
-  def liftedApply[X, Y](mx: M[X])(f: M[X => Y]): M[Y] = flatMap(f)(map(mx = mx))
+  def liftedApply[X, Y](mx: M[X])(mf: M[X => Y]): M[Y] = flatMap(mf)(f => map(mx)(f))
 
   def product[X, Y](mx: M[X], my: M[Y]): M[(X, Y)] = flatMap(mx)(x => map(my)(y => (x, y)))
 

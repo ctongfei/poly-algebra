@@ -1,7 +1,7 @@
 package poly.algebra
 
-import poly.util.typeclass._
-import poly.util.specgroup._
+import poly.algebra.factory._
+import poly.algebra.specgroup._
 
 /**
  * Represents an algebra over a field, i.e., a vector space equipped with a
@@ -9,7 +9,7 @@ import poly.util.specgroup._
  * @author Tongfei Chen (ctongfei@gmail.com).
  * @since 0.1.0
  */
-trait AlgebraOverField[V, @sp(fd) F] extends VectorSpace[V, F] with AlgebraOverRing[V, F]
+trait AlgebraOverField[X, @sp(fd) S] extends VectorSpace[X, S] with AlgebraOverRing[X, S]
 
 object AlgebraOverField extends BinaryImplicitGetter[AlgebraOverField] {
 

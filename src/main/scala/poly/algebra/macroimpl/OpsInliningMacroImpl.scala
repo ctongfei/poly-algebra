@@ -49,6 +49,8 @@ object OpsInliningMacroImpl {
 
       case TermName("$u22C5") => TermName("dot") // ⋅
 
+      case TermName("$hash$hash$hash") => TermName("hash")
+
       case _ => op
     }
   }

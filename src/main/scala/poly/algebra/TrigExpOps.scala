@@ -1,9 +1,10 @@
 package poly.algebra
 
-import poly.util.typeclass._
-import poly.util.specgroup._
+import poly.algebra.factory._
+import poly.algebra.specgroup._
 
 /**
+ * Represents the support for trigonometric and exponential/logarithmic functions.
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
 trait TrigExpOps[@sp(fd) X] {

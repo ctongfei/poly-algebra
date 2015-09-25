@@ -1,12 +1,10 @@
 package poly.algebra
 
-import poly.util.typeclass._
+import poly.algebra.factory._
 import poly.algebra.hkt._
 
 /**
- * Represents a one-to-one function.
- *
- * An instance of this typeclass should satisfy the following axiom:
+ * Represents a one-to-one function between two types.
  * @author Tongfei Chen (ctongfei@gmail.com).
  * @since 0.2.5
  */

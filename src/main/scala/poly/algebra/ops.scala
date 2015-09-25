@@ -1,7 +1,7 @@
 package poly.algebra
 
 import poly.algebra.macroimpl._
-import poly.util.typeclass._
+import poly.algebra.factory._
 import scala.language.experimental.macros
 
 /**
@@ -34,13 +34,13 @@ object ops {
     def |(y: X)(implicit ev: BooleanAlgebra[X]): X = macro OpsInliningMacroImpl.binaryOp[X, X, BooleanAlgebra[X]]
     def ^(y: X)(implicit ev: BooleanAlgebra[X]): X = macro OpsInliningMacroImpl.binaryOp[X, X, BooleanAlgebra[X]]
 
-    def :*[R](y: R)(implicit ev: Module[X, R]): X = macro OpsInliningMacroImpl.binaryOp[X, R, Module[X, R]]
-    def *:[R](y: R)(implicit ev: Module[X, R]): X = macro OpsInliningMacroImpl.binaryOp[X, R, Module[X, R]]
+    def :*[S](y: S)(implicit ev: Module[X, S]): X = macro OpsInliningMacroImpl.binaryOp[X, S, Module[X, S]]
+    def *:[S](y: S)(implicit ev: Module[X, S]): X = macro OpsInliningMacroImpl.binaryOp[X, S, Module[X, S]]
 
     def >?<(y: X)(implicit ev: WeakOrder[X]): Int = macro OpsInliningMacroImpl.binaryOp[X, X, WeakOrder[X]]
-    def =~=(y: X)(implicit ev: Eq[X]): Boolean = macro OpsInliningMacroImpl.binaryOp[X, X, Eq[X]]
-    def =!=(y: X)(implicit ev: Eq[X]): Boolean = macro OpsInliningMacroImpl.binaryOp[X, X, Eq[X]]
-    def ≠(y: X)(implicit ev: Eq[X]): Boolean = macro OpsInliningMacroImpl.binaryOp[X, X, Eq[X]]
+    def =~=(y: X)(implicit ev: Equiv[X]): Boolean = macro OpsInliningMacroImpl.binaryOp[X, X, Equiv[X]]
+    def =!=(y: X)(implicit ev: Equiv[X]): Boolean = macro OpsInliningMacroImpl.binaryOp[X, X, Equiv[X]]
+    def ≠(y: X)(implicit ev: Equiv[X]): Boolean = macro OpsInliningMacroImpl.binaryOp[X, X, Equiv[X]]
     def <=(y: X)(implicit ev: PartialOrder[X]): Boolean = macro OpsInliningMacroImpl.binaryOp[X, X, PartialOrder[X]]
     def ≤(y: X)(implicit ev: PartialOrder[X]): Boolean = macro OpsInliningMacroImpl.binaryOp[X, X, PartialOrder[X]]
     def ≥(y: X)(implicit ev: PartialOrder[X]): Boolean = macro OpsInliningMacroImpl.binaryOp[X, X, PartialOrder[X]]
@@ -52,8 +52,9 @@ object ops {
 
     def ++(y: X)(implicit ev: ConcatenativeSemigroup[X]): X = macro OpsInliningMacroImpl.binaryOp[X, X, ConcatenativeSemigroup[X]]
 
-    //def +=(y: X)(implicit ev: InplaceAdditiveSemigroup[X]): Unit = ev.inplaceAdd(x, y)
-    //def -=(y: X)(implicit ev: InplaceAdditiveGroup[X]): Unit = ev.inplaceSub(x, y)
+    def ###(implicit ev: Hashing[X, Int]): Int = macro OpsInliningMacroImpl.unaryOp[X, Hashing[X, Int]]
+    //def :+=(y: X)(implicit ev: InplaceAdditiveSemigroup[X]): Unit = ev.inplaceAdd(x, y)
+    //def :-=(y: X)(implicit ev: InplaceAdditiveGroup[X]): Unit = ev.inplaceSub(x, y)
 
   }
 

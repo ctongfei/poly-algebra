@@ -1,10 +1,21 @@
 package poly.algebra
 
-import poly.util.typeclass._
+import poly.algebra.factory._
 import poly.algebra.hkt._
-import poly.util.specgroup._
+import poly.algebra.specgroup._
 
 /**
+ * Represents a weak order.
+ *
+ * A weak order is a generalization of a total order in which some elements may be tied.
+ * Weak orders appear ubiquitously in ordered data structures and sorting algorithms.
+ *
+ * An instance of this typeclass should satisfy the following axioms:
+ *  - $lawOrderTransitivity
+ *  - $lawOrderTotality
+ *
+ * @define lawOrderTotality '''Totality''':  ∀''a'', ''b''∈X, ''a'' <= ''b'' or ''b'' <= ''a''.
+ * @since 0.1.0
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
 trait WeakOrder[@sp(fdib) -X] extends PartialOrder[X] { self =>
@@ -22,7 +33,7 @@ trait WeakOrder[@sp(fdib) -X] extends PartialOrder[X] { self =>
   def min[Y <: X](x: Y, y: Y): Y = if (cmp(x, y) <= 0) x else y
 
   /** Returns the equivalence relation (tied relation) induced by this weak order. */
-  def asEq: Eq[X] = new Eq[X] {
+  def asEq: Equiv[X] = new Equiv[X] {
     def eq(x: X, y: X) = self.cmp(x, y) == 0
   }
 
@@ -41,6 +52,11 @@ trait WeakOrder[@sp(fdib) -X] extends PartialOrder[X] { self =>
     }
   }
 
+  /** Marks whether the `cmp` method is derived from [[java.lang.Comparable]] or [[scala.math.Ordered]]. */
+  def fromJavaComparable = false
+
+  def weakOrderSameAs[X1 <: X](that: WeakOrder[X1]) = (this eq that) || (this.fromJavaComparable && that.fromJavaComparable)
+
 }
 
 object WeakOrder extends ImplicitGetter[WeakOrder] {
@@ -51,6 +67,12 @@ object WeakOrder extends ImplicitGetter[WeakOrder] {
 
   def by[@sp(fdib) X, Y](f: Y => X)(implicit O: WeakOrder[X]): WeakOrder[Y] = new WeakOrder[Y] {
     def cmp(x: Y, y: Y) = O.cmp(f(x), f(y))
+  }
+
+  implicit def fromJavaComparable[X <: java.lang.Comparable[X]]: WeakOrder[X] = new WeakOrder[X] {
+    def cmp(x: X, y: X) = x compareTo y
+    override def fromJavaComparable = true
+    override def fromJavaEquals = true
   }
 
   implicit object ContravariantFunctor extends ContravariantFunctor[WeakOrder] {

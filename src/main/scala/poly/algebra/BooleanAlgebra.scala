@@ -1,10 +1,11 @@
 package poly.algebra
 
-import poly.util.typeclass._
-import poly.util.specgroup._
+import poly.algebra.factory._
+import poly.algebra.specgroup._
 
 /**
  * Represents an abstract Boolean algebra, which is a complemented distributive lattice.
+ *
  * @author Tongfei Chen (ctongfei@gmail.com).
  * @since 0.1.0
  */
@@ -40,7 +41,7 @@ trait BooleanAlgebra[@sp(Boolean) X] extends BoundedLattice[X] { self =>
 
 object BooleanAlgebra extends ImplicitGetter[BooleanAlgebra] {
 
-  def create[@sp(Boolean) X](fAnd: (X, X) => X, fOr: (X, X) => X, fNot: X => X, fZero: X, fOne: X)(implicit E: Eq[X]) = new BooleanAlgebra[X] {
+  def create[@sp(Boolean) X](fAnd: (X, X) => X, fOr: (X, X) => X, fNot: X => X, fZero: X, fOne: X)(implicit E: Equiv[X]) = new BooleanAlgebra[X] {
     def and(x: X, y: X) = fAnd(x, y)
     def or(x: X, y: X) = fOr(x, y)
     def not(x: X) = fNot(x)

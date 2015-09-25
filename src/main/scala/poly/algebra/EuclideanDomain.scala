@@ -1,12 +1,13 @@
 package poly.algebra
 
-import poly.util.typeclass._
-import poly.util.specgroup._
+import poly.algebra.factory._
+import poly.algebra.specgroup._
 
 /**
+ * Represents a Euclidean domain. 
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait EuclideanDomain[@sp(fdi) X] extends CRing[X] {
+trait EuclideanDomain[@sp(fdi) X] extends CRing[X] with OrderedRing[X] {
 
   /** Returns the quotient (Euclidean division) of two elements. */
   def div(x: X, y: X): X
@@ -42,13 +43,14 @@ trait EuclideanDomain[@sp(fdi) X] extends CRing[X] {
 }
 
 object EuclideanDomain extends ImplicitGetter[EuclideanDomain] {
-  def create[@sp(fdi) X](fQuot: (X, X) => X, fMod: (X, X) => X)(implicit R: Ring[X]): EuclideanDomain[X] =
+  def create[@sp(fdi) X](fQuot: (X, X) => X, fMod: (X, X) => X)(implicit X: OrderedRing[X]): EuclideanDomain[X] =
     new EuclideanDomain[X] {
-      def add(x: X, y: X): X = R.add(x, y)
-      def mul(x: X, y: X): X = R.mul(x, y)
-      def neg(x: X): X = R.neg(x)
-      def zero: X = R.zero
-      def one: X = R.one
+      def cmp(x: X, y: X) = X.cmp(x, y)
+      def add(x: X, y: X): X = X.add(x, y)
+      def mul(x: X, y: X): X = X.mul(x, y)
+      def neg(x: X): X = X.neg(x)
+      def zero: X = X.zero
+      def one: X = X.one
       def div(x: X, y: X): X = fQuot(x, y)
       def mod(x: X, y: X): X = fMod(x, y)
     }

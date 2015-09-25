@@ -1,18 +1,26 @@
 package poly.algebra
 
-import poly.util.typeclass._
+import poly.algebra.factory._
 import poly.algebra.hkt._
-import poly.util.specgroup._
+import poly.algebra.specgroup._
 
 /**
- * Typeclass for partial orders.
+ * Represents a partial order.
  *
- * A partial order is a binary relation `≤` (precedence) on a type `X` which is reflexive, antisymmetric
- * and transitive.
+ * Partial orders are a generalization of total orders in which some element pairs
+ * may not be compared.
  *
+ * An instance of this typeclass should satisfy the following axioms:
+ *  - $lawOrderReflexivity
+ *  - $lawOrderAntisymmetry
+ *  - $lawOrderTransitivity
+ *
+ * @define lawOrderReflexivity '''Reflexivity''':  ∀''a''∈X, ''a'' <= ''a''.
+ * @define lawOrderAntisymmetry '''Antisymmetry''':  ∀''a'', ''b''∈X, ''a'' <= ''b'' and ''b'' <= ''a'' implies ''a'' == ''b''.
+ * @define lawOrderTransitivity '''Transitivity''':  ∀''a'', ''b'', ''c''∈X, ''a'' <= ''b'' and ''b'' <= ''c'' implies ''a'' <= ''c''.
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait PartialOrder[@sp(fdib) -X] extends Eq[X] { self =>
+trait PartialOrder[@sp(fdib) -X] extends Equiv[X] { self =>
 
   /** Returns whether ''x'' precedes ''y'' under this order. */
   def le(x: X, y: X): Boolean
@@ -20,7 +28,6 @@ trait PartialOrder[@sp(fdib) -X] extends Eq[X] { self =>
   /** Returns whether ''x'' succeeds ''y'' under this order. */
   def ge(x: X, y: X): Boolean = le(y, x)
 
-  /** Returns whether ''x'' is equivalent to ''y'' under this order. */
   def eq(x: X, y: X) = le(x, y) && le(y, x)
 
   /** Returns whether ''x'' strictly precedes ''y'' under this order. */
@@ -34,17 +41,29 @@ trait PartialOrder[@sp(fdib) -X] extends Eq[X] { self =>
     override def reverse = self
     def le(x: X, y: X) = self.le(y, x)
   }
+  
+  def fromScalaPartiallyOrdered = false
+
+  def partialOrderSameAs[X1 <: X](that: PartialOrder[X1]) = (this eq that) || (this.fromScalaPartiallyOrdered && that.fromScalaPartiallyOrdered)
 
 }
 
 object PartialOrder extends ImplicitGetter[PartialOrder] {
 
+  implicit def fromScalaPartiallyOrdered[X <: scala.math.PartiallyOrdered[X]]: PartialOrder[X] = new PartialOrder[X] {
+    def le(x: X, y: X) = x tryCompareTo y match {
+      case Some(r) => r <= 0
+      case None => false
+    }
+    override def fromScalaPartiallyOrdered = true
+  }
+  
   def create[@sp(fdib) X](fLe: (X, X) => Boolean): PartialOrder[X] = new PartialOrder[X] {
     def le(x: X, y: X): Boolean = fLe(x, y)
   }
 
-  def by[Y, @sp(fdib) X](f: Y => X)(implicit ev: PartialOrder[X]): PartialOrder[Y] = new PartialOrder[Y] {
-    def le(x: Y, y: Y) = ev.le(f(x), f(y))
+  def by[Y, @sp(fdib) X](f: Y => X)(implicit X: PartialOrder[X]): PartialOrder[Y] = new PartialOrder[Y] {
+    def le(x: Y, y: Y) = X.le(f(x), f(y))
   }
 
   implicit object ContravariantFunctor extends ContravariantFunctor[PartialOrder] {

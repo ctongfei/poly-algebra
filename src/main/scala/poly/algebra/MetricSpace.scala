@@ -1,17 +1,17 @@
 package poly.algebra
 
-import poly.util.typeclass._
-import poly.util.specgroup._
+import poly.algebra.factory._
+import poly.algebra.specgroup._
 
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait MetricSpace[-V, @sp(fdi) +F] {
-  def dist(x: V, y: V): F
+trait MetricSpace[-X, @sp(fdi) +S] {
+  def dist(x: X, y: X): S
 }
 
 object MetricSpace extends BinaryImplicitGetter[MetricSpace] {
-  def create[V, @sp(fdi) F](fDist: (V, V) => F): MetricSpace[V, F] = new MetricSpace[V, F] {
-    def dist(x: V, y: V): F = fDist(x, y)
+  def create[X, @sp(fdi) S](fDist: (X, X) => S): MetricSpace[X, S] = new MetricSpace[X, S] {
+    def dist(x: X, y: X): S = fDist(x, y)
   }
 }

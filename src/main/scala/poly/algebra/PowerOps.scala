@@ -1,7 +1,7 @@
 package poly.algebra
 
-import poly.util.typeclass._
-import poly.util.specgroup._
+import poly.algebra.factory._
+import poly.algebra.specgroup._
 
 trait PowerOps[@sp(fd) X] {
   def root(x: X, n: Int): X
