@@ -8,8 +8,9 @@ import scala.language.reflectiveCalls
 /**
  * Typeclass for monads.
  * @author Tongfei Chen (ctongfei@gmail.com).
+ * @since 0.2.1
  */
-trait Monad[M[_]] extends Functor[M] with Applicative[M] { self =>
+trait Monad[M[_]] extends ApplicativeFunctor[M] { self =>
 
   def id[X](u: X): M[X]
 
@@ -19,16 +20,22 @@ trait Monad[M[_]] extends Functor[M] with Applicative[M] { self =>
 
   def flatten[Y](mmy: M[M[Y]]): M[Y] = flatMap(mmy)(u => u)
 
-  def liftedApply[X, Y](mx: M[X])(mf: M[X => Y]): M[Y] = flatMap(mf)(f => map(mx)(f))
+  def liftedMap[X, Y](mx: M[X])(mf: M[X => Y]): M[Y] = flatMap(mf)(f => map(mx)(f))
 
-  def product[X, Y](mx: M[X], my: M[Y]): M[(X, Y)] = flatMap(mx)(x => map(my)(y => (x, y)))
+  override def product[X, Y](mx: M[X])(my: M[Y]): M[(X, Y)] = flatMap(mx)(x => map(my)(y => (x, y)))
 
-  /** Casts this monad as a monoid on Kleisli functions. */
-  def asMonoid[X]: Monoid[X => M[X]] = new Monoid[X => M[X]] {
-    def id = self.id[X]
-    def op(f: X => M[X], g: X => M[X]) = u => flatMap(flatMap(self.id(u))(f))(g)
+  /**
+   * Returns the Kleisli category naturally associated with this monad, i.e.
+   * a category on the type `A => M[B]`.
+   * @return The natural Kleisli category
+   */
+  def Kleisli: Arrow[({type λ[α, β] = α => M[β]})#λ] = new Arrow[({type λ[α, β] = (α) => M[β]})#λ] {
+    def compose[X, Y, Z](g: Y => M[Z], f: X => M[Y]) = x => flatMap(f(x))(g)
+    def id[X] = self.id[X]
+    def lift[X, Y](f: X => Y) = x => id(f(x))
+    def apply1[X, Y, Z](f: X => M[Y]) = xz => self.map(f(xz._1))(y => (y, xz._2))
+    def apply2[X, Y, Z](f: X => M[Y]) = xz => self.map(f(xz._2))(y => (xz._1, y))
   }
-
 }
 
 object Monad extends ImplicitHktGetter[Monad]{

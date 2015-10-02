@@ -12,10 +12,6 @@ trait Hashing[@sp -X, @sp(i) +H] extends Equiv[X] {
   /** Returns a user-defined hash code of an object. */
   def hash(x: X): H
 
-  def fromJavaHashCode = false
-
-  def hashingSameAs[X1 <: X, H1 >: H](that: Hashing[X1, H1]) = (this eq that) || (this.fromJavaHashCode && that.fromJavaHashCode)
-
 }
 
 object Hashing extends BinaryImplicitGetter[Hashing] {
@@ -27,10 +23,4 @@ object Hashing extends BinaryImplicitGetter[Hashing] {
     override def fromJavaEquals = X.fromJavaEquals
   }
 
-  /** Creates a `Hashing` object from a type's inherent `hashCode`/`##` method. */
-  implicit def default[@sp X]: Hashing[X, Int] = new Hashing[X, Int] {
-    def hash(x: X) = x.##
-    def eq(x: X, y: X) = x equals y // from Java
-    override def fromJavaHashCode = true
-  }
 }

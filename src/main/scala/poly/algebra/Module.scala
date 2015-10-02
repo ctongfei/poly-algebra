@@ -30,10 +30,7 @@ import poly.algebra.specgroup._
  * @tparam S Type of scalars
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait Module[X, @sp(fdi) S] extends AdditiveCGroup[X] { self =>
-
-  type LinearForm <: X => S
-  type BilinearForm <: (X, X) => S
+trait Module[X, @sp(fdi) S] extends Action[X, S] with AdditiveCGroup[X] { self =>
 
   implicit def ringOfScalar: Ring[S]
 
@@ -45,9 +42,13 @@ trait Module[X, @sp(fdi) S] extends AdditiveCGroup[X] { self =>
    * Returns the dual space of this module.
    * @since 0.2.7
    */
-  def dualSpace: Module[X => S, S] = new FunctionSpaceOverRing[X, S, S] {
-    def moduleOfCodomain = Module.trivial(self.ringOfScalar)
+  def dualSpace: Module[X => S, S] = new Module[X => S, S] {
     implicit def ringOfScalar = self.ringOfScalar
+    def scale(f: X => S, k: S) = x => ringOfScalar.mul(f(x), k)
+    def add(f: X => S, g: X => S) = x => ringOfScalar.add(f(x), g(x))
+    def zero = x => ringOfScalar.zero
+    override def neg(f: X => S) = x => ringOfScalar.neg(f(x))
+    override def sub(f: X => S, g: X => S) = x => ringOfScalar.sub(f(x), g(x))
   }
 }
 

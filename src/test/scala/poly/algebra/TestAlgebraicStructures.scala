@@ -38,10 +38,5 @@ class TestAlgebraicStructures extends FunSuite {
     assert(L.sup(12, 18) == 36)
   }
 
-  test("Endofunction space") {
-    val S = EndofunctionSpaceOverRing.default[Double, Double]
-    val f = S.composeN((x: Double) => x * x, 4)
-    assert(f(2) == 65536)
-  }
 
 }

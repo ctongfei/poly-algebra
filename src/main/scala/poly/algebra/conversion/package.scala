@@ -64,7 +64,7 @@ package object conversion {
     def cmp(x: X, y: X) = s.compare(x, y)
   }
 
-  implicit def scalaHashingAsPoly[X](s: scala.util.hashing.Hashing[X]): Hashing[X, Int] = new Hashing[X, Int] {
+  implicit def scalaHashingAsPoly[X](s: scala.util.hashing.Hashing[X]): IntHashing[X] = new IntHashing[X] {
     def hash(x: X) = s.hash(x)
     def eq(x: X, y: X) = x equals y
     override def fromJavaEquals = true

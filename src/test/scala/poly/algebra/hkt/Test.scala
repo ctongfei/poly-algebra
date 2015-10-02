@@ -18,6 +18,10 @@ object Test extends App {
 
   println(g(3))
 
+  val f1 = (x: Int) => Array.fill(x)(x)
+  val f2 = (x: Int) => Array.fill(x)(0)
+
+
   val StringByLength = WeakOrder[Int] |< ((f: String) => f.length)
 
   println(StringByLength.cmp("ABC", "DEFG"))

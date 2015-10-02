@@ -13,6 +13,8 @@ trait Category[⇾[_, _]] { self =>
 
   def compose[X, Y, Z](g: Y ⇾ Z, f: X ⇾ Y): X ⇾ Z
 
+  def andThen[X, Y, Z](f: X ⇾ Y, g: Y ⇾ Z): X ⇾ Z = compose(g, f)
+
   def asMonoid[X]: Monoid[X ⇾ X] = new Monoid[X ⇾ X] {
     def op(f: X ⇾ X, g: X ⇾ X) = compose(f, g)
     def id = self.id[X]

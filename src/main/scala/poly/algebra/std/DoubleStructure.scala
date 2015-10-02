@@ -5,13 +5,9 @@ import poly.algebra._
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-object DoubleStructure extends
-  OrderedField[Double] with
-  PowerOps[Double] with
-  TrigExpOps[Double] with
-  BoundedLattice[Double] with
-  CompleteMetricSpace[Double, Double]
-{
+object DoubleStructure extends IsReal[Double] with BoundedLattice[Double] {
+
+  final def fromDouble(x: Double) = x
 
   final val bot: Double = Double.NegativeInfinity
   final val top: Double = Double.PositiveInfinity

@@ -77,7 +77,7 @@ trait GenericFunctions {
   /** Returns the minimum one of the specified elements. */
   def min[@sp(fdi) X](xs: X*)(implicit ev: WeakOrder[X]) = xs.reduce(ev.min[X])
 
-  //def abs[@sp(fdi) X](x: X)(implicit ev: OrderedRing[X]) = ev.abs(x)
+  def abs[@sp(fdi) X](x: X)(implicit ev: OrderedRing[X]) = ev.abs(x)
 
   def sgn[@sp(fdi) X](x: X)(implicit ev: OrderedRing[X]) = ev.sgn(x)
 
@@ -95,6 +95,8 @@ trait GenericFunctions {
 
   def tan[@sp(fd) X](x: X)(implicit ev: TrigExpOps[X]) = ev.tan(x)
 
+  def atan2[@sp(fd) X](y: X, x: X)(implicit ev: TrigExpOps[X]) = ev.atan2(y, x)
+
   def arcsin[@sp(fd) X](x: X)(implicit ev: TrigExpOps[X]) = ev.arcsin(x)
 
   def arccos[@sp(fd) X](x: X)(implicit ev: TrigExpOps[X]) = ev.arccos(x)
@@ -106,5 +108,21 @@ trait GenericFunctions {
   def cosh[@sp(fd) X](x: X)(implicit ev: TrigExpOps[X]) = ev.cosh(x)
 
   def tanh[@sp(fd) X](x: X)(implicit ev: TrigExpOps[X]) = ev.tanh(x)
+
+  def log[@sp(fd) X](x: X)(implicit ev: TrigExpOps[X]) = ev.log(x)
+
+  def log1p[@sp(fd) X](x: X)(implicit ev: TrigExpOps[X]) = ev.log1p(x)
+
+  def exp[@sp(fd) X](x: X)(implicit ev: TrigExpOps[X]) = ev.exp(x)
+
+  def expm1[@sp(fd) X](x: X)(implicit ev: TrigExpOps[X]) = ev.expm1(x)
+
+  def e[@sp(fd) X](x: X)(implicit ev: TrigExpOps[X]) = ev.e
+
+  def pi[@sp(fd) X](x: X)(implicit ev: TrigExpOps[X]) = ev.pi
+
+
+
+
 
 }
