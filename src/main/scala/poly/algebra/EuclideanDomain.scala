@@ -37,7 +37,6 @@ trait EuclideanDomain[@sp(fdi) X] extends CRing[X] with OrderedRing[X] {
   def asLatticeWithGcdLcm: Lattice[X] = new Lattice[X] {
     def sup(x: X, y: X) = lcm(x, y)
     def inf(x: X, y: X) = gcd(x, y)
-    override def le(x: X, y: X) = mod(y, x) == zero
   }
 
 }

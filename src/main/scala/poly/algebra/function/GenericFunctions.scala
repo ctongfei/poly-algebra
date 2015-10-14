@@ -121,8 +121,4 @@ trait GenericFunctions {
 
   def pi[@sp(fd) X](x: X)(implicit ev: TrigExpOps[X]) = ev.pi
 
-
-
-
-
 }

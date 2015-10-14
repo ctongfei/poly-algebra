@@ -1,6 +1,7 @@
 package poly.algebra
 
 /**
+ * Brings typeclass instances of default algebraic structures on system types into scope.
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
 object implicits {
@@ -11,6 +12,7 @@ object implicits {
   implicit final val BooleanStructure = std.BooleanStructure
   implicit final val StringStructure = std.StringStructure
 
+  implicit final val IterableStructure = std.IterableStructure
   implicit final val SeqStructure = std.SeqStructure
   implicit final val FunctionStructure = std.FunctionStructure
   implicit final val EitherStructure = std.EitherStructure

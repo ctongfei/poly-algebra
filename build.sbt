@@ -22,6 +22,8 @@ libraryDependencies += "com.storm-enroute" %% "scalameter-core" % "0.7"         
 
 scalacOptions in (Compile, doc) += "-diagrams"
 
+scalacOptions += "-Ymacro-debug-lite"
+
 classDiagramSettings
 
 publishMavenStyle := true

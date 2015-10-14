@@ -19,6 +19,18 @@ import poly.algebra.specgroup._
  * @since 0.2.0
  */
 trait BoundedLattice[@sp(Boolean) X] extends
-  Lattice[X] with Bounded[X] with BoundedLowerSemilattice[X] with BoundedUpperSemilattice[X]
+  Lattice[X] with Bounded[X] with BoundedLowerSemilattice[X] with BoundedUpperSemilattice[X] { self =>
+
+  def asMonoidWithInf: CMonoid[X] = new CMonoid[X] {
+    def id: X = self.top
+    def op(x: X, y: X): X = self.inf(x, y)
+  }
+
+  def asMonoidWithSup: CMonoid[X] = new CMonoid[X] {
+    def id: X = self.bot
+    def op(x: X, y: X): X = self.sup(x, y)
+  }
+
+}
 
 object BoundedLattice extends ImplicitGetter[BoundedLattice]

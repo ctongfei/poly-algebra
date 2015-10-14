@@ -8,8 +8,8 @@ import poly.algebra.hkt._
 object FunctionStructure extends Profunctor[Function1] with Arrow[Function1] {
 
   def id[X]: X => X = x => x
-  def map[X, Y, Z](f: X => Y)(g: Y => Z): X => Z = g compose f
-  def contramap[X, Y, Z](g: Y => Z)(f: X => Y) = g compose f
+  override def map[X, Y, Z](f: X => Y)(g: Y => Z): X => Z = g compose f
+  override def contramap[X, Y, Z](g: Y => Z)(f: X => Y) = g compose f
 
   def lift[X, Y](f: X => Y) = f
   def apply1[X, Y, Z](f: X => Y) = xz => (f(xz._1), xz._2)

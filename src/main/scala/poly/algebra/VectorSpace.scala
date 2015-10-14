@@ -23,9 +23,6 @@ import poly.algebra.specgroup._
  */
 trait VectorSpace[X, @sp(fd) S] extends Module[X, S] { self =>
 
-  type LinearForm <: X => S
-  type BilinearForm <: (X, X) => S
-
   implicit def fieldOfScalar: Field[S]
   def ringOfScalar: Ring[S] = fieldOfScalar
 

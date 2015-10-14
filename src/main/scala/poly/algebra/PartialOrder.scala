@@ -28,7 +28,7 @@ trait PartialOrder[@sp(fdib) -X] extends Equiv[X] { self =>
   /** Returns whether ''x'' succeeds ''y'' under this order. */
   def ge(x: X, y: X): Boolean = le(y, x)
 
-  def eq(x: X, y: X) = le(x, y) && le(y, x)
+  def eq(x: X, y: X): Boolean = le(x, y) && le(y, x)
 
   /** Returns whether ''x'' strictly precedes ''y'' under this order. */
   def lt(x: X, y: X): Boolean = le(x, y) & !le(y, x)

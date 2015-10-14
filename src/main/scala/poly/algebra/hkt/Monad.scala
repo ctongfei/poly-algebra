@@ -29,7 +29,7 @@ trait Monad[M[_]] extends ApplicativeFunctor[M] { self =>
    * a category on the type `A => M[B]`.
    * @return The natural Kleisli category
    */
-  def Kleisli: Arrow[({type λ[α, β] = α => M[β]})#λ] = new Arrow[({type λ[α, β] = (α) => M[β]})#λ] {
+  def Kleisli: Arrow[({type λ[α, β] = α => M[β]})#λ] = new Arrow[({type λ[α, β] = α => M[β]})#λ] {
     def compose[X, Y, Z](g: Y => M[Z], f: X => M[Y]) = x => flatMap(f(x))(g)
     def id[X] = self.id[X]
     def lift[X, Y](f: X => Y) = x => id(f(x))
@@ -38,7 +38,7 @@ trait Monad[M[_]] extends ApplicativeFunctor[M] { self =>
   }
 }
 
-object Monad extends ImplicitHktGetter[Monad]{
+object Monad extends ImplicitHktGetter[Monad] {
 
   /** The default monad on functions. */
   implicit def functionMonad[W]: Monad[({type λ[+α] = W => α})#λ] = new Monad[({type λ[+α] = W => α})#λ] {

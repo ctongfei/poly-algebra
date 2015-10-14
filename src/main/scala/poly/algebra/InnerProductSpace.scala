@@ -34,15 +34,15 @@ trait InnerProductSpace[V, @sp(fd) F] extends NormedVectorSpace[V, F] {
 }
 
 object InnerProductSpace extends BinaryImplicitGetter[InnerProductSpace] {
-  def create[V, @sp(fd) F: PowerOps : Field](fDot: (V, V) => F)(implicit S: VectorSpace[V, F]): InnerProductSpace[V, F] =
+  def create[V, @sp(fd) F: PowerOps : Field](fDot: (V, V) => F)(implicit V: VectorSpace[V, F]): InnerProductSpace[V, F] =
     new InnerProductSpace[V, F] {
       def powerOpsOfScalar = implicitly[PowerOps[F]]
       def fieldOfScalar = implicitly[Field[F]]
       def dot(x: V, y: V): F = fDot(x, y)
-      def add(x: V, y: V): V = S.add(x, y)
-      override def neg(x: V): V = S.neg(x)
-      override def sub(x: V, y: V): V = S.sub(x, y)
-      def zero: V = S.zero
-      def scale(x: V, k: F): V = S.scale(x, k)
+      def add(x: V, y: V): V = V.add(x, y)
+      override def neg(x: V): V = V.neg(x)
+      override def sub(x: V, y: V): V = V.sub(x, y)
+      def zero: V = V.zero
+      def scale(x: V, k: F): V = V.scale(x, k)
     }
 }

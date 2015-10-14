@@ -16,13 +16,19 @@ import poly.algebra.specgroup._
  * @define lawSupremumIdempotency '''Supremum idempotency''': ∀''a''∈X, sup(''a'', ''a'') == a.
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait UpperSemilattice[@sp(fdib) X] extends PartialOrder[X] { self =>
+trait UpperSemilattice[@sp(fdib) X] { self =>
+
   /** Returns the supremum (join, a.k.a. least upper bound) of the two arguments. */
   def sup(x: X, y: X): X
-  def le(x: X, y: X) = eq(y, sup(x, y))
-  override def ge(x: X, y: X) = eq(x, sup(x, y))
 
-  override def reverse: LowerSemilattice[X] = new LowerSemilattice[X] {
+  def asPartialOrder(implicit e: Equiv[X]): PartialOrder[X] = new PartialOrder[X] {
+    override def eq(x: X, y: X) = e.eq(x, y)
+    override def ne(x: X, y: X) = e.ne(x, y)
+    def le(x: X, y: X) = eq(y, sup(x, y))
+    override def ge(x: X, y: X) = eq(x, sup(x, y))
+  }
+
+  def reverse: LowerSemilattice[X] = new LowerSemilattice[X] {
     override def reverse = self
     def inf(x: X, y: X) = sup(x, y)
   }
@@ -38,5 +44,3 @@ object UpperSemilattice extends ImplicitGetter[UpperSemilattice] {
     def sup(x: X, y: X): X = fSup(x, y)
   }
 }
-
-

@@ -52,7 +52,16 @@ object ops {
     def kleisliAndThen[Z](g: Y => M[Z])(implicit M: Monad[M]) = M.Kleisli.andThen(f, g)
     def kleisliCompose[Z](g: Z => M[X])(implicit M: Monad[M]) = M.Kleisli.compose(f, g)
 
+    /**
+     * Composes two instances of Kleisli arrows into one. The left hand side arrow is applied first.
+     * @param M `M` should be a monad
+     */
     def >=>           [Z](g: Y => M[Z])(implicit M: Monad[M]) = M.Kleisli.andThen(f, g)
+
+    /**
+     * Composes two instances of Kleisli arrows into one. The right hand side arrow is applied first.
+     * @param M `M` should be a monad
+     */
     def <=<           [Z](g: Z => M[X])(implicit M: Monad[M]) = M.Kleisli.compose(f, g)
   }
 

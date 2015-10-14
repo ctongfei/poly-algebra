@@ -21,13 +21,16 @@ import poly.algebra.specgroup._
  */
 
 trait Lattice[@sp(fdib) X] extends UpperSemilattice[X] with LowerSemilattice[X] { self =>
-  override def le(x: X, y: X) = eq(x, inf(x, y))
-  override def ge(x: X, y: X) = eq(x, sup(x, y))
 
   override def reverse: Lattice[X] = new Lattice[X] {
     override def reverse = self
     def sup(x: X, y: X) = self.inf(x, y)
     def inf(x: X, y: X) = self.sup(x, y)
+  }
+
+  override def asPartialOrder(implicit e: Equiv[X]): PartialOrder[X] = new PartialOrder[X] {
+    def le(x: X, y: X): Boolean = e.eq(x, inf(x, y))
+    override def ge(x: X, y: X): Boolean = e.eq(x, sup(x, y))
   }
 }
 

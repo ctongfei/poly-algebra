@@ -30,12 +30,14 @@ import poly.algebra.specgroup._
  * @tparam S Type of scalars
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-trait Module[X, @sp(fdi) S] extends Action[X, S] with AdditiveCGroup[X] { self =>
+trait Module[X, @sp(fdi) S] extends MultiplicativeAction[X, S] with AdditiveCGroup[X] { self =>
 
+  /** Returns the ring structure endowed on the type of scalars. */
   implicit def ringOfScalar: Ring[S]
 
   /** Scales a vector by a scalar. */
   def scale(x: X, k: S): X
+
   def neg(x: X): X = scale(x, ringOfScalar.negOne)
 
   /**
@@ -64,7 +66,6 @@ object Module extends BinaryImplicitGetter[Module] {
   /**
    * Constructs the trivial module of any ring over itself.
    * @param R The ring
-   * @tparam R Type of values of the ring
    * @return The trivial module of a ring over itself.
    */
   implicit def trivial[R](implicit R: Ring[R]): Module[R, R] = new Module[R, R] {

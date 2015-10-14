@@ -14,7 +14,6 @@ import poly.algebra.specgroup._
  *  - $lawMultiplicativeAssociativity
  *  - $lawMultiplicativeIdentity
  *  - $lawDistributivityMA
- *
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
 trait Ring[@sp(fdi) X] extends Semiring[X] with AdditiveCGroup[X] {
@@ -37,13 +36,13 @@ object Ring extends ImplicitGetter[Ring] {
   }
 
   /** Creates a ring using the provided operations `mul`, `one` based on an existing additive group. */
-  def create[@sp(di) X](fMul: (X, X) => X, oneElem: X)(implicit G: AdditiveGroup[X]): Ring[X] = new Ring[X] {
-    def add(x: X, y: X): X = G.add(x, y)
+  def create[@sp(di) X](fMul: (X, X) => X, oneElem: X)(implicit X: AdditiveGroup[X]): Ring[X] = new Ring[X] {
+    def add(x: X, y: X): X = X.add(x, y)
     def mul(x: X, y: X): X = fMul(x, y)
-    def zero: X = G.zero
+    def zero: X = X.zero
     def one: X = oneElem
-    def neg(x: X): X = G.neg(x)
-    override def sub(x: X, y: X): X = G.sub(x, y)
+    def neg(x: X): X = X.neg(x)
+    override def sub(x: X, y: X): X = X.sub(x, y)
   }
 }
 

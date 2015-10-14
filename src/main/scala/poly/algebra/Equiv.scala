@@ -1,5 +1,6 @@
 package poly.algebra
 
+import poly.algebra.factory._
 import poly.algebra.hkt._
 import poly.algebra.specgroup._
 
@@ -17,7 +18,7 @@ import poly.algebra.specgroup._
  * @author Tongfei Chen (ctongfei@gmail.com).
  * @since 0.1.0
  */
-trait Equiv[@sp -X] {
+trait Equiv[@sp(fdib) -X] {
 
   /** Checks if two objects of the same type are equivalent under this equivalence relation. */
   def eq(x: X, y: X): Boolean
@@ -32,9 +33,9 @@ trait Equiv[@sp -X] {
 }
 
 
-object Equiv {
+object Equiv extends ImplicitGetter[Equiv] {
 
-  def create[@sp X](fEq: (X, X) => Boolean): Equiv[X] = new Equiv[X] {
+  def create[@sp(fdib) X](fEq: (X, X) => Boolean): Equiv[X] = new Equiv[X] {
     def eq(x: X, y: X) = fEq(x, y)
   }
 

@@ -7,7 +7,7 @@ package poly.algebra
  */
 trait InplaceAdditiveCSemigroup[X] extends AdditiveCSemigroup[X] {
   /** Adds ''y'' onto ''x'' in-place. */
-  def inplaceAdd(x: X, y: X): Unit
+  def addInplace(x: X, y: X): Unit
 }
 
 /**
@@ -16,7 +16,7 @@ trait InplaceAdditiveCSemigroup[X] extends AdditiveCSemigroup[X] {
  */
 trait InplaceAdditiveCMonoid[X] extends InplaceAdditiveCSemigroup[X] with AdditiveCMonoid[X] {
   /** Clears ''x'' in-place. */
-  def inplaceClear(x: X): Unit
+  def clear(x: X): Unit
 }
 
 
@@ -26,5 +26,5 @@ trait InplaceAdditiveCMonoid[X] extends InplaceAdditiveCSemigroup[X] with Additi
  */
 trait InplaceAdditiveCGroup[X] extends InplaceAdditiveCMonoid[X] with AdditiveCGroup[X] {
   /** Subtracts ''y'' from ''x'' in-place. */
-  def inplaceSub(x: X, y: X): Unit = inplaceAdd(x, neg(y))
+  def subInplace(x: X, y: X): Unit
 }
