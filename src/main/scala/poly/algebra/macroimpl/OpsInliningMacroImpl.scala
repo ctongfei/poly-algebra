@@ -37,9 +37,6 @@ object OpsInliningMacroImpl {
       case TermName("$percent") => TermName("mod")
       case TermName("$div$percent") => TermName("quotmod")
 
-      case TermName("$colon$times") => TermName("scale")
-      case TermName("$times$colon") => TermName("scale")
-
       case TermName("$amp") => TermName("and")
       case TermName("$bar") => TermName("or")
       case TermName("$up") => TermName("xor")
@@ -55,33 +52,25 @@ object OpsInliningMacroImpl {
     }
   }
 
-  /**
-   * Rewrites a unary operator by implicit conversion into a direct call.
-   * `-x` will be rewritten as `withOps(x).unary_-(ev)`, then it will be rewritten as `ev.neg(x)` by this macro.
-   */
-  def unaryOp[T, Ev](c: Context)(ev: c.Expr[Ev]) = {
+  def op1(c: Context) = {
     import c.universe._
     c.macroApplication match {
-      case q"$implicitConv($lhs).$method($evidence)" => q"$evidence.${opsName(c)(method)}($lhs)"
+      case q"$implicitConv($lhs)($evidence).$method" => q"$evidence.${opsName(c)(method)}($lhs)"
     }
   }
 
-  /**
-   * Rewrites a binary operator by implicit conversion into a direct call.
-   * `x+y` will be rewritten as `withOps(x).+(y)(ev)`, then it will be rewritten as `ev.add(x, y)` by this macro.
-   */
-  def binaryOp[T1, T2, Ev](c: Context)(y: c.Expr[T2])(ev: c.Expr[Ev]) = {
+  def op2(c: Context)(y: c.Tree) = {
     import c.universe._
     c.macroApplication match {
-      case q"$implicitConv($lhs).$method($rhs)($evidence)" => q"$evidence.${opsName(c)(method)}($lhs, $rhs)"
-      case q"$implicitConv($lhs).$method[$ty]($rhs)($evidence)" => q"$evidence.${opsName(c)(method)}($lhs, $rhs)"
+      case q"$implicitConv($lhs)($evidence).$method($rhs)" => q"$evidence.${opsName(c)(method)}($lhs, $rhs)"
+      case q"$implicitConv($lhs)($evidence).$method[$ty]($rhs)" => q"$evidence.${opsName(c)(method)}($lhs, $rhs)"
     }
   }
 
-  def ipowOp[T, Ev](c: Context)(n: c.Expr[Int])(ev: c.Expr[Ev]) = {
+  def ipowOp(c: Context)(n: c.Tree) = {
     import c.universe._
     c.macroApplication match {
-      case q"$implicitConv($lhs).$method($rhs)($evidence)" => q"$evidence.${ops(c)("ipow")}($lhs, $rhs)"
+      case q"$implicitConv($lhs)($evidence).$method($rhs)" => q"$evidence.${ops(c)("ipow")}($lhs, $rhs)"
     }
   }
 

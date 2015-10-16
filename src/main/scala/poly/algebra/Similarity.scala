@@ -9,6 +9,7 @@ import poly.algebra.specgroup._
  */
 trait Similarity[-X, @sp(fdi) +S] {
 
+  /** Returns the similarity measure between two objects. */
   def sim(x: X, y: X): S
   
 }

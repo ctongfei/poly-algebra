@@ -17,12 +17,4 @@ trait ContravariantFunctor[F[_]] {
 
 }
 
-object ContravariantFunctor extends ImplicitHktGetter[ContravariantFunctor] {
-
-  /** The default contravariant functor on functions. */
-  implicit def functionContravariantFunctor[Z]: ContravariantFunctor[({type λ[-α] = α => Z})#λ] =
-    new ContravariantFunctor[({type λ[-α] = α => Z})#λ] {
-      def contramap[Y, X](g: Y => Z)(f: X => Y) = f andThen g
-    }
-
-}
+object ContravariantFunctor extends ImplicitHktGetter[ContravariantFunctor]

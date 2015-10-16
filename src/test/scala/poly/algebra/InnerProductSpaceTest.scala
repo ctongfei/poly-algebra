@@ -13,9 +13,9 @@ class InnerProductSpaceTest extends FunSuite {
 
     implicit val L2 = new InnerProductSpace[Point, Double] {
       def dot(x: Point, y: Point): Double = x.x * y.x + x.y * y.y
-      def powerOpsOfScalar: PowerOps[Double] = std.DoubleStructure
-      def fieldOfScalar: Field[Double] = std.DoubleStructure
-      def scale(x: Point, k: Double): Point = Point(x.x * k, x.y * k)
+      def powerOpsOnScalar: PowerOps[Double] = std.DoubleStructure
+      def fieldOnScalar: Field[Double] = std.DoubleStructure
+      def scale(k: Double, x: Point): Point = Point(x.x * k, x.y * k)
       def zero: Point = Point(0.0, 0.0)
       def add(x: Point, y: Point): Point = Point(x.x + y.x, x.y + y.y)
     }

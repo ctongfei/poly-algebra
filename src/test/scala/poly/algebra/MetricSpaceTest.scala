@@ -9,27 +9,27 @@ import poly.algebra.implicits._
  */
 class MetricSpaceTest extends FunSuite {
 
-//  test("MetricSpace 1: Absolute value on integers") {
-//    val ms1 = MetricSpace[Int, Int]
-//    assert(ms1.dist(2, 3) == 1)
-//    assert(ms1.dist(-4, 3) == 7)
-//    assert(ms1.dist(0, -5) == 5)
-//  }
+  test("MetricSpace 1: Absolute value on integers") {
+    val ms1 = MetricSpace[Int, Int]
+    assert(dist(2, 3) == 1)
+    assert(dist(-4, 3) == 7)
+    assert(dist(0, -5) == 5)
+  }
 
   test("MetricSpace 2: Hamming distance on Boolean sequences") {
-    val ms2 = MetricSpace.create[Array[Boolean], Int](
+    implicit val ms2 = MetricSpace.create[Array[Boolean], Int](
       (x, y) => Sum(x.length)(i => if (x(i) ^ y(i)) 1 else 0)
     )
     val a = Array(true, true, true, false)
     val b = Array(false, true, true, true)
     val c = Array(false, false, false, false)
-    assert(ms2.dist(a, b) == 2)
-    assert(ms2.dist(b, c) == 3)
-    assert(ms2.dist(a, c) == 3)
+    assert(dist(a, b) == 2)
+    assert(dist(b, c) == 3)
+    assert(dist(a, c) == 3)
   }
 
   test("MetricSpace 3: Levenshtein edit distance on strings") {
-    val ms3 = MetricSpace.create[String, Int](
+    implicit val ms3 = MetricSpace.create[String, Int](
       (x, y) => {
         val d = Array.ofDim[Int](x.length + 1, y.length + 1)
         for (i ← 0 to x.length) d(i)(0) = i
@@ -41,9 +41,9 @@ class MetricSpaceTest extends FunSuite {
         d(x.length)(y.length)
       }
     )
-    assert(ms3.dist("kitten", "sitting") == 3)
-    assert(ms3.dist("Saturday", "Sunday") == 3)
-    assert(ms3.dist("ACGTACGT", "CGTACGG") == 2)
+    assert(dist("kitten", "sitting") == 3)
+    assert(dist("Saturday", "Sunday") == 3)
+    assert(dist("ACGTACGT", "CGTACGG") == 2)
   }
 
 }

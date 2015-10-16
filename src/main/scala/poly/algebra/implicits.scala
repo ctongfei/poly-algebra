@@ -7,6 +7,7 @@ package poly.algebra
 object implicits {
 
   implicit final val IntStructure = std.IntStructure
+  implicit final val LongStructure = std.LongStructure
   implicit final val FloatStructure = std.FloatStructure
   implicit final val DoubleStructure = std.DoubleStructure
   implicit final val BooleanStructure = std.BooleanStructure
@@ -18,5 +19,8 @@ object implicits {
   implicit final val EitherStructure = std.EitherStructure
   implicit final val TupleStructure = std.TupleStructure
   implicit final val OptionStructure = std.OptionStructure
+
+  implicit final val InstantStructure = std.InstantStructure
+  implicit final val DurationStructure = std.DurationStructure
 
 }

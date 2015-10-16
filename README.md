@@ -16,7 +16,19 @@ import poly.algebra.hkt.ops._   // Enables operators on higher-kinded types
 
 #### Installation
 ```scala
-libraryDependencies += "me.tongfei" %% "poly-algebra" % "0.2.9-SNAPSHOT"
+libraryDependencies += "me.tongfei" %% "poly-algebra" % "0.2.10-SNAPSHOT"
 ```
 
 #### Features
+
+##### Sophisticated operators
+```scala
+val now = Instant.now()
+val h = Duration.ofHours(1)
+now + h
+h + now
+now - h
+now - (now - h)
+2 * h
+h * 2
+```

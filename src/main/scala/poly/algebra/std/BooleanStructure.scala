@@ -25,4 +25,8 @@ object BooleanStructure extends BooleanAlgebra[Boolean] with TotalOrder[Boolean]
   override final def sup(x: Boolean, y: Boolean) = x | y
   override final def inf(x: Boolean, y: Boolean) = x & y
 
+  override final def fromJavaEquals = true
+  override final def fromJavaComparable = true
+  override final def fromScalaPartiallyOrdered = true
+
 }

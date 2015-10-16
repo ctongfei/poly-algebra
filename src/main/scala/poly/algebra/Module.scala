@@ -33,34 +33,34 @@ import poly.algebra.specgroup._
 trait Module[X, @sp(fdi) S] extends MultiplicativeAction[X, S] with AdditiveCGroup[X] { self =>
 
   /** Returns the ring structure endowed on the type of scalars. */
-  implicit def ringOfScalar: Ring[S]
+  implicit def ringOnScalar: Ring[S]
 
   /** Scales a vector by a scalar. */
-  def scale(x: X, k: S): X
+  def scale(k: S, x: X): X
 
-  def neg(x: X): X = scale(x, ringOfScalar.negOne)
+  def neg(x: X): X = scale(ringOnScalar.negOne, x)
 
   /**
    * Returns the dual space of this module.
    * @since 0.2.7
    */
   def dualSpace: Module[X => S, S] = new Module[X => S, S] {
-    implicit def ringOfScalar = self.ringOfScalar
-    def scale(f: X => S, k: S) = x => ringOfScalar.mul(f(x), k)
-    def add(f: X => S, g: X => S) = x => ringOfScalar.add(f(x), g(x))
-    def zero = x => ringOfScalar.zero
-    override def neg(f: X => S) = x => ringOfScalar.neg(f(x))
-    override def sub(f: X => S, g: X => S) = x => ringOfScalar.sub(f(x), g(x))
+    implicit def ringOnScalar = self.ringOnScalar
+    def scale(k: S, f: X => S) = x => ringOnScalar.mul(f(x), k)
+    def add(f: X => S, g: X => S) = x => ringOnScalar.add(f(x), g(x))
+    def zero = x => ringOnScalar.zero
+    override def neg(f: X => S) = x => ringOnScalar.neg(f(x))
+    override def sub(f: X => S, g: X => S) = x => ringOnScalar.sub(f(x), g(x))
   }
 }
 
 object Module extends BinaryImplicitGetter[Module] {
 
   def create[X, @sp(fdi) R](fAdd: (X, X) => X, fScale: (R, X) => X, fZero: X)(implicit R: Ring[R]): Module[X, R] = new Module[X, R] {
-    def ringOfScalar = R
+    def ringOnScalar = R
     def zero = fZero
     def add(x: X, y: X) = fAdd(x, y)
-    def scale(x: X, k: R) = fScale(k, x)
+    def scale(k: R, x: X) = fScale(k, x)
   }
 
   /**
@@ -69,11 +69,11 @@ object Module extends BinaryImplicitGetter[Module] {
    * @return The trivial module of a ring over itself.
    */
   implicit def trivial[R](implicit R: Ring[R]): Module[R, R] = new Module[R, R] {
-    def ringOfScalar = R
+    def ringOnScalar = R
     def add(x: R, y: R) = R.add(x, y)
     override def neg(x: R) = R.neg(x)
     override def sub(x: R, y: R) = R.sub(x, y)
     def zero = R.zero
-    def scale(y: R, x: R) = R.mul(x, y)
+    def scale(x: R, y: R) = R.mul(x, y)
   }
 }
