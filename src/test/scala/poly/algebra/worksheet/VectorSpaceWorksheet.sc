@@ -33,7 +33,7 @@ val room = Celsius(25)
 val c = Kelvin(10)
 room + c
 room - c
-c + c
+c + c + c + c - c + c
 c * 2
 2.0 * c
 (room + c) - (room - c)

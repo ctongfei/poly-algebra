@@ -10,16 +10,19 @@ import poly.algebra._
  */
 object InstantStructure extends AffineSpace[Instant, Duration, Long] with TotalOrder[Instant] {
 
+  override def eq(x: Instant, y: Instant) = x equals y
   def cmp(x: Instant, y: Instant) = x compareTo y
-
   def translate(k: Duration, x: Instant) = x plus k
   def sub(x: Instant, y: Instant) = Duration.between(y, x)
   def vectorSpaceOnVector = DurationStructure
+
+  override def fromJavaComparable = true
+  override def fromJavaEquals = true
 }
 
 object DurationStructure extends VectorSpace[Duration, Long] with TotalOrder[Duration] {
 
-  //TODO: override
+  override def eq(x: Duration, y: Duration) = x equals y
   def cmp(x: Duration, y: Duration): Int = x compareTo y
 
   def scale(k: Long, x: Duration) = x multipliedBy k
@@ -39,5 +42,8 @@ object DurationStructure extends VectorSpace[Duration, Long] with TotalOrder[Dur
     def inv(x: Long): Long = 1l / x
     override def div(x: Long, y: Long) = x / y
   }
+
+  override def fromJavaComparable = true
+  override def fromJavaEquals = true
 
 }

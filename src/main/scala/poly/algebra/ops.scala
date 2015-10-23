@@ -28,7 +28,7 @@ trait Priority0Implicits extends Priority1Implicits {
     def -(y: X): X = macro OpsInliningMacroImpl.op2
   }
 
-  implicit class withMultiplicativeSemigroupOps[X: MultiplicativeSemigroup](x: X) {
+  implicit class WithMultiplicativeSemigroupOps[X: MultiplicativeSemigroup](x: X) {
     /** Returns the product of two elements given an implicit multiplicative semigroup. */
     def *(y: X): X = macro OpsInliningMacroImpl.op2
     /** Returns the ''n''-th power of an element given an implicit multiplicative semigroup. */

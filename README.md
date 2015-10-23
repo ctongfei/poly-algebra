@@ -26,10 +26,10 @@ libraryDependencies += "me.tongfei" %% "poly-algebra" % "0.2.10-SNAPSHOT"
 ```scala
 val now = Instant.now()
 val h = Duration.ofHours(1)
-now + h
-h + now
-now - h
-now - (now - h)
-2 * h
-h * 2
+now + h // type: Instant
+h + now // type: Instant
+now - h // type: Instant
+now - (now - h) // type: Duration
+2 * h // type: Duration
+h * 2 // type: Duration
 ```
