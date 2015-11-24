@@ -53,4 +53,5 @@ object FloatStructure extends IsReal[Float] with BoundedLattice[Float] {
   override def abs(x: Float) = Math.abs(x)
   override def sgn(x: Float) = Math.signum(x)
   override def dist(x: Float, y: Float) = Math.abs(x - y)
+
 }

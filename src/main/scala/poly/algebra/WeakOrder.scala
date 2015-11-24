@@ -13,9 +13,10 @@ import scala.annotation.unchecked._
  * Weak orders appear ubiquitously in ordered data structures and sorting algorithms.
  *
  * An instance of this typeclass should satisfy the following axioms:
- *  - $lawOrderTransitivity
- *  - $lawOrderTotality
- *
+ * <ul>
+ *  <li> $lawOrderTransitivity </li>
+ *  <li> $lawOrderTotality </li>
+ * </ul>
  * @define lawOrderTotality '''Totality''':  ∀''a'', ''b''∈X, ''a'' <= ''b'' or ''b'' <= ''a''.
  * @since 0.1.0
  * @author Tongfei Chen (ctongfei@gmail.com).
@@ -54,11 +55,6 @@ trait WeakOrder[@sp(fdib) -X] extends PartialOrder[X] { self =>
     }
   }
 
-  /** Marks whether the `cmp` method is derived from [[java.lang.Comparable]] or [[scala.math.Ordered]]. */
-  def fromJavaComparable = false
-
-  def weakOrderSameAs[X1 <: X](that: WeakOrder[X1]) = (this eq that) || (this.fromJavaComparable && that.fromJavaComparable)
-
 }
 
 object WeakOrder extends ImplicitGetter[WeakOrder] {
@@ -73,8 +69,6 @@ object WeakOrder extends ImplicitGetter[WeakOrder] {
 
   implicit def fromJavaComparable[X <: java.lang.Comparable[X]]: WeakOrder[X] = new WeakOrder[X] {
     def cmp(x: X, y: X) = x compareTo y
-    override def fromJavaComparable = true
-    override def fromJavaEquals = true
   }
 
   implicit object ContravariantFunctor extends ContravariantFunctor[WeakOrder] {

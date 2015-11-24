@@ -1,6 +1,6 @@
 package poly.algebra
 
 /**
- * @author Tongfei Chen (ctongfei@gmail.com).
- */
+  * @author Tongfei Chen
+  */
 package object function extends GenericFunctions with MapReduceMathOps

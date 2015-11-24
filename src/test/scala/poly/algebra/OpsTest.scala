@@ -1,7 +1,7 @@
 package poly.algebra
 
-import poly.algebra.ops._
-import poly.algebra.implicits._
+import poly.algebra.syntax._
+import poly.algebra.specgroup._
 
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
@@ -20,6 +20,16 @@ object OpsTest extends App {
   val p0 = new Prob(-1.0)
   val p2 = new Prob(-3.0)
   val p3 = p0 * p2
+
+
+
+  def timesTwo[@sp(fd) R: IsReal](x: R): R = {
+    x * generic[R](2.0)
+  }
+
+  def times[@sp(fd) R: IsReal](x: R, y: R): R = x * y
+
+
 
   val bp = 0
 

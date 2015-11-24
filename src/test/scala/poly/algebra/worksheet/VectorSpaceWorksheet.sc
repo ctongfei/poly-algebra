@@ -8,12 +8,12 @@ import java.time._
 val t = Instant.now()
 val d = Duration.ofHours(1)
 
-t + d
-t - d
-d + t
-(t + d) - (t - d)
-d * 3l
-4l * d
+t :+ d
+t :- d
+d +: t
+(t :+ d) :-: (t :- d)
+d :* 3l
+4l *: d
 
 // TEST 2
 case class Celsius(t: Double)
@@ -31,9 +31,9 @@ implicit object Celsius extends AffineSpace[Celsius, Kelvin, Double] {
 }
 val room = Celsius(25)
 val c = Kelvin(10)
-room + c
-room - c
+room :+ c
+room :- c
 c + c + c + c - c + c
-c * 2
-2.0 * c
-(room + c) - (room - c)
+c :* 2
+2.0 *: c
+(room :+ c) :-: (room :- c)

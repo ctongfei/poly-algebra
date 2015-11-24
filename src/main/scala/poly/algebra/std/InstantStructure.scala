@@ -16,8 +16,6 @@ object InstantStructure extends AffineSpace[Instant, Duration, Long] with TotalO
   def sub(x: Instant, y: Instant) = Duration.between(y, x)
   def vectorSpaceOnVector = DurationStructure
 
-  override def fromJavaComparable = true
-  override def fromJavaEquals = true
 }
 
 object DurationStructure extends VectorSpace[Duration, Long] with TotalOrder[Duration] {
@@ -43,7 +41,5 @@ object DurationStructure extends VectorSpace[Duration, Long] with TotalOrder[Dur
     override def div(x: Long, y: Long) = x / y
   }
 
-  override def fromJavaComparable = true
-  override def fromJavaEquals = true
 
 }

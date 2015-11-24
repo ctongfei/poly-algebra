@@ -1,6 +1,6 @@
 name := "poly-algebra"
 
-version := "0.2.11-SNAPSHOT"
+version := "0.2.15-SNAPSHOT"
 
 organization := "me.tongfei"
 
@@ -8,21 +8,13 @@ scalaVersion := "2.11.7"
 
 isSnapshot := true
 
-resolvers += Resolver.sonatypeRepo("snapshots")
-
 libraryDependencies += "org.scala-lang"    %  "scala-reflect"   % scalaVersion.value
-
-libraryDependencies += "me.tongfei"        %% "poly-macroutil"  % "0.1.0-SNAPSHOT"
-
+libraryDependencies += "me.tongfei"        %% "poly-macroutil"  % "0.2.0"
 libraryDependencies += "org.scalatest"     %% "scalatest"       % "2.2.2"             % Test
-
 libraryDependencies += "org.scalacheck"    %% "scalacheck"      % "1.12.4"            % Test
-
 libraryDependencies += "com.storm-enroute" %% "scalameter-core" % "0.7"               % Test
 
 scalacOptions in (Compile, doc) += "-diagrams"
-
-scalacOptions += "-Ymacro-debug-lite"
 
 classDiagramSettings
 

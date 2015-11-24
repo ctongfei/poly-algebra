@@ -10,10 +10,10 @@ import scala.language.higherKinds
  */
 trait ConcatenativeSemigroupKind[S[_]] { self =>
 
-  def concat[x](sx: S[x], sy: S[x]): S[x]
+  def concat[X](sx: S[X], sy: S[X]): S[X]
 
-  implicit def concatenativeSemigroup[x] = new ConcatenativeSemigroup[S[x]] {
-    def concat(a: S[x], b: S[x]): S[x] = self.concat(a, b)
+  implicit def concatenativeSemigroup[X] = new ConcatenativeSemigroup[S[X]] {
+    def concat(a: S[X], b: S[X]): S[X] = self.concat(a, b)
   }
   
 }

@@ -26,10 +26,6 @@ trait Equiv[@sp(fdib) -X] {
   /** Checks if two objects of the same type are not equivalent under this equivalence equation. */
   def ne(x: X, y: X): Boolean = !eq(x, y)
 
-  /** Marks whether the `eq` method is derived from `java.lang.Object.equals`. */
-  def fromJavaEquals = false
-
-  def equivSameAs[X1 <: X](that: Equiv[X1]) = (this eq that) || (this.fromJavaEquals && that.fromJavaEquals)
 }
 
 
@@ -42,7 +38,6 @@ object Equiv extends ImplicitGetter[Equiv] {
   implicit def default[@sp X]: Equiv[X] = new Equiv[X] {
     def eq(x: X, y: X) = x == y
     override def ne(x: X, y: X) = x != y
-    override def fromJavaEquals = true
   }
 
   def by[@sp Y, X](f: Y => X)(implicit ev: Equiv[X]): Equiv[Y] = new Equiv[Y] {

@@ -19,8 +19,8 @@ class VectorSpaceTest extends FunSuite {
     )
     assert(Point(2, 3) + Point(4, 5) == Point(6, 8))
     assert(Point(4, 4) - Point(1, 2) == Point(3, 2))
-    assert(Point(5, 5) * 2.0 == Point(10, 10))
-    assert(2.0 * Point(4, 4) == Point(8, 8))
+    assert(Point(5, 5) :* 2.0 == Point(10, 10))
+    assert(2.0 *: Point(4, 4) == Point(8, 8))
     assert(zero[Point] == Point(0, 0))
   }
 

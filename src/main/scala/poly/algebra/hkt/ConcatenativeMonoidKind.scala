@@ -8,11 +8,11 @@ import scala.language.higherKinds
  */
 trait ConcatenativeMonoidKind[M[_]] extends ConcatenativeSemigroupKind[M] { self =>
 
-  def empty[x]: M[x]
+  def empty[X]: M[X]
 
-  implicit def concatenativeMonoid[x]: ConcatenativeMonoid[M[x]] = new ConcatenativeMonoid[M[x]] {
-    def concat(mx: M[x], my: M[x]) = self.concat(mx, my)
-    def empty: M[x] = self.empty[x]
+  implicit def concatenativeMonoid[X]: ConcatenativeMonoid[M[X]] = new ConcatenativeMonoid[M[X]] {
+    def concat(mx: M[X], my: M[X]) = self.concat(mx, my)
+    def empty: M[X] = self.empty[X]
   }
   
 }

@@ -1,12 +1,18 @@
 package poly.algebra.function
 
 import poly.algebra._
+import poly.algebra.macroimpl._
 import poly.algebra.specgroup._
+import scala.language.experimental.macros
 
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
 trait GenericFunctions {
+
+  def generic[X](x: Double)(implicit isReal: IsReal[X]): X = macro OpsInlining.genericImpl[X]
+  def generic[X](x: Float)(implicit isReal: IsReal[X]): X = macro OpsInlining.genericImpl[X]
+  def generic[X](x: Int)(implicit isReal: IsReal[X]): X = macro OpsInlining.genericImpl[X]
 
   /** Returns the identity element of a type. */
   def id[X](implicit ev: HasIdentity[X]) = ev.id

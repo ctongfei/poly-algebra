@@ -1,11 +1,13 @@
 package poly.algebra.macroimpl
 
+import poly.algebra._
+
 import scala.reflect.macros.blackbox._
 
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-object OpsInliningMacroImpl {
+object OpsInlining {
 
   def ops(c: Context)(s: String): c.TermName = {
     import c.universe._
@@ -37,6 +39,12 @@ object OpsInliningMacroImpl {
       case TermName("$percent") => TermName("mod")
       case TermName("$div$percent") => TermName("quotmod")
 
+      case TermName("$colon$times") => TermName("scale")
+      case TermName("$times$colon") => TermName("scale")
+
+      case TermName("$colon$plus") => TermName("translate")
+      case TermName("$plus$colon") => TermName("translate")
+
       case TermName("$amp") => TermName("and")
       case TermName("$bar") => TermName("or")
       case TermName("$up") => TermName("xor")
@@ -67,11 +75,32 @@ object OpsInliningMacroImpl {
     }
   }
 
+  def op2R(c: Context)(y: c.Tree) = {
+    import c.universe._
+    c.macroApplication match {
+      case q"$implicitConv($lhs)($evidence).$method($rhs)" => q"$evidence.${opsName(c)(method)}($rhs, $lhs)"
+      case q"$implicitConv($lhs)($evidence).$method[$ty]($rhs)" => q"$evidence.${opsName(c)(method)}($rhs, $lhs)"
+    }
+  }
+
+  def op2LiftRight(c: Context)(y: c.Tree) = {
+    import c.universe._
+    c.macroApplication match {
+      case q"$implicitConv($lhs)($evidence).$method($rhs)" => q"$evidence.${opsName(c)(method)}($lhs, $evidence.fromDouble($rhs))"
+      case q"$implicitConv($lhs)($evidence).$method[$ty]($rhs)" => q"$evidence.${opsName(c)(method)}($lhs, $evidence.fromDouble($rhs))"
+    }
+  }
+
   def ipowOp(c: Context)(n: c.Tree) = {
     import c.universe._
     c.macroApplication match {
       case q"$implicitConv($lhs)($evidence).$method($rhs)" => q"$evidence.${ops(c)("ipow")}($lhs, $rhs)"
     }
+  }
+
+  def genericImpl[X](c: Context)(x: c.Expr[X])(isReal: c.Expr[IsReal[X]]): c.Expr[X] = {
+    import c.universe._
+    c.Expr[X](q"$isReal.fromDouble($x)")
   }
 
 }

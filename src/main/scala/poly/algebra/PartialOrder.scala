@@ -41,10 +41,6 @@ trait PartialOrder[@sp(fdib) -X] extends Equiv[X] { self =>
     override def reverse = self
     def le(x: X, y: X) = self.le(y, x)
   }
-  
-  def fromScalaPartiallyOrdered = false
-
-  def partialOrderSameAs[X1 <: X](that: PartialOrder[X1]) = (this eq that) || (this.fromScalaPartiallyOrdered && that.fromScalaPartiallyOrdered)
 
 }
 
@@ -55,7 +51,6 @@ object PartialOrder extends ImplicitGetter[PartialOrder] {
       case Some(r) => r <= 0
       case None => false
     }
-    override def fromScalaPartiallyOrdered = true
   }
   
   def create[@sp(fdib) X](fLe: (X, X) => Boolean): PartialOrder[X] = new PartialOrder[X] {

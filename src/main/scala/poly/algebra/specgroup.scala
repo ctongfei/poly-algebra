@@ -3,7 +3,7 @@ package poly.algebra
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-private[poly] object specgroup {
+object specgroup {
 
   type sp = specialized
   final val d = new Specializable.Group(Tuple1(Double))

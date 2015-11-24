@@ -1,9 +1,9 @@
 package poly.algebra
 
 import org.scalatest._
-import poly.algebra.implicits._
-import poly.algebra.ops._
+import poly.algebra.syntax._
 import java.time._
+import scala.Predef.{any2stringadd => _, _}
 
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
@@ -11,12 +11,13 @@ import java.time._
 class AffineSpaceTest extends FunSuite {
 
   test("Affine space on instants") {
+    import poly.algebra.implicits._
     val t = Instant.now()
     val d = Duration.ofHours(1)
     val d2 = d + d
-    val t1 = d + t
-    val t2 = t - d
-    assert(t1 - t2 == d2)
+    val t1 = t :+ d
+    val t2 = t :- d
+    assert(t1 :-: t2 == d2)
   }
 
 }

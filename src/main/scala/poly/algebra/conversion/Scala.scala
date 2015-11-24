@@ -1,16 +1,13 @@
-package poly.algebra
+package poly.algebra.conversion
 
+import poly.algebra._
 import scala.language.implicitConversions
 
 /**
  * This package contains implicit converters that converts Scala math typeclasses to Poly-algebra typeclasses.
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-package object conversion {
-
-  implicit def javaComparatorAsPoly[X](s: java.util.Comparator[X]): WeakOrder[X] = new WeakOrder[X] {
-    def cmp(x: X, y: X) = s.compare(x, y)
-  }
+object Scala {
 
   implicit def scalaEquivAsPoly[X](s: scala.Equiv[X]): Equiv[X] = new Equiv[X] {
     def eq(x: X, y: X): Boolean = s.equiv(x, y)
@@ -67,8 +64,6 @@ package object conversion {
   implicit def scalaHashingAsPoly[X](s: scala.util.hashing.Hashing[X]): IntHashing[X] = new IntHashing[X] {
     def hash(x: X) = s.hash(x)
     def eq(x: X, y: X) = x equals y
-    override def fromJavaEquals = true
-    override def fromJavaHashCode = true
   }
 
 }

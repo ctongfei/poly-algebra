@@ -1,8 +1,7 @@
 package poly.algebra
 
 import org.scalatest._
-import poly.algebra.function._
-import poly.algebra.implicits._
+import poly.algebra.syntax._
 
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
@@ -10,7 +9,7 @@ import poly.algebra.implicits._
 class MetricSpaceTest extends FunSuite {
 
   test("MetricSpace 1: Absolute value on integers") {
-    val ms1 = MetricSpace[Int, Int]
+    implicit val ms1 = MetricSpace[Int, Int]
     assert(dist(2, 3) == 1)
     assert(dist(-4, 3) == 7)
     assert(dist(0, -5) == 5)

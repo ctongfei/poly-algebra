@@ -47,4 +47,5 @@ object Monad extends ImplicitHktGetter[Monad] {
     override def map[X, Y](mx: W => X)(f: X => Y): W => Y = f compose mx
   }
 
+
 }

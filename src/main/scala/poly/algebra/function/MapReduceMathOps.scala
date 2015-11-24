@@ -4,6 +4,7 @@ import poly.algebra._
 import poly.macroutil._
 import poly.algebra.specgroup._
 import scala.language.experimental.macros
+import scala.reflect.macros.blackbox._
 
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
@@ -28,5 +29,5 @@ trait MapReduceMathOps {
 
   def Inf[X](n: Int)(f: Int => X)(implicit X: LowerSemilattice[X]): X =
     MapReduceOps.bySemigroup(n, f, X.inf)
-  
+
 }

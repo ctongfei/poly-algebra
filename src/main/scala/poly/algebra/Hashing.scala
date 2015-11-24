@@ -20,7 +20,6 @@ object Hashing extends BinaryImplicitGetter[Hashing] {
   def create[@sp X, H](fHash: X => H)(implicit X: Equiv[X]): Hashing[X, H] = new Hashing[X, H] {
     def hash(x: X): H = fHash(x)
     def eq(x: X, y: X) = X.eq(x, y)
-    override def fromJavaEquals = X.fromJavaEquals
   }
 
 }

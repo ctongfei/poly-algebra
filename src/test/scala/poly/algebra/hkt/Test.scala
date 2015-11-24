@@ -16,6 +16,7 @@ object Test extends App {
     b ← (x: Int) => x + 10
   } yield a + b
 
+
   println(g(3))
 
   val f1 = (x: Int) => Array.fill(x)(x)
@@ -36,3 +37,4 @@ object Test extends App {
   val bp = 0
 
 }
+
