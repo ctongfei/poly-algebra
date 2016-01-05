@@ -18,6 +18,7 @@ trait Functor[F[_]] {
 
   //def unzip[X, Y](fxy: F[(X, Y)]): (F[X], F[Y]) = (map(fxy)(_._1), map(fxy)(_._2))
 
+
 }
 
 object Functor extends ImplicitHktGetter[Functor]

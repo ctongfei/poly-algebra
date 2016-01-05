@@ -22,10 +22,4 @@ trait HasBottom[@sp(fdib) +X] {
 
 }
 
-object HasBottom extends ImplicitGetter[HasBottom] {
-
-  /** Creates a `HasBottom` object given an minimum element `bot` of a type. */
-  def create[@sp(fdi) X](botElem: X) = new HasBottom[X] {
-    def bot = botElem
-  }
-}
+object HasBottom extends ImplicitGetter[HasBottom]

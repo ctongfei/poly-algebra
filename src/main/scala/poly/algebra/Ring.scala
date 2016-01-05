@@ -7,15 +7,19 @@ import poly.algebra.specgroup._
  * Represents a ring. A ring is an Abelian additive group together with a multiplicative monoid.
  *
  * An instance of this typeclass should satisfy the following axioms:
- *  - $lawAdditiveAssociativity
- *  - $lawAdditiveIdentity
- *  - $lawAdditiveInvertibility
- *  - $lawAdditiveCommutativity
- *  - $lawMultiplicativeAssociativity
- *  - $lawMultiplicativeIdentity
- *  - $lawDistributivityMA
+ * <ul>
+ *  <li> $lawAdditiveAssociativity </li>
+ *  <li> $lawAdditiveIdentity </li>
+ *  <li> $lawAdditiveInvertibility </li>
+ *  <li> $lawAdditiveCommutativity </li>
+ *  <li> $lawMultiplicativeAssociativity </li>
+ *  <li> $lawMultiplicativeIdentity </li>
+ *  <li> $lawDistributivityMA </li>
+ * </ul>
  * @author Tongfei Chen (ctongfei@gmail.com).
+ * @since 0.1.0
  */
+@scala.annotation.implicitNotFound("Cannot find a ring on type ${X}.")
 trait Ring[@sp(fdi) X] extends Semiring[X] with AdditiveCGroup[X] {
 
   /** Returns the -1 element in this ring. */

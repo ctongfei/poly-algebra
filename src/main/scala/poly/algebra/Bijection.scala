@@ -4,7 +4,7 @@ import poly.algebra.factory._
 import poly.algebra.hkt._
 
 /**
- * Represents a one-to-one function between two types.
+ * Represents an one-to-one function between two types.
  * @author Tongfei Chen (ctongfei@gmail.com).
  * @since 0.2.5
  */
@@ -33,22 +33,22 @@ object Bijection extends BinaryImplicitGetter[Bijection] {
   /** Symbolic alias for bijections. */
   type ⇔[X, Y] = Bijection[X, Y]
 
-  def create[X, Y](f1: X => Y, f2: Y => X): Bijection[X, Y] = new (X <=> Y) {
+  def create[X, Y](f1: X => Y, f2: Y => X): X <=> Y = new (X <=> Y) {
     def invert(y: Y) = f2(y)
     def apply(x: X): Y = f1(x)
   }
 
-  implicit object Category extends Category[Bijection] {
+  implicit object Category extends Category[<=>] {
     def id[X] = Bijection.create(x => x, x => x)
-    def compose[X, Y, Z](g: Bijection[Y, Z], f: Bijection[X, Y]) = g compose f
+    def compose[X, Y, Z](g: Y <=> Z, f: X <=> Y) = g compose f
   }
 
-  implicit def IdentityBijection[X]: Bijection[X, X] = new (X <=> X) {
+  implicit def IdentityBijection[X]: X <=> X = new (X <=> X) {
     def invert(x: X): X = x
     def apply(x: X): X = x
   }
 
-  implicit def SwapBijection[X, Y]: Bijection[(X, Y), (Y, X)] = new ((X, Y) <=> (Y, X)) {
+  implicit def SwapBijection[X, Y]: (X, Y) <=> (Y, X) = new ((X, Y) <=> (Y, X)) {
     def invert(y: (Y, X)): (X, Y) = y.swap
     def apply(x: (X, Y)): (Y, X) = x.swap
   }

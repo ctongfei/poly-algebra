@@ -29,7 +29,7 @@ object DurationStructure extends VectorSpace[Duration, Long] with TotalOrder[Dur
   override def sub(x: Duration, y: Duration) = x minus y
   def zero = Duration.ZERO
 
-  /** This is not really a field; but we could pretend that it is (thought them as real numbers). */
+  /** This is not really a field; but we could pretend that it is (consider them as real numbers). */
   implicit object fieldOnScalar extends Field[Long] {
     final val zero: Long = 0l
     final val one: Long = 1l

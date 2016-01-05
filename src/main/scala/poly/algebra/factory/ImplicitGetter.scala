@@ -39,6 +39,10 @@ trait ImplicitHktGetter[Ev[_[_]]] {
   def apply[A[_]](implicit ev: Ev[A]): Ev[A] = ev
 }
 
-trait BinaryImplicitHktGetter[Ev[_[_, _]]] {
+trait Unary2TImplicitHktGetter[Ev[_[_, _]]] {
   def apply[A[_, _]](implicit ev: Ev[A]): Ev[A] = ev
+}
+
+trait Binary1TImplicitHktGetter[Ev[_[_], _[_]]] {
+  def apply[A[_], B[_]](implicit ev: Ev[A, B]): Ev[A, B] = ev
 }

@@ -26,4 +26,4 @@ trait Bifunctor[×[_, _]] {
 
 }
 
-object Bifunctor extends BinaryImplicitHktGetter[Bifunctor]
+object Bifunctor extends Unary2TImplicitHktGetter[Bifunctor]

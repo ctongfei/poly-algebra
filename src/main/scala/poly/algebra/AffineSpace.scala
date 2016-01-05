@@ -4,6 +4,10 @@ import poly.algebra.factory._
 import poly.algebra.specgroup._
 
 /**
+ * Represents an affine space.
+ * @tparam P Type of points
+ * @tparam V Type of vectors
+ * @tparam F Type of field on which the vector space is based
  * @author Tongfei Chen (ctongfei@gmail.com).
  * @since 0.2.10
  */

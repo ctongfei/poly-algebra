@@ -28,6 +28,4 @@ object AdditiveCGroup extends ImplicitGetter[AdditiveCGroup] {
     def add(x: X, y: X): X = f(x, y)
     def zero: X = zeroElem
   }
-
 }
-

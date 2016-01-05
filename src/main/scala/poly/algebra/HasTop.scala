@@ -22,10 +22,4 @@ trait HasTop[@sp(fdib) +X] {
 
 }
 
-object HasTop extends ImplicitGetter[HasTop] {
-
-  /** Creates a `HasTop` object given an maximum element `top` of a type. */
-  def create[@sp(fdi) X](topElem: X) = new HasTop[X] {
-    def top = topElem
-  }
-}
+object HasTop extends ImplicitGetter[HasTop]

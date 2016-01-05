@@ -6,6 +6,7 @@ import poly.algebra.specgroup._
 /**
  * Represents the support for trigonometric and exponential/logarithmic functions.
  * @author Tongfei Chen (ctongfei@gmail.com).
+ * @since 0.2.0
  */
 trait TrigExpOps[@sp(fd) X] {
   def e: X

@@ -20,6 +20,7 @@ trait LowerSemilattice[@sp(Boolean) X] { self =>
   /** Returns the infimum (meet, a.k.a. greatest lower bound) of the two arguments. */
   def inf(x: X, y: X): X
 
+  /** Casts this lower semilattice as a partial order if an implicit equivalence relation is present. */
   def asPartialOrder(implicit e: Equiv[X]): PartialOrder[X] = new PartialOrder[X] {
     override def eq(x: X, y: X) = e.eq(x, y)
     override def ne(x: X, y: X) = e.ne(x, y)
@@ -32,6 +33,7 @@ trait LowerSemilattice[@sp(Boolean) X] { self =>
     def sup(x: X, y: X) = inf(x, y)
   }
 
+  /** Casts this structure as an symbol-agnostic semigroup with the infimum operation on this semilattice. */
   def asSemigroupWithInf: CSemigroup[X] = new CSemigroup[X] {
     def op(x: X, y: X) = inf(x, y)
   }
@@ -39,7 +41,7 @@ trait LowerSemilattice[@sp(Boolean) X] { self =>
 
 object LowerSemilattice extends ImplicitGetter[LowerSemilattice] {
 
-  def create[@sp(Boolean) X](fInf: (X, X) => X): LowerSemilattice[X] = new LowerSemilattice[X] {
+  def by[@sp(Boolean) X](fInf: (X, X) => X): LowerSemilattice[X] = new LowerSemilattice[X] {
     def inf(x: X, y: X): X = fInf(x, y)
   }
 }

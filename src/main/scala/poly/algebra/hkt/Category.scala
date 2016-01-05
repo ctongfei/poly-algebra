@@ -22,4 +22,4 @@ trait Category[⇾[_, _]] { self =>
 
 }
 
-object Category extends BinaryImplicitHktGetter[Category]
+object Category extends Unary2TImplicitHktGetter[Category]

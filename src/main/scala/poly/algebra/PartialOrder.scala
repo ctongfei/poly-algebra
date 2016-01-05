@@ -42,6 +42,8 @@ trait PartialOrder[@sp(fdib) -X] extends Equiv[X] { self =>
     def le(x: X, y: X) = self.le(y, x)
   }
 
+  override def contramap[Y](f: Y => X): PartialOrder[Y] = PartialOrder.by(f)(self)
+
 }
 
 object PartialOrder extends ImplicitGetter[PartialOrder] {

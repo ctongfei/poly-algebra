@@ -18,16 +18,16 @@ trait MapReduceMathOps {
   def Product[@sp(fdi) X](n: Int)(f: Int => X)(implicit X: MultiplicativeSemigroup[X]): X =
     MapReduceOps.bySemigroup(n, f, X.mul)
   
-  def Max[X](n: Int)(f: Int => X)(implicit X: WeakOrder[X]): X =
+  def Max[@sp(fdi) X](n: Int)(f: Int => X)(implicit X: WeakOrder[X]): X =
     MapReduceOps.bySemigroup(n, f, X.max[X])
 
-  def Min[X](n: Int)(f: Int => X)(implicit X: WeakOrder[X]): X =
+  def Min[@sp(fdi) X](n: Int)(f: Int => X)(implicit X: WeakOrder[X]): X =
     MapReduceOps.bySemigroup(n, f, X.min[X])
 
-  def Sup[X](n: Int)(f: Int => X)(implicit X: UpperSemilattice[X]): X =
+  def Sup[@sp(fdi) X](n: Int)(f: Int => X)(implicit X: UpperSemilattice[X]): X =
     MapReduceOps.bySemigroup(n, f, X.sup)
 
-  def Inf[X](n: Int)(f: Int => X)(implicit X: LowerSemilattice[X]): X =
+  def Inf[@sp(fdi) X](n: Int)(f: Int => X)(implicit X: LowerSemilattice[X]): X =
     MapReduceOps.bySemigroup(n, f, X.inf)
 
 }

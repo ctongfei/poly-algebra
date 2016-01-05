@@ -6,7 +6,9 @@ import scala.language.reflectiveCalls
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-object ops {
+object ops extends HktImplicits
+
+trait HktImplicits {
 
   /**
    * Enriches any type with higher-kinded type operations if appropriate algebraic structures are implicitly provided.
@@ -14,7 +16,7 @@ object ops {
    * @tparam H Higher-kinded type
    * @tparam X Type of the variable
    */
-  implicit class withHktOps[H[_], X](val x: H[X]) extends AnyVal {
+  implicit class withHktOps[H[_], X](val x: H[X]) {
 
     def map      [Y](f: X => Y      )(implicit H: Functor[H]             ): H[Y]      = H.map(x)(f)
     def contramap[Y](f: Y => X      )(implicit H: ContravariantFunctor[H]): H[Y]      = H.contramap(x)(f)
@@ -30,7 +32,7 @@ object ops {
 
   }
 
-  implicit class withBiHktOps[H[_, _], X, Y](val x: H[X, Y]) extends AnyVal {
+  implicit class withBiHktOps[H[_, _], X, Y](val x: H[X, Y]) {
 
     def map1     [Z](f: X => Z)      (implicit H: Bifunctor[H]         ) = H.map1(x)(f)
     def map2     [Z](f: Y => Z)      (implicit H: Bifunctor[H]         ) = H.map2(x)(f)
@@ -48,7 +50,7 @@ object ops {
 
   }
 
-  implicit class KleisliOps[M[_], X, Y](val f: X => M[Y]) extends AnyVal {
+  implicit class KleisliOps[M[_], X, Y](val f: X => M[Y]) {
     def kleisliAndThen[Z](g: Y => M[Z])(implicit M: Monad[M]) = M.Kleisli.andThen(f, g)
     def kleisliCompose[Z](g: Z => M[X])(implicit M: Monad[M]) = M.Kleisli.compose(f, g)
 
@@ -65,7 +67,7 @@ object ops {
     def <=<           [Z](g: Z => M[X])(implicit M: Monad[M]) = M.Kleisli.compose(f, g)
   }
 
-  implicit class CoKleisliOps[W[_], X, Y](val f: W[X] => Y) extends AnyVal {
+  implicit class CoKleisliOps[W[_], X, Y](val f: W[X] => Y) {
     def coKleisliAndThen[Z](g: W[Y] => Z)(implicit W: Comonad[W]) = W.CoKleisli.andThen(f, g)
     def coKleisliCompose[Z](g: W[Z] => X)(implicit W: Comonad[W]) = W.CoKleisli.compose(f, g)
 

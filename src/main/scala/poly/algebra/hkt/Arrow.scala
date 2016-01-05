@@ -23,4 +23,4 @@ trait Arrow[⇾[_, _]] extends Category[⇾] with Profunctor[⇾] {
   def contramap[X, Y, Z](g: Y ⇾ Z)(f: X => Y) = compose(g, lift(f))
 }
 
-object Arrow extends BinaryImplicitHktGetter[Arrow]
+object Arrow extends Unary2TImplicitHktGetter[Arrow]

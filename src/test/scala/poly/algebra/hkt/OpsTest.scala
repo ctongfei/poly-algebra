@@ -1,8 +1,7 @@
 package poly.algebra.hkt
 
 import org.scalatest._
-import poly.algebra.hkt.ops._
-import poly.algebra.implicits._
+import poly.algebra.hkt.syntax._
 
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).

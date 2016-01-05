@@ -10,20 +10,23 @@ import poly.algebra.specgroup._
  * together with a linear distributive scaling function.
  *
  * An instance of this typeclass should satisfy the following axioms:
- *  - S is a field.
- *  - $lawAdditiveAssociativity
- *  - $lawAdditiveIdentity
- *  - $lawAdditiveInvertibility
- *  - $lawAdditiveCommutativity
- *  - $lawCompatibility
- *  - $lawScalingIdentity
- *  - $lawDistributivitySV
- *  - $lawDistributivitySS
+ * <ul>
+ *  <li> S is a field. </li>
+ *  <li> $lawAdditiveAssociativity </li>
+ *  <li> $lawAdditiveIdentity </li>
+ *  <li> $lawAdditiveInvertibility </li>
+ *  <li> $lawAdditiveCommutativity </li>
+ *  <li> $lawCompatibility </li>
+ *  <li> $lawScalingIdentity </li>
+ *  <li> $lawDistributivitySV </li>
+ *  <li> $lawDistributivitySS </li>
+ * </ul>
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
 trait VectorSpace[X, @sp(fd) S] extends Module[X, S] { self =>
 
-  implicit def fieldOnScalar: Field[S]
+  def fieldOnScalar: Field[S]
+
   def ringOnScalar = fieldOnScalar
 
   /**
@@ -65,6 +68,10 @@ object VectorSpace extends BinaryImplicitGetter[VectorSpace] {
     def zero = fZero
   }
 
+  /**
+    * Constructs the natural function space of type `X => Y` if there exists a vector space over `Y`.
+    * @return
+    */
   implicit def lift[X, Y, @sp(fd) F](implicit Y: VectorSpace[Y, F]): VectorSpace[X => Y, F] = new VectorSpace[X => Y, F] {
     implicit def fieldOnScalar = Y.ringOnScalar
     def scale(k: F, f: (X) => Y) = x => Y.scale(k, f(x))

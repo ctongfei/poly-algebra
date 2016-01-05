@@ -55,6 +55,8 @@ trait WeakOrder[@sp(fdib) -X] extends PartialOrder[X] { self =>
     }
   }
 
+  override def contramap[Y](f: Y => X): WeakOrder[Y] = WeakOrder.by(f)(self)
+
 }
 
 object WeakOrder extends ImplicitGetter[WeakOrder] {

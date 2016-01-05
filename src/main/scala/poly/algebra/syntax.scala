@@ -1,5 +1,7 @@
 package poly.algebra
 
+import poly.algebra.function._
+
 /**
   * An object for all-in-one importing experience.
   * Once imported this `syntax` object,
@@ -7,7 +9,7 @@ package poly.algebra
   * @author Tongfei Chen
   * @since 0.2.15
   */
-object syntax extends function.GenericFunctions with function.MapReduceMathOps with Priority1Implicits {
+object syntax extends GenericFunctions with MapReduceMathOps with Priority1Implicits {
 
   implicit final val IntStructure = std.IntStructure
   implicit final val LongStructure = std.LongStructure

@@ -25,4 +25,4 @@ trait Profunctor[⇾[_, _]] { self =>
 
 }
 
-object Profunctor extends BinaryImplicitHktGetter[Profunctor]
+object Profunctor extends Unary2TImplicitHktGetter[Profunctor]

@@ -31,6 +31,8 @@ trait TotalOrder[@sp(fdib) -X] extends Lattice[X @uv] with WeakOrder[X] { self =
     override def reverse: TotalOrder[X] = self
     def cmp(x: X, y: X): Int = -self.cmp(x, y)
   }
+
+  override def contramap[Y](f: Y => X): TotalOrder[Y] = TotalOrder.by(f)(self)
 }
 
 object TotalOrder extends ImplicitGetter[TotalOrder] {

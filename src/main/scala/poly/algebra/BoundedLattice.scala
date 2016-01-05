@@ -7,14 +7,16 @@ import poly.algebra.specgroup._
  * Represents a bounded lattice, i.e., a lattice containing both the top and the bottom elements.
  *
  * An instance of this typeclass should satisfy the following axioms:
- *  - $lawSupremumAssociativity
- *  - $lawInfimumAssociativity
- *  - $lawSupremumCommutativity
- *  - $lawInfimumCommutativity
- *  - $lawAbsorptionSI
- *  - $lawAbsorptionIS
- *  - $lawTop
- *  - $lawBottom
+ * <ul>
+ *  <li> $lawSupremumAssociativity </li>
+ *  <li> $lawInfimumAssociativity </li>
+ *  <li> $lawSupremumCommutativity </li>
+ *  <li> $lawInfimumCommutativity </li>
+ *  <li> $lawAbsorptionSI </li>
+ *  <li> $lawAbsorptionIS </li>
+ *  <li> $lawTop </li>
+ *  <li> $lawBottom </li>
+ * </ul>
  * @author Tongfei Chen (ctongfei@gmail.com).
  * @since 0.2.0
  */

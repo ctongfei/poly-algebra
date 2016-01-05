@@ -13,5 +13,5 @@ import poly.algebra.specgroup._
  * @since 0.2.7
  */
 trait Bounded[@sp(fdib) +X] extends HasTop[X] with HasBottom[X]
-object Bounded extends ImplicitGetter[Bounded]
 
+object Bounded extends ImplicitGetter[Bounded]

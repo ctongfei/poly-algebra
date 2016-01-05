@@ -39,7 +39,3 @@ object AdditiveGroup extends ImplicitGetter[AdditiveGroup] {
     def zero: X = zeroElem
   }
 }
-
-
-
-

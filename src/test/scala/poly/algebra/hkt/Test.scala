@@ -1,8 +1,8 @@
 package poly.algebra.hkt
 
 import poly.algebra._
-import poly.algebra.implicits._
-import poly.algebra.hkt.ops._
+import poly.algebra.syntax._
+import poly.algebra.hkt.syntax._
 
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).

@@ -7,14 +7,15 @@ import poly.algebra.specgroup._
  * Represents a semiring. A semiring is a commutative additive monoid as well as a multiplicative monoid.
  *
  * An instance of this typeclass should satisfy the following axioms:
- *  - $lawAdditiveAssociativity
- *  - $lawAdditiveIdentity
- *  - $lawAdditiveCommutativity
- *  - $lawMultiplicativeAssociativity
- *  - $lawMultiplicativeIdentity
- *  - $lawDistributivityMA
- *  - $lawAnnihilationM
- *
+ * <ul>
+ *  <li> $lawAdditiveAssociativity </li>
+ *  <li> $lawAdditiveIdentity </li>
+ *  <li> $lawAdditiveCommutativity </li>
+ *  <li> $lawMultiplicativeAssociativity </li>
+ *  <li> $lawMultiplicativeIdentity </li>
+ *  <li> $lawDistributivityMA </li>
+ *  <li> $lawAnnihilationM </li>
+ * </ul>
  * @define lawDistributivityMA '''Distributivity of multiplication w.r.t. addition''': ∀''a'', ''b'', ''c''∈X, (''a'' + ''b'') * ''c'' == ''a'' * ''c'' + ''b'' * ''c'' and ''a'' * (''b'' + ''c'') == ''a'' * ''b'' + ''a'' * ''c''.
  * @define lawAnnihilationM '''Zero as an annihilator''': ∀''a''∈X, 0 * ''a'' == ''a'' * 0 == 0.
  * @author Tongfei Chen (ctongfei@gmail.com).
