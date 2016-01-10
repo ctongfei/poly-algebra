@@ -5,9 +5,12 @@ import poly.algebra.specgroup._
 
 /**
  * Represents a similarity measure.
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  */
-trait Similarity[-X, @sp(fdi) +S] {
+trait Similarity[-X, @sp(fdi) S] {
+
+  /** Returns the order on similarity values. */
+  implicit def orderOnSimilarity: TotalOrder[S]
 
   /** Returns the similarity measure between two objects. */
   def sim(x: X, y: X): S
@@ -15,7 +18,8 @@ trait Similarity[-X, @sp(fdi) +S] {
 }
 
 object Similarity extends BinaryImplicitGetter[Similarity] {
-  def create[V, @sp(fdi) F](fSim: (V, V) => F): Similarity[V, F] = new Similarity[V, F] {
+  def create[V, @sp(fdi) F](fSim: (V, V) => F)(implicit F: TotalOrder[F]): Similarity[V, F] = new Similarity[V, F] {
     def sim(x: V, y: V): F = fSim(x, y)
+    def orderOnSimilarity = F
   }
 }

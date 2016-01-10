@@ -115,7 +115,7 @@ trait Priority1Implicits extends Priority2Implicits {
 trait Priority2Implicits {
 
   implicit class withAffineSpaceSubOps[X, V, F](x: X)(implicit X: AffineSpace[X, V, F]) {
-    def -(y: X) = X.sub(y, x)
+    def -(y: X) = X.sub(x, y)
   }
 
 }

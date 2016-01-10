@@ -8,7 +8,7 @@ import scala.language.implicitConversions
  * @author Tongfei Chen (ctongfei@gmail.com).
  * @since 0.2.11
  */
-object Java {
+object FromJava {
 
   implicit def javaComparatorAsPoly[X](s: java.util.Comparator[X]): WeakOrder[X] = new WeakOrder[X] {
     def cmp(x: X, y: X) = s.compare(x, y)
