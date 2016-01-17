@@ -18,14 +18,14 @@ object OpsInlining {
     import c.universe._
     op match {
 
-      case TermName("$eq$tilde$eq") => TermName("eq")
-      case TermName("$eq$bang$eq") => TermName("ne")
+      case TermName("$eq$eq$eq") => TermName("eq") // ===
+      case TermName("$bang$eq$eq") => TermName("ne") // !==
       case TermName("$u2260") => TermName("ne") // ≠
-      case TermName("$greater") => TermName("gt")
-      case TermName("$greater$eq") => TermName("ge")
+      case TermName("$greater") => TermName("gt") // >
+      case TermName("$greater$eq") => TermName("ge") // >=
       case TermName("$u2265") => TermName("ge") // ≥
-      case TermName("$less") => TermName("lt")
-      case TermName("$less$eq") => TermName("le")
+      case TermName("$less") => TermName("lt") // <
+      case TermName("$less$eq") => TermName("le") // <=
       case TermName("$u2264") => TermName("le") // ≤
       case TermName("$greater$qmark$less") => TermName("cmp")
 

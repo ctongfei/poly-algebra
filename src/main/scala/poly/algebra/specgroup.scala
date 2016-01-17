@@ -1,5 +1,7 @@
 package poly.algebra
 
+import scala._
+
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
@@ -18,5 +20,6 @@ object specgroup {
   final val dib = new Specializable.Group((Int, Double, Boolean))
   final val ib = new Specializable.Group((Int, Boolean))
   final val il = new Specializable.Group((Int, Long))
+  final val ilb = new Specializable.Group((Int, Long, Boolean))
 
 }

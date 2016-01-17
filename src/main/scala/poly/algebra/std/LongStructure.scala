@@ -5,12 +5,17 @@ import poly.algebra._
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-object LongStructure extends EuclideanDomain[Long] with BoundedLattice[Long] {
+object LongStructure extends EuclideanDomain[Long] with BoundedLattice[Long] with SequentialOrder[Long] {
 
   final val bot: Long = Long.MinValue
   final val top: Long = Long.MaxValue
 
-  def cmp(x: Long, y: Long) = x compareTo y
+  def pred(x: Long) = x - 1l
+  def succ(x: Long) = x + 1l
+  override def predN(x: Long, n: Int) = x - n
+  override def succN(x: Long, n: Int) = x + n
+
+  def cmp(x: Long, y: Long) = if (x == y) 0 else if (x < y) -1 else 1
   override def le(x: Long, y: Long) = x <= y
   override def lt(x: Long, y: Long) = x < y
   override def ge(x: Long, y: Long) = x >= y

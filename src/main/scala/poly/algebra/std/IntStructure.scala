@@ -5,11 +5,16 @@ import poly.algebra._
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).
  */
-object IntStructure extends EuclideanDomain[Int] with BoundedLattice[Int] {
+object IntStructure extends EuclideanDomain[Int] with BoundedLattice[Int] with SequentialOrder[Int] {
 
   final val bot: Int = Int.MinValue
   final val top: Int = Int.MaxValue
-  
+
+  def pred(x: Int) = x - 1
+  def succ(x: Int) = x + 1
+  override def predN(x: Int, n: Int) = x - n
+  override def succN(x: Int, n: Int) = x + n
+
   def cmp(x: Int, y: Int) = x - y
   override def le(x: Int, y: Int) = x <= y
   override def lt(x: Int, y: Int) = x < y

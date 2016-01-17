@@ -6,7 +6,6 @@ import scala.util.{hashing => suh}
 
 /**
   * Contains extension methods that converts Poly-algebra typeclasses to Scala typeclasses.
-  *
   * @author Tongfei Chen
   * @since 0.2.18
   */
@@ -30,6 +29,10 @@ object ToScala {
         else None
       }
       def lteq(x: X, y: X) = p.le(x, y)
+      override def gteq(x: X, y: X) = p.ge(x, y)
+      override def lt(x: X, y: X) = p.lt(x, y)
+      override def gt(x: X, y: X) = p.gt(x, y)
+      override def equiv(x: X, y: X) = p.eq(x, y)
     }
 
   }
@@ -39,6 +42,12 @@ object ToScala {
 
     def asScalaOrdering: sm.Ordering[X] = new Ordering[X] {
       def compare(x: X, y: X) = p.cmp(x, y)
+
+      override def lteq(x: X, y: X) = p.le(x, y)
+      override def gteq(x: X, y: X) = p.ge(x, y)
+      override def lt(x: X, y: X) = p.lt(x, y)
+      override def gt(x: X, y: X) = p.gt(x, y)
+      override def equiv(x: X, y: X) = p.eq(x, y)
     }
 
   }

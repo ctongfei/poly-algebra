@@ -123,8 +123,12 @@ trait GenericFunctions {
 
   def expm1[@sp(fd) X](x: X)(implicit ev: TrigExpOps[X]) = ev.expm1(x)
 
-  def e[@sp(fd) X](x: X)(implicit ev: TrigExpOps[X]) = ev.e
+  def e[@sp(fd) X](implicit ev: TrigExpOps[X]) = ev.e
 
-  def pi[@sp(fd) X](x: X)(implicit ev: TrigExpOps[X]) = ev.pi
+  def pi[@sp(fd) X](implicit ev: TrigExpOps[X]) = ev.pi
+
+  def succ[@sp(il) X](x: X)(implicit ev: SequentialOrder[X]) = ev.succ(x)
+
+  def pred[@sp(il) X](x: X)(implicit ev: SequentialOrder[X]) = ev.pred(x)
 
 }

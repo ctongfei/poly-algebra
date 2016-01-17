@@ -1,6 +1,6 @@
 name := "poly-algebra"
 
-version := "0.2.18-SNAPSHOT"
+version := "0.2.20-SNAPSHOT"
 
 organization := "me.tongfei"
 

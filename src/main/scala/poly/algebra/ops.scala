@@ -84,8 +84,8 @@ trait Priority1Implicits extends Priority2Implicits {
   }
 
   implicit class withEquivOps[X: Equiv](x: X) {
-    def =~=(y: X) : Boolean = macro OpsInlining.op2
-    def =!=(y: X) : Boolean = macro OpsInlining.op2
+    def ===(y: X) : Boolean = macro OpsInlining.op2
+    def !==(y: X) : Boolean = macro OpsInlining.op2
     def ≠(y: X) : Boolean = macro OpsInlining.op2
   }
 

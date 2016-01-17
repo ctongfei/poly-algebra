@@ -21,7 +21,7 @@ trait NaturalTransformation[-A[_], +B[_]] { self =>
 
 }
 
-object NaturalTransformation extends Binary1TImplicitHktGetter[NaturalTransformation] {
+object NaturalTransformation {
 
   type ~~>[A[_], B[_]] = NaturalTransformation[A, B]
 
