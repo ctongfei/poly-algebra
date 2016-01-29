@@ -1,6 +1,7 @@
 package poly.algebra
 
 import poly.algebra.factory._
+import poly.algebra.hkt._
 
 /**
  * Represents a monoid, i.e., a semigroup with an identity element.
@@ -47,6 +48,3 @@ object Monoid extends ImplicitGetter[Monoid] {
   }
 
 }
-
-
-

@@ -21,15 +21,11 @@ object OpsTest extends App {
   val p2 = new Prob(-3.0)
   val p3 = p0 * p2
 
-
-
   def timesTwo[@sp(fd) R: IsReal](x: R): R = {
     x * generic[R](2.0)
   }
 
   def times[@sp(fd) R: IsReal](x: R, y: R): R = x * y
-
-
 
   val bp = 0
 

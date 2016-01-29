@@ -25,7 +25,7 @@ import poly.algebra.hkt.ops._   // Enables operators on higher-kinded types
 
 #### Installation
 ```scala
-libraryDependencies += "me.tongfei" %% "poly-algebra" % "0.2.15-SNAPSHOT"
+libraryDependencies += "me.tongfei" %% "poly-algebra" % "0.2.20-SNAPSHOT"
 ```
 
 #### Features

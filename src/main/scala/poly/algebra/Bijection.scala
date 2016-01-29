@@ -2,13 +2,14 @@ package poly.algebra
 
 import poly.algebra.factory._
 import poly.algebra.hkt._
+import poly.algebra.specgroup._
 
 /**
  * Represents an one-to-one function between two types.
  * @author Tongfei Chen (ctongfei@gmail.com).
  * @since 0.2.5
  */
-trait Bijection[X, Y] extends (X => Y) { self =>
+trait Bijection[@sp(i) X, @sp(i) Y] extends (X => Y) { self =>
 
   def invert(y: Y): X
 

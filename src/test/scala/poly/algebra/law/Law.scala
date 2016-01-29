@@ -51,7 +51,7 @@ object Law {
   }
 
   def eqSymmetry[X: Equiv : Arbitrary] = forAll { (x: X, y: X) =>
-    (x =~= y implies y =~= x) && (x =!= y implies y =!= x)
+    (x === y implies y === x) && ((x !== y) implies (y !== x))
   }
 
   def orderReflexivity[X: PartialOrder : Arbitrary] = forAll { (x: X) =>
@@ -59,13 +59,12 @@ object Law {
   }
 
   def orderAntisymmetry[X: PartialOrder : Arbitrary] = forAll { (x: X, y: X) =>
-    (x <= y && y >= x) implies (x =~= y)
+    (x <= y && y >= x) implies (x === y)
   }
 
   def orderTransitivity[X: PartialOrder : Arbitrary] = forAll { (x: X, y: X, z: X) =>
     (x <= y && y <= z) implies (x <= z)
   }
-
 
   def semigroup[X: Semigroup : Arbitrary] = associativity
   def monoid[X: Monoid: Arbitrary] = associativity && identity

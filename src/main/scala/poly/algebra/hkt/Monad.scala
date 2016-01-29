@@ -10,7 +10,7 @@ import scala.language.reflectiveCalls
  * @author Tongfei Chen (ctongfei@gmail.com).
  * @since 0.2.1
  */
-trait Monad[M[_]] extends ApplicativeFunctor[M] { self =>
+trait Monad[M[_]] extends Idiom[M] { self =>
 
   def id[X](u: X): M[X]
 
