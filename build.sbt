@@ -1,15 +1,12 @@
 name := "poly-algebra"
-
-version := "0.2.20-SNAPSHOT"
-
+version := "0.3.0-M0-SNAPSHOT"
 organization := "me.tongfei"
-
 scalaVersion := "2.11.7"
-
 isSnapshot := true
 
 libraryDependencies += "org.scala-lang"    %  "scala-reflect"   % scalaVersion.value
 libraryDependencies += "me.tongfei"        %% "poly-macroutil"  % "0.2.0"
+
 libraryDependencies += "org.scalatest"     %% "scalatest"       % "2.2.2"             % Test
 libraryDependencies += "org.scalacheck"    %% "scalacheck"      % "1.12.4"            % Test
 libraryDependencies += "com.storm-enroute" %% "scalameter-core" % "0.7"               % Test

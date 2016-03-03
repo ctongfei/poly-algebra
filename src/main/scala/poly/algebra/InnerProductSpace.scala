@@ -44,6 +44,6 @@ object InnerProductSpace extends BinaryImplicitGetter[InnerProductSpace] {
       override def neg(x: V): V = V.neg(x)
       override def sub(x: V, y: V): V = V.sub(x, y)
       def zero: V = V.zero
-      def scale(k: F, x: V): V = V.scale(k, x)
+      def scale(x: V, k: F): V = V.scale(x, k)
     }
 }

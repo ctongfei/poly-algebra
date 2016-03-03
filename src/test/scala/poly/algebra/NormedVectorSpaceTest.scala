@@ -12,7 +12,7 @@ class NormedVectorSpaceTest extends FunSuite {
     val n = 3
     implicit val space = VectorSpace.create[Array[Double], Double](
       (x, y) => Array.tabulate(n)(i => x(i) + y(i)),
-      (k, x) => Array.tabulate(n)(i => k * x(i)),
+      (x, k) => Array.tabulate(n)(i => k * x(i)),
       Array.fill(3)(0.0)
     )
     implicit val l3space = NormedVectorSpace.create[Array[Double], Double](

@@ -36,7 +36,7 @@ trait VectorSpace[X, @sp(fd) S] extends Module[X, S] { self =>
   override def dualSpace: VectorSpace[X => S, S] = new VectorSpace[X => S, S] {
     def fieldOnScalar: Field[S] = self.fieldOnScalar
 
-    def scale(k: S, f: X => S) = x => fieldOnScalar.mul(f(x), k)
+    def scale(f: X => S, k: S) = x => fieldOnScalar.mul(f(x), k)
     def zero = x => fieldOnScalar.zero
     def add(f: X => S, g: X => S) = x => fieldOnScalar.add(f(x), g(x))
     override def neg(f: X => S) = x => fieldOnScalar.neg(f(x))
@@ -61,10 +61,10 @@ object VectorSpace extends BinaryImplicitGetter[VectorSpace] {
     def scale(x: F, y: F) = F.mul(x, y)
   }
 
-  def create[V, @sp(fd) F](fAdd: (V, V) => V, fScale: (F, V) => V, fZero: V)(implicit F: Field[F]): VectorSpace[V, F] = new VectorSpace[V, F] {
+  def create[V, @sp(fd) F](fAdd: (V, V) => V, fScale: (V, F) => V, fZero: V)(implicit F: Field[F]): VectorSpace[V, F] = new VectorSpace[V, F] {
     def fieldOnScalar = F
     def add(x: V, y: V) = fAdd(x, y)
-    def scale(k: F, x: V) = fScale(k, x)
+    def scale(x: V, k: F) = fScale(x, k)
     def zero = fZero
   }
 
@@ -74,7 +74,7 @@ object VectorSpace extends BinaryImplicitGetter[VectorSpace] {
     */
   implicit def lift[X, Y, @sp(fd) F](implicit Y: VectorSpace[Y, F]): VectorSpace[X => Y, F] = new VectorSpace[X => Y, F] {
     implicit def fieldOnScalar = Y.ringOnScalar
-    def scale(k: F, f: (X) => Y) = x => Y.scale(k, f(x))
+    def scale(f: X => Y, k: F) = x => Y.scale(f(x), k)
     def zero = x => Y.zero
     def add(f: X => Y, g: X => Y) = x => Y.add(f(x), g(x))
     override def sub(f: X => Y, g: X => Y) = x => Y.sub(f(x), g(x))

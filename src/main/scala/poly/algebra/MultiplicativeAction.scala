@@ -9,10 +9,10 @@ import poly.algebra.specgroup._
  */
 trait MultiplicativeAction[X, @sp(fdi) S] {
 
-  def scale(k: S, x: X): X
+  def scale(x: X, k: S): X
 
   def asActionWithScale: Action[X, S] = new Action[X, S] {
-    def act(k: S, x: X) = scale(k, x)
+    def act(x: X, k: S) = scale(x, k)
   }
 }
 

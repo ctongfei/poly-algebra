@@ -22,13 +22,13 @@ trait HktImplicits {
     def contramap[Y](f: Y => X      )(implicit H: ContravariantFunctor[H]): H[Y]      = H.contramap(x)(f)
     def flatMap  [Y](f: X => H[Y]   )(implicit H: Monad[H]               ): H[Y]      = H.flatMap(x)(f)
     def filter      (f: X => Boolean)(implicit H: ConcatenativeMonad[H]  ): H[X]      = H.filter(x)(f)
-    def product  [Y](y: H[Y])        (implicit H: Idiom[H]  ): H[(X, Y)] = H.product(x)(y)
+    def product  [Y](y: H[Y])        (implicit H: Idiom[H]               ): H[(X, Y)] = H.product(x)(y)
 
     def |>       [Y](f: X => Y)      (implicit H: Functor[H]             ): H[Y]      = H.map(x)(f)
     def |<       [Y](f: Y => X)      (implicit H: ContravariantFunctor[H]): H[Y]      = H.contramap(x)(f)
     def ||>      [Y](f: X => H[Y])   (implicit H: Monad[H]               ): H[Y]      = H.flatMap(x)(f)
     def |?          (f: X => Boolean)(implicit H: ConcatenativeMonad[H]  ): H[X]      = H.filter(x)(f)
-    def ×        [Y](y: H[Y])        (implicit H: Idiom[H]  ): H[(X, Y)] = H.product(x)(y)
+    def ×        [Y](y: H[Y])        (implicit H: Idiom[H]               ): H[(X, Y)] = H.product(x)(y)
 
   }
 

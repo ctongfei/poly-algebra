@@ -55,25 +55,25 @@ trait Priority1Implicits extends Priority2Implicits {
   implicit class withAdditiveActionXOps[X, S](x: X)(implicit X: AdditiveAction[X, S]) {
     /** Returns the result of an object (point) being acted (translated) by an element (vector) given an implicit
       * additive action. */
-    def :+(y: S): X = macro OpsInlining.op2R
+    def :+(y: S): X = macro OpsInlining.op2
     /** Returns the result of an element (vector) acting (translating) on an object (point) given an implicit
       * additive action. */
-    def +:(y: S): X = macro OpsInlining.op2R
+    def +:(y: S): X = macro OpsInlining.op2
   }
 
 
   implicit class withMultiplicativeActionXOps[X, S](x: X)(implicit X: MultiplicativeAction[X, S]) {
     /** Returns the result of an object (vector) being acted (scaled) by an element (scalar) given an implicit
       * multiplicative action. */
-    def :*(y: S): X = macro OpsInlining.op2R
+    def :*(y: S): X = macro OpsInlining.op2
 
     /** Returns the result of an element (scalar) acting (scaling) on an object (vector) given an implicit
       * multiplicative action. */
-    def *:(y: S): X = macro OpsInlining.op2R
+    def *:(y: S): X = macro OpsInlining.op2
   }
 
   implicit class withAdditiveGroupActionXOps[X, S](x: X)(implicit X: AdditiveGroupAction[X, S]) {
-    def :-(y: S) = X.translate(X.groupOnActor.neg(y), x)
+    def :-(y: S) = X.translate(x, X.groupOnActor.neg(y))
   }
 
   implicit class withBooleanAlgebraOps[X: BooleanAlgebra](x: X) {

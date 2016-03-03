@@ -45,9 +45,6 @@ trait WeakOrder[@sp(fdib) -X] extends PartialOrder[X] { self =>
     def cmp(x: X, y: X): Int = -self.cmp(x, y)
   }
 
-  /** If tied after first order, use second order. Experimental.
-   * @since 0.2.3
-   */
   def thenOrderBy[Y <: X](that: WeakOrder[Y]): WeakOrder[Y] = new WeakOrder[Y] {
     def cmp(x: Y, y: Y) = {
       val r = self.cmp(x, y)

@@ -20,5 +20,11 @@ object syntax extends GenericFunctions with MapReduceMathOps with Priority1Impli
 
   implicit final val InstantStructure = std.InstantStructure
   implicit final val DurationStructure = std.DurationStructure
-  
+
+  /** ASCII-compliant symbolic alias for bijections. */
+  type <=>[X, Y] = Bijection[X, Y]
+
+  /** Symbolic alias for bijections. */
+  type ⇔[X, Y] = Bijection[X, Y]
+
 }

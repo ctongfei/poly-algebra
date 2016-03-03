@@ -22,11 +22,6 @@ trait TotalOrder[@sp(fdib) -X] extends Lattice[X @uv] with WeakOrder[X] { self =
   def sup(x: X, y: X): X @uv = max(x, y)
   def inf(x: X, y: X): X @uv = min(x, y)
 
-  override def eq(x: X, y: X) = x == y
-  override def ne(x: X, y: X) = x != y
-  override def le(x: X, y: X) = cmp(x, y) <= 0
-  override def ge(x: X, y: X) = cmp(x, y) >= 0
-
   override def reverse: TotalOrder[X] = new TotalOrder[X] {
     override def reverse: TotalOrder[X] = self
     def cmp(x: X, y: X): Int = -self.cmp(x, y)

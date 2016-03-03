@@ -10,11 +10,11 @@ import poly.algebra.specgroup._
  */
 trait AdditiveAction[X, @sp(fdi) S] {
   /** Translates an element ''x'' by ''k''. */
-  def translate(k: S, x: X): X
+  def translate(x: X, k: S): X
 
   /** Casts this additive action as a general action with the operator `translate`. */
   def asActionWithTranslate: Action[X, S] = new Action[X, S] {
-    def act(k: S, x: X) = translate(k, x)
+    def act(x: X, k: S) = translate(x, k)
   }
 }
 

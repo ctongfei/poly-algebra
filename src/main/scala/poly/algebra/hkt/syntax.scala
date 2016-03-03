@@ -1,6 +1,7 @@
 package poly.algebra.hkt
 
 import poly.algebra._
+import scala.language.higherKinds
 
 /**
   * @author Tongfei Chen
@@ -14,5 +15,8 @@ object syntax extends HktImplicits {
   implicit final val EitherStructure = std.EitherStructure
   implicit final val TupleStructure = std.TupleStructure
   implicit final val OptionStructure = std.OptionStructure
+
+
+  type ~~>[A[_], B[_]] = NaturalTransformation[A, B]
 
 }

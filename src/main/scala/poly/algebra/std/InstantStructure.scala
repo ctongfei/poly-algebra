@@ -12,7 +12,7 @@ object InstantStructure extends AffineSpace[Instant, Duration, Long] with TotalO
 
   override def eq(x: Instant, y: Instant) = x equals y
   def cmp(x: Instant, y: Instant) = x compareTo y
-  def translate(k: Duration, x: Instant) = x plus k
+  def translate(x: Instant, k: Duration) = x plus k
   def sub(x: Instant, y: Instant) = Duration.between(y, x)
   def vectorSpaceOnVector = DurationStructure
 
@@ -23,7 +23,7 @@ object DurationStructure extends VectorSpace[Duration, Long] with TotalOrder[Dur
   override def eq(x: Duration, y: Duration) = x equals y
   def cmp(x: Duration, y: Duration): Int = x compareTo y
 
-  def scale(k: Long, x: Duration) = x multipliedBy k
+  def scale(x: Duration, k: Long) = x multipliedBy k
   def add(x: Duration, y: Duration) = x plus y
   override def neg(x: Duration): Duration = x.negated
   override def sub(x: Duration, y: Duration) = x minus y

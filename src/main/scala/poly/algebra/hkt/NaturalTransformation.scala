@@ -9,7 +9,7 @@ import scala.language.higherKinds
   */
 trait NaturalTransformation[-A[_], +B[_]] { self =>
 
-  import NaturalTransformation._
+  import syntax._
 
   def apply[X](a: A[X]): B[X]
 
@@ -21,8 +21,3 @@ trait NaturalTransformation[-A[_], +B[_]] { self =>
 
 }
 
-object NaturalTransformation {
-
-  type ~~>[A[_], B[_]] = NaturalTransformation[A, B]
-
-}

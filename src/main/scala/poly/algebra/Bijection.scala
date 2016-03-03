@@ -2,14 +2,14 @@ package poly.algebra
 
 import poly.algebra.factory._
 import poly.algebra.hkt._
-import poly.algebra.specgroup._
+import poly.algebra.syntax._
 
 /**
  * Represents an one-to-one function between two types.
  * @author Tongfei Chen (ctongfei@gmail.com).
  * @since 0.2.5
  */
-trait Bijection[@sp(i) X, @sp(i) Y] extends (X => Y) { self =>
+trait Bijection[@specialized(Int, AnyRef) X, @specialized(Int, AnyRef) Y] extends (X => Y) { self =>
 
   def invert(y: Y): X
 
@@ -25,14 +25,14 @@ trait Bijection[@sp(i) X, @sp(i) Y] extends (X => Y) { self =>
 
   def compose[W](that: Bijection[W, X]): Bijection[W, Y] = that andThen self
 
+  def product[U, V](that: Bijection[U, V]): Bijection[(X, U), (Y, V)] = new Bijection[(X, U), (Y, V)] {
+    def invert(yv: (Y, V)) = (self.invert(yv._1), that.invert(yv._2))
+    def apply(xu: (X, U)) = (self(xu._1), that(xu._2))
+  }
+
 }
 
 object Bijection extends BinaryImplicitGetter[Bijection] {
-
-  /** ASCII-compliant symbolic alias for bijections. */
-  type <=>[X, Y] = Bijection[X, Y]
-  /** Symbolic alias for bijections. */
-  type ⇔[X, Y] = Bijection[X, Y]
 
   def create[X, Y](f1: X => Y, f2: Y => X): X <=> Y = new (X <=> Y) {
     def invert(y: Y) = f2(y)

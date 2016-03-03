@@ -36,9 +36,9 @@ trait Module[X, @sp(fdi) S] extends MultiplicativeAction[X, S] with AdditiveCGro
   implicit def ringOnScalar: Ring[S]
 
   /** Scales a vector by a scalar. */
-  def scale(k: S, x: X): X
+  def scale(x: X, k: S): X
 
-  def neg(x: X): X = scale(ringOnScalar.negOne, x)
+  def neg(x: X): X = scale(x, ringOnScalar.negOne)
 
   /**
    * Returns the dual space of this module.
@@ -46,7 +46,7 @@ trait Module[X, @sp(fdi) S] extends MultiplicativeAction[X, S] with AdditiveCGro
    */
   def dualSpace: Module[X => S, S] = new Module[X => S, S] {
     implicit def ringOnScalar = self.ringOnScalar
-    def scale(k: S, f: X => S) = x => ringOnScalar.mul(f(x), k)
+    def scale(f: X => S, k: S) = x => ringOnScalar.mul(f(x), k)
     def add(f: X => S, g: X => S) = x => ringOnScalar.add(f(x), g(x))
     def zero = x => ringOnScalar.zero
     override def neg(f: X => S) = x => ringOnScalar.neg(f(x))
@@ -56,11 +56,11 @@ trait Module[X, @sp(fdi) S] extends MultiplicativeAction[X, S] with AdditiveCGro
 
 object Module extends BinaryImplicitGetter[Module] {
 
-  def create[X, @sp(fdi) R](fAdd: (X, X) => X, fScale: (R, X) => X, fZero: X)(implicit R: Ring[R]): Module[X, R] = new Module[X, R] {
+  def create[X, @sp(fdi) R](fAdd: (X, X) => X, fScale: (X, R) => X, fZero: X)(implicit R: Ring[R]): Module[X, R] = new Module[X, R] {
     def ringOnScalar = R
     def zero = fZero
     def add(x: X, y: X) = fAdd(x, y)
-    def scale(k: R, x: X) = fScale(k, x)
+    def scale(x: X, k: R) = fScale(x, k)
   }
 
   /**

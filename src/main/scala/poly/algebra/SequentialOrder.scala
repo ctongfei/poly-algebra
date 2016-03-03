@@ -1,6 +1,7 @@
 package poly.algebra
 
 import poly.algebra.factory._
+import poly.algebra.hkt._
 import poly.algebra.specgroup._
 
 /**
@@ -9,7 +10,7 @@ import poly.algebra.specgroup._
   * @author Tongfei Chen
   * @since 0.2.19
   */
-trait SequentialOrder[@sp(il) X] extends TotalOrder[X] {
+trait SequentialOrder[@sp(il) X] extends TotalOrder[X] { self =>
 
   def pred(x: X): X
   def succ(x: X): X
@@ -32,6 +33,13 @@ trait SequentialOrder[@sp(il) X] extends TotalOrder[X] {
       i += 1
     }
     r
+  }
+
+  override def reverse: SequentialOrder[X] = new SequentialOrder[X] {
+    def pred(x: X): X = self.succ(x)
+    def succ(x: X): X = self.pred(x)
+    def cmp(x: X, y: X): Int = -self.cmp(x, y)
+    override def reverse = self
   }
 
 }

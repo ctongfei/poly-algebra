@@ -9,7 +9,7 @@ import poly.algebra.specgroup._
 trait NormedVectorSpace[V, @sp(fd) F] extends VectorSpace[V, F] with MetricSpace[V, F] {
   def norm(x: V): F
   def dist(x: V, y: V): F = norm(sub(x, y))
-  def normalize(x: V): V = scale(ringOnScalar.inv(norm(x)), x)
+  def normalize(x: V): V = scale(x, ringOnScalar.inv(norm(x)))
 }
 
 object NormedVectorSpace extends BinaryImplicitGetter[NormedVectorSpace] {
@@ -22,6 +22,6 @@ object NormedVectorSpace extends BinaryImplicitGetter[NormedVectorSpace] {
     override def sub(x: V, y: V): V = S.sub(x, y)
     def add(x: V, y: V): V = S.add(x, y)
     def zero: V = S.zero
-    def scale(k: F, x: V): V = S.scale(k, x)
+    def scale(x: V, k: F): V = S.scale(x, k)
   }
 }

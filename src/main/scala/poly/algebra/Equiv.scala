@@ -31,7 +31,6 @@ trait Equiv[@sp(fdib) -X] {
   def product[Y](that: Equiv[Y]) = Equiv.product(this, that)
 }
 
-
 object Equiv extends ImplicitGetter[Equiv] {
 
   // CONSTRUCTORS
