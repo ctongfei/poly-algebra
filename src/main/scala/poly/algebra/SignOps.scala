@@ -4,7 +4,7 @@ import poly.algebra.factory._
 import poly.algebra.specgroup._
 
 /**
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  */
 trait SignOps[@sp(fdi) X] {
 

@@ -3,7 +3,7 @@ package poly.algebra.std
 import poly.algebra._
 
 /**
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  */
 object IntStructure extends EuclideanDomain[Int] with BoundedLattice[Int] with SequentialOrder[Int] {
 

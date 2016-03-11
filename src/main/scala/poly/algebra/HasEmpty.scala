@@ -4,7 +4,7 @@ import poly.algebra.factory._
 
 /**
  * Represents the existence of an empty element.
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  */
 trait HasEmpty[+X] {
 

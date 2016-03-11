@@ -5,7 +5,7 @@ import poly.algebra.specgroup._
 
 /**
  * Represents a complete metric space.
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  * @since 0.2.7
  */
 trait CompleteMetricSpace[@sp(fd) -V, @sp(fd) F] extends MetricSpace[V, F]

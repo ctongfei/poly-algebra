@@ -10,7 +10,7 @@ import poly.algebra.specgroup._
  *  - $lawAdditiveAssociativity
  *  - $lawAdditiveIdentity
  *  - $lawAdditiveCommutativity
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  * @since 0.2.6
  */
 trait AdditiveCMonoid[@sp(fdi) X] extends AdditiveMonoid[X] with AdditiveCSemigroup[X] { self =>

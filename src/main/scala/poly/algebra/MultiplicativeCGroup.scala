@@ -11,7 +11,7 @@ import poly.algebra.specgroup._
  *  - $lawMultiplicativeIdentity
  *  - $lawMultiplicativeInvertibility
  *  - $lawMultiplicativeCommutativity
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  */
 trait MultiplicativeCGroup[@sp(fd) X] extends MultiplicativeGroup[X] with MultiplicativeCMonoid[X] { self =>
   override def asGroupWithMul: CGroup[X] = new CGroup[X] {

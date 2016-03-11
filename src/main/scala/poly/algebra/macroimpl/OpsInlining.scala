@@ -5,7 +5,7 @@ import poly.algebra._
 import scala.reflect.macros.blackbox._
 
 /**
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  */
 object OpsInlining {
 

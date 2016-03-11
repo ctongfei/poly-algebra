@@ -3,7 +3,7 @@ package poly.algebra.std
 import poly.algebra.hkt._
 
 /**
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  */
 object TupleStructure extends Bifunctor[Tuple2] {
   def mapFirst[A, B, C](t: (A, B))(f1: A => C) = (f1(t._1), t._2)

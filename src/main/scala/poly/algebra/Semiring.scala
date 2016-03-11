@@ -18,7 +18,7 @@ import poly.algebra.specgroup._
  * </ul>
  * @define lawDistributivityMA '''Distributivity of multiplication w.r.t. addition''': ∀''a'', ''b'', ''c''∈X, (''a'' + ''b'') * ''c'' == ''a'' * ''c'' + ''b'' * ''c'' and ''a'' * (''b'' + ''c'') == ''a'' * ''b'' + ''a'' * ''c''.
  * @define lawAnnihilationM '''Zero as an annihilator''': ∀''a''∈X, 0 * ''a'' == ''a'' * 0 == 0.
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  * @since 0.1.0
  */
 trait Semiring[@sp(fdi) X] extends AdditiveCMonoid[X] with MultiplicativeMonoid[X]

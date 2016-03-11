@@ -9,7 +9,7 @@ import poly.algebra.specgroup._
  * An instance of this typeclass should satisfy the following axiom:
  *  - $lawMultiplicativeIdentity
  * @define lawMultiplicativeIdentity '''Multiplicative identity''': ∀''a''∈X, ''a'' * 1 == 1 * ''a'' == ''a''.
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  */
 trait HasOne[@sp(fdi) +X] {
   /** The `1` element (multiplicative identity) of this type. */

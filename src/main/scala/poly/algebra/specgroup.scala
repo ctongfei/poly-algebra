@@ -3,7 +3,7 @@ package poly.algebra
 import scala._
 
 /**
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  */
 object specgroup {
 

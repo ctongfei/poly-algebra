@@ -8,7 +8,7 @@ import poly.algebra.specgroup._
  * @tparam P Type of points
  * @tparam V Type of vectors
  * @tparam F Type of field on which the vector space is based
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  * @since 0.2.10
  */
 trait AffineSpace[P, V, @sp(fd) F] extends AdditiveGroupAction[P, V] {

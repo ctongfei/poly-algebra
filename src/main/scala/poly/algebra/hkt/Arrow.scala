@@ -7,7 +7,7 @@ import scala.language.reflectiveCalls
 
 /**
  * Represents an arrow.
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  * @since 0.2.9
  */
 trait Arrow[⇾[_, _]] extends Category[⇾] with Profunctor[⇾] {

@@ -4,7 +4,7 @@ import scala.language.higherKinds
 import scala.language.reflectiveCalls
 
 /**
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  */
 object ops extends HktImplicits
 
@@ -50,7 +50,36 @@ trait HktImplicits {
 
   }
 
-  implicit class KleisliOps[M[_], X, Y](val f: X => M[Y]) {
+  implicit class FuncOps[X, Y](private val func: X => Y) {
+    /**
+     * Lifts this function (`X => Y`) to a functor application (`F[X] => F[Y]`).
+     * @tparam F Functor
+     */
+    def liftF[F[_]: Functor](x: F[X]) = Functor[F].map(x)(func)
+
+    /**
+     * Lifts this function (`X => Y`) to a contravariant functor application (`F[Y] => F[X]`).
+     * @tparam F Contravariant functor
+     */
+    def liftCF[F[_]: ContravariantFunctor](y: F[Y]) = ContravariantFunctor[F].contramap(y)(func)
+  }
+
+  implicit class Func2Ops[X, Y, Z](private val f: (X, Y) => Z) {
+    /**
+     * Lifts this function `(X, Y) => Z` to an idiomatic (a.k.a. applicative functor) application (`(F[X], F[Y]) => F[Z]`).
+     * @tparam I Idiom
+     */
+    def liftI[I[_]: Idiom](x: I[X], y: I[Y]) = Idiom[I].mapPair(x, y)(f)
+  }
+
+  implicit class KleisliOps[M[_], X, Y](private val f: X => M[Y]) {
+
+    /**
+     * Lifts this function `X => M[Y]` to a monadic application (`M[X] => M[Y]`).
+     * @param M Monad
+     */
+    def liftM(x: M[X])(implicit M: Monad[M]) = M.flatMap(x)(f)
+
     def kleisliAndThen[Z](g: Y => M[Z])(implicit M: Monad[M]) = M.Kleisli.andThen(f, g)
     def kleisliCompose[Z](g: Z => M[X])(implicit M: Monad[M]) = M.Kleisli.compose(f, g)
 
@@ -68,6 +97,9 @@ trait HktImplicits {
   }
 
   implicit class CoKleisliOps[W[_], X, Y](val f: W[X] => Y) {
+
+    def cm(x: W[X])(implicit W: Comonad[W]) = W.extend(x)(f)
+
     def coKleisliAndThen[Z](g: W[Y] => Z)(implicit W: Comonad[W]) = W.CoKleisli.andThen(f, g)
     def coKleisliCompose[Z](g: W[Z] => X)(implicit W: Comonad[W]) = W.CoKleisli.compose(f, g)
 

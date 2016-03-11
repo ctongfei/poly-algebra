@@ -7,7 +7,7 @@ import scala.language.experimental.macros
 import scala.reflect.macros.blackbox._
 
 /**
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  * @since 0.2.0
  */
 trait MapReduceMathOps {

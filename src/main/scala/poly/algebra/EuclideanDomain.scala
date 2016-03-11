@@ -5,7 +5,7 @@ import poly.algebra.specgroup._
 
 /**
  * Represents a Euclidean domain. 
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  */
 trait EuclideanDomain[@sp(fdi) X] extends CRing[X] with OrderedRing[X] {
 

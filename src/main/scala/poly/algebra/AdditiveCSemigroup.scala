@@ -11,7 +11,7 @@ import poly.algebra.specgroup._
  *  - $lawAdditiveCommutativity
  *
  * @define lawAdditiveCommutativity '''Additive commutativity''':  ∀''a'', ''b''∈X, ''a'' + ''b'' == ''b'' + ''a''.
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  * @since 0.2.6
  */
 trait AdditiveCSemigroup[@sp(fdi) X] extends AdditiveSemigroup[X] { self =>

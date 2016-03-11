@@ -6,7 +6,7 @@ import poly.algebra.specgroup._
 /**
  * Represents an algebra over a field, i.e., a vector space equipped with a
  * bilinear product over the type of vectors.
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  * @since 0.1.0
  */
 trait AlgebraOverField[X, @sp(fd) S] extends VectorSpace[X, S] with AlgebraOverRing[X, S]

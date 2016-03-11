@@ -4,7 +4,7 @@ import poly.algebra.factory._
 import poly.algebra.specgroup._
 
 /**
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  * @since 0.2.4
  */
 trait OrderedRing[@sp(fdi) X] extends Ring[X] with OrderedAdditiveCGroup[X] with SignOps[X] {

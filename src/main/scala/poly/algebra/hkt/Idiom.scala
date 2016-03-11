@@ -7,7 +7,7 @@ import scala.language.higherKinds
 
 /**
  * Typeclass for applicative functors.
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  * @since 0.2.20
  */
 trait Idiom[A[_]] extends Functor[A] { self =>

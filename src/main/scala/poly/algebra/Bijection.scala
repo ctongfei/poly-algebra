@@ -6,30 +6,21 @@ import poly.algebra.syntax._
 
 /**
  * Represents an one-to-one function between two types.
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  * @since 0.2.5
  */
 trait Bijection[@specialized(Int, AnyRef) X, @specialized(Int, AnyRef) Y] extends (X => Y) { self =>
 
   def invert(y: Y): X
 
-  implicit def inverse: Bijection[Y, X] = new Bijection[Y, X] {
-    def invert(x: X): Y = self.apply(x)
-    def apply(y: Y): X = self.invert(y)
-  }
+  /** Returns the inverse bijection of this bijection. */
+  def inverse: Bijection[Y, X] = new Bijection.Inverse(self)
 
-  def andThen[Z](that: Bijection[Y, Z]): Bijection[X, Z] = new Bijection[X, Z] {
-    def invert(z: Z): X = self.invert(that.invert(z))
-    def apply(x: X): Z = that(self(x))
-  }
+  def andThen[Z](that: Bijection[Y, Z]) = new Bijection.Composed(that, self)
 
-  def compose[W](that: Bijection[W, X]): Bijection[W, Y] = that andThen self
+  def compose[W](that: Bijection[W, X]) = new Bijection.Composed(self, that)
 
-  def product[U, V](that: Bijection[U, V]): Bijection[(X, U), (Y, V)] = new Bijection[(X, U), (Y, V)] {
-    def invert(yv: (Y, V)) = (self.invert(yv._1), that.invert(yv._2))
-    def apply(xu: (X, U)) = (self(xu._1), that(xu._2))
-  }
-
+  def product[U, V](that: Bijection[U, V]) = new Bijection.Product(self, that)
 }
 
 object Bijection extends BinaryImplicitGetter[Bijection] {
@@ -39,7 +30,7 @@ object Bijection extends BinaryImplicitGetter[Bijection] {
     def apply(x: X): Y = f1(x)
   }
 
-  implicit object Category extends Category[<=>] {
+  implicit object Category extends Category[Bijection] {
     def id[X] = Bijection.create(x => x, x => x)
     def compose[X, Y, Z](g: Y <=> Z, f: X <=> Y) = g compose f
   }
@@ -54,4 +45,18 @@ object Bijection extends BinaryImplicitGetter[Bijection] {
     def apply(x: (X, Y)): (Y, X) = x.swap
   }
 
+  class Inverse[X, Y](override val inverse: Bijection[X, Y]) extends Bijection[Y, X] {
+    def invert(x: X): Y = inverse.apply(x)
+    def apply(y: Y): X = inverse.invert(y)
+  }
+
+  class Composed[X, Y, Z](outer: Bijection[Y, Z], inner: Bijection[X, Y]) extends Bijection[X, Z] {
+    def invert(z: Z) = inner.invert(outer.invert(z))
+    def apply(x: X) = outer(inner(x))
+  }
+
+  class Product[X, Y, U, V](first: Bijection[X, Y], second: Bijection[U, V]) extends Bijection[(X, U), (Y, V)] {
+    def invert(yv: (Y, V)) = (first.invert(yv._1), second.invert(yv._2))
+    def apply(xu: (X, U)) = (first(xu._1), second(xu._2))
+  }
 }

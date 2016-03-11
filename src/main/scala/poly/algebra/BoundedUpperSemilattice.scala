@@ -11,7 +11,7 @@ import poly.algebra.specgroup._
  *  - $lawSupremumCommutativity
  *  - $lawSupremumIdempotency
  *  - $lawTop
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  */
 trait BoundedUpperSemilattice[@sp(Boolean) X] extends UpperSemilattice[X] with HasTop[X]
 

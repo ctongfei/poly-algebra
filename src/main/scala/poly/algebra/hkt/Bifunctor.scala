@@ -6,7 +6,7 @@ import scala.language.higherKinds
 import scala.language.reflectiveCalls
 
 /**
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  */
 trait Bifunctor[×[_, _]] {
 

@@ -5,7 +5,7 @@ import scala.language.higherKinds
 
 /**
  * Represents a universally quantified concatenative semigroup.
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  * @since 0.2.1
  */
 trait ConcatenativeSemigroupKind[S[_]] { self =>

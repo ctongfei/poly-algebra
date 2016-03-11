@@ -4,7 +4,7 @@ import poly.algebra.factory._
 import poly.algebra.specgroup._
 
 /**
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  */
 trait MetricSpace[@sp(fdi) -X, @sp(fdi) +S] {
   def dist(x: X, y: X): S

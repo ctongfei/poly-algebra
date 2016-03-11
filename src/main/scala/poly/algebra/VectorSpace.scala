@@ -21,7 +21,7 @@ import poly.algebra.specgroup._
  *  <li> $lawDistributivitySV </li>
  *  <li> $lawDistributivitySS </li>
  * </ul>
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  */
 trait VectorSpace[X, @sp(fd) S] extends Module[X, S] { self =>
 

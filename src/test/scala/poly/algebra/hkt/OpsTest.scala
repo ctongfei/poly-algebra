@@ -11,8 +11,11 @@ class OpsTest extends FunSuite {
   test("HKT operators on functions (<<<, >>>)") {
     val f = (x: Int) => x * 2
     val g = (x: Int) => x + 3
+
+    val gg = g.liftF(Option(3))
     val fg = f <<< g
     val gf = f >>> g
+    assert(gg.contains(6))
     assert(fg(1) == 8)
     assert(gf(1) == 5)
   }

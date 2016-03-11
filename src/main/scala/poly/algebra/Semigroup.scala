@@ -10,7 +10,7 @@ import poly.algebra.factory._
  * An instance of this typeclass should satisfy the following axiom:
  *  - $lawAssociativity
  * @define lawAssociativity '''Associativity''': ∀''a'', ''b'', ''c''∈X, (''a'' op ''b'') op ''c'' == ''a'' op (''b'' op ''c'').
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  */
 trait Semigroup[X] {
 

@@ -10,7 +10,7 @@ import poly.algebra.specgroup._
  * An instance of this typeclass should satisfy the following axioms:
  *  - $lawAdditiveAssociativity
  *  - $lawAdditiveIdentity
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  * @since 0.1.0
  */
 trait AdditiveMonoid[@sp(fdi) X] extends AdditiveSemigroup[X] with HasZero[X] { self =>

@@ -5,7 +5,7 @@ import poly.algebra.specgroup._
 
 /**
  * Represents an action in which its action operator is translation (`:+`).
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  * @since 0.2.10
  */
 trait AdditiveAction[X, @sp(fdi) S] {

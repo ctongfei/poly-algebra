@@ -11,7 +11,7 @@ import poly.algebra.specgroup._
  *  - $lawInfimumCommutativity
  *  - $lawInfimumIdempotency
  *  - $lawBottom
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  * @since 0.2.0
  */
 trait BoundedLowerSemilattice[@sp(Boolean) X] extends LowerSemilattice[X] with HasBottom[X]

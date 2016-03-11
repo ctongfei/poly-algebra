@@ -12,7 +12,7 @@ import poly.algebra.factory._
  *  - $lawInvertibility
  * @define lawInvertibility '''Invertibility''': ∀''a''∈X, ∃''b''∈X, ''a'' op ''b'' == ''b'' op ''a'' == id.
  *
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  */
 trait Group[X] extends Monoid[X] {
   def inv(x: X): X

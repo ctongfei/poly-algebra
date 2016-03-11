@@ -3,7 +3,7 @@ package poly.algebra.std
 import poly.algebra.hkt._
 
 /**
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  */
 object FunctionStructure extends Profunctor[Function1] with Arrow[Function1] {
 

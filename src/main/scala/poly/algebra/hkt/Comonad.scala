@@ -6,7 +6,7 @@ import scala.language.higherKinds
 import scala.language.reflectiveCalls
 
 /**
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  * @since 0.2.4
  */
 trait Comonad[W[_]] extends Functor[W] { self =>

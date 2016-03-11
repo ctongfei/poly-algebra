@@ -11,7 +11,7 @@ import poly.algebra.specgroup._
  *  - $lawAdditiveIdentity
  *  - $lawAdditiveInvertibility
  *  - $lawAdditiveCommutativity
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  * @since 0.2.6
  */
 trait AdditiveCGroup[@sp(fdi) X] extends AdditiveGroup[X] with AdditiveCMonoid[X] { self =>

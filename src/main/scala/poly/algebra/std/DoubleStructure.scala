@@ -3,7 +3,7 @@ package poly.algebra.std
 import poly.algebra._
 
 /**
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  */
 object DoubleStructure extends IsReal[Double] with BoundedLattice[Double] {
 

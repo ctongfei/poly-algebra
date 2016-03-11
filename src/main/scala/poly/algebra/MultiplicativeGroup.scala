@@ -14,7 +14,7 @@ import poly.algebra.specgroup._
  *  - $lawMultiplicativeInvertibility
  *
  * @define lawMultiplicativeInvertibility '''Multiplicative invertibility''': ∀''a''∈X, ∃''a''^-1^∈X, ''a'' * ''a''^-1^ == ''a''^-1^ * ''a'' == 1.
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  */
 trait MultiplicativeGroup[@sp(fd) X] extends MultiplicativeMonoid[X] { self =>
 

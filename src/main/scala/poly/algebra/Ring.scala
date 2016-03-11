@@ -16,7 +16,7 @@ import poly.algebra.specgroup._
  *  <li> $lawMultiplicativeIdentity </li>
  *  <li> $lawDistributivityMA </li>
  * </ul>
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  * @since 0.1.0
  */
 @scala.annotation.implicitNotFound("Cannot find a ring on type ${X}.")
@@ -24,7 +24,6 @@ trait Ring[@sp(fdi) X] extends Semiring[X] with AdditiveCGroup[X] {
 
   /** Returns the -1 element in this ring. */
   def negOne = neg(one)
-
 }
 
 object Ring extends ImplicitGetter[Ring] {

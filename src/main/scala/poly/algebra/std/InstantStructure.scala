@@ -5,7 +5,7 @@ import poly.algebra._
 
 /**
  * Represents the natural affine structure on time instants.
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  * @since 0.2.10
  */
 object InstantStructure extends AffineSpace[Instant, Duration, Long] with TotalOrder[Instant] {

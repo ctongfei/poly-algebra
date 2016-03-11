@@ -5,7 +5,7 @@ import poly.algebra.specgroup._
 
 /**
  * Represents a field.
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  */
 trait Field[@sp(fd) X] extends CRing[X] with MultiplicativeCGroup[X]
 

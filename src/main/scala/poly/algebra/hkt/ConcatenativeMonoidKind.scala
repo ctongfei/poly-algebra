@@ -3,7 +3,7 @@ package poly.algebra.hkt
 import poly.algebra._
 import scala.language.higherKinds
 /**
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  * @since 0.2.1
  */
 trait ConcatenativeMonoidKind[M[_]] extends ConcatenativeSemigroupKind[M] { self =>

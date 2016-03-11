@@ -8,7 +8,7 @@ import poly.algebra.specgroup._
  * Typeclass for inner product spaces.
  * An inner product space is a vector space endowed with an inner product operation.
  *
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  * @since 0.1.0
  */
 trait InnerProductSpace[V, @sp(fd) F] extends NormedVectorSpace[V, F] {

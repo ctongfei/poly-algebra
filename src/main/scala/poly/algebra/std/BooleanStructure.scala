@@ -3,7 +3,7 @@ package poly.algebra.std
 import poly.algebra._
 
 /**
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  */
 object BooleanStructure extends BooleanAlgebra[Boolean] with TotalOrder[Boolean] with IntHashing[Boolean] {
 

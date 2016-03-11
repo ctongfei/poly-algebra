@@ -2,7 +2,7 @@ package poly.algebra
 
 /**
  * Brings typeclass instances of default algebraic structures on system types into scope.
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  */
 object implicits {
 

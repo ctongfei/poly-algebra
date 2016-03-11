@@ -10,7 +10,7 @@ import poly.algebra.specgroup._
  *  - $lawMultiplicativeAssociativity
  *  - $lawMultiplicativeIdentity
  *  - $lawMultiplicativeCommutativity
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  */
 trait MultiplicativeCMonoid[@sp(fdi) X] extends MultiplicativeMonoid[X] with MultiplicativeCSemigroup[X] { self =>
   override def asMonoidWithMul: CMonoid[X] = new CMonoid[X] {

@@ -9,7 +9,7 @@ import poly.algebra.hkt._
  * An instance of this typeclass should satisfy the following axioms:
  *  - $lawAssociativity
  *  - $lawIdentity
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  */
 trait Monoid[X] extends Semigroup[X] with HasIdentity[X] {
 

@@ -17,7 +17,7 @@ import poly.algebra.specgroup._
  *  - $lawDistributivityMA
  *  - $lawAnnihilationM
  *
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  * @since 0.2.6
  */
 trait CSemiring[@sp(fdi) X] extends Semiring[X] with MultiplicativeCMonoid[X]

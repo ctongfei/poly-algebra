@@ -19,7 +19,7 @@ import scala.annotation.unchecked._
  * </ul>
  * @define lawOrderTotality '''Totality''':  ∀''a'', ''b''∈X, ''a'' <= ''b'' or ''b'' <= ''a''.
  * @since 0.1.0
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  */
 trait WeakOrder[@sp(fdib) -X] extends PartialOrder[X] { self =>
 

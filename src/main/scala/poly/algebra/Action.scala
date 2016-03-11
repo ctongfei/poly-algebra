@@ -5,7 +5,7 @@ import poly.algebra.factory._
 /**
  * Represents an action.
  *
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  * @since 0.2.10
  */
 @scala.annotation.implicitNotFound("Cannot find an action of type ${S} onto ${X}.")

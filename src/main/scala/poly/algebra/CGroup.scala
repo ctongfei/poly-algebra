@@ -10,7 +10,7 @@ import poly.algebra.factory._
  *  - $lawIdentity
  *  - $lawInvertibility
  *  - $lawCommutativity
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  * @since 0.2.6
  */
 trait CGroup[X] extends CMonoid[X] with Group[X]

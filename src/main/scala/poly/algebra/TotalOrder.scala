@@ -12,7 +12,7 @@ import scala.annotation.unchecked.{uncheckedVariance => uv}
  *  - $lawOrderTransitivity
  *  - $lawOrderAntisymmetry
  *  - $lawOrderTotality
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  * @since 0.1.0
  */
 trait TotalOrder[@sp(fdib) -X] extends Lattice[X @uv] with WeakOrder[X] { self =>

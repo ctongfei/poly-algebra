@@ -18,7 +18,7 @@ import poly.algebra.specgroup._
  * @define lawOrderReflexivity '''Reflexivity''':  ∀''a''∈X, ''a'' <= ''a''.
  * @define lawOrderAntisymmetry '''Antisymmetry''':  ∀''a'', ''b''∈X, ''a'' <= ''b'' and ''b'' <= ''a'' implies ''a'' == ''b''.
  * @define lawOrderTransitivity '''Transitivity''':  ∀''a'', ''b'', ''c''∈X, ''a'' <= ''b'' and ''b'' <= ''c'' implies ''a'' <= ''c''.
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  */
 trait PartialOrder[@sp(fdib) -X] extends Equiv[X] { self =>
 

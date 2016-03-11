@@ -18,7 +18,7 @@ import poly.algebra.specgroup._
  * </ul>
  * @define lawAbsorptionSI '''Absorption of supremum w.r.t. infimum''': ∀''a'', ''b''∈X, sup(''a'', inf(''a'', ''b'')) == ''a''.
  * @define lawAbsorptionIS '''Absorption of infimum w.r.t. supremum''': ∀''a'', ''b''∈X, inf(''a'', sup(''a'', ''b'')) == ''a''.
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  * @since 0.1.0
  */
 trait Lattice[@sp(fdib) X] extends UpperSemilattice[X] with LowerSemilattice[X] { self =>

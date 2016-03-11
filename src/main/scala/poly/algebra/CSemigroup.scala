@@ -9,7 +9,7 @@ import poly.algebra.factory._
  *  - $lawAssociativity
  *  - $lawCommutativity
  * @define lawCommutativity '''Commutativity''': ∀''a'', ''b''∈X, ''a'' op ''b'' == ''b'' op ''a''.
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  * @since 0.2.6
  */
 trait CSemigroup[X] extends Semigroup[X]

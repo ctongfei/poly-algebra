@@ -5,7 +5,7 @@ import poly.algebra.specgroup._
 
 /**
  * Represents an algebra over a ring, i.e., a module equipped with a bilinear product.
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  * @since 0.1.0
  */
 trait AlgebraOverRing[X, @sp(fdi) S] extends Module[X, S] with CRing[X]

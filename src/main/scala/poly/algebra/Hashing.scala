@@ -5,7 +5,7 @@ import poly.algebra.specgroup._
 
 /**
  * Typeclass for hashing functions.
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  */
 trait Hashing[@sp -X, @sp(i) +H] extends Equiv[X] {
 

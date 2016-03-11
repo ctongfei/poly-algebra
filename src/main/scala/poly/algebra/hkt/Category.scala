@@ -5,7 +5,7 @@ import poly.algebra.factory._
 import scala.language.higherKinds
 
 /**
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  */
 trait Category[⇾[_, _]] { self =>
 

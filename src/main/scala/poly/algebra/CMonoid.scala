@@ -9,7 +9,7 @@ import poly.algebra.factory._
  *  - $lawAssociativity
  *  - $lawIdentity
  *  - $lawCommutativity
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  * @since 0.2.6
  */
 trait CMonoid[X] extends Monoid[X] with CSemigroup[X]

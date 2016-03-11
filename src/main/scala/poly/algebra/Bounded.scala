@@ -9,7 +9,7 @@ import poly.algebra.specgroup._
  * An instance of this typeclass should satisfy the following axioms:
  *  - $lawTop
  *  - $lawBottom
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  * @since 0.2.7
  */
 trait Bounded[@sp(fdib) +X] extends HasTop[X] with HasBottom[X]

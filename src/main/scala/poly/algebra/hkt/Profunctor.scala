@@ -6,7 +6,7 @@ import scala.language.higherKinds
 import scala.language.reflectiveCalls
 
 /**
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  * @since 0.2.9
  */
 trait Profunctor[⇾[_, _]] { self =>

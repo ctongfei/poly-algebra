@@ -14,7 +14,7 @@ import poly.algebra.specgroup._
  * @define lawSupremumAssociativity '''Supremum associativity''': ∀''a'', ''b'', ''c''∈X, sup(''a'', sup(''b'', ''c'')) == sup(sup(''a'', ''b''), ''c'').
  * @define lawSupremumCommutativity '''Supremum commutativity''': ∀''a'', ''b''∈X, sup(''a'', ''b'') == sup(''b'', ''a'').
  * @define lawSupremumIdempotency '''Supremum idempotency''': ∀''a''∈X, sup(''a'', ''a'') == a.
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  */
 trait UpperSemilattice[@sp(fdib) X] { self =>
 

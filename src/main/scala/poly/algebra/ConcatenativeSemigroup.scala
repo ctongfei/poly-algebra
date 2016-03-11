@@ -4,7 +4,7 @@ import poly.algebra.factory._
 
 /**
  * Represents a concatenative semigroup (i.e. semigroups operating on sequences, etc. that bears the operation `++`)
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  * @since 0.2.1
  */
 trait ConcatenativeSemigroup[X] { self =>

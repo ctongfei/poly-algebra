@@ -14,7 +14,7 @@ import poly.algebra.specgroup._
  * @define lawInfimumAssociativity '''Infimum associativity''': ∀''a'', ''b'', ''c''∈X, inf(''a'', inf(''b'', ''c'')) == inf(inf(''a'', ''b''), ''c'').
  * @define lawInfimumCommutativity '''Infimum commutativity''': ∀''a'', ''b''∈X, inf(''a'', ''b'') == inf(''b'', ''a'').
  * @define lawInfimumIdempotency '''Infimum idempotency''': ∀''a''∈X, inf(''a'', ''a'') == a.
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  */
 trait LowerSemilattice[@sp(Boolean) X] { self =>
   /** Returns the infimum (meet, a.k.a. greatest lower bound) of the two arguments. */

@@ -5,7 +5,7 @@ import scala.language.implicitConversions
 
 /**
  * This object contains implicit converters that converts Java strategy objects to Poly-algebra typeclasses.
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  * @since 0.2.11
  */
 object FromJava {

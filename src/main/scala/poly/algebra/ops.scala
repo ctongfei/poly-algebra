@@ -6,7 +6,7 @@ import scala.language.experimental.macros
 
 /**
  * Importing this object introduces efficient operator overloading through macros.
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  */
 object ops extends Priority1Implicits
 

@@ -6,7 +6,7 @@ import poly.algebra.specgroup._
 /**
  * Represents an abstract Boolean algebra, which is a complemented distributive lattice.
  *
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  * @since 0.1.0
  */
 trait BooleanAlgebra[@sp(Boolean) X] extends BoundedLattice[X] { self =>
@@ -28,14 +28,8 @@ trait BooleanAlgebra[@sp(Boolean) X] extends BoundedLattice[X] { self =>
   def sup(x: X, y: X): X = or(x, y)
   def inf(x: X, y: X): X = and(x, y)
 
-  /** Casts this Boolean algebra as a Boolean ring with "`xor`" as `+` and "`and`" as `*`. */
-  def asBooleanRing: Ring[X] = new Ring[X] {
-    def mul(x: X, y: X): X = and(x, y)
-    def add(x: X, y: X): X = xor(x, y)
-    def neg(x: X): X = x
-    def one: X = self.top
-    def zero: X = self.bot
-  }
+  /** Casts this Boolean algebra as a Boolean ring with "`xor`" as "`+`" and "`and`" as "`*`". */
+  def asBooleanRing = new BooleanAlgebra.BooleanRing[X](self)
 
 }
 
@@ -47,6 +41,14 @@ object BooleanAlgebra extends ImplicitGetter[BooleanAlgebra] {
     def not(x: X) = fNot(x)
     val bot = fZero
     val top = fOne
+  }
+
+  class BooleanRing[X](booleanAlgebra: BooleanAlgebra[X]) extends Ring[X] {
+    def mul(x: X, y: X): X = booleanAlgebra.and(x, y)
+    def add(x: X, y: X): X = booleanAlgebra.xor(x, y)
+    def neg(x: X): X = x
+    def one: X = booleanAlgebra.top
+    def zero: X = booleanAlgebra.bot
   }
 
 }

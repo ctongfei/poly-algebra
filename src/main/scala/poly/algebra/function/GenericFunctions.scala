@@ -6,13 +6,28 @@ import poly.algebra.specgroup._
 import scala.language.experimental.macros
 
 /**
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  */
 trait GenericFunctions {
 
   def generic[X](x: Double)(implicit isReal: IsReal[X]): X = macro OpsInlining.genericImpl[X]
   def generic[X](x: Float)(implicit isReal: IsReal[X]): X = macro OpsInlining.genericImpl[X]
   def generic[X](x: Int)(implicit isReal: IsReal[X]): X = macro OpsInlining.genericImpl[X]
+
+  /** Returns the sum of two elements. */
+  def add[@sp(fdi) X](x: X, y: X)(implicit X: AdditiveSemigroup[X]) = X.add(x, y)
+
+  /** Returns the difference of two elements. */
+  def sub[@sp(fdi) X](x: X, y: X)(implicit X: AdditiveGroup[X]) = X.sub(x, y)
+
+  /** Returns the product of two elements. */
+  def mul[@sp(fdi) X](x: X, y: X)(implicit X: MultiplicativeSemigroup[X]) = X.mul(x, y)
+
+  /** Returns the quotient of two elements. */
+  def div[@sp(fdi) X](x: X, y: X)(implicit X: MultiplicativeGroup[X]) = X.div(x, y)
+
+  /** Returns the remainder of two elements after the modulo operation. */
+  def mod[@sp(i) X](x: X, y: X)(implicit X: EuclideanDomain[X]) = X.mod(x, y)
 
   /** Returns the identity element of a type. */
   def id[X](implicit ev: HasIdentity[X]) = ev.id
@@ -45,7 +60,7 @@ trait GenericFunctions {
   def norm[V, @sp(fdi) F](x: V)(implicit ev: NormedVectorSpace[V, F]) = ev.norm(x)
 
   /** Returns the angle between two vectors in an inner product space. */
-  def angle[V, @sp(fd) F](x: V, y: V)(implicit ev1: InnerProductSpace[V, F], ev2: TrigExpOps[F]) = ev1.angle(x, y)
+  def angle[V, @sp(fd) F](x: V, y: V)(implicit V: InnerProductSpace[V, F], F: TrigExpOps[F]) = V.angle(x, y)
 
   /** Returns the greatest common divisor of two elements. */
   def gcd[@sp(i) X](x: X, y: X)(implicit ev: EuclideanDomain[X]) = ev.gcd(x, y)

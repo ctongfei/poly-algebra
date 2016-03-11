@@ -7,7 +7,7 @@ import scala.language.reflectiveCalls
 
 /**
  * Typeclass for monads.
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  * @since 0.2.1
  */
 trait Monad[M[_]] extends Idiom[M] { self =>

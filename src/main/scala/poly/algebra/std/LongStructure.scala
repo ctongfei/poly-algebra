@@ -3,7 +3,7 @@ package poly.algebra.std
 import poly.algebra._
 
 /**
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  */
 object LongStructure extends EuclideanDomain[Long] with BoundedLattice[Long] with SequentialOrder[Long] {
 

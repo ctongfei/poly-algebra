@@ -17,7 +17,7 @@ import poly.algebra.specgroup._
  *  <li> $lawTop </li>
  *  <li> $lawBottom </li>
  * </ul>
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  * @since 0.2.0
  */
 trait BoundedLattice[@sp(Boolean) X] extends

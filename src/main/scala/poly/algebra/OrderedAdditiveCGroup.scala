@@ -4,7 +4,7 @@ import poly.algebra.factory._
 import poly.algebra.specgroup._
 
 /**
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  */
 trait OrderedAdditiveCGroup[@sp(fdi) X] extends OrderedAdditiveGroup[X] with AdditiveCGroup[X] with MetricSpace[X, X] {
 

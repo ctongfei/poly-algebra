@@ -3,7 +3,7 @@ package poly.algebra.factory
 import scala.language.higherKinds
 
 /**
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  */
 trait ImplicitGetter[Ev[_]] {
 

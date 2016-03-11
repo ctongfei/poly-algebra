@@ -4,7 +4,7 @@ import poly.algebra.factory._
 
 /**
  * Represents a concatenative monoid (i.e. monoids operating on sequences, etc. that bears the operation `++`)
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  * @since 0.2.1
  */
 trait ConcatenativeMonoid[X] extends ConcatenativeSemigroup[X] with HasEmpty[X] { self =>

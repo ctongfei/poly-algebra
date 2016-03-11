@@ -5,7 +5,7 @@ import scala.language.implicitConversions
 
 /**
  * This package contains implicit converters that converts Scala math typeclasses to Poly-algebra typeclasses.
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  */
 object FromScala {
 

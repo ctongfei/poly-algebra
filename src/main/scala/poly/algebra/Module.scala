@@ -28,7 +28,7 @@ import poly.algebra.specgroup._
  *
  * @tparam X Type of vectors
  * @tparam S Type of scalars
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  */
 trait Module[X, @sp(fdi) S] extends MultiplicativeAction[X, S] with AdditiveCGroup[X] { self =>
 

@@ -2,7 +2,7 @@ package poly.algebra
 
 /**
  * An additive semigroup that allows inplace addition (for performance when dealing with vectors/matrices).
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  * @since 0.2.1
  */
 trait InplaceAdditiveCSemigroup[X] extends AdditiveCSemigroup[X] {
@@ -12,7 +12,7 @@ trait InplaceAdditiveCSemigroup[X] extends AdditiveCSemigroup[X] {
 
 /**
  * An additive monoid that allows inplace addition (for performance when dealing with vectors/matrices).
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  */
 trait InplaceAdditiveCMonoid[X] extends InplaceAdditiveCSemigroup[X] with AdditiveCMonoid[X] {
   /** Clears ''x'' in-place. */
@@ -22,7 +22,7 @@ trait InplaceAdditiveCMonoid[X] extends InplaceAdditiveCSemigroup[X] with Additi
 
 /**
  * An additive group that allows inplace addition and subtraction (for performance when dealing with vectors/matrices).
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  */
 trait InplaceAdditiveCGroup[X] extends InplaceAdditiveCMonoid[X] with AdditiveCGroup[X] {
   /** Subtracts ''y'' from ''x'' in-place. */

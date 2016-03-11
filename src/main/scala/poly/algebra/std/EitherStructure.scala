@@ -3,7 +3,7 @@ package poly.algebra.std
 import poly.algebra.hkt._
 
 /**
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  */
 object EitherStructure extends Bifunctor[Either] {
   def mapFirst[A, B, C](e: Either[A, B])(f1: A => C) = e match {

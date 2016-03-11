@@ -4,7 +4,7 @@ import poly.algebra.factory._
 import poly.algebra.specgroup._
 
 /**
- * @author Tongfei Chen (ctongfei@gmail.com).
+ * @author Tongfei Chen
  */
 trait NormedVectorSpace[V, @sp(fd) F] extends VectorSpace[V, F] with MetricSpace[V, F] {
   def norm(x: V): F
