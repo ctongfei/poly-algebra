@@ -9,4 +9,6 @@ package object algebra {
 
   type Id[X] = X
 
+  type implicitNotFound = scala.annotation.implicitNotFound
+
 }

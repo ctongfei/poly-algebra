@@ -52,25 +52,29 @@ trait WeakOrder[@sp(fdib) -X] extends PartialOrder[X] { self =>
     }
   }
 
-  override def contramap[Y](f: Y => X): WeakOrder[Y] = WeakOrder.by(f)(self)
+  override def contramap[@sp(fdib) Y](f: Y => X): WeakOrder[Y] = new WeakOrder[Y] {
+    def cmp(x: Y, y: Y) = self.cmp(f(x), f(y))
+  }
 
 }
 
 object WeakOrder extends ImplicitGetter[WeakOrder] {
 
+  // CONSTRUCTORS
+
   def create[@sp(fdib) X](fCmp: (X, X) => Int): WeakOrder[X] = new WeakOrder[X] {
     def cmp(x: X, y: X) = fCmp(x, y)
   }
 
-  def by[@sp(fdib) X, Y](f: Y => X)(implicit O: WeakOrder[X]): WeakOrder[Y] = new WeakOrder[Y] {
-    def cmp(x: Y, y: Y) = O.cmp(f(x), f(y))
-  }
+  def by[@sp(fdib) X, Y](f: Y => X)(implicit X: WeakOrder[X]) = X contramap f
 
   implicit def fromJavaComparable[X <: java.lang.Comparable[X]]: WeakOrder[X] = new WeakOrder[X] {
     def cmp(x: X, y: X) = x compareTo y
   }
 
+  // TYPECLASS INSTANCES
+
   implicit object ContravariantFunctor extends ContravariantFunctor[WeakOrder] {
-    def contramap[X, Y](wox: WeakOrder[X])(f: Y => X) = WeakOrder.by(f)(wox)
+    def contramap[X, Y](wox: WeakOrder[X])(f: Y => X) = wox contramap f
   }
 }

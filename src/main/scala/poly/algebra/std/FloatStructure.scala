@@ -5,7 +5,7 @@ import poly.algebra._
 /**
  * @author Tongfei Chen
  */
-object FloatStructure extends IsReal[Float] with BoundedLattice[Float] {
+object FloatStructure extends IsReal[Float] with BoundedLattice[Float] with TotalOrder[Float] {
 
   final def fromDouble(x: Double) = x.toFloat
 
@@ -13,6 +13,7 @@ object FloatStructure extends IsReal[Float] with BoundedLattice[Float] {
   final val top: Float = Float.PositiveInfinity
 
   def cmp(x: Float, y: Float) = (x - y).toInt
+  override def eq(x: Float, y: Float) = x == y
   override def le(x: Float, y: Float) = x <= y
   override def lt(x: Float, y: Float) = x < y
   override def ge(x: Float, y: Float) = x >= y

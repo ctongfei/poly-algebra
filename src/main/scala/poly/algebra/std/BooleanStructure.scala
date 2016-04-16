@@ -5,7 +5,7 @@ import poly.algebra._
 /**
  * @author Tongfei Chen
  */
-object BooleanStructure extends BooleanAlgebra[Boolean] with TotalOrder[Boolean] with IntHashing[Boolean] {
+object BooleanStructure extends BooleanAlgebra[Boolean] with TotalOrder[Boolean] {
 
   def elements = List(false, true)
 
@@ -14,8 +14,6 @@ object BooleanStructure extends BooleanAlgebra[Boolean] with TotalOrder[Boolean]
     else if (x) 1
     else -1
   }
-
-  def hash(x: Boolean) = x.hashCode
 
   final val top = true
   final val bot = false

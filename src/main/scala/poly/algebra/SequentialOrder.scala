@@ -10,9 +10,12 @@ import poly.algebra.specgroup._
   * @author Tongfei Chen
   * @since 0.2.19
   */
-trait SequentialOrder[@sp(il) X] extends TotalOrder[X] { self =>
+trait SequentialOrder[@sp(Int) X] extends TotalOrder[X] { self =>
 
+  /** Returns the preceding element of the given element under this sequential order. */
   def pred(x: X): X
+
+  /** Returns the succeeding element of the given element under this sequential order. */
   def succ(x: X): X
 
   def predN(x: X, n: Int): X = {
@@ -36,12 +39,14 @@ trait SequentialOrder[@sp(il) X] extends TotalOrder[X] { self =>
   }
 
   override def reverse: SequentialOrder[X] = new SequentialOrder[X] {
-    def pred(x: X): X = self.succ(x)
-    def succ(x: X): X = self.pred(x)
-    def cmp(x: X, y: X): Int = -self.cmp(x, y)
+    def pred(x: X) = self.succ(x)
+    def succ(x: X) = self.pred(x)
+    def cmp(x: X, y: X) = -self.cmp(x, y)
     override def reverse = self
   }
 
 }
 
-object SequentialOrder extends ImplicitGetter[SequentialOrder]
+object SequentialOrder extends ImplicitGetter[SequentialOrder] {
+
+}

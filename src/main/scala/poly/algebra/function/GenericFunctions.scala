@@ -27,7 +27,7 @@ trait GenericFunctions {
   def div[@sp(fdi) X](x: X, y: X)(implicit X: MultiplicativeGroup[X]) = X.div(x, y)
 
   /** Returns the remainder of two elements after the modulo operation. */
-  def mod[@sp(i) X](x: X, y: X)(implicit X: EuclideanDomain[X]) = X.mod(x, y)
+  def mod[@sp(Int) X](x: X, y: X)(implicit X: EuclideanDomain[X]) = X.mod(x, y)
 
   /** Returns the identity element of a type. */
   def id[X](implicit ev: HasIdentity[X]) = ev.id
@@ -63,10 +63,10 @@ trait GenericFunctions {
   def angle[V, @sp(fd) F](x: V, y: V)(implicit V: InnerProductSpace[V, F], F: TrigExpOps[F]) = V.angle(x, y)
 
   /** Returns the greatest common divisor of two elements. */
-  def gcd[@sp(i) X](x: X, y: X)(implicit ev: EuclideanDomain[X]) = ev.gcd(x, y)
+  def gcd[@sp(Int) X](x: X, y: X)(implicit ev: EuclideanDomain[X]) = ev.gcd(x, y)
 
   /** Returns the least common multiplier of two elements. */
-  def lcm[@sp(i) X](x: X, y: X)(implicit ev: EuclideanDomain[X]) = ev.lcm(x, y)
+  def lcm[@sp(Int) X](x: X, y: X)(implicit ev: EuclideanDomain[X]) = ev.lcm(x, y)
 
   /** Returns the supremum (join) of two elements in a lattice. */
   def sup[@sp(fdib) X](x: X, y: X)(implicit ev: UpperSemilattice[X]) = ev.sup(x, y)
@@ -81,10 +81,10 @@ trait GenericFunctions {
   def min[@sp(fdib) X](x: X, y: X)(implicit ev: WeakOrder[X]) = ev.min(x, y)
 
   /** Returns the greatest common divisor of the specified elements. */
-  def gcd[@sp(i) X](xs: X*)(implicit ev: EuclideanDomain[X]) = xs.reduce(ev.gcd)
+  def gcd[@sp(Int) X](xs: X*)(implicit ev: EuclideanDomain[X]) = xs.reduce(ev.gcd)
 
   /** Returns the least common multiplier of the specified elements. */
-  def lcm[@sp(i) X](xs: X*)(implicit ev: EuclideanDomain[X]) = xs.reduce(ev.lcm)
+  def lcm[@sp(Int) X](xs: X*)(implicit ev: EuclideanDomain[X]) = xs.reduce(ev.lcm)
 
   /** Returns the supremum (join) of the specified elements. */
   def sup[@sp(fdi) X](xs: X*)(implicit ev: UpperSemilattice[X]) = xs.reduce(ev.sup)

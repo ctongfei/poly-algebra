@@ -1,8 +1,10 @@
 name := "poly-algebra"
-version := "0.3.0-M0-SNAPSHOT"
+version := "0.3.2-SNAPSHOT"
 organization := "me.tongfei"
-scalaVersion := "2.11.7"
+scalaVersion := "2.11.8"
 isSnapshot := true
+
+// crossScalaVersions := Seq("2.11.8", "2.12.0-M4")
 
 libraryDependencies += "org.scala-lang"    %  "scala-reflect"   % scalaVersion.value
 libraryDependencies += "me.tongfei"        %% "poly-macroutil"  % "0.2.0"

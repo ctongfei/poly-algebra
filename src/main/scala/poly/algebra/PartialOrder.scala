@@ -42,11 +42,20 @@ trait PartialOrder[@sp(fdib) -X] extends Equiv[X] { self =>
     def le(x: X, y: X) = self.le(y, x)
   }
 
-  override def contramap[Y](f: Y => X): PartialOrder[Y] = PartialOrder.by(f)(self)
+  override def contramap[@sp(fdib) Y](f: Y => X): PartialOrder[Y] = new PartialOrder[Y] {
+    def le(x: Y, y: Y) = self.le(f(x), f(y))
+  }
+
+  /** Returns the product order of two partial orders. */
+  def product[Y](that: PartialOrder[Y]): PartialOrder[(X, Y)] = new PartialOrder[(X, Y)] {
+    def le(x: (X, Y), y: (X, Y)) = self.le(x._1, y._1) && that.le(x._2, y._2)
+  }
 
 }
 
 object PartialOrder extends ImplicitGetter[PartialOrder] {
+
+  // CONSTRUCTORS
 
   implicit def fromScalaPartiallyOrdered[X <: scala.math.PartiallyOrdered[X]]: PartialOrder[X] = new PartialOrder[X] {
     def le(x: X, y: X) = x tryCompareTo y match {
@@ -59,11 +68,9 @@ object PartialOrder extends ImplicitGetter[PartialOrder] {
     def le(x: X, y: X): Boolean = fLe(x, y)
   }
 
-  def by[Y, @sp(fdib) X](f: Y => X)(implicit X: PartialOrder[X]): PartialOrder[Y] = new PartialOrder[Y] {
-    def le(x: Y, y: Y) = X.le(f(x), f(y))
-  }
+  def by[Y, @sp(fdib) X](f: Y => X)(implicit X: PartialOrder[X]) = X contramap f
 
   implicit object ContravariantFunctor extends ContravariantFunctor[PartialOrder] {
-    def contramap[X, Y](pox: PartialOrder[X])(f: Y => X) = PartialOrder.by(f)(pox)
+    def contramap[X, Y](pox: PartialOrder[X])(f: Y => X) = pox contramap f
   }
 }

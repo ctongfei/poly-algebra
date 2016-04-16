@@ -9,17 +9,7 @@ import poly.algebra.function._
   * @author Tongfei Chen
   * @since 0.2.15
   */
-object syntax extends GenericFunctions with MapReduceMathOps with Priority1Implicits {
-
-  implicit final val IntStructure = std.IntStructure
-  implicit final val LongStructure = std.LongStructure
-  implicit final val FloatStructure = std.FloatStructure
-  implicit final val DoubleStructure = std.DoubleStructure
-  implicit final val BooleanStructure = std.BooleanStructure
-  implicit final val StringStructure = std.StringStructure
-
-  implicit final val InstantStructure = std.InstantStructure
-  implicit final val DurationStructure = std.DurationStructure
+object syntax extends GenericFunctions with MapReduceMathOps with ImplicitStructures with Priority1Implicits {
 
   /** ASCII-compliant symbolic alias for bijections. */
   type <=>[X, Y] = Bijection[X, Y]

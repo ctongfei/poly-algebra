@@ -18,7 +18,7 @@ import poly.algebra.specgroup._
  * @author Tongfei Chen
  * @since 0.1.0
  */
-trait Equiv[@sp(fdib) -X] {
+trait Equiv[@sp(fdib) -X] { self =>
 
   /** Checks if two objects of the same type are equivalent under this equivalence relation. */
   def eq(x: X, y: X): Boolean
@@ -26,9 +26,13 @@ trait Equiv[@sp(fdib) -X] {
   /** Checks if two objects of the same type are not equivalent under this equivalence equation. */
   def ne(x: X, y: X): Boolean = !eq(x, y)
 
-  def contramap[Y](f: Y => X): Equiv[Y] = Equiv.by(f)(this)
+  def contramap[@sp(fdib) Y](f: Y => X): Equiv[Y] = new Equiv[Y] {
+    def eq(x: Y, y: Y) = self.eq(f(x), f(y))
+  }
 
-  def product[Y](that: Equiv[Y]) = Equiv.product(this, that)
+  def product[@sp(fdib) Y](that: Equiv[Y]): Equiv[(X, Y)] = new Equiv[(X, Y)] {
+    def eq(x: (X, Y), y: (X, Y)) = self.eq(x._1, y._1) && that.eq(x._2, y._2)
+  }
 }
 
 object Equiv extends ImplicitGetter[Equiv] {
@@ -39,19 +43,11 @@ object Equiv extends ImplicitGetter[Equiv] {
     def eq(x: X, y: X) = fEq(x, y)
   }
 
-  def product[@sp(fdib) X, @sp(fdib) Y](implicit X: Equiv[X], Y: Equiv[Y]): Equiv[(X, Y)] = new Equiv[(X, Y)] {
-    def eq(x: (X, Y), y: (X, Y)) = X.eq(x._1, y._1) && Y.eq(x._2, y._2)
-  }
+  def product[X, Y](implicit X: Equiv[X], Y: Equiv[Y]) = X product Y
 
-  def by[@sp(fdib) Y, X](f: Y => X)(implicit ev: Equiv[X]): Equiv[Y] = new Equiv[Y] {
-    def eq(x: Y, y: Y) = ev.eq(f(x), f(y))
-    override def ne(x: Y, y: Y) = ev.ne(f(x), f(y))
-  }
+  def by[@sp(fdib) Y, @sp(fdib) X](f: Y => X)(implicit X: Equiv[X]) = X contramap f
 
-  implicit def default[@sp(fdib) X]: Equiv[X] = new Equiv[X] {
-    def eq(x: X, y: X) = x == y
-    override def ne(x: X, y: X) = x != y
-  }
+  def default[@sp(fdib) X]: Equiv[X] = IntHashing.default[X]
 
   /** Returns the equality-by-reference relation. */
   def byRef[X <: AnyRef]: Equiv[X] = new Equiv[X] {

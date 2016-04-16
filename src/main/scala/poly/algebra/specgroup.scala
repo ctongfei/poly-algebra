@@ -8,9 +8,6 @@ import scala._
 object specgroup {
 
   type sp = specialized
-  final val d = new Specializable.Group(Tuple1(Double))
-  final val i = new Specializable.Group(Tuple1(Int))
-  final val b = new Specializable.Group(Tuple1(Boolean))
   final val fd = new Specializable.Group((Float, Double))
   final val di = new Specializable.Group((Int, Double))
   final val fdi = new Specializable.Group((Int, Float, Double))

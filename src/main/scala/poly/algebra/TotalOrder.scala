@@ -27,7 +27,9 @@ trait TotalOrder[@sp(fdib) -X] extends Lattice[X @uv] with WeakOrder[X] { self =
     def cmp(x: X, y: X): Int = -self.cmp(x, y)
   }
 
-  override def contramap[Y](f: Y => X): TotalOrder[Y] = TotalOrder.by(f)(self)
+  override def contramap[@sp(fdib) Y](f: Y => X): TotalOrder[Y] = new TotalOrder[Y] {
+    def cmp(x: Y, y: Y) = self.cmp(f(x), f(y))
+  }
 }
 
 object TotalOrder extends ImplicitGetter[TotalOrder] {
@@ -38,12 +40,10 @@ object TotalOrder extends ImplicitGetter[TotalOrder] {
     override def gt(x: X, y: X) = fLt(y, x)
   }
 
-  def by[Y, @sp(fdib) X](f: Y => X)(implicit O: TotalOrder[X]): TotalOrder[Y] = new TotalOrder[Y] {
-    def cmp(x: Y, y: Y) = O.cmp(f(x), f(y))
-  }
+  def by[Y, @sp(fdib) X](f: Y => X)(implicit X: TotalOrder[X]) = X contramap f
 
   implicit object ContravariantFunctor extends ContravariantFunctor[TotalOrder] {
-    def contramap[X, Y](tox: TotalOrder[X])(f: Y => X): TotalOrder[Y] = TotalOrder.by(f)(tox)
+    def contramap[X, Y](tox: TotalOrder[X])(f: Y => X): TotalOrder[Y] = tox contramap f
   }
 
 }

@@ -69,7 +69,7 @@ trait HktImplicits {
      * Lifts this function `(X, Y) => Z` to an idiomatic (a.k.a. applicative functor) application (`(F[X], F[Y]) => F[Z]`).
      * @tparam I Idiom
      */
-    def liftI[I[_]: Idiom](x: I[X], y: I[Y]) = Idiom[I].mapPair(x, y)(f)
+    def liftI[I[_]: Idiom](x: I[X], y: I[Y]) = Idiom[I].productMap(x, y)(f)
   }
 
   implicit class KleisliOps[M[_], X, Y](private val f: X => M[Y]) {

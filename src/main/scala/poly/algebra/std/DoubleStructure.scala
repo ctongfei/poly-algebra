@@ -5,7 +5,7 @@ import poly.algebra._
 /**
  * @author Tongfei Chen
  */
-object DoubleStructure extends IsReal[Double] with BoundedLattice[Double] {
+object DoubleStructure extends IsReal[Double] with BoundedLattice[Double] with TotalOrder[Double] {
 
   final def fromDouble(x: Double) = x
 
@@ -13,6 +13,7 @@ object DoubleStructure extends IsReal[Double] with BoundedLattice[Double] {
   final val top: Double = Double.PositiveInfinity
 
   final def cmp(x: Double, y: Double) = (x - y).toInt
+  final override def eq(x: Double, y: Double) = x == y
   final override def le(x: Double, y: Double) = x <= y
   final override def lt(x: Double, y: Double) = x < y
   final override def ge(x: Double, y: Double) = x >= y

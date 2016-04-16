@@ -2,7 +2,6 @@ package poly.algebra
 
 import poly.algebra.factory._
 
-
 /**
  * Represents a group. A group is a monoid where for each element there exists an inverse element.
  *
@@ -11,15 +10,17 @@ import poly.algebra.factory._
  *  - $lawIdentity
  *  - $lawInvertibility
  * @define lawInvertibility '''Invertibility''': ∀''a''∈X, ∃''b''∈X, ''a'' op ''b'' == ''b'' op ''a'' == id.
- *
+ * @since 0.1.0
  * @author Tongfei Chen
  */
 trait Group[X] extends Monoid[X] {
   def inv(x: X): X
+
+  def invOp(x: X, y: X) = op(x, inv(y))
 }
 
 object Group extends ImplicitGetter[Group] {
-  def create[X](f: (X, X) => X, idElem: X, fInv: X => X) = new Group[X] {
+  def create[X](f: (X, X) => X, idElem: X, fInv: X => X): Group[X] = new Group[X] {
     def inv(x: X): X = fInv(x)
     def op(x: X, y: X): X = f(x, y)
     def id: X = idElem

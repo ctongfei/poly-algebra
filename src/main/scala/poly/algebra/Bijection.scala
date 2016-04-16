@@ -2,6 +2,7 @@ package poly.algebra
 
 import poly.algebra.factory._
 import poly.algebra.hkt._
+import poly.algebra.specgroup._
 import poly.algebra.syntax._
 
 /**
@@ -9,7 +10,7 @@ import poly.algebra.syntax._
  * @author Tongfei Chen
  * @since 0.2.5
  */
-trait Bijection[@specialized(Int, AnyRef) X, @specialized(Int, AnyRef) Y] extends (X => Y) { self =>
+trait Bijection[@sp(Int, AnyRef) X, @sp(Int, AnyRef) Y] extends (X => Y) { self =>
 
   def invert(y: Y): X
 

@@ -7,10 +7,15 @@ import poly.algebra.specgroup._
  * Typeclass for hashing functions.
  * @author Tongfei Chen
  */
-trait Hashing[@sp -X, @sp(i) +H] extends Equiv[X] {
+trait Hashing[@sp -X, @sp(Int) +H] extends Equiv[X] { self =>
 
   /** Returns a user-defined hash code of an object. */
   def hash(x: X): H
+
+  override def contramap[@sp(fdib) Y](f: Y => X): Hashing[Y, H] = new Hashing[Y, H] {
+    def hash(y: Y) = self.hash(f(y))
+    def eq(x: Y, y: Y) = self.eq(f(x), f(y))
+  }
 
 }
 
