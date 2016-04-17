@@ -12,16 +12,28 @@ import poly.algebra.syntax._
  */
 trait Bijection[@sp(Int, AnyRef) X, @sp(Int, AnyRef) Y] extends (X => Y) { self =>
 
+  /** Given a value ''y'' in the codomain, returns the unique value in the domain that maps to ''y''. */
   def invert(y: Y): X
 
   /** Returns the inverse bijection of this bijection. */
-  def inverse: Bijection[Y, X] = new Bijection.Inverse(self)
+  def inverse: Bijection[Y, X] = new Bijection[Y, X] {
+    def invert(x: X) = self.apply(x)
+    def apply(y: Y) = self.invert(y)
+    override def inverse = self
+  }
 
-  def andThen[Z](that: Bijection[Y, Z]) = new Bijection.Composed(that, self)
+  def andThen[Z](that: Bijection[Y, Z]) = that compose self
 
-  def compose[W](that: Bijection[W, X]) = new Bijection.Composed(self, that)
+  def compose[W](that: Bijection[W, X]): Bijection[W, Y] = new Bijection[W, Y] {
+    def invert(y: Y) = that.invert(self.invert(y))
+    def apply(w: W) = self(that(w))
+  }
 
-  def product[U, V](that: Bijection[U, V]) = new Bijection.Product(self, that)
+  def product[U, V](that: Bijection[U, V]): Bijection[(X, U), (Y, V)] = new Bijection[(X, U), (Y, V)] {
+    def invert(yv: (Y, V)) = (self.invert(yv._1), that.invert(yv._2))
+    def apply(xu: (X, U)) = (self(xu._1), that(xu._2))
+  }
+
 }
 
 object Bijection extends BinaryImplicitGetter[Bijection] {
@@ -44,20 +56,5 @@ object Bijection extends BinaryImplicitGetter[Bijection] {
   implicit def SwapBijection[X, Y]: (X, Y) <=> (Y, X) = new ((X, Y) <=> (Y, X)) {
     def invert(y: (Y, X)): (X, Y) = y.swap
     def apply(x: (X, Y)): (Y, X) = x.swap
-  }
-
-  class Inverse[X, Y](override val inverse: Bijection[X, Y]) extends Bijection[Y, X] {
-    def invert(x: X): Y = inverse.apply(x)
-    def apply(y: Y): X = inverse.invert(y)
-  }
-
-  class Composed[X, Y, Z](outer: Bijection[Y, Z], inner: Bijection[X, Y]) extends Bijection[X, Z] {
-    def invert(z: Z) = inner.invert(outer.invert(z))
-    def apply(x: X) = outer(inner(x))
-  }
-
-  class Product[X, Y, U, V](first: Bijection[X, Y], second: Bijection[U, V]) extends Bijection[(X, U), (Y, V)] {
-    def invert(yv: (Y, V)) = (first.invert(yv._1), second.invert(yv._2))
-    def apply(xu: (X, U)) = (first(xu._1), second(xu._2))
   }
 }

@@ -16,6 +16,7 @@ object IntStructure extends EuclideanDomain[Int] with BoundedLattice[Int] with S
   override def succN(x: Int, n: Int) = x + n
 
   def cmp(x: Int, y: Int) = x - y
+  override def eq(x: Int, y: Int) = x == y
   override def le(x: Int, y: Int) = x <= y
   override def lt(x: Int, y: Int) = x < y
   override def ge(x: Int, y: Int) = x >= y

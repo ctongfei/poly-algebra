@@ -1,7 +1,5 @@
 package poly.algebra
 
-import poly.algebra.std._
-
 /**
  * Brings typeclass instances of default algebraic structures on system types into scope.
  *
@@ -11,13 +9,14 @@ object implicits extends ImplicitStructures
 
 trait ImplicitStructures extends LowerPriorityImplicitStructures {
 
-  implicit object IntHashing extends DefaultHashing[Int]
-  implicit object DoubleHashing extends DefaultHashing[Double]
-  implicit object FloatHashing extends DefaultHashing[Float]
-  implicit object BooleanHashing extends DefaultHashing[Boolean]
-  implicit object LongHashing extends DefaultHashing[Long]
-  implicit object CharHashing extends DefaultHashing[Char]
-
+  implicit final val IntIntHashing = IntHashing.default[Int]
+  implicit final val DoubleHashing = IntHashing.default[Double]
+  implicit final val FloatHashing = IntHashing.default[Float]
+  implicit final val BooleanHashing = IntHashing.default[Boolean]
+  implicit final val LongHashing = IntHashing.default[Long]
+  implicit final val CharHashing = IntHashing.default[Char]
+  implicit final val StringHashing = IntHashing.default[String]
+  
 }
 
 trait LowerPriorityImplicitStructures {
