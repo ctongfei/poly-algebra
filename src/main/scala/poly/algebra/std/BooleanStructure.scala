@@ -5,7 +5,7 @@ import poly.algebra._
 /**
  * @author Tongfei Chen
  */
-object BooleanStructure extends BooleanAlgebra[Boolean] with TotalOrder[Boolean] with OrderedHashing[Boolean] {
+object BooleanStructure extends BooleanAlgebra[Boolean] with OrderedHashing[Boolean] {
 
   def elements = List(false, true)
 

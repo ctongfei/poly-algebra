@@ -38,7 +38,7 @@ object ToScala {
   }
 
 
-  implicit class WeakOrderToScalaOps[X](val p: pa.WeakOrder[X]) extends AnyVal {
+  implicit class WeakOrderToScalaOps[X](val p: pa.Order[X]) extends AnyVal {
 
     def asScalaOrdering: sm.Ordering[X] = new Ordering[X] {
       def compare(x: X, y: X) = p.cmp(x, y)

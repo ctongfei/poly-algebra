@@ -75,10 +75,10 @@ trait GenericFunctions {
   def inf[@sp(fdib) X](x: X, y: X)(implicit ev: LowerSemilattice[X]) = ev.inf(x, y)
 
   /** Returns the greater one of the two elements. */
-  def max[@sp(fdib) X](x: X, y: X)(implicit ev: WeakOrder[X]) = ev.max(x, y)
+  def max[@sp(fdib) X](x: X, y: X)(implicit ev: Order[X]) = ev.max(x, y)
 
   /** Returns the lesser one of the two elements. */
-  def min[@sp(fdib) X](x: X, y: X)(implicit ev: WeakOrder[X]) = ev.min(x, y)
+  def min[@sp(fdib) X](x: X, y: X)(implicit ev: Order[X]) = ev.min(x, y)
 
   /** Returns the greatest common divisor of the specified elements. */
   def gcd[@sp(Int) X](xs: X*)(implicit ev: EuclideanDomain[X]) = xs.reduce(ev.gcd)
@@ -93,10 +93,10 @@ trait GenericFunctions {
   def inf[@sp(fdi) X](xs: X*)(implicit ev: LowerSemilattice[X]) = xs.reduce(ev.inf)
 
   /** Returns the maximum one of the specified elements. */
-  def max[@sp(fdi) X](xs: X*)(implicit ev: WeakOrder[X]) = xs.reduce(ev.max[X])
+  def max[@sp(fdi) X](xs: X*)(implicit ev: Order[X]) = xs.reduce(ev.max[X])
 
   /** Returns the minimum one of the specified elements. */
-  def min[@sp(fdi) X](xs: X*)(implicit ev: WeakOrder[X]) = xs.reduce(ev.min[X])
+  def min[@sp(fdi) X](xs: X*)(implicit ev: Order[X]) = xs.reduce(ev.min[X])
 
   def abs[@sp(fdi) X](x: X)(implicit ev: OrderedRing[X]) = ev.abs(x)
 

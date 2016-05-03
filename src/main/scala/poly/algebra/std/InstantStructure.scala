@@ -8,7 +8,7 @@ import poly.algebra._
  * @author Tongfei Chen
  * @since 0.2.10
  */
-object InstantStructure extends AffineSpace[Instant, Duration, Long] with TotalOrder[Instant] {
+object InstantStructure extends AffineSpace[Instant, Duration, Long] with Order[Instant] {
 
   override def eq(x: Instant, y: Instant) = x equals y
   def cmp(x: Instant, y: Instant) = x compareTo y
@@ -18,7 +18,7 @@ object InstantStructure extends AffineSpace[Instant, Duration, Long] with TotalO
 
 }
 
-object DurationStructure extends VectorSpace[Duration, Long] with TotalOrder[Duration] {
+object DurationStructure extends VectorSpace[Duration, Long] with Order[Duration] {
 
   override def eq(x: Duration, y: Duration) = x equals y
   def cmp(x: Duration, y: Duration): Int = x compareTo y

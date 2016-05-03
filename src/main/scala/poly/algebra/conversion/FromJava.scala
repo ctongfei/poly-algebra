@@ -10,7 +10,7 @@ import scala.language.implicitConversions
  */
 object FromJava {
 
-  implicit def javaComparatorAsPoly[X](s: java.util.Comparator[X]): WeakOrder[X] = new WeakOrder[X] {
+  implicit def javaComparatorAsPoly[X](s: java.util.Comparator[X]): Order[X] = new Order[X] {
     def cmp(x: X, y: X) = s.compare(x, y)
   }
 

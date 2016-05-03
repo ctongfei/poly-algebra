@@ -10,7 +10,7 @@ import poly.algebra.specgroup._
   * @author Tongfei Chen
   * @since 0.2.19
   */
-trait SequentialOrder[@sp(Int) X] extends TotalOrder[X] { self =>
+trait SequentialOrder[@sp(Int) X] extends Order[X] { self =>
 
   /** Returns the preceding element of the given element under this sequential order. */
   def pred(x: X): X

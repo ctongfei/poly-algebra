@@ -6,7 +6,7 @@ import poly.algebra.specgroup._
 /**
  * @author Tongfei Chen
  */
-trait OrderedAdditiveGroup[@sp(fdi) X] extends AdditiveGroup[X] with TotalOrder[X] {
+trait OrderedAdditiveGroup[@sp(fdi) X] extends AdditiveGroup[X] with Order[X] {
 
   def isPositive(x: X) = gt(x, zero)
 

@@ -98,7 +98,7 @@ trait Priority1Implicits extends Priority2Implicits {
     def >(y: Y) : Boolean = macro OpsInlining.op2
   }
 
-  implicit class withWeakOrderOps[X, Y >: X : WeakOrder](x: X) {
+  implicit class withWeakOrderOps[X, Y >: X : Order](x: X) {
     def >?<(y: Y): Int = macro OpsInlining.op2
   }
 

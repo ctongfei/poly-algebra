@@ -5,7 +5,7 @@ import poly.algebra._
 /**
  * @author Tongfei Chen
  */
-object DoubleStructure extends IsReal[Double] with BoundedLattice[Double] with TotalOrder[Double] with OrderedHashing[Double] {
+object DoubleStructure extends IsReal[Double] with BoundedLattice[Double] with OrderedHashing[Double] {
 
   final def hash(x: Double) = x.##
 

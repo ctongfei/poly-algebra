@@ -17,7 +17,7 @@ object FromScala {
     def le(x: X, y: X) = s.lteq(x, y)
   }
 
-  implicit def scalaOrderAsPoly[X](s: scala.Ordering[X]): WeakOrder[X] = new WeakOrder[X] {
+  implicit def scalaOrderAsPoly[X](s: scala.Ordering[X]): Order[X] = new Order[X] {
     def cmp(x: X, y: X) = s.compare(x, y)
   }
 

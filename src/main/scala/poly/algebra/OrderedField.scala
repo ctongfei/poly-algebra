@@ -7,6 +7,6 @@ import poly.algebra.specgroup._
  * @author Tongfei Chen
  * @since 0.2.4
  */
-trait OrderedField[@sp(fd) X] extends Field[X] with TotalOrder[X] with OrderedRing[X]
+trait OrderedField[@sp(fd) X] extends Field[X] with OrderedRing[X]
 
 object OrderedField extends ImplicitGetter[OrderedField]
