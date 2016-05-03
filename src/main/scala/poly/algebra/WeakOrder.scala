@@ -36,7 +36,7 @@ trait WeakOrder[@sp(fdib) -X] extends PartialOrder[X] { self =>
   def min[Y <: X](x: Y, y: Y): Y = if (cmp(x, y) <= 0) x else y
 
   /** Returns the equivalence relation (tied relation) induced by this weak order. */
-  def asEquiv: Equiv[X] = new Equiv[X] {
+  def asEquiv: Eq[X] = new Eq[X] {
     def eq(x: X, y: X) = self.cmp(x, y) == 0
   }
 

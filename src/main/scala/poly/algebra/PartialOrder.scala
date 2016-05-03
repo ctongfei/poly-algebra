@@ -20,7 +20,7 @@ import poly.algebra.specgroup._
  * @define lawOrderTransitivity '''Transitivity''':  ∀''a'', ''b'', ''c''∈X, ''a'' <= ''b'' and ''b'' <= ''c'' implies ''a'' <= ''c''.
  * @author Tongfei Chen
  */
-trait PartialOrder[@sp(fdib) -X] extends Equiv[X] { self =>
+trait PartialOrder[@sp(fdib) -X] extends Eq[X] { self =>
 
   /** Returns whether ''x'' precedes ''y'' under this order. */
   def le(x: X, y: X): Boolean

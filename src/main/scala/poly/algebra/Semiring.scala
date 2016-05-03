@@ -21,7 +21,11 @@ import poly.algebra.specgroup._
  * @author Tongfei Chen
  * @since 0.1.0
  */
-trait Semiring[@sp(fdi) X] extends AdditiveCMonoid[X] with MultiplicativeMonoid[X]
+trait Semiring[@sp(fdi) X] extends AdditiveCMonoid[X] with MultiplicativeMonoid[X] {
+
+  def two = add(one, one)
+
+}
 
 object Semiring extends ImplicitGetter[Semiring] {
 

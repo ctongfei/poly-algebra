@@ -22,7 +22,7 @@ trait UpperSemilattice[@sp(fdib) X] { self =>
   def sup(x: X, y: X): X
 
   /** Casts upper lower semilattice as a partial order if an implicit equivalence relation is present. */
-  def asPartialOrder(implicit e: Equiv[X]): PartialOrder[X] = new PartialOrder[X] {
+  def asPartialOrder(implicit e: Eq[X]): PartialOrder[X] = new PartialOrder[X] {
     override def eq(x: X, y: X) = e.eq(x, y)
     override def ne(x: X, y: X) = e.ne(x, y)
     def le(x: X, y: X) = eq(y, sup(x, y))

@@ -5,7 +5,9 @@ import poly.algebra._
 /**
  * @author Tongfei Chen
  */
-object FloatStructure extends IsReal[Float] with BoundedLattice[Float] with TotalOrder[Float] {
+object FloatStructure extends IsReal[Float] with BoundedLattice[Float] with TotalOrder[Float] with OrderedHashing[Float] {
+
+  final def hash(x: Float) = x.##
 
   final def fromDouble(x: Double) = x.toFloat
 

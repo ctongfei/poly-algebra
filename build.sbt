@@ -1,5 +1,5 @@
 name := "poly-algebra"
-version := "0.3.2-SNAPSHOT"
+version := "0.3.3-SNAPSHOT"
 organization := "me.tongfei"
 scalaVersion := "2.11.8"
 isSnapshot := true
@@ -13,7 +13,7 @@ libraryDependencies += "org.scalatest"     %% "scalatest"       % "2.2.2"       
 libraryDependencies += "org.scalacheck"    %% "scalacheck"      % "1.12.4"            % Test
 libraryDependencies += "com.storm-enroute" %% "scalameter-core" % "0.7"               % Test
 
-scalacOptions in (Compile, doc) += "-diagrams"
+scalacOptions in (Compile, doc) ++= Seq("-diagrams", "-Ymacro-debug-lite")
 
 classDiagramSettings
 

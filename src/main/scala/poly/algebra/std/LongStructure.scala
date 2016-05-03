@@ -5,7 +5,9 @@ import poly.algebra._
 /**
  * @author Tongfei Chen
  */
-object LongStructure extends EuclideanDomain[Long] with BoundedLattice[Long] with SequentialOrder[Long] {
+object LongStructure extends EuclideanDomain[Long] with BoundedLattice[Long] with SequentialOrder[Long] with OrderedHashing[Long] {
+
+  final def hash(x: Long) = x.##
 
   final val bot: Long = Long.MinValue
   final val top: Long = Long.MaxValue

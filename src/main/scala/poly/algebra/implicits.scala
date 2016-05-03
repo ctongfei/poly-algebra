@@ -7,19 +7,7 @@ package poly.algebra
  */
 object implicits extends ImplicitStructures
 
-trait ImplicitStructures extends LowerPriorityImplicitStructures {
-
-  implicit final val IntIntHashing = IntHashing.default[Int]
-  implicit final val DoubleHashing = IntHashing.default[Double]
-  implicit final val FloatHashing = IntHashing.default[Float]
-  implicit final val BooleanHashing = IntHashing.default[Boolean]
-  implicit final val LongHashing = IntHashing.default[Long]
-  implicit final val CharHashing = IntHashing.default[Char]
-  implicit final val StringHashing = IntHashing.default[String]
-  
-}
-
-trait LowerPriorityImplicitStructures {
+trait ImplicitStructures {
 
   implicit final val IntStructure = std.IntStructure
   implicit final val LongStructure = std.LongStructure

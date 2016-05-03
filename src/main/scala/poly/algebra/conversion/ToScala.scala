@@ -11,7 +11,7 @@ import scala.util.{hashing => suh}
   */
 object ToScala {
 
-  implicit class EquivToScalaOps[X](val p: pa.Equiv[X]) extends AnyVal {
+  implicit class EquivToScalaOps[X](val p: pa.Eq[X]) extends AnyVal {
 
     def asScalaEquiv: sm.Equiv[X] = new Equiv[X] {
       def equiv(x: X, y: X) = p.eq(x, y)
@@ -52,7 +52,7 @@ object ToScala {
 
   }
 
-  implicit class IntHashingToScalaOps[X](val p: pa.IntHashing[X]) extends AnyVal {
+  implicit class IntHashingToScalaOps[X](val p: pa.Hashing[X]) extends AnyVal {
 
     def asScalaHashing: suh.Hashing[X] = new suh.Hashing[X] {
       def hash(x: X) = p.hash(x)

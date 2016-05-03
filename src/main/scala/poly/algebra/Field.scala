@@ -6,8 +6,13 @@ import poly.algebra.specgroup._
 /**
  * Represents a field.
  * @author Tongfei Chen
+ * @since 0.1.0
  */
-trait Field[@sp(fd) X] extends CRing[X] with MultiplicativeCGroup[X]
+trait Field[@sp(fd) X] extends CRing[X] with MultiplicativeCGroup[X] {
+
+  def half = div(one, two)
+
+}
 
 object Field extends ImplicitGetter[Field] {
   def create[@sp(fd) X](R: Ring[X], fInv: X => X) = new Field[X] {

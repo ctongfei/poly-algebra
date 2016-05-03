@@ -5,7 +5,9 @@ import poly.algebra._
 /**
  * @author Tongfei Chen
  */
-object IntStructure extends EuclideanDomain[Int] with BoundedLattice[Int] with SequentialOrder[Int] {
+object IntStructure extends EuclideanDomain[Int] with BoundedLattice[Int] with SequentialOrder[Int] with OrderedHashing[Int] {
+
+  final def hash(x: Int) = x.##
 
   final val bot: Int = Int.MinValue
   final val top: Int = Int.MaxValue

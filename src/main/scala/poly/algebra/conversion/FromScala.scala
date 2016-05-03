@@ -9,7 +9,7 @@ import scala.language.implicitConversions
  */
 object FromScala {
 
-  implicit def scalaEquivAsPoly[X](s: scala.Equiv[X]): Equiv[X] = new Equiv[X] {
+  implicit def scalaEquivAsPoly[X](s: scala.Equiv[X]): Eq[X] = new Eq[X] {
     def eq(x: X, y: X): Boolean = s.equiv(x, y)
   }
 
@@ -61,7 +61,7 @@ object FromScala {
     def cmp(x: X, y: X) = s.compare(x, y)
   }
 
-  implicit def scalaHashingAsPoly[X](s: scala.util.hashing.Hashing[X]): IntHashing[X] = new IntHashing[X] {
+  implicit def scalaHashingAsPoly[X](s: scala.util.hashing.Hashing[X]): Hashing[X] = new Hashing[X] {
     def hash(x: X) = s.hash(x)
     def eq(x: X, y: X) = x equals y
   }

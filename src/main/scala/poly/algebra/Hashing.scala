@@ -4,27 +4,42 @@ import poly.algebra.factory._
 import poly.algebra.specgroup._
 
 /**
- * Typeclass for hashing functions.
+ * Represents an equivalence relation endowed with a hashing function.
+ * This is the typeclass that a HashMap requires for its keys.
+ *
  * @author Tongfei Chen
  */
-trait Hashing[@sp -X, @sp(Int) +H] extends Equiv[X] { self =>
+trait Hashing[@sp -X] extends Eq[X] { self =>
 
-  /** Returns a user-defined hash code of an object. */
-  def hash(x: X): H
+  /** Returns the hash value of the given input. */
+  def hash(x: X): Int
 
-  override def contramap[@sp(fdib) Y](f: Y => X): Hashing[Y, H] = new Hashing[Y, H] {
+  override def contramap[@sp(fdib) Y](f: Y => X): Hashing[Y] = new Hashing[Y] {
     def hash(y: Y) = self.hash(f(y))
     def eq(x: Y, y: Y) = self.eq(f(x), f(y))
   }
 
 }
 
-object Hashing extends BinaryImplicitGetter[Hashing] {
+object Hashing extends ImplicitGetter[Hashing] {
 
-  /** Creates a `Hashing` object from the specific hash function. */
-  def create[@sp X, H](fHash: X => H)(implicit X: Equiv[X]): Hashing[X, H] = new Hashing[X, H] {
-    def hash(x: X): H = fHash(x)
+  /** Creates a `IntHashing` object from the specific hash function. */
+  def create[@sp X](fHash: X => Int)(implicit X: Eq[X]): Hashing[X] = new Hashing[X] {
+    def hash(x: X): Int = fHash(x)
     def eq(x: X, y: X) = X.eq(x, y)
   }
 
+  def by[Y, @sp X](f: Y => X)(implicit X: Hashing[X]) = X contramap f
+
+  /** Creates an `IntHashing` object from a type's inherent `hashCode`/`##` method. */
+  def default[@sp X]: Hashing[X] = new Hashing[X] {
+    def hash(x: X) = x.##
+    def eq(x: X, y: X) = x equals y
+  }
+
+  /** Creates an `IntHashing` object using the identity (by-reference) hashing function and identity equivalence relation. */
+  def byRef[X <: AnyRef]: Hashing[X] = new Hashing[X] {
+    def hash(x: X) = System.identityHashCode(x)
+    def eq(x: X, y: X) = x eq y
+  }
 }

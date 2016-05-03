@@ -30,7 +30,7 @@ trait Lattice[@sp(fdib) X] extends UpperSemilattice[X] with LowerSemilattice[X] 
   }
 
   /** Casts this lattice as a partial order if an implicit equivalence relation is present. */
-  override def asPartialOrder(implicit e: Equiv[X]): PartialOrder[X] = new PartialOrder[X] {
+  override def asPartialOrder(implicit e: Eq[X]): PartialOrder[X] = new PartialOrder[X] {
     def le(x: X, y: X): Boolean = e.eq(x, inf(x, y))
     override def ge(x: X, y: X): Boolean = e.eq(x, sup(x, y))
   }

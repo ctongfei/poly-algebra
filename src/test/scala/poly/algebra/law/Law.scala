@@ -50,7 +50,7 @@ object Law {
     x + y == y + x
   }
 
-  def eqSymmetry[X: Equiv : Arbitrary] = forAll { (x: X, y: X) =>
+  def eqSymmetry[X: Eq : Arbitrary] = forAll { (x: X, y: X) =>
     (x === y implies y === x) && ((x !== y) implies (y !== x))
   }
 

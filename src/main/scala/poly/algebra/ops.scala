@@ -83,7 +83,7 @@ trait Priority1Implicits extends Priority2Implicits {
     def ^(y: Y): Y = macro OpsInlining.op2
   }
 
-  implicit class withEquivOps[X, Y >: X : Equiv](x: X) {
+  implicit class withEquivOps[X, Y >: X : Eq](x: X) {
     def ===(y: Y) : Boolean = macro OpsInlining.op2
     def !==(y: Y) : Boolean = macro OpsInlining.op2
     def ≠(y: Y) : Boolean = macro OpsInlining.op2
@@ -106,7 +106,7 @@ trait Priority1Implicits extends Priority2Implicits {
     def ++(y: Y): Y = macro OpsInlining.op2
   }
 
-  implicit class withHashingOps[X: IntHashing](x: X) {
+  implicit class withHashingOps[X: Hashing](x: X) {
     def ### : Int = macro OpsInlining.op1
   }
 }
