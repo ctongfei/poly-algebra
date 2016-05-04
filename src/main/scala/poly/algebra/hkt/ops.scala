@@ -55,13 +55,13 @@ trait HktImplicits {
      * Lifts this function (`X => Y`) to a functor application (`F[X] => F[Y]`).
      * @tparam F Functor
      */
-    def liftF[F[_]: Functor](x: F[X]) = Functor[F].map(x)(func)
+    def liftF[F[_]](x: F[X])(implicit F: Functor[F]) = F.map(x)(func)
 
     /**
      * Lifts this function (`X => Y`) to a contravariant functor application (`F[Y] => F[X]`).
      * @tparam F Contravariant functor
      */
-    def liftCF[F[_]: ContravariantFunctor](y: F[Y]) = ContravariantFunctor[F].contramap(y)(func)
+    def liftCF[F[_]](y: F[Y])(implicit F: ContravariantFunctor[F]) = F.contramap(y)(func)
   }
 
   implicit class Func2Ops[X, Y, Z](private val f: (X, Y) => Z) {
@@ -69,7 +69,7 @@ trait HktImplicits {
      * Lifts this function `(X, Y) => Z` to an idiomatic (a.k.a. applicative functor) application (`(F[X], F[Y]) => F[Z]`).
      * @tparam I Idiom
      */
-    def liftI[I[_]: Idiom](x: I[X], y: I[Y]) = Idiom[I].productMap(x, y)(f)
+    def liftI[I[_]](x: I[X], y: I[Y])(implicit I: Idiom[I]) = I.productMap(x, y)(f)
   }
 
   implicit class KleisliOps[M[_], X, Y](private val f: X => M[Y]) {
