@@ -27,6 +27,8 @@ object OpsTest extends App {
 
   def times[@sp(fd) R: IsReal](x: R, y: R): R = x * y
 
+  val a = Order[Int]
+
   val bp = 0
 
 }

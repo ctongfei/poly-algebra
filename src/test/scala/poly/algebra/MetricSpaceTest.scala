@@ -9,7 +9,6 @@ import poly.algebra.syntax._
 class MetricSpaceTest extends FunSuite {
 
   test("MetricSpace 1: Absolute value on integers") {
-    implicit val ms1 = MetricSpace[Int, Int]
     assert(dist(2, 3) == 1)
     assert(dist(-4, 3) == 7)
     assert(dist(0, -5) == 5)
