@@ -11,7 +11,7 @@ import poly.algebra.specgroup._
  * @define lawMultiplicativeIdentity '''Multiplicative identity''': ∀''a''∈X, ''a'' * 1 == 1 * ''a'' == ''a''.
  * @author Tongfei Chen
  */
-trait HasOne[@sp(fdi) +X] {
+trait HasOne[@sp(fdil) +X] {
   /** The `1` element (multiplicative identity) of this type. */
   def one: X
 
@@ -21,10 +21,4 @@ trait HasOne[@sp(fdi) +X] {
   }
 }
 
-object HasOne extends ImplicitGetter[HasOne] {
-
-  /** Creates a `HasOne` object given an identity element `1` of a type. */
-  def create[@sp(fdi) X](oneElem: X) = new HasOne[X] {
-    def one = oneElem
-  }
-}
+object HasOne extends ImplicitGetter[HasOne]

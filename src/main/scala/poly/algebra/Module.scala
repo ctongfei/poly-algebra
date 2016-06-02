@@ -11,15 +11,17 @@ import poly.algebra.specgroup._
  * of a vector space because the scalars need only be a ring ([[poly.algebra.Ring]]).
  *
  * An instance of this typeclass should satisfy the following axioms:
- *  - S is a ring.
- *  - $lawAdditiveAssociativity
- *  - $lawAdditiveIdentity
- *  - $lawAdditiveInvertibility
- *  - $lawAdditiveCommutativity
- *  - $lawCompatibility
- *  - $lawScalingIdentity
- *  - $lawDistributivitySV
- *  - $lawDistributivitySS
+ * <ul>
+ *  <li> S is a ring. </li>
+ *  <li> $lawAdditiveAssociativity </li>
+ *  <li> $lawAdditiveIdentity </li>
+ *  <li> $lawAdditiveInvertibility </li>
+ *  <li> $lawAdditiveCommutativity </li>
+ *  <li> $lawCompatibility </li>
+ *  <li> $lawScalingIdentity </li>
+ *  <li> $lawDistributivitySV </li>
+ *  <li> $lawDistributivitySS </li>
+ * </ul>
  *
  * @define lawCompatibility '''Compatibility''': ∀''k'', ''l''∈S, ∀''a''∈X, ''k'' *: (''l'' *: ''a'') == (''k'' * ''l'') *: ''a''.
  * @define lawScalingIdentity '''Scaling identity''': ∀''a''∈X, 1 *: ''a'' == ''a''.
@@ -28,6 +30,7 @@ import poly.algebra.specgroup._
  *
  * @tparam X Type of vectors
  * @tparam S Type of scalars
+ * @since 0.1.0
  * @author Tongfei Chen
  */
 trait Module[X, @sp(fdi) S] extends MultiplicativeAction[X, S] with AdditiveCGroup[X] { self =>
@@ -44,7 +47,7 @@ trait Module[X, @sp(fdi) S] extends MultiplicativeAction[X, S] with AdditiveCGro
    * Returns the dual space of this module.
    * @since 0.2.7
    */
-  def dualSpace: Module[X => S, S] = new Module[X => S, S] {
+  def dual: Module[X => S, S] = new Module[X => S, S] {
     implicit def ringOnScalar = self.ringOnScalar
     def scale(f: X => S, k: S) = x => ringOnScalar.mul(f(x), k)
     def add(f: X => S, g: X => S) = x => ringOnScalar.add(f(x), g(x))
@@ -52,6 +55,7 @@ trait Module[X, @sp(fdi) S] extends MultiplicativeAction[X, S] with AdditiveCGro
     override def neg(f: X => S) = x => ringOnScalar.neg(f(x))
     override def sub(f: X => S, g: X => S) = x => ringOnScalar.sub(f(x), g(x))
   }
+
 }
 
 object Module extends BinaryImplicitGetter[Module] {
@@ -63,11 +67,7 @@ object Module extends BinaryImplicitGetter[Module] {
     def scale(x: X, k: R) = fScale(x, k)
   }
 
-  /**
-   * Constructs the trivial module of any ring over itself.
-   * @param R The ring
-   * @return The trivial module of a ring over itself.
-   */
+  /** Constructs the trivial module of any ring over itself. */
   implicit def trivial[R](implicit R: Ring[R]): Module[R, R] = new Module[R, R] {
     def ringOnScalar = R
     def add(x: R, y: R) = R.add(x, y)
@@ -75,5 +75,13 @@ object Module extends BinaryImplicitGetter[Module] {
     override def sub(x: R, y: R) = R.sub(x, y)
     def zero = R.zero
     def scale(x: R, y: R) = R.mul(x, y)
+  }
+
+  /** Returns the natural Z-module of an Abelian group. */
+  implicit def ZModule[X](implicit X: AdditiveCGroup[X]): Module[X, Int] = new Module[X, Int] {
+    def ringOnScalar: Ring[Int] = std.IntStructure
+    def scale(x: X, k: Int) = X.sumN(x, k)
+    def zero = X.zero
+    def add(x: X, y: X) = X.add(x, y)
   }
 }

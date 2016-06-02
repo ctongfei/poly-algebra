@@ -10,9 +10,9 @@ import poly.algebra.specgroup._
  * @author Tongfei Chen
  * @since 0.3.3
  */
-trait OrderedHashing[@sp -X] extends Order[X] with Hashing[X] { self =>
+trait OrderedHashing[@sp(fdi) -X] extends Order[X] with Hashing[X] { self =>
 
-  override def contramap[@sp Y](f: Y => X): OrderedHashing[Y] = new OrderedHashing[Y] {
+  override def contramap[@sp(Int) Y](f: Y => X): OrderedHashing[Y] = new OrderedHashing[Y] {
     def cmp(x: Y, y: Y) = self.cmp(f(x), f(y))
     def hash(x: Y) = self.hash(f(x))
   }

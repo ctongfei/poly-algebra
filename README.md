@@ -28,3 +28,9 @@ import poly.algebra.hkt.ops._   // Enables operators on higher-kinded types
 libraryDependencies += "me.tongfei" %% "poly-algebra" % "0.3.5-SNAPSHOT"
 ```
 
+#### TODO
+
+ - Move implicits to companion objects
+ - Typeclasses instance for BigInt
+ - Field extends EuclideanDomain? or not?
+ 

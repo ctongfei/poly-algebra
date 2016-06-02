@@ -9,6 +9,12 @@ package object algebra {
 
   type Id[X] = X
 
-  type implicitNotFound = scala.annotation.implicitNotFound
+  private[algebra] type implicitNotFound = scala.annotation.implicitNotFound
+
+  /** ASCII-compliant symbolic alias for bijections. */
+  type <=>[X, Y] = Bijection[X, Y]
+
+  /** Symbolic alias for bijections. */
+  type ⇔[X, Y] = Bijection[X, Y]
 
 }

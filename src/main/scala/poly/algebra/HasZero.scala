@@ -11,7 +11,7 @@ import poly.algebra.specgroup._
  * @define lawAdditiveIdentity '''Additive identity''': ∀''a''∈X, ''a'' + 0 == 0 + ''a'' == ''a''.
  * @author Tongfei Chen
  */
-trait HasZero[@sp(fdi) +X] {
+trait HasZero[@sp(fdil) +X] {
 
   /** The `0` element (additive identity) of this type. */
   def zero: X
@@ -22,10 +22,4 @@ trait HasZero[@sp(fdi) +X] {
   }
 }
 
-object HasZero extends ImplicitGetter[HasZero] {
-
-  /** Creates a `HasZero` object given an identity element `0` of a type. */
-  def create[@sp(fdi) X](zeroElem: X) = new HasZero[X] {
-    def zero = zeroElem
-  }
-}
+object HasZero extends ImplicitGetter[HasZero]

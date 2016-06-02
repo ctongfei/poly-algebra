@@ -14,13 +14,14 @@ import poly.algebra.specgroup._
  * @author Tongfei Chen
  * @since 0.2.6
  */
-trait AdditiveCSemigroup[@sp(fdi) X] extends AdditiveSemigroup[X] { self =>
+trait AdditiveCSemigroup[@sp(fdil) X] extends AdditiveSemigroup[X] { self =>
   override def asSemigroupWithAdd: CSemigroup[X] = new CSemigroup[X] {
     def op(x: X, y: X) = self.add(x, y)
   }
 }
 
 object AdditiveCSemigroup extends ImplicitGetter[AdditiveCSemigroup] {
+
   def create[@sp(fdi) X](f: (X, X) => X): AdditiveCSemigroup[X] = new AdditiveCSemigroup[X] {
     def add(x: X, y: X): X = f(x, y)
   }

@@ -17,10 +17,4 @@ trait HasEmpty[+X] {
   }
 }
 
-object HasEmpty extends ImplicitGetter[HasEmpty] {
-
-  /** Creates a `HasEmpty` object given an empty element of a type. */
-  def create[X](emptyElem: X) = new HasEmpty[X] {
-    def empty = emptyElem
-  }
-}
+object HasEmpty extends ImplicitGetter[HasEmpty]

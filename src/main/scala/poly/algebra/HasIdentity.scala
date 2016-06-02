@@ -15,11 +15,4 @@ trait HasIdentity[+X] {
   def id: X
 }
 
-object HasIdentity extends ImplicitGetter[HasIdentity] {
-
-  /** Creates a `HasIdentity` object given an identity element of a type. */
-  def create[X](idElem: X) = new HasIdentity[X] {
-    def id = idElem
-  }
-}
-
+object HasIdentity extends ImplicitGetter[HasIdentity]

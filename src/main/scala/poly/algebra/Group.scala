@@ -3,7 +3,7 @@ package poly.algebra
 import poly.algebra.factory._
 
 /**
- * Represents a group. A group is a monoid where for each element there exists an inverse element.
+ * Represents a group. A group is a monoid where an inverse element exists for every element.
  *
  * An instance of this typeclass should satisfy the following axioms:
  *  - $lawAssociativity
@@ -14,6 +14,8 @@ import poly.algebra.factory._
  * @author Tongfei Chen
  */
 trait Group[X] extends Monoid[X] {
+
+  /** Returns the unique inverse element of the given element in this group. */
   def inv(x: X): X
 
   def invOp(x: X, y: X) = op(x, inv(y))

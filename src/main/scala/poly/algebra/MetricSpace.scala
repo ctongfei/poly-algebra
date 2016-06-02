@@ -7,6 +7,8 @@ import poly.algebra.specgroup._
  * @author Tongfei Chen
  */
 trait MetricSpace[@sp(fdi) -X, @sp(fdi) +S] {
+
+  /** Returns the distance of two elements under this metric space. */
   def dist(x: X, y: X): S
 }
 

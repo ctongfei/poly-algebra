@@ -6,8 +6,9 @@ import poly.algebra.specgroup._
 /**
  * Represents a Euclidean domain. 
  * @author Tongfei Chen
+ * @since 0.1.0
  */
-trait EuclideanDomain[@sp(fdi) X] extends CRing[X] with OrderedRing[X] {
+trait EuclideanDomain[@sp(il) X] extends CRing[X] with OrderedRing[X] {
 
   /** Returns the quotient (Euclidean division) of two elements. */
   def div(x: X, y: X): X
@@ -41,17 +42,4 @@ trait EuclideanDomain[@sp(fdi) X] extends CRing[X] with OrderedRing[X] {
 
 }
 
-object EuclideanDomain extends ImplicitGetter[EuclideanDomain] {
-  def create[@sp(fdi) X](fQuot: (X, X) => X, fMod: (X, X) => X)(implicit X: OrderedRing[X]): EuclideanDomain[X] =
-    new EuclideanDomain[X] {
-      def cmp(x: X, y: X) = X.cmp(x, y)
-      def add(x: X, y: X): X = X.add(x, y)
-      def mul(x: X, y: X): X = X.mul(x, y)
-      def neg(x: X): X = X.neg(x)
-      def zero: X = X.zero
-      def one: X = X.one
-      def div(x: X, y: X): X = fQuot(x, y)
-      def mod(x: X, y: X): X = fMod(x, y)
-    }
-
-}
+object EuclideanDomain extends ImplicitGetter[EuclideanDomain]

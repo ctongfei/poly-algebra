@@ -13,7 +13,7 @@ import poly.algebra.specgroup._
  * @define lawAdditiveAssociativity '''Additive associativity''': ∀''a'', ''b'', ''c''∈X, (''a'' + ''b'') + ''c'' == ''a'' + (''b'' + ''c'').
  * @since 0.1.0
  */
-trait AdditiveSemigroup[@sp(fdi) X] { self =>
+trait AdditiveSemigroup[@sp(fdil) X] { self =>
 
   /** The `+` operation of this semigroup. */
   def add(x: X, y: X): X
@@ -28,7 +28,6 @@ trait AdditiveSemigroup[@sp(fdi) X] { self =>
 }
 
 object AdditiveSemigroup extends ImplicitGetter[AdditiveSemigroup] {
-
   /** Creates an additive semigroup of the specific type using the `+` operation provided. */
   def create[@sp(fdi) X](f: (X, X) => X): AdditiveSemigroup[X] = new AdditiveSemigroup[X] {
     def add(x: X, y: X): X = f(x, y)

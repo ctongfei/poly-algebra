@@ -17,6 +17,6 @@ import poly.algebra.specgroup._
  *  - $lawDistributivityMA
  * @since 0.2.6
  */
-trait CRing[@sp(fdi) X] extends Ring[X] with CSemiring[X]
+trait CRing[@sp(fdil) X] extends Ring[X] with CSemiring[X]
 
 object CRing extends ImplicitGetter[CRing]

@@ -25,10 +25,10 @@ trait HktImplicits {
     def product  [Y](y: H[Y])        (implicit H: Idiom[H]               ): H[(X, Y)] = H.product(x)(y)
 
     def |>       [Y](f: X => Y)      (implicit H: Functor[H]             ): H[Y]      = H.map(x)(f)
-    def |<       [Y](f: Y => X)      (implicit H: ContravariantFunctor[H]): H[Y]      = H.contramap(x)(f)
+    def <|       [Y](f: Y => X)      (implicit H: ContravariantFunctor[H]): H[Y]      = H.contramap(x)(f)
     def ||>      [Y](f: X => H[Y])   (implicit H: Monad[H]               ): H[Y]      = H.flatMap(x)(f)
     def |?          (f: X => Boolean)(implicit H: ConcatenativeMonad[H]  ): H[X]      = H.filter(x)(f)
-    def ×        [Y](y: H[Y])        (implicit H: Idiom[H]               ): H[(X, Y)] = H.product(x)(y)
+    def |*|      [Y](y: H[Y])        (implicit H: Idiom[H]               ): H[(X, Y)] = H.product(x)(y)
 
   }
 
@@ -43,7 +43,7 @@ trait HktImplicits {
     def compose  [Z](f: H[Z, X])     (implicit H: Category[H]          ) = H.compose(x, f)
 
     def |>       [Z](f: Y => Z)      (implicit H: Profunctor[H]        ) = H.map(x)(f)
-    def |<       [Z](f: Z => X)      (implicit H: Profunctor[H]        ) = H.contramap(x)(f)
+    def <|       [Z](f: Z => X)      (implicit H: Profunctor[H]        ) = H.contramap(x)(f)
     def ||>      [Z](f: Y => H[X, Z])(implicit H: Monad[({type λ[υ] = H[X, υ]})#λ]) = H.flatMap(x)(f)
     def >>>      [Z](f: H[Y, Z])     (implicit H: Category[H]          ) = H.andThen(x, f)
     def <<<      [Z](f: H[Z, X])     (implicit H: Category[H]          ) = H.compose(x, f)
@@ -98,7 +98,7 @@ trait HktImplicits {
 
   implicit class CoKleisliOps[W[_], X, Y](val f: W[X] => Y) {
 
-    def cm(x: W[X])(implicit W: Comonad[W]) = W.extend(x)(f)
+    def liftCM(x: W[X])(implicit W: Comonad[W]) = W.extend(x)(f)
 
     def coKleisliAndThen[Z](g: W[Y] => Z)(implicit W: Comonad[W]) = W.CoKleisli.andThen(f, g)
     def coKleisliCompose[Z](g: W[Z] => X)(implicit W: Comonad[W]) = W.CoKleisli.compose(f, g)

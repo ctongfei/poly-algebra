@@ -8,7 +8,6 @@ import poly.algebra.specgroup._
  */
 trait SignOps[@sp(fdi) X] {
 
-  def abs(x: X): X
   def sgn(x: X): X
 
 }

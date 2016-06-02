@@ -12,7 +12,7 @@ import poly.algebra.specgroup._
  * @author Tongfei Chen
  * @since 0.2.5
  */
-trait HasTop[@sp(fdib) +X] {
+trait HasTop[@sp(fdilb) +X] {
   /** The maximum `top` element of this type. */
   def top: X
 

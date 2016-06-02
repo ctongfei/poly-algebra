@@ -21,10 +21,12 @@ import poly.algebra.specgroup._
  *  <li> $lawDistributivitySV </li>
  *  <li> $lawDistributivitySS </li>
  * </ul>
+ * @since 0.1.0
  * @author Tongfei Chen
  */
 trait VectorSpace[X, @sp(fd) S] extends Module[X, S] { self =>
 
+  /** Returns the field structure endowed on the set of scalars. */
   def fieldOnScalar: Field[S]
 
   def ringOnScalar = fieldOnScalar
@@ -33,9 +35,8 @@ trait VectorSpace[X, @sp(fd) S] extends Module[X, S] { self =>
    * Returns the dual space of this vector space.
    * @since 0.2.2
    */
-  override def dualSpace: VectorSpace[X => S, S] = new VectorSpace[X => S, S] {
-    def fieldOnScalar: Field[S] = self.fieldOnScalar
-
+  override def dual: VectorSpace[X => S, S] = new VectorSpace[X => S, S] {
+    def fieldOnScalar = self.fieldOnScalar
     def scale(f: X => S, k: S) = x => fieldOnScalar.mul(f(x), k)
     def zero = x => fieldOnScalar.zero
     def add(f: X => S, g: X => S) = x => fieldOnScalar.add(f(x), g(x))
@@ -61,18 +62,8 @@ object VectorSpace extends BinaryImplicitGetter[VectorSpace] {
     def scale(x: F, y: F) = F.mul(x, y)
   }
 
-  def create[V, @sp(fd) F](fAdd: (V, V) => V, fScale: (V, F) => V, fZero: V)(implicit F: Field[F]): VectorSpace[V, F] = new VectorSpace[V, F] {
-    def fieldOnScalar = F
-    def add(x: V, y: V) = fAdd(x, y)
-    def scale(x: V, k: F) = fScale(x, k)
-    def zero = fZero
-  }
-
-  /**
-    * Constructs the natural function space of type `X => Y` if there exists a vector space over `Y`.
-    * @return
-    */
-  implicit def lift[X, Y, @sp(fd) F](implicit Y: VectorSpace[Y, F]): VectorSpace[X => Y, F] = new VectorSpace[X => Y, F] {
+  /** Constructs the natural function space of type `X => Y` if there exists a vector space over `Y`. */
+  implicit def lift[X, @sp(fd) Y, @sp(fd) F](implicit Y: VectorSpace[Y, F]): VectorSpace[X => Y, F] = new VectorSpace[X => Y, F] {
     implicit def fieldOnScalar = Y.ringOnScalar
     def scale(f: X => Y, k: F) = x => Y.scale(f(x), k)
     def zero = x => Y.zero

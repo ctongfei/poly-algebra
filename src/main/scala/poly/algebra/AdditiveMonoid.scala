@@ -13,7 +13,7 @@ import poly.algebra.specgroup._
  * @author Tongfei Chen
  * @since 0.1.0
  */
-trait AdditiveMonoid[@sp(fdi) X] extends AdditiveSemigroup[X] with HasZero[X] { self =>
+trait AdditiveMonoid[@sp(fdil) X] extends AdditiveSemigroup[X] with HasZero[X] { self =>
 
   override def sumN(x: X, n: Int): X = asMonoidWithAdd.combineN(x, n)
 
@@ -25,7 +25,6 @@ trait AdditiveMonoid[@sp(fdi) X] extends AdditiveSemigroup[X] with HasZero[X] { 
 }
 
 object AdditiveMonoid extends ImplicitGetter[AdditiveMonoid] {
-
   /** Creates an additive monoid of the specific type using the provided `+` and `0`. */
   def create[@sp(fdi) X](f: (X, X) => X, zeroElem: X): AdditiveMonoid[X] = new AdditiveMonoid[X] {
     def add(x: X, y: X): X = f(x, y)

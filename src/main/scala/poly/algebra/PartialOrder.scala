@@ -19,6 +19,7 @@ import poly.algebra.specgroup._
  * @define lawOrderAntisymmetry '''Antisymmetry''':  ∀''a'', ''b''∈X, ''a'' <= ''b'' and ''b'' <= ''a'' implies ''a'' == ''b''.
  * @define lawOrderTransitivity '''Transitivity''':  ∀''a'', ''b'', ''c''∈X, ''a'' <= ''b'' and ''b'' <= ''c'' implies ''a'' <= ''c''.
  * @author Tongfei Chen
+ * @since 0.1.0
  */
 trait PartialOrder[@sp(fdib) -X] extends Eq[X] { self =>
 
@@ -37,19 +38,12 @@ trait PartialOrder[@sp(fdib) -X] extends Eq[X] { self =>
   def gt(x: X, y: X): Boolean = le(y, x) & !le(x, y)
 
   /** Returns the reverse order of this ordering relation. */
-  def reverse: PartialOrder[X] = new PartialOrder[X] {
-    override def reverse = self
-    def le(x: X, y: X) = self.le(y, x)
-  }
+  def reverse: PartialOrder[X] = new PartialOrderT.Reverse(self)
 
-  override def contramap[@sp(fdib) Y](f: Y => X): PartialOrder[Y] = new PartialOrder[Y] {
-    def le(x: Y, y: Y) = self.le(f(x), f(y))
-  }
+  override def contramap[@sp(Int) Y](f: Y => X): PartialOrder[Y] = new PartialOrderT.Contramapped(self, f)
 
   /** Returns the product order of two partial orders. */
-  def product[Y](that: PartialOrder[Y]): PartialOrder[(X, Y)] = new PartialOrder[(X, Y)] {
-    def le(x: (X, Y), y: (X, Y)) = self.le(x._1, y._1) && that.le(x._2, y._2)
-  }
+  def product[Y](that: PartialOrder[Y]): PartialOrder[(X, Y)] = new PartialOrderT.Product(self, that)
 
 }
 
@@ -73,4 +67,23 @@ object PartialOrder extends ImplicitGetter[PartialOrder] {
   implicit object ContravariantFunctor extends ContravariantFunctor[PartialOrder] {
     def contramap[X, Y](pox: PartialOrder[X])(f: Y => X) = pox contramap f
   }
+}
+
+abstract class AbstractPartialOrder[@sp(fdib) -X] extends PartialOrder[X]
+
+private[poly] object PartialOrderT {
+
+  class Reverse[X](self: PartialOrder[X]) extends AbstractPartialOrder[X] {
+    override def reverse = self
+    def le(x: X, y: X) = self.le(y, x)
+  }
+
+  class Contramapped[@sp(fdib) X, @sp(Int) Y](self: PartialOrder[X], f: Y ⇒ X) extends PartialOrder[Y] {
+    def le(x: Y, y: Y) = self.le(f(x), f(y))
+  }
+
+  class Product[X, Y](self: PartialOrder[X], that: PartialOrder[Y]) extends AbstractPartialOrder[(X, Y)] {
+    def le(x: (X, Y), y: (X, Y)) = self.le(x._1, y._1) && that.le(x._2, y._2)
+  }
+
 }

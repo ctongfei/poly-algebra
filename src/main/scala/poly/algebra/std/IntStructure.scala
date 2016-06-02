@@ -28,7 +28,8 @@ object IntStructure extends EuclideanDomain[Int] with BoundedLattice[Int] with S
 
   final val zero = 0
   final val one = 1
-  override val negOne = -1 // ! `final` causes compiler generating a class that when loaded, throws ClassFormatException
+  //TODO: ! `final` causes compiler generating a class that when loaded, throws ClassFormatException (SI-9486)
+  override val negOne = -1
   def add(x: Int, y: Int) = x + y
   def neg(x: Int) = -x
   override def sub(x: Int, y: Int) = x - y

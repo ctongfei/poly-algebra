@@ -23,6 +23,7 @@ import poly.algebra.specgroup._
  */
 trait Semiring[@sp(fdi) X] extends AdditiveCMonoid[X] with MultiplicativeMonoid[X] {
 
+  /** Returns the 2 element in this semiring. */
   def two = add(one, one)
 
 }

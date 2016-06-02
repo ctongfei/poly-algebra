@@ -7,13 +7,15 @@ import scala.language.experimental.macros
 /**
  * Importing this object introduces efficient operator overloading through macros.
  * @author Tongfei Chen
+ * @since 0.2.0
  */
 object ops extends Priority1Implicits
 
 trait Priority1Implicits extends Priority2Implicits {
 
   implicit class withSemigroupOps[X, Y >: X : Semigroup](x: X) {
-    def op(y: Y): Y = macro OpsInlining.op2
+    /** Applies the binary operator of an implicit semigroup on the two arguments. */
+    def <>(y: Y): Y = macro OpsInlining.op2
   }
 
   implicit class withAdditiveSemigroupOps[X, Y >: X : AdditiveSemigroup](x: X) {
@@ -60,7 +62,6 @@ trait Priority1Implicits extends Priority2Implicits {
       * additive action. */
     def +:(y: S): Y = macro OpsInlining.op2
   }
-
 
   implicit class withMultiplicativeActionXOps[X, Y >: X, S](x: X)(implicit Y: MultiplicativeAction[Y, S]) {
     /** Returns the result of an object (vector) being acted (scaled) by an element (scalar) given an implicit

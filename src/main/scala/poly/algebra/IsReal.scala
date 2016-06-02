@@ -8,7 +8,7 @@ import poly.algebra.specgroup._
  * @author Tongfei Chen
  * @since 0.2.10
  */
-trait IsReal[@sp(fd) X] extends OrderedField[X] with PowerOps[X] with TrigExpOps[X] with CompleteMetricSpace[X, X] {
+trait IsReal[@sp(fd) X] extends OrderedField[X] with PowerOps[X] with TrigExpOps[X] with MetricSpace[X, X] {
 
   def fromDouble(x: Double): X
   def fromFloat(x: Float): X = fromDouble(x.toDouble)

@@ -12,7 +12,7 @@ import poly.algebra.specgroup._
  * @author Tongfei Chen
  * @since 0.2.5
  */
-trait HasBottom[@sp(fdib) +X] {
+trait HasBottom[@sp(fdilb) +X] {
   /** The minimum `bot` element of this type. */
   def bot: X
 
