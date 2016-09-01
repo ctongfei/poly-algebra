@@ -13,17 +13,17 @@ import poly.algebra.specgroup._
  * @define lawAdditiveAssociativity '''Additive associativity''': ∀''a'', ''b'', ''c''∈X, (''a'' + ''b'') + ''c'' == ''a'' + (''b'' + ''c'').
  * @since 0.1.0
  */
-trait AdditiveSemigroup[@sp(fdil) X] { self =>
+trait AdditiveSemigroup[@sp(fdil) S] { self =>
 
   /** The `+` operation of this semigroup. */
-  def add(x: X, y: X): X
+  def add(x: S, y: S): S
 
   /** Computes the sum ''x'' + ''x'' + ··· + ''x'' with ''x'' repeated for ''n'' times. */
-  def sumN(x: X, n: Int): X = asSemigroupWithAdd.combineN(x, n)
+  def sumN(x: S, n: Int): S = asSemigroupWithAdd.combineN(x, n)
 
   /** Casts this structure as a symbol-agnostic semigroup. */
-  def asSemigroupWithAdd: Semigroup[X] = new Semigroup[X] {
-    def op(x: X, y: X) = self.add(x, y)
+  def asSemigroupWithAdd: Semigroup[S] = new Semigroup[S] {
+    def op(x: S, y: S) = self.add(x, y)
   }
 }
 

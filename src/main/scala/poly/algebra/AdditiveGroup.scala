@@ -15,17 +15,17 @@ import poly.algebra.specgroup._
  * @define lawAdditiveInvertibility '''Additive invertibility''': ∀''a''∈X, ∃(-''a'')∈X, ''a'' + (-''a'') == (-''a'') + ''a'' == 0.
  * @since 0.1.0
  */
-trait AdditiveGroup[@sp(fdil) X] extends AdditiveMonoid[X] { self =>
+trait AdditiveGroup[@sp(fdil) G] extends AdditiveMonoid[G] { self =>
   /** Returns the negation (additive inverse) of an element. */
-  def neg(x: X): X
+  def neg(x: G): G
 
   /** Returns the difference of two elements. */
-  def sub(x: X, y: X): X = add(x, neg(y))
+  def sub(x: G, y: G): G = add(x, neg(y))
 
   /** Casts this object to a symbol-agnostic group with the group operation `+`. */
-  def asGroupWithAdd: Group[X] = new Group[X] {
-    def inv(x: X) = self.neg(x)
-    def op(x: X, y: X) = self.add(x, y)
+  def asGroupWithAdd: Group[G] = new Group[G] {
+    def inv(x: G) = self.neg(x)
+    def op(x: G, y: G) = self.add(x, y)
     def id = self.zero
   }
 }

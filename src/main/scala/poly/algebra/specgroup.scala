@@ -1,14 +1,12 @@
 package poly.algebra
 
-import scala._
-
 /**
  * @author Tongfei Chen
  */
 object specgroup {
 
   type unsp = scala.annotation.unspecialized
-  type sp = specialized
+  type sp = scala.specialized
   final val fd = new Specializable.Group((Float, Double))
   final val di = new Specializable.Group((Int, Double))
   final val fdi = new Specializable.Group((Int, Float, Double))
@@ -23,7 +21,7 @@ object specgroup {
 
   /**
    * Specializes what [[scala.Tuple1]] specialized.
-   * */
+   */
   final val spTuple1 = new Specializable.Group((Int, Long, Double))
 
   /**

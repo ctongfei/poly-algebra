@@ -35,7 +35,7 @@ trait BooleanAlgebra[@sp(Boolean) X] extends BoundedLattice[X] { self =>
 
 object BooleanAlgebra extends ImplicitGetter[BooleanAlgebra] {
 
-  def create[@sp(Boolean) X](fAnd: (X, X) => X, fOr: (X, X) => X, fNot: X => X, fZero: X, fOne: X)(implicit E: Eq[X]) = new BooleanAlgebra[X] {
+  def create[@sp(Boolean) X](fAnd: (X, X) => X, fOr: (X, X) => X, fNot: X => X, fZero: X, fOne: X) = new BooleanAlgebra[X] {
     def and(x: X, y: X) = fAnd(x, y)
     def or(x: X, y: X) = fOr(x, y)
     def not(x: X) = fNot(x)

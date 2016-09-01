@@ -16,9 +16,6 @@ class TestAlgebraicStructures extends FunSuite {
     assert(B.nand(true, true) == false)
     assert(B.xor(true, false) == true)
     assert(B.xor(true, true) == false)
-    assert(B.asPartialOrder.le(false, true))
-    assert(B.asPartialOrder.ge(true, false))
-    assert(B.asPartialOrder.le(true, true))
     assert(B.or(true, false) == true)
     assert(B.nor(true, false) == false)
   }

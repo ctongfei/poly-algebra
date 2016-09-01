@@ -15,6 +15,8 @@ trait Hashing[@sp -X] extends Eq[X] { self =>
   def hash(x: X): Int
 
   override def contramap[@sp(Int) Y](f: Y => X): Hashing[Y] = new HashingT.Contramapped(self, f)
+
+  @unsp def coproduct[Y](that: Hashing[Y]): Hashing[Either[X, Y]] = new HashingT.EitherHashing(self, that)
 }
 
 object Hashing extends ImplicitGetter[Hashing] {
@@ -35,6 +37,7 @@ object Hashing extends ImplicitGetter[Hashing] {
   def onTuple3[A, B, C](implicit A: Hashing[A], B: Hashing[B], C: Hashing[C]): Hashing[(A, B, C)] = new HashingT.Tuple3Hashing(A, B, C)
   def onTuple4[A, B, C, D](implicit A: Hashing[A], B: Hashing[B], C: Hashing[C], D: Hashing[D]): Hashing[(A, B, C, D)] = new HashingT.Tuple4Hashing(A, B, C, D)
   def onTuple5[A, B, C, D, E](implicit A: Hashing[A], B: Hashing[B], C: Hashing[C], D: Hashing[D], E: Hashing[E]): Hashing[(A, B, C, D, E)] = new HashingT.Tuple5Hashing(A, B, C, D, E)
+  def onEither[A, B](implicit A: Hashing[A], B: Hashing[B]): Hashing[Either[A, B]] = new HashingT.EitherHashing(A, B)
 
 }
 
@@ -83,5 +86,12 @@ private[poly] object HashingT {
 
   class Tuple5Hashing[A, B, C, D, E](A: Hashing[A], B: Hashing[B], C: Hashing[C], D: Hashing[D], E: Hashing[E]) extends EqT.Tuple5Eq(A, B, C, D, E) with Hashing[(A, B, C, D, E)] {
     def hash(x: (A, B, C, D, E)) = (A.hash(x._1), B.hash(x._2), C.hash(x._3), D.hash(x._4), E.hash(x._5)).##
+  }
+
+  class EitherHashing[A, B](A: Hashing[A], B: Hashing[B]) extends EqT.EitherEq[A, B](A, B) with Hashing[Either[A, B]] {
+    def hash(x: Either[A, B]) = x match {
+      case Left(l)  => Left(A.hash(l)).hashCode
+      case Right(r) => Right(B.hash(r)).hashCode
+    }
   }
 }

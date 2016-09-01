@@ -12,7 +12,7 @@ object SumMacroBenchmark extends App {
 
   for (n ← Seq(100000, 200000, 400000, 800000, 1600000, 3200000)) {
 
-    val conf = config(Key.exec.benchRuns → 20)
+    val conf = config(Key.exec.benchRuns → 40)
     .withWarmer(new Warmer.Default).withMeasurer(new Measurer.IgnoringGC)
 
     var sum = 0.0

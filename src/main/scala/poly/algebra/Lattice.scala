@@ -29,11 +29,6 @@ trait Lattice[@sp(fdib) X] extends UpperSemilattice[X] with LowerSemilattice[X] 
     def inf(x: X, y: X) = self.sup(x, y)
   }
 
-  /** Casts this lattice as a partial order if an implicit equivalence relation is present. */
-  override def asPartialOrder(implicit e: Eq[X]): PartialOrder[X] = new PartialOrder[X] {
-    def le(x: X, y: X): Boolean = e.eq(x, inf(x, y))
-    override def ge(x: X, y: X): Boolean = e.eq(x, sup(x, y))
-  }
 }
 
 object Lattice extends ImplicitGetter[Lattice] {
@@ -43,4 +38,16 @@ object Lattice extends ImplicitGetter[Lattice] {
   }
 }
 
+trait EqLattice[@sp(Boolean) X] extends Lattice[X] with EqLowerSemilattice[X] with EqUpperSemilattice[X] { self =>
+
+  override def reverse: EqLattice[X] = new EqLattice[X] {
+    def le(x: X, y: X) = self.le(y, x)
+    def sup(x: X, y: X) = self.inf(x, y)
+    def inf(x: X, y: X) = self.sup(x, y)
+    override def reverse = self
+  }
+
+}
+
+object EqLattice extends ImplicitGetter[EqLattice]
 

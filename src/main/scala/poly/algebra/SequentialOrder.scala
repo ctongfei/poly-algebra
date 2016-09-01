@@ -47,6 +47,4 @@ trait SequentialOrder[@sp(Int) X] extends Order[X] { self =>
 
 }
 
-object SequentialOrder extends ImplicitGetter[SequentialOrder] {
-
-}
+object SequentialOrder extends ImplicitGetter[SequentialOrder]

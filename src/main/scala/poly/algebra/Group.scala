@@ -13,12 +13,12 @@ import poly.algebra.factory._
  * @since 0.1.0
  * @author Tongfei Chen
  */
-trait Group[X] extends Monoid[X] {
+trait Group[G] extends Monoid[G] {
 
   /** Returns the unique inverse element of the given element in this group. */
-  def inv(x: X): X
+  def inv(x: G): G
 
-  def invOp(x: X, y: X) = op(x, inv(y))
+  def invOp(x: G, y: G) = op(x, inv(y))
 }
 
 object Group extends ImplicitGetter[Group] {
@@ -28,6 +28,3 @@ object Group extends ImplicitGetter[Group] {
     def id: X = idElem
   }
 }
-
-
-

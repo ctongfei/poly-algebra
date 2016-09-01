@@ -17,6 +17,6 @@ object syntax extends HktImplicits {
   implicit final val OptionStructure = std.OptionStructure
 
 
-  type ~~>[A[_], B[_]] = NaturalTransformation[A, B]
+  type =>>[A[_], B[_]] = NaturalTransformation[A, B]
 
 }

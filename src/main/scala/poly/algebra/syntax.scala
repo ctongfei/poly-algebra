@@ -10,4 +10,3 @@ import poly.algebra.function._
   * @since 0.2.15
   */
 object syntax extends GenericFunctions with MapReduceMathOps with ImplicitStructures with Priority1Implicits
-

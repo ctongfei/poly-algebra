@@ -17,15 +17,15 @@ trait Functor[F[_]] { self =>
 
   def unzip[X, Y](fxy: F[(X, Y)]): (F[X], F[Y]) = (map(fxy)(_._1), map(fxy)(_._2))
 
-  def compose[G[_]](that: Functor[G]) = new Functor.Composed(self, that)
+  def compose[G[_]](that: Functor[G]): Functor[({type λ[α] = F[G[α]]})#λ] = new FunctorT.Composed(self, that)
 
-  def andThen[G[_]](that: Functor[G]) = new Functor.Composed(that, self)
+  def andThen[G[_]](that: Functor[G]): Functor[({type λ[α] = G[F[α]]})#λ] = new FunctorT.Composed(that, self)
 }
 
-object Functor extends ImplicitHktGetter[Functor] {
+object Functor extends ImplicitHktGetter[Functor]
 
+private[poly] object FunctorT {
   class Composed[F[_], G[_]](ff: Functor[F], fg: Functor[G]) extends Functor[({type λ[α] = F[G[α]]})#λ] {
     def map[X, Y](fgx: F[G[X]])(f: X => Y) = ff.map(fgx)(gx => fg.map(gx)(f))
   }
-
 }

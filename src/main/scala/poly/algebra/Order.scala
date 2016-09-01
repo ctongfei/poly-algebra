@@ -21,7 +21,7 @@ import scala.annotation.unchecked.{uncheckedVariance => uv}
  * @since 0.1.0
  * @author Tongfei Chen
  */
-trait Order[@sp(fdilb) -X] extends PartialOrder[X] with Lattice[X @uv] { self =>
+trait Order[@sp(fdilb) -X] extends EqLattice[X @uv] { self =>
 
   def cmp(x: X, y: X): Int
 
@@ -56,9 +56,7 @@ object Order extends ImplicitGetter[Order] {
 
   def by[@sp(Int) X, Y](f: Y => X)(implicit X: Order[X]) = X contramap f
 
-  implicit def fromJavaComparable[X <: java.lang.Comparable[X]]: Order[X] = new Order[X] {
-    def cmp(x: X, y: X) = x compareTo y
-  }
+  implicit def fromJavaComparable[X <: java.lang.Comparable[X]]: Order[X] = new OrderT.FromJavaComparable[X]
 
   // TYPECLASS INSTANCES
 
@@ -74,6 +72,10 @@ private[poly] object OrderT {
   class Reverse[X](self: Order[X]) extends Order[X] {
     override def reverse: Order[X] = self
     def cmp(x: X, y: X): Int = -self.cmp(x, y)
+  }
+
+  class FromJavaComparable[X <: java.lang.Comparable[X]] extends AbstractOrder[X] {
+    def cmp(x: X, y: X) = x compareTo y
   }
 
   class Contramapped[@sp(fdilb) X, @sp(Int) Y](self: Order[X], f: Y ⇒ X) extends Order[Y] {

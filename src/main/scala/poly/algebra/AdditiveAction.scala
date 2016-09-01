@@ -21,10 +21,10 @@ trait AdditiveAction[X, S] {
 /** Represents an additive action where the actors form a semigroup. */
 trait AdditiveSemigroupAction[X, S] extends AdditiveAction[X, S] { self =>
   /** Returns the semigroup on actors. */
-  def semigroupOnActor: AdditiveSemigroup[S]
+  def actorSemigroup: AdditiveSemigroup[S]
 
   override def asActionWithTranslate: SemigroupAction[X, S] = new SemigroupAction[X, S] {
-    def semigroupOnActor = self.semigroupOnActor.asSemigroupWithAdd
+    def actorSemigroup = self.actorSemigroup.asSemigroupWithAdd
     def act(x: X, k: S) = self.translate(x, k)
   }
 }
@@ -32,11 +32,11 @@ trait AdditiveSemigroupAction[X, S] extends AdditiveAction[X, S] { self =>
 /** Represents an additive action where the actors form a monoid. */
 trait AdditiveMonoidAction[X, S] extends AdditiveSemigroupAction[X, S] { self =>
   /** Returns the monoid on actors. */
-  def monoidOnActor: AdditiveMonoid[S]
-  def semigroupOnActor = monoidOnActor
+  def actorMonoid: AdditiveMonoid[S]
+  def actorSemigroup = actorMonoid
 
   override def asActionWithTranslate: MonoidAction[X, S] = new MonoidAction[X, S] {
-    def monoidOnActor = self.monoidOnActor.asMonoidWithAdd
+    def actorMonoid = self.actorMonoid.asMonoidWithAdd
     def act(x: X, k: S) = self.translate(x, k)
   }
 }
@@ -44,12 +44,12 @@ trait AdditiveMonoidAction[X, S] extends AdditiveSemigroupAction[X, S] { self =>
 /** Represents an additive action where the actors form a group. */
 trait AdditiveGroupAction[X, S] extends AdditiveMonoidAction[X, S] { self =>
   /** Returns the group on actors. */
-  def groupOnActor: AdditiveGroup[S]
-  def monoidOnActor = groupOnActor
-  override def semigroupOnActor = groupOnActor
+  def actorGroup: AdditiveGroup[S]
+  def actorMonoid = actorGroup
+  override def actorSemigroup = actorGroup
 
   override def asActionWithTranslate: GroupAction[X, S] = new GroupAction[X, S] {
-    def groupOnActor = self.groupOnActor.asGroupWithAdd
+    def actorGroup = self.actorGroup.asGroupWithAdd
     def act(x: X, k: S) = self.translate(x, k)
   }
 }

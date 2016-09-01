@@ -9,8 +9,8 @@ import poly.algebra.ops._
 
 /**
  * Law checking for Poly-algebra structures using ScalaCheck.
- * @author Tongfei Chen (ctongfei@gmail.com).
- * @since 0.3.0
+ * @author Tongfei Chen
+ * @since 0.4.0
  */
 object Law {
 
@@ -19,19 +19,19 @@ object Law {
   }
 
   def associativity[X: Semigroup: Arbitrary] = forAll { (x: X, y: X, z: X) =>
-    ((x op y) op z) == (x op (y op z))
+    ((x <> y) <> z) == (x <> (y <> z))
   }
 
   def identity[X: Monoid: Arbitrary] = forAll { (x: X) =>
-    (id[X] op x) == x && (x op id[X]) == x
+    (id[X] <> x) == x && (x <> id[X]) == x
   }
 
   def divisibility[X: Group: Arbitrary] = forAll { (x: X) =>
-    (x op implicitly[Group[X]].inv(x)) == id[X]
+    (x <> implicitly[Group[X]].inv(x)) == id[X]
   }
 
   def commutativity[X: Semigroup: Arbitrary] = forAll { (x: X, y: X) =>
-    (x op y) == (y op x)
+    (x <> y) == (y <> x)
   }
 
   def additionAssociativity[X: AdditiveSemigroup : Arbitrary] = forAll { (x: X, y: X, z: X) =>
@@ -76,7 +76,4 @@ object Law {
 
   def partialOrder[X: PartialOrder : Arbitrary] = orderReflexivity[X] && orderAntisymmetry[X] && orderTransitivity[X]
 
-  def bijection[X: Arbitrary, Y: Arbitrary](implicit b: Bijection[X, Y]) = forAll { (x: X, y: Y) =>
-    (b.invert(b(x)) == x) && (b(b.invert(y)) == y)
-  }
 }

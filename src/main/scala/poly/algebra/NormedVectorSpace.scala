@@ -9,14 +9,14 @@ import poly.algebra.specgroup._
 trait NormedVectorSpace[V, @sp(fd) F] extends VectorSpace[V, F] with MetricSpace[V, F] {
   def norm(x: V): F
   def dist(x: V, y: V): F = norm(sub(x, y))
-  def normalize(x: V): V = scale(x, ringOnScalar.inv(norm(x)))
+  def normalize(x: V): V = scale(x, scalarRing.inv(norm(x)))
 }
 
 object NormedVectorSpace extends BinaryImplicitGetter[NormedVectorSpace] {
 
   def create[V, @sp(fd) F: Field](fNorm: V => F)(implicit S: VectorSpace[V, F]): NormedVectorSpace[V, F]
   = new NormedVectorSpace[V, F] {
-    def fieldOnScalar = implicitly[Field[F]]
+    def scalarField = implicitly[Field[F]]
     def norm(x: V): F = fNorm(x)
     override def neg(x: V): V = S.neg(x)
     override def sub(x: V, y: V): V = S.sub(x, y)

@@ -13,13 +13,13 @@ import poly.algebra.specgroup._
  * @author Tongfei Chen
  * @since 0.1.0
  */
-trait AdditiveMonoid[@sp(fdil) X] extends AdditiveSemigroup[X] with HasZero[X] { self =>
+trait AdditiveMonoid[@sp(fdil) M] extends AdditiveSemigroup[M] with HasZero[M] { self =>
 
-  override def sumN(x: X, n: Int): X = asMonoidWithAdd.combineN(x, n)
+  override def sumN(x: M, n: Int): M = asMonoidWithAdd.combineN(x, n)
 
   /** Casts this object as a symbol-agnostic monoid with the operation `+`. */
-  def asMonoidWithAdd: Monoid[X] = new Monoid[X] {
-    def op(x: X, y: X) = self.add(x, y)
+  def asMonoidWithAdd: Monoid[M] = new Monoid[M] {
+    def op(x: M, y: M) = self.add(x, y)
     def id = self.zero
   }
 }

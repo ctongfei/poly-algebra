@@ -13,7 +13,7 @@ trait AlgebraOverRing[X, @sp(fdi) S] extends Module[X, S] with CRing[X]
 object AlgebraOverRing extends BinaryImplicitGetter[AlgebraOverRing] {
 
   implicit def trivial[@sp(fdi) X](implicit R: Ring[X]): AlgebraOverRing[X, X] = new AlgebraOverRing[X, X] {
-    def ringOnScalar = R
+    def scalarRing = R
     def zero = R.zero
     def one = R.one
     def add(x: X, y: X) = R.add(x, y)

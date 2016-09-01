@@ -36,24 +36,24 @@ import poly.algebra.specgroup._
 trait Module[X, @sp(fdi) S] extends MultiplicativeAction[X, S] with AdditiveCGroup[X] { self =>
 
   /** Returns the ring structure endowed on the type of scalars. */
-  implicit def ringOnScalar: Ring[S]
+  implicit def scalarRing: Ring[S]
 
   /** Scales a vector by a scalar. */
   def scale(x: X, k: S): X
 
-  def neg(x: X): X = scale(x, ringOnScalar.negOne)
+  def neg(x: X): X = scale(x, scalarRing.negOne)
 
   /**
    * Returns the dual space of this module.
    * @since 0.2.7
    */
   def dual: Module[X => S, S] = new Module[X => S, S] {
-    implicit def ringOnScalar = self.ringOnScalar
-    def scale(f: X => S, k: S) = x => ringOnScalar.mul(f(x), k)
-    def add(f: X => S, g: X => S) = x => ringOnScalar.add(f(x), g(x))
-    def zero = x => ringOnScalar.zero
-    override def neg(f: X => S) = x => ringOnScalar.neg(f(x))
-    override def sub(f: X => S, g: X => S) = x => ringOnScalar.sub(f(x), g(x))
+    implicit def scalarRing = self.scalarRing
+    def scale(f: X => S, k: S) = x => scalarRing.mul(f(x), k)
+    def add(f: X => S, g: X => S) = x => scalarRing.add(f(x), g(x))
+    def zero = x => scalarRing.zero
+    override def neg(f: X => S) = x => scalarRing.neg(f(x))
+    override def sub(f: X => S, g: X => S) = x => scalarRing.sub(f(x), g(x))
   }
 
 }
@@ -61,7 +61,7 @@ trait Module[X, @sp(fdi) S] extends MultiplicativeAction[X, S] with AdditiveCGro
 object Module extends BinaryImplicitGetter[Module] {
 
   def create[X, @sp(fdi) R](fAdd: (X, X) => X, fScale: (X, R) => X, fZero: X)(implicit R: Ring[R]): Module[X, R] = new Module[X, R] {
-    def ringOnScalar = R
+    def scalarRing = R
     def zero = fZero
     def add(x: X, y: X) = fAdd(x, y)
     def scale(x: X, k: R) = fScale(x, k)
@@ -69,7 +69,7 @@ object Module extends BinaryImplicitGetter[Module] {
 
   /** Constructs the trivial module of any ring over itself. */
   implicit def trivial[R](implicit R: Ring[R]): Module[R, R] = new Module[R, R] {
-    def ringOnScalar = R
+    def scalarRing = R
     def add(x: R, y: R) = R.add(x, y)
     override def neg(x: R) = R.neg(x)
     override def sub(x: R, y: R) = R.sub(x, y)
@@ -79,7 +79,7 @@ object Module extends BinaryImplicitGetter[Module] {
 
   /** Returns the natural Z-module of an Abelian group. */
   implicit def ZModule[X](implicit X: AdditiveCGroup[X]): Module[X, Int] = new Module[X, Int] {
-    def ringOnScalar: Ring[Int] = std.IntStructure
+    def scalarRing: Ring[Int] = std.IntStructure
     def scale(x: X, k: Int) = X.sumN(x, k)
     def zero = X.zero
     def add(x: X, y: X) = X.add(x, y)

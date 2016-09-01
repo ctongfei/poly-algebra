@@ -1,5 +1,5 @@
 name := "poly-algebra"
-version := "0.3.9-SNAPSHOT"
+version := "0.3.13-SNAPSHOT"
 organization := "me.tongfei"
 scalaVersion := "2.11.8"
 isSnapshot := true

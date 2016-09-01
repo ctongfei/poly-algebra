@@ -14,7 +14,7 @@ object InstantStructure extends AffineSpace[Instant, Duration, Long] with Order[
   def cmp(x: Instant, y: Instant) = x compareTo y
   def translate(x: Instant, k: Duration) = x plus k
   def sub(x: Instant, y: Instant) = Duration.between(y, x)
-  def vectorSpaceOnVector = DurationStructure
+  def vectorSpace = DurationStructure
 
 }
 
@@ -30,7 +30,7 @@ object DurationStructure extends VectorSpace[Duration, Long] with Order[Duration
   def zero = Duration.ZERO
 
   /** This is not really a field; but we could pretend that it is (consider them as real numbers). */
-  implicit object fieldOnScalar extends Field[Long] {
+  implicit object scalarField extends Field[Long] {
     final val zero: Long = 0l
     final val one: Long = 1l
     def add(x: Long, y: Long) = x + y
@@ -40,6 +40,5 @@ object DurationStructure extends VectorSpace[Duration, Long] with Order[Duration
     def inv(x: Long): Long = 1l / x
     override def div(x: Long, y: Long) = x / y
   }
-
 
 }

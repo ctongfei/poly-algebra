@@ -36,3 +36,16 @@ trait BoundedLattice[@sp(Boolean) X] extends
 }
 
 object BoundedLattice extends ImplicitGetter[BoundedLattice]
+
+trait EqBoundedLattice[@sp(Boolean) X] extends EqBoundedLowerSemilattice[X] with BoundedUpperSemilatticeWithEq[X] with BoundedLattice[X] { self =>
+  override def reverse: EqBoundedLattice[X] = new EqBoundedLattice[X] {
+    def sup(x: X, y: X) = self.inf(x, y)
+    def le(x: X, y: X) = self.le(y, x)
+    def top = self.bot
+    def bot = self.top
+    def inf(x: X, y: X) = self.sup(x, y)
+    override def reverse = self
+  }
+}
+
+object EqBoundedLattice extends ImplicitGetter[EqBoundedLattice]

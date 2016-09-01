@@ -2,6 +2,7 @@ package poly.algebra
 
 import poly.algebra.syntax._
 import poly.algebra.specgroup._
+import scala.Predef.{any2stringadd => _, _}
 
 /**
  * @author Tongfei Chen (ctongfei@gmail.com).

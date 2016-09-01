@@ -11,9 +11,9 @@ import poly.algebra.hkt._
  *  - $lawIdentity
  * @author Tongfei Chen
  */
-trait Monoid[X] extends Semigroup[X] with HasIdentity[X] {
+trait Monoid[M] extends Semigroup[M] with HasIdentity[M] { self =>
 
-  override def combineN(x: X, n: Int): X = {
+  override def combineN(x: M, n: Int): M = {
     if (n == 0) return id
     var y = x
     var m = n
@@ -31,6 +31,9 @@ trait Monoid[X] extends Semigroup[X] with HasIdentity[X] {
     r
   }
 
+  /** Returns the product monoid of two monoids. */
+  def product[N](that: Monoid[N]): Monoid[(M, N)] = new MonoidT.Product(self, that)
+
 }
 
 object Monoid extends ImplicitGetter[Monoid] {
@@ -41,10 +44,14 @@ object Monoid extends ImplicitGetter[Monoid] {
     val id: X = idElem
   }
 
-  /** Returns the product monoid of two monoids. */
-  def product[X, Y](implicit Mx: Monoid[X], My: Monoid[Y]): Monoid[(X, Y)] = new Monoid[(X, Y)] {
-    def op(x: (X, Y), y: (X, Y)) = (Mx.op(x._1, y._1), My.op(x._2, y._2))
-    val id: (X, Y) = (Mx.id, My.id)
+  def product[X, Y](implicit mx: Monoid[X], my: Monoid[Y]): Monoid[(X, Y)] = new MonoidT.Product(mx, my)
+
+}
+
+private[poly] object MonoidT {
+
+  class Product[X, Y](mx: Monoid[X], my: Monoid[Y]) extends SemigroupT.Product(mx, my) with Monoid[(X, Y)] {
+    def id = (mx.id, my.id)
   }
 
 }

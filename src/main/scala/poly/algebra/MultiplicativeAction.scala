@@ -17,17 +17,30 @@ trait MultiplicativeAction[X, @sp(fdi) S] {
 }
 
 trait MultiplicativeSemigroupAction[X, @sp(fdi) S] extends MultiplicativeAction[X, S] {
-  def semigroupOnScalar: MultiplicativeSemigroup[S]
+  def scalarSemigroup: MultiplicativeSemigroup[S]
+  override def asActionWithScale: SemigroupAction[X, S] = new SemigroupAction[X, S] {
+    def actorSemigroup = scalarSemigroup.asSemigroupWithMul
+    def act(x: X, k: S) = scale(x, k)
+  }
 }
 
 trait MultiplicativeMonoidAction[X, @sp(fdi) S] extends MultiplicativeSemigroupAction[X, S] {
-  def monoidOnScalar: MultiplicativeMonoid[S]
-  def semigroupOnScalar = monoidOnScalar
+  def scalarMonoid: MultiplicativeMonoid[S]
+  def scalarSemigroup = scalarMonoid
+  override def asActionWithScale: MonoidAction[X, S] = new MonoidAction[X, S] {
+    def actorMonoid = scalarMonoid.asMonoidWithMul
+    def act(x: X, k: S) = scale(x, k)
+  }
 }
 
 trait MultiplicativeGroupAction[X, @sp(fdi) S] extends MultiplicativeMonoidAction[X, S] {
-  def groupOnScalar: MultiplicativeGroup[S]
-  def monoidOnScalar = groupOnScalar
+  def scalarGroup: MultiplicativeGroup[S]
+  def scalarMonoid = scalarGroup
+  override def scalarSemigroup = scalarGroup
+  override def asActionWithScale: GroupAction[X, S] = new GroupAction[X, S] {
+    def actorGroup = scalarGroup.asGroupWithMul
+    def act(x: X, k: S) = scale(x, k)
+  }
 }
 
 object MultiplicativeAction extends BinaryImplicitGetter[MultiplicativeAction]

@@ -14,7 +14,7 @@ trait AlgebraOverField[X, @sp(fd) S] extends VectorSpace[X, S] with AlgebraOverR
 object AlgebraOverField extends BinaryImplicitGetter[AlgebraOverField] {
 
   implicit def trivial[@sp(fd) X](implicit F: Field[X]): AlgebraOverField[X, X] = new AlgebraOverField[X, X] {
-    def fieldOnScalar = F
+    def scalarField = F
     def zero = F.zero
     def one = F.one
     def add(x: X, y: X) = F.add(x, y)

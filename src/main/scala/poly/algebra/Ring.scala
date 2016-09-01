@@ -19,7 +19,6 @@ import poly.algebra.specgroup._
  * @author Tongfei Chen
  * @since 0.1.0
  */
-@scala.annotation.implicitNotFound("Cannot find a ring on type ${X}.")
 trait Ring[@sp(fdi) X] extends Semiring[X] with AdditiveCGroup[X] {
 
   /** Returns the -1 element in this ring. */
@@ -29,8 +28,7 @@ trait Ring[@sp(fdi) X] extends Semiring[X] with AdditiveCGroup[X] {
 object Ring extends ImplicitGetter[Ring] {
 
   /** Creates a ring using the provided operations `add`, `mul`, `zero`, `one` and `neg`. */
-  def create[@sp(di) X](fAdd: (X, X) => X, fMul: (X, X) => X, zeroElem: X, oneElem: X, fNeg: X => X)
-  : Ring[X] = new Ring[X] {
+  def create[@sp(di) X](fAdd: (X, X) => X, fMul: (X, X) => X, zeroElem: X, oneElem: X, fNeg: X => X): Ring[X] = new Ring[X] {
     def add(x: X, y: X): X = fAdd(x, y)
     def mul(x: X, y: X): X = fMul(x, y)
     def zero: X = zeroElem
@@ -48,7 +46,3 @@ object Ring extends ImplicitGetter[Ring] {
     override def sub(x: X, y: X): X = X.sub(x, y)
   }
 }
-
-
-
-

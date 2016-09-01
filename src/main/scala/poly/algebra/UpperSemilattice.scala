@@ -21,14 +21,6 @@ trait UpperSemilattice[@sp(fdib) X] { self =>
   /** Returns the supremum (join, a.k.a. least upper bound) of the two arguments. */
   def sup(x: X, y: X): X
 
-  /** Casts upper lower semilattice as a partial order if an implicit equivalence relation is present. */
-  def asPartialOrder(implicit e: Eq[X]): PartialOrder[X] = new PartialOrder[X] {
-    override def eq(x: X, y: X) = e.eq(x, y)
-    override def ne(x: X, y: X) = e.ne(x, y)
-    def le(x: X, y: X) = eq(y, sup(x, y))
-    override def ge(x: X, y: X) = eq(x, sup(x, y))
-  }
-
   def reverse: LowerSemilattice[X] = new LowerSemilattice[X] {
     override def reverse = self
     def inf(x: X, y: X) = sup(x, y)
@@ -45,3 +37,15 @@ object UpperSemilattice extends ImplicitGetter[UpperSemilattice] {
     def sup(x: X, y: X): X = fSup(x, y)
   }
 }
+
+trait EqUpperSemilattice[@sp(Boolean) X] extends UpperSemilattice[X] with PartialOrder[X] { self =>
+
+  override def reverse: EqLowerSemilattice[X] = new EqLowerSemilattice[X] {
+    def le(x: X, y: X) = self.le(y, x)
+    def inf(x: X, y: X) = self.sup(x, y)
+    override def reverse = self
+  }
+
+}
+
+object EqUpperSemilattice extends ImplicitGetter[EqUpperSemilattice]

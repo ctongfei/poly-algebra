@@ -27,21 +27,21 @@ import poly.algebra.specgroup._
 trait VectorSpace[X, @sp(fd) S] extends Module[X, S] { self =>
 
   /** Returns the field structure endowed on the set of scalars. */
-  def fieldOnScalar: Field[S]
+  def scalarField: Field[S]
 
-  def ringOnScalar = fieldOnScalar
+  final def scalarRing = scalarField
 
   /**
    * Returns the dual space of this vector space.
    * @since 0.2.2
    */
   override def dual: VectorSpace[X => S, S] = new VectorSpace[X => S, S] {
-    def fieldOnScalar = self.fieldOnScalar
-    def scale(f: X => S, k: S) = x => fieldOnScalar.mul(f(x), k)
-    def zero = x => fieldOnScalar.zero
-    def add(f: X => S, g: X => S) = x => fieldOnScalar.add(f(x), g(x))
-    override def neg(f: X => S) = x => fieldOnScalar.neg(f(x))
-    override def sub(f: X => S, g: X => S) = x => fieldOnScalar.sub(f(x), g(x))
+    def scalarField = self.scalarField
+    def scale(f: X => S, k: S) = x => scalarField.mul(f(x), k)
+    def zero = x => scalarField.zero
+    def add(f: X => S, g: X => S) = x => scalarField.add(f(x), g(x))
+    override def neg(f: X => S) = x => scalarField.neg(f(x))
+    override def sub(f: X => S, g: X => S) = x => scalarField.sub(f(x), g(x))
   }
 
 }
@@ -54,7 +54,7 @@ object VectorSpace extends BinaryImplicitGetter[VectorSpace] {
    * @return The trivial vector space of a field over itself.
    */
   implicit def trivial[@sp(fd) F](implicit F: Field[F]): VectorSpace[F, F] = new VectorSpace[F, F] {
-    def fieldOnScalar = F
+    def scalarField = F
     def add(x: F, y: F) = F.add(x, y)
     override def neg(x: F) = F.neg(x)
     override def sub(x: F, y: F) = F.sub(x, y)
@@ -63,8 +63,8 @@ object VectorSpace extends BinaryImplicitGetter[VectorSpace] {
   }
 
   /** Constructs the natural function space of type `X => Y` if there exists a vector space over `Y`. */
-  implicit def lift[X, @sp(fd) Y, @sp(fd) F](implicit Y: VectorSpace[Y, F]): VectorSpace[X => Y, F] = new VectorSpace[X => Y, F] {
-    implicit def fieldOnScalar = Y.ringOnScalar
+  implicit def lift[X, Y, @sp(fd) F](implicit Y: VectorSpace[Y, F]): VectorSpace[X => Y, F] = new VectorSpace[X => Y, F] {
+    implicit def scalarField = Y.scalarRing
     def scale(f: X => Y, k: F) = x => Y.scale(f(x), k)
     def zero = x => Y.zero
     def add(f: X => Y, g: X => Y) = x => Y.add(f(x), g(x))

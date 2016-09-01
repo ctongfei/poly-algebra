@@ -8,7 +8,6 @@ import poly.algebra.factory._
  * @author Tongfei Chen
  * @since 0.2.10
  */
-@implicitNotFound("Cannot find an action of type ${S} onto ${X}.")
 trait Action[X, -S] {
   /** Acts an element onto a state. */
   def act(x: X, k: S): X
@@ -23,38 +22,44 @@ object Action extends BinaryImplicitGetter[Action] {
 }
 
 trait SemigroupAction[X, S] extends Action[X, S] {
-  def semigroupOnActor: Semigroup[S]
+  def actorSemigroup: Semigroup[S]
 }
 
 object SemigroupAction extends BinaryImplicitGetter[SemigroupAction] {
+
+  def create[X, S](fAct: (X, S) => X)(implicit S: Semigroup[S]): SemigroupAction[X, S] = new SemigroupAction[X, S] {
+    def actorSemigroup = S
+    def act(x: X, k: S) = fAct(x, k)
+  }
+
   /** Returns the trivial action if an implicit semigroup is present. */
   implicit def trivial[S](implicit S: Semigroup[S]): SemigroupAction[S, S] = new SemigroupAction[S, S] {
     def act(x: S, k: S) = S.op(x, k)
-    def semigroupOnActor = S
+    def actorSemigroup = S
   }
 }
 
 trait MonoidAction[X, S] extends SemigroupAction[X, S] {
-  def monoidOnActor: Monoid[S]
-  def semigroupOnActor = monoidOnActor
+  def actorMonoid: Monoid[S]
+  def actorSemigroup = actorMonoid
 }
 
 object MonoidAction extends BinaryImplicitGetter[MonoidAction] {
   implicit def trivial[S](implicit S: Monoid[S]): MonoidAction[S, S] = new MonoidAction[S, S] {
-    def monoidOnActor = S
+    def actorMonoid = S
     def act(x: S, k: S) = S.op(x, k)
   }
 }
 
 trait GroupAction[X, S] extends MonoidAction[X, S] {
-  def groupOnActor: Group[S]
-  def monoidOnActor = groupOnActor
-  override def semigroupOnActor = groupOnActor
+  def actorGroup: Group[S]
+  def actorMonoid = actorGroup
+  override def actorSemigroup = actorGroup
 }
 
 object GroupAction extends BinaryImplicitGetter[GroupAction] {
   implicit def trivial[S](implicit S: Group[S]): GroupAction[S, S] = new GroupAction[S, S] {
-    def groupOnActor = S
+    def actorGroup = S
     def act(x: S, k: S) = S.op(x, k)
   }
 }

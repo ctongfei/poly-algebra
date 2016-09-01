@@ -51,12 +51,7 @@ object PartialOrder extends ImplicitGetter[PartialOrder] {
 
   // CONSTRUCTORS
 
-  implicit def fromScalaPartiallyOrdered[X <: scala.math.PartiallyOrdered[X]]: PartialOrder[X] = new PartialOrder[X] {
-    def le(x: X, y: X) = x tryCompareTo y match {
-      case Some(r) => r <= 0
-      case None => false
-    }
-  }
+  implicit def fromScalaPartiallyOrdered[X <: scala.math.PartiallyOrdered[X]]: PartialOrder[X] = new PartialOrderT.FromScalaPartiallyOrdered[X]
   
   def create[@sp(fdib) X](fLe: (X, X) => Boolean): PartialOrder[X] = new PartialOrder[X] {
     def le(x: X, y: X): Boolean = fLe(x, y)
@@ -76,6 +71,13 @@ private[poly] object PartialOrderT {
   class Reverse[X](self: PartialOrder[X]) extends AbstractPartialOrder[X] {
     override def reverse = self
     def le(x: X, y: X) = self.le(y, x)
+  }
+
+  class FromScalaPartiallyOrdered[X <: scala.math.PartiallyOrdered[X]] extends AbstractPartialOrder[X] {
+    def le(x: X, y: X) = x tryCompareTo y match {
+      case Some(r) => r <= 0
+      case None => false
+    }
   }
 
   class Contramapped[@sp(fdib) X, @sp(Int) Y](self: PartialOrder[X], f: Y ⇒ X) extends PartialOrder[Y] {

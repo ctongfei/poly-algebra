@@ -7,14 +7,16 @@ import poly.algebra.specgroup._
 /**
  * Typeclass for type-strict equivalence relations. This is equivalent to the Haskell typeclass `Eq`.
  *
+ * `Eq` is contravariant with respect to its type parameter.
+ *
  * An instance of this typeclass should satisfy the following axioms:
  *  - $lawEqReflexivity
  *  - $lawEqSymmetry
  *  - $lawEqTransitivity
  *
  * @define lawEqReflexivity '''Reflexivity''': ∀''a''∈X, ''a'' === ''a''.
- * @define lawEqSymmetry '''Symmetry''': ∀''a'', ''b''∈X, ''a'' =~= ''b'' implies ''b'' =~= ''a''.
- * @define lawEqTransitivity '''Transitivity''': ∀''a'', ''b'', ''c''∈X, ''a'' =~= ''b'' and ''b'' =~= ''c'' implies ''a'' =~= ''c''.
+ * @define lawEqSymmetry '''Symmetry''': ∀''a'', ''b''∈X, ''a'' === ''b'' implies ''b'' === ''a''.
+ * @define lawEqTransitivity '''Transitivity''': ∀''a'', ''b'', ''c''∈X, ''a'' === ''b'' and ''b'' === ''c'' implies ''a'' === ''c''.
  * @author Tongfei Chen
  * @since 0.1.0
  */
@@ -37,6 +39,8 @@ trait Eq[@sp -X] { self ⇒
    * equivalent if and only if x,,1,, == y,,1,, under this and x,,2,, == y,,2,, under that.
    */
   def product[@sp(Int, Long, Double, Char, Boolean) Y](that: Eq[Y]): Eq[(X, Y)] = Eq.onTuple2(self, that)
+
+  @unsp def coproduct[Y](that: Eq[Y]): Eq[Either[X, Y]] = Eq.onEither(self, that)
 
   @unsp def intersect[Y <: X](that: Eq[Y]): Eq[Y] = new EqT.Intersection(self, that)
 
@@ -91,6 +95,11 @@ object Eq extends ImplicitGetter[Eq] {
     case _ ⇒ new EqT.Tuple5Eq(A, B, C, D, E)
   }
 
+  implicit def onEither[A, B](implicit A: Eq[A], B: Eq[B]): Eq[Either[A, B]] = (A, B) match {
+    case (ha: Hashing[A], hb: Hashing[B]) => new HashingT.EitherHashing(ha, hb)
+    case _ => new EqT.EitherEq(A, B)
+  }
+
   // TYPECLASS INSTANCES
 
   implicit object ContravariantFunctor extends ContravariantFunctor[Eq] {
@@ -123,8 +132,7 @@ private[poly] object EqT {
     def eq(x: Tuple1[A], y: Tuple1[A]) = A.eq(x._1, y._1)
   }
 
-  class Tuple2Eq[@sp(spTuple2) A, @sp(spTuple2) B]
-  (A: Eq[A], B: Eq[B]) extends Eq[(A, B)] {
+  class Tuple2Eq[@sp(spTuple2) A, @sp(spTuple2) B](A: Eq[A], B: Eq[B]) extends Eq[(A, B)] {
     def eq(x: (A, B), y: (A, B)) =
       A.eq(x._1, y._1) && B.eq(x._2, y._2)
   }
@@ -142,6 +150,14 @@ private[poly] object EqT {
   class Tuple5Eq[A, B, C, D, E](A: Eq[A], B: Eq[B], C: Eq[C], D: Eq[D], E: Eq[E]) extends AbstractEq[(A, B, C, D, E)] {
     def eq(x: (A, B, C, D, E), y: (A, B, C, D, E)) =
       A.eq(x._1, y._1) && B.eq(x._2, y._2) && C.eq(x._3, y._3) && D.eq(x._4, y._4) && E.eq(x._5, y._5)
+  }
+
+  class EitherEq[A, B](A: Eq[A], B: Eq[B]) extends AbstractEq[Either[A, B]] {
+    def eq(x: Either[A, B], y: Either[A, B]) = (x, y) match {
+      case (Left(xl),  Left(yl) ) => A.eq(xl, yl)
+      case (Right(xr), Right(yr)) => B.eq(xr, yr)
+      case _ => false
+    }
   }
 
 }

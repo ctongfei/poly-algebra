@@ -17,3 +17,14 @@ import poly.algebra.specgroup._
 trait BoundedLowerSemilattice[@sp(Boolean) X] extends LowerSemilattice[X] with HasBottom[X]
 
 object BoundedLowerSemilattice extends ImplicitGetter[BoundedLowerSemilattice]
+
+trait EqBoundedLowerSemilattice[@sp(Boolean) X] extends BoundedLowerSemilattice[X] with EqLowerSemilattice[X] { self =>
+  override def reverse: BoundedUpperSemilatticeWithEq[X] = new BoundedUpperSemilatticeWithEq[X] {
+    def top = self.bot
+    def le(x: X, y: X) = self.le(y, x)
+    def sup(x: X, y: X) = self.inf(x, y)
+    override def reverse = self
+  }
+}
+
+object EqBoundedLowerSemilattice extends ImplicitGetter[EqBoundedLowerSemilattice]

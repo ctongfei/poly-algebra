@@ -74,7 +74,7 @@ trait Priority1Implicits extends Priority2Implicits {
   }
 
   implicit class withAdditiveGroupActionXOps[X, Y >: X, S](x: X)(implicit Y: AdditiveGroupAction[Y, S]) {
-    def :-(y: S) = Y.translate(x, Y.groupOnActor.neg(y))
+    def :-(y: S) = Y.translate(x, Y.actorGroup.neg(y))
   }
 
   implicit class withBooleanAlgebraOps[X, Y >: X : BooleanAlgebra](x: X) {
