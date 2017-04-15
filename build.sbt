@@ -1,11 +1,11 @@
 import scala.io._
 
 name := "poly-algebra"
-version := "0.4.0-SNAPSHOT"
+version := "0.4.0"
 organization := "me.tongfei"
 scalaVersion := "2.11.8"
 crossScalaVersions := Seq("2.11.8", "2.12.1")
-isSnapshot := true
+isSnapshot := false
 
 libraryDependencies += "org.scala-lang"    %  "scala-reflect"   % scalaVersion.value
 libraryDependencies += "me.tongfei"        %% "poly-macroutil"  % "0.2.0"

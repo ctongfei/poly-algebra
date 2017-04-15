@@ -7,7 +7,7 @@ import poly.algebra._
  */
 object FromScala {
 
-  implicit class scalaEquivAsPoly[X](s: scala.Equiv[X]) extends AnyVal {
+  implicit class scalaEquivAsPoly[X](val s: scala.Equiv[X]) extends AnyVal {
     def asPoly: Eq[X] = new ScalaEquivAsPoly(s)
   }
   implicit class scalaPartialOrderAsPoly[X](val s: scala.PartialOrdering[X]) extends AnyVal {
