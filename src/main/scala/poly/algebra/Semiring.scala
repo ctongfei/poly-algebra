@@ -26,6 +26,7 @@ trait Semiring[@sp(fdi) X] extends AdditiveCMonoid[X] with MultiplicativeMonoid[
   /** Returns the 2 element in this semiring. */
   def two = add(one, one)
 
+  def product[Y](that: Semiring[Y]): Semiring[(X, Y)] = new SemiringT.Product(this, that)
 }
 
 object Semiring extends ImplicitGetter[Semiring] {
@@ -39,10 +40,16 @@ object Semiring extends ImplicitGetter[Semiring] {
     def one: X = oneElem
   }
 
-  def from[@sp(di) X](am: AdditiveCMonoid[X], mm: MultiplicativeMonoid[X]): Semiring[X] = new Semiring[X] {
-    def one: X = mm.one
-    def add(x: X, y: X): X = am.add(x, y)
-    def mul(x: X, y: X): X = mm.mul(x, y)
-    def zero: X = am.zero
+  def product[X, Y](implicit X: Semiring[X], Y: Semiring[Y]): Semiring[(X, Y)] = new SemiringT.Product(X, Y)
+}
+
+private[poly] object SemiringT {
+
+  class Product[X, Y](X: Semiring[X], Y: Semiring[Y]) extends Semiring[(X, Y)] {
+    def add(x: (X, Y), y: (X, Y)) = (X.add(x._1, y._1), Y.add(x._2, y._2))
+    def one = (X.one, Y.one)
+    def mul(x: (X, Y), y: (X, Y)) = (X.mul(x._1, y._1), Y.mul(x._2, y._2))
+    def zero = (X.zero, Y.zero)
   }
+
 }

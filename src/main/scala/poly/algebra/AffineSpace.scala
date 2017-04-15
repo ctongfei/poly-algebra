@@ -26,8 +26,8 @@ object AffineSpace extends TernaryImplicitGetter[AffineSpace] {
    * @param V Type of the vector space
    */
   implicit def trivial[V, F](implicit V: VectorSpace[V, F]): AffineSpace[V, V, F] = new AffineSpace[V, V, F] {
-    def vectorSpace: VectorSpace[V, F] = V
-    def sub(x: V, y: V): V = V.sub(x, y)
-    def translate(k: V, x: V): V = V.add(k, x)
+    def vectorSpace = V
+    def sub(x: V, y: V) = V.sub(x, y)
+    def translate(k: V, x: V) = V.add(k, x)
   }
 }

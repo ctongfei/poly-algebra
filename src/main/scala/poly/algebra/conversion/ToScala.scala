@@ -11,7 +11,7 @@ import scala.util.{hashing => suh}
   */
 object ToScala {
 
-  implicit class EquivToScalaOps[X](val p: pa.Eq[X]) extends AnyVal {
+  implicit class EqAsScala[X](val p: pa.Eq[X]) extends AnyVal {
 
     def asScalaEquiv: sm.Equiv[X] = new Equiv[X] {
       def equiv(x: X, y: X) = p.eq(x, y)
@@ -19,7 +19,7 @@ object ToScala {
 
   }
 
-  implicit class PartialOrderToScalaOps[X](val p: pa.PartialOrder[X]) extends AnyVal {
+  implicit class PartialOrderAsScala[X](val p: pa.PartialOrder[X]) extends AnyVal {
 
     def asScalaPartialOrdering: sm.PartialOrdering[X] = new PartialOrdering[X] {
       def tryCompare(x: X, y: X) = {
@@ -38,7 +38,7 @@ object ToScala {
   }
 
 
-  implicit class WeakOrderToScalaOps[X](val p: pa.Order[X]) extends AnyVal {
+  implicit class OrderAsScala[X](val p: pa.Order[X]) extends AnyVal {
 
     def asScalaOrdering: sm.Ordering[X] = new Ordering[X] {
       def compare(x: X, y: X) = p.cmp(x, y)
@@ -52,7 +52,7 @@ object ToScala {
 
   }
 
-  implicit class IntHashingToScalaOps[X](val p: pa.Hashing[X]) extends AnyVal {
+  implicit class HashingAsScala[X](val p: pa.Hashing[X]) extends AnyVal {
 
     def asScalaHashing: suh.Hashing[X] = new suh.Hashing[X] {
       def hash(x: X) = p.hash(x)

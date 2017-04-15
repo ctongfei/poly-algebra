@@ -30,6 +30,7 @@ object AdditiveMonoid extends ImplicitGetter[AdditiveMonoid] {
     def add(x: X, y: X): X = f(x, y)
     def zero: X = zeroElem
   }
+
 }
 
 

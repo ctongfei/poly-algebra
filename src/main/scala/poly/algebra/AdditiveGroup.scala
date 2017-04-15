@@ -12,7 +12,7 @@ import poly.algebra.specgroup._
  *  - $lawAdditiveAssociativity
  *  - $lawAdditiveIdentity
  *  - $lawAdditiveInvertibility
- * @define lawAdditiveInvertibility '''Additive invertibility''': ∀''a''∈X, ∃(-''a'')∈X, ''a'' + (-''a'') == (-''a'') + ''a'' == 0.
+ * @define lawAdditiveInvertibility '''Additive invertibility''': \(\forall a\in X, \exists -a \in X, a + (-a) == (-a) + a == 0\).
  * @since 0.1.0
  */
 trait AdditiveGroup[@sp(fdil) G] extends AdditiveMonoid[G] { self =>
@@ -37,4 +37,5 @@ object AdditiveGroup extends ImplicitGetter[AdditiveGroup] {
     def add(x: X, y: X): X = f(x, y)
     def zero: X = zeroElem
   }
+
 }

@@ -4,7 +4,9 @@ import poly.algebra.factory._
 import poly.algebra.specgroup._
 
 /**
+ * Represents a vector space equipped with a norm.
  * @author Tongfei Chen
+ * @since 0.1.0
  */
 trait NormedVectorSpace[V, @sp(fd) F] extends VectorSpace[V, F] with MetricSpace[V, F] {
   def norm(x: V): F

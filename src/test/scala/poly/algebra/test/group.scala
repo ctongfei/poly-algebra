@@ -41,6 +41,7 @@ class GroupTest extends FunSuite {
     assert(m0.id == "")
     assert(("ab" <> "cd") == "abcd")
     assert(m0.combineN("a", 6) == "aaaaaa")
+    assert(m0.combineN("b", 0) == "")
   }
 
   test("Product monoid") {
@@ -55,7 +56,12 @@ class GroupTest extends FunSuite {
 
   test("Group") {
     val g0 = AdditiveGroup[Int].asGroupWithAdd
-
+    val a = 2
+    val b = -2
+    assert(g0.combineN(a, 10) == 20)
+    assert(a == g0.inv(b))
+    assert(g0.invOp(a, b) == 4)
+    assert(g0.op(a, b) == g0.id)
   }
 
 }

@@ -30,7 +30,9 @@ class OrderTest extends FunSuite {
   }
 
   test("Product partial orders") {
-    implicit val po1 = PartialOrder[Int] product PartialOrder[Int]
+    val po1: PartialOrder[Int] = PartialOrder[Int]
+    val po2: PartialOrder[Int] = PartialOrder[Int]
+    implicit val po = po1 product po2
     assert((0, 1) <= (1, 2))
     assert((1, 0) <= (1, 4))
     assert((2, 4) <= (3, 4))

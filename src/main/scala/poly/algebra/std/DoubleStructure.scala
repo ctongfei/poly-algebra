@@ -57,5 +57,4 @@ object DoubleStructure extends IsReal[Double] with BoundedLattice[Double] with O
   override final def sgn(x: Double) = Math.signum(x)
   override final def dist(x: Double, y: Double) = Math.abs(x - y)
 
-
 }

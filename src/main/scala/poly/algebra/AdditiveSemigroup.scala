@@ -10,7 +10,7 @@ import poly.algebra.specgroup._
  * An instance of this typeclass should satisfy the following axiom:
  *  - $lawAdditiveAssociativity
  *
- * @define lawAdditiveAssociativity '''Additive associativity''': ∀''a'', ''b'', ''c''∈X, (''a'' + ''b'') + ''c'' == ''a'' + (''b'' + ''c'').
+ * @define lawAdditiveAssociativity '''Additive associativity''': \(\forall a, b, c \in X, (a+b)+c = a+(b+c)\).
  * @since 0.1.0
  */
 trait AdditiveSemigroup[@sp(fdil) S] { self =>
@@ -32,8 +32,5 @@ object AdditiveSemigroup extends ImplicitGetter[AdditiveSemigroup] {
   def create[@sp(fdi) X](f: (X, X) => X): AdditiveSemigroup[X] = new AdditiveSemigroup[X] {
     def add(x: X, y: X): X = f(x, y)
   }
+
 }
-
-
-
-

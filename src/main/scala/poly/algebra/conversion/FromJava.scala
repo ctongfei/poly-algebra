@@ -1,17 +1,12 @@
 package poly.algebra.conversion
 
-import poly.algebra._
-import scala.language.implicitConversions
-
 /**
- * This object contains implicit converters that converts Java strategy objects to Poly-algebra typeclasses.
  * @author Tongfei Chen
- * @since 0.2.11
  */
 object FromJava {
 
-  implicit def javaComparatorAsPoly[X](s: java.util.Comparator[X]): Order[X] = new Order[X] {
-    def cmp(x: X, y: X) = s.compare(x, y)
+  implicit class javaComparatorAsPoly[X](val j: java.util.Comparator[X]) extends AnyVal {
+    def asPoly = new JavaComparatorAsPoly(j)
   }
 
 }

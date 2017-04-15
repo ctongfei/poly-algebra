@@ -3,13 +3,14 @@ package poly.algebra
 import poly.algebra.factory._
 
 /**
- *
  * Typeclass for semigroups.
  * A semigroup is a set equipped with an associative binary operation.
  *
  * An instance of this typeclass should satisfy the following axiom:
- *  - $lawAssociativity
- * @define lawAssociativity '''Associativity''': ∀''a'', ''b'', ''c''∈X, (''a'' op ''b'') op ''c'' == ''a'' op (''b'' op ''c'').
+ * <ul>
+ *   <li> $lawAssociativity </li>
+ * </ul>
+ * @define lawAssociativity '''Associativity''': \(\forall a, b, c \in S, (ab)c = a(bc)\).
  * @author Tongfei Chen
  * @since 0.1.0
  */
@@ -37,8 +38,8 @@ trait Semigroup[S] extends Magma[S] { self =>
     r
   }
 
+  /** Returns the semigroup on tuples in which each component of the tuple also forms a semigroup. */
   def product[T](that: Semigroup[T]): Semigroup[(S, T)] = new SemigroupT.Product(self, that)
-
 
 }
 

@@ -51,4 +51,5 @@ object BooleanAlgebra extends ImplicitGetter[BooleanAlgebra] {
     def zero: X = booleanAlgebra.bot
   }
 
+  implicit val onBoolean = std.BooleanStructure
 }

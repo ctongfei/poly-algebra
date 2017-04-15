@@ -1,9 +1,9 @@
 package poly.algebra
 
 import poly.algebra.factory._
-import poly.algebra.hkt._
 
 /**
+ *
  * Represents a monoid, i.e., a semigroup with an identity element.
  *
  * An instance of this typeclass should satisfy the following axioms:
@@ -13,6 +13,9 @@ import poly.algebra.hkt._
  */
 trait Monoid[M] extends Semigroup[M] with HasIdentity[M] { self =>
 
+  /**
+   * Computes x <> x <> ... <> x (''n'' times) using the binary exponentiation algorithm.
+   */
   override def combineN(x: M, n: Int): M = {
     if (n == 0) return id
     var y = x

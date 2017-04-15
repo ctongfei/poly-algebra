@@ -26,5 +26,6 @@ object AdditiveCMonoid extends ImplicitGetter[AdditiveCMonoid] {
     def add(x: X, y: X): X = f(x, y)
     def zero: X = zeroElem
   }
+
 }
 

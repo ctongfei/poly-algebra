@@ -34,8 +34,8 @@ trait HktImplicits {
 
   implicit class withBiHktOps[H[_, _], X, Y](val x: H[X, Y]) {
 
-    def map1     [Z](f: X => Z)      (implicit H: Bifunctor[H]         ) = H.mapFirst(x)(f)
-    def map2     [Z](f: Y => Z)      (implicit H: Bifunctor[H]         ) = H.mapSecond(x)(f)
+    def map1     [Z](f: X => Z)      (implicit H: Bifunctor[H]         ) = H.map1(x)(f)
+    def map2     [Z](f: Y => Z)      (implicit H: Bifunctor[H]         ) = H.map2(x)(f)
     def flatMap  [Z](f: Y => H[X, Z])(implicit H: Monad[({type λ[υ] = H[X, υ]})#λ]) = H.flatMap(x)(f)
     def map      [Z](f: Y => Z)      (implicit H: Profunctor[H]        ) = H.map(x)(f)
     def contramap[Z](f: Z => X)      (implicit H: Profunctor[H]        ) = H.contramap(x)(f)

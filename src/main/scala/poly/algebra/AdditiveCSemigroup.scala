@@ -25,5 +25,6 @@ object AdditiveCSemigroup extends ImplicitGetter[AdditiveCSemigroup] {
   def create[@sp(fdi) X](f: (X, X) => X): AdditiveCSemigroup[X] = new AdditiveCSemigroup[X] {
     def add(x: X, y: X): X = f(x, y)
   }
+
 }
 

@@ -20,7 +20,8 @@ object OpsInlining {
 
       case TermName("$eq$eq$eq") => TermName("eq") // ===
       case TermName("$bang$eq$eq") => TermName("ne") // !==
-      case TermName("$u2260") => TermName("ne") // ≠
+
+      //case TermName("$u2260") => TermName("ne") // ≠
       case TermName("$greater") => TermName("gt") // >
       case TermName("$greater$eq") => TermName("ge") // >=
       case TermName("$u2265") => TermName("ge") // ≥

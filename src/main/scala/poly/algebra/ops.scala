@@ -87,7 +87,6 @@ trait Priority1Implicits extends Priority2Implicits {
   implicit class withEquivOps[X, Y >: X : Eq](x: X) {
     def ===(y: Y) : Boolean = macro OpsInlining.op2
     def !==(y: Y) : Boolean = macro OpsInlining.op2
-    def ≠(y: Y) : Boolean = macro OpsInlining.op2
   }
 
   implicit class withPartialOrderOps[X, Y >: X : PartialOrder](x: X) {
@@ -99,7 +98,7 @@ trait Priority1Implicits extends Priority2Implicits {
     def >(y: Y) : Boolean = macro OpsInlining.op2
   }
 
-  implicit class withWeakOrderOps[X, Y >: X : Order](x: X) {
+  implicit class withOrderOps[X, Y >: X : Order](x: X) {
     def >?<(y: Y): Int = macro OpsInlining.op2
   }
 
